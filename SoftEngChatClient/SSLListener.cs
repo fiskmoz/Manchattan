@@ -26,10 +26,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			byte[] buffer = new byte[2048];
 			string incommingMessage;
 
-			while(true)
+			while (true)
 			{
 				incommingMessage = ReadMessage(sslStream, buffer);
-				//insert event here	
+				RaiseEvent(incommingMessage);
 
 			}
 		}
@@ -55,5 +55,20 @@ namespace SoftEngChatClient.Model.SSLCommunication
 				return e.InnerException.Message;
 			}
 		}
+
+		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
+		public static event EventHandler IncommingMessage;
+
+		public void RaiseEvent(string incomming)
+		{
+			IncommingMessage message = new IncommingMessage();
+			message.Message = incomming;
+			IncommingMessage(this, message);
+		}
+	}
+
+	class IncommingMessage : EventArgs
+	{
+		public string Message { get; set; }
 	}
 }
