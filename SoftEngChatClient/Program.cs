@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SoftEngChatClient
 {
@@ -26,13 +27,28 @@ namespace SoftEngChatClient
                 }
             }
         }
+        [STAThread]
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Login());
+
             Thread thread = new Thread(handle_message);
             Client = new TcpClient();
             bool quit = false;
-            Client.Connect("127.0.0.1", 5300);
+            try
+            {
+                Client.Connect("127.0.0.1", 5300);
+            }
+            catch( Exception e)
+            {
+                Console.WriteLine("No connection");
+                string str = Console.ReadLine();
+                System.Environment.Exit(1);
+            }
             var stream = Client.GetStream();
+
             thread.Start();
             while (!quit)
             {
