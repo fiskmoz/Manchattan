@@ -10,16 +10,29 @@ namespace Model
 {
     public class DatabaseManegement
     {
+        User test;
+        public struct temp
+        {
+            int ID;
+            String name;
+            String password;
+            String mail;
+        }
         public void DBwrite()
         {
+
+            test = new User();
+
+            test.name = "Bob";
+            test.password = "girls";
+            test.mail = "bob@pornhub.com";
+
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
-
             
-
-            using(StreamWriter file = File.CreateText(@"DB.json"))
+            using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Source\Repos\softeng-2018-group4\Model\DB.txt"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, "namn");
+                serializer.Serialize(file, test);
             }
           
 
