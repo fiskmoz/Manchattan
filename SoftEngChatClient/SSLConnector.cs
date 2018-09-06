@@ -12,8 +12,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLConnector
 	{
-		public SSLListener sslListener;
-		private SSLWriter sslWriter;
+		public SSLListener sslListener {private get; private set; ;
+		public SSLWriter sslWriter { private get; private set; }
 		private TcpClient client;
 		private NetworkStream netStream;
 		private SslStream sslStream;
