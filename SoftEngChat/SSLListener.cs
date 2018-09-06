@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngChatClient.SSLCommunication
+namespace SoftEngChat.Model.SSLCommunication
 {
 	class SSLListener
 	{
