@@ -11,33 +11,35 @@ namespace Model
     public class DatabaseManegement
     {
         User test;
-        public struct temp
-        {
-            int ID;
-            String name;
-            String password;
-            String mail;
-        }
         public void DBwrite()
         {
 
+            // Test user
             test = new User();
 
             test.name = "Bob";
             test.password = "girls";
             test.mail = "bob@pornhub.com";
-
-
-
-            //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             
+            // Output to file
             using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Desktop\DB.txt"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-               serializer.Serialize(file, test);
+                serializer.Serialize(file, test);
             }
           
 
+        }
+        public void DBread()
+        {
+            // Input from file to struct
+            User inputuser = new User();
+            using(StreamReader file = File.OpenText(@"C:\Users\Nikla\Desktop\DB.txt"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                inputuser = (User)serializer.Deserialize(file, typeof(User));
+            }
+            Console.WriteLine(inputuser.name +" " +  inputuser.password +" "+ inputuser.mail);
         }
     }
 }
