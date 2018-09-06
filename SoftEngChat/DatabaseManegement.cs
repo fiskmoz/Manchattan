@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿//using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,11 +33,9 @@ namespace Model
             
             using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Desktop\DB.txt"))
             {
-                JsonSerializer serializer = new JsonSerializer();
-               serializer.Serialize(file, test);
+      //          JsonSerializer serializer = new JsonSerializer();
+         //      serializer.Serialize(file, test);
             }
-          
-
         }
     }
 }

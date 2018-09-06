@@ -41,6 +41,11 @@ namespace SoftEngChatClient
 
         private void SendButton_Click(object sender, EventArgs e)
         {
+            SendMessageToStream();
+        }
+
+        private void SendMessageToStream()
+        {
             var stream = Client.GetStream();
             stream.Write(Encoding.ASCII.GetBytes(MessageBox.Text), 0, MessageBox.Text.Length);
             MessageBox.Clear();
@@ -66,7 +71,9 @@ namespace SoftEngChatClient
                 if (bytesRead > 0)
                 {
                     string msg = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    AppendTextBox(msg);
+                    
+                    AppendTextBox(msg + System.Environment.NewLine);
+                    
                 }
             }
         }
@@ -79,6 +86,19 @@ namespace SoftEngChatClient
                 return;
             }
             ChatBox.Text += value;
+        }
+
+        private void ChatWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void MessageBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                SendMessageToStream();
+            }
         }
     }
 }
