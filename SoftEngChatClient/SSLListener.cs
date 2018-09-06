@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
-	class SSLConnector
+	class SSLListener
 	{
 	}
 }

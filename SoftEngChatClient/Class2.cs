@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngChatClient.SSLCommunication
+namespace SoftEngChatClient
 {
-	class SSLListener
+	namespace Model
 	{
 	}
+	namespace View
+	{
+
+	}
+	namespace Controller { }
 }
