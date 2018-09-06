@@ -11,11 +11,8 @@ public class User
     }
 
 
-	public User()
-	{
-        ID++;
-    
-	}
+    public User() => user.ID++;
+	
 
     // Get and set function for user.
     public String name { get; set; }
