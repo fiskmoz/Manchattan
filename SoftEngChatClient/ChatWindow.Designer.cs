@@ -93,6 +93,7 @@
             this.ChatBox.Location = new System.Drawing.Point(182, 31);
             this.ChatBox.Multiline = true;
             this.ChatBox.Name = "ChatBox";
+            this.ChatBox.ReadOnly = true;
             this.ChatBox.Size = new System.Drawing.Size(411, 271);
             this.ChatBox.TabIndex = 4;
             // 
