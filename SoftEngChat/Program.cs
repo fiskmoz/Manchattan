@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Model;
 
 namespace SoftEngChat
 {
@@ -91,6 +92,7 @@ namespace SoftEngChat
     {
         static void Main(string[] args)
         {
+            //DatabaseManegement DBtest = new DatabaseManegement();
             ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }

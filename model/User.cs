@@ -10,7 +10,6 @@ public class User
         String mail;
     }
 
-
 	public User()
 	{
         ID++;
