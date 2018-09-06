@@ -36,6 +36,7 @@ namespace Model
         public void DBwrite()
         {
 
+            // Test user
             test = new User();
 
             test.name = "Bob";
@@ -64,6 +65,17 @@ namespace Model
             
           
 
+        }
+        public void DBread()
+        {
+            // Input from file to struct
+            User inputuser = new User();
+            using(StreamReader file = File.OpenText(@"C:\Users\Nikla\Desktop\DB.txt"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                inputuser = (User)serializer.Deserialize(file, typeof(User));
+            }
+            Console.WriteLine(inputuser.name +" " +  inputuser.password +" "+ inputuser.mail);
         }
     }
 }

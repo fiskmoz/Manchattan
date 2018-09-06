@@ -12,6 +12,8 @@ namespace SoftEngChatClient
 {
     public partial class Login : Form
     {
+        public ChatWindow chatWindow = new ChatWindow();
+
         public Login()
         {
             InitializeComponent();
@@ -19,7 +21,7 @@ namespace SoftEngChatClient
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            ChatWindow chatWindow = new ChatWindow();
+            
             this.Hide();
             chatWindow.Show();
         }
