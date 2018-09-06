@@ -14,13 +14,58 @@ namespace Model
     }
     public class DatabaseManegement
     {
+        //File path where the login file appears.
+        static String fileName = "DB.txt";
+        static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+
+        //Database constructor, it creates a file with all login credentials 
+        public DatabaseManegement()
+        {
+            if(!File.Exists(filePath))
+            {
+                try
+                {
+                    File.Create(filePath);
+                }
+                catch(Exception e)
+                {
+                    e.GetBaseException();
+                    Console.WriteLine("Couldnt create file");
+                }
+            }   
+        }
+
+        User test;
         User[] test = new User[2];
         User[] inputuser = new User[2];
+        
         public void DBwrite()
         {
 
             // Test user
 
+            test.name = "Bob";
+            test.password = "girls";
+            test.mail = "bob@pornhub.com";
+
+
+
+            //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
+            try
+            {
+                using (StreamWriter file = File.CreateText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, test);
+                    Console.WriteLine(filePath);
+                }
+
+            }
+            catch(Exception e)
+            {
+              
+                e.GetBaseException();
+                Console.Write("Dont work");
             test[0] = new User();
             test[0].name = "Bob";
             test[0].password = "girls";
@@ -37,6 +82,7 @@ namespace Model
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, test);
             }
+            
           
 
         }
