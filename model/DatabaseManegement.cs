@@ -13,7 +13,9 @@ namespace Model
         public void DBwrite()
         {
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
+
             
+
             using(StreamWriter file = File.CreateText(@"DB.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
