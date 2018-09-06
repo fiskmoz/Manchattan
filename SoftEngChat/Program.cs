@@ -92,7 +92,8 @@ namespace SoftEngChat
     {
         static void Main(string[] args)
         {
-            //DatabaseManegement DBtest = new DatabaseManegement();
+            DatabaseManegement DBtest = new DatabaseManegement();
+            DBtest.DBwrite();
             ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }
