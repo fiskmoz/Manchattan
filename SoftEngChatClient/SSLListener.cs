@@ -29,7 +29,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			while(true)
 			{
 				incommingMessage = ReadMessage(sslStream, buffer);
-				//insert event here
+				//insert event here	
 
 			}
 		}
