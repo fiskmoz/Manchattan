@@ -70,7 +70,7 @@ namespace Model
         {
             // Input from file to struct
             User inputuser = new User();
-            using(StreamReader file = File.OpenText(@"C:\Users\Nikla\Desktop\DB.txt"))
+            using(StreamReader file = File.OpenText(filePath))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 inputuser = (User)serializer.Deserialize(file, typeof(User));
