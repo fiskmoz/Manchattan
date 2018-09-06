@@ -10,14 +10,29 @@ namespace Model
 {
     public class DatabaseManegement
     {
-        User test;
-        public struct temp
+        //File path where the login file appears.
+        static String fileName = "DB.txt";
+        static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+
+        //Database constructor, it creates a file with all login credentials 
+        public DatabaseManegement()
         {
-            int ID;
-            String name;
-            String password;
-            String mail;
+            if(!File.Exists(filePath))
+            {
+                try
+                {
+                    File.Create(filePath);
+                }
+                catch(Exception e)
+                {
+                    e.GetBaseException();
+                    Console.WriteLine("Couldnt create file");
+                }
+            }   
         }
+
+        User test;
+        
         public void DBwrite()
         {
 
@@ -30,12 +45,23 @@ namespace Model
 
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
-            
-            using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Desktop\DB.txt"))
+            try
             {
-                JsonSerializer serializer = new JsonSerializer();
-               serializer.Serialize(file, test);
+                using (StreamWriter file = File.CreateText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, test);
+                    Console.WriteLine(filePath);
+                }
+
             }
+            catch(Exception e)
+            {
+              
+                e.GetBaseException();
+                Console.Write("Dont work");
+            }
+            
           
 
         }
