@@ -21,45 +21,43 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		}
 
 		//Start to listen for incomming messages.
+		//Raises event when message arrives, if error: event message == 0
 		private void StartListen()
 		{
 			byte[] buffer = new byte[2048];
-			string incommingMessage;
+			byte[] incommingMessage;
 
 			while (true)
 			{
 				incommingMessage = ReadMessage(sslStream, buffer);
-				RaiseEvent(incommingMessage);
-
+				if (buffer != null)
+					RaiseEvent(incommingMessage);
 			}
 		}
 
 		//Read message from SSL stream.
 		//IN: SSL stream, buffer.
-		//OUT: Incomming message (string)
-		private string ReadMessage(SslStream stream, byte[] buffer)
+		//OUT: Incomming message (byte[])
+		private void ReadMessage(SslStream stream, byte[] buffer)
 		{
 			string message = null;
 			try
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
-				if (bytesRead > 0)
-				{
-					message = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-				}
-
-				return message;
 			}
 			catch (Exception e)
 			{
-				return e.InnerException.Message;
+				RaiseEvent(0);
+				buffer = null;
+				continue;
 			}
 		}
 
+		//Eventhandling
 		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
 		public static event EventHandler IncommingMessage;
 
-		public void RaiseEvent(string incomming)
+		public void RaiseEvent(byte[] incomming)
 		{
 			IncommingMessage message = new IncommingMessage();
 			message.Message = incomming;
@@ -69,6 +67,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 	class IncommingMessage : EventArgs
 	{
-		public string Message { get; set; }
+		public byte[] Message { get; set; }
 	}
 }
