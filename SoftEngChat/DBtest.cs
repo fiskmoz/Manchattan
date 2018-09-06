@@ -27,14 +27,12 @@ namespace Model
             test.password = "girls";
             test.mail = "bob@pornhub.com";
 
-
-
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             
-            using(StreamWriter file = File.CreateText(@"C:\Users\Anders Olsson\Desktop\DBAnders.txt"))
+            using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Source\Repos\softeng-2018-group4\Model\DB.txt"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-               serializer.Serialize(file, test);
+                serializer.Serialize(file, test);
             }
           
 
