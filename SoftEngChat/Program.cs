@@ -96,7 +96,7 @@ namespace SoftEngChat
         public static void Main(string[] args)
         {
             DatabaseManegement DBtest = new DatabaseManegement();
-            DBtest.DBread();
+            DBtest.DBwrite();
             ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }

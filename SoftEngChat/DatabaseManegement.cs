@@ -18,6 +18,9 @@ namespace Model
         static String fileName = "DB.txt";
         static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
 
+        User[] test = new User[2];
+        User[] inputuser = new User[2];
+
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
         {
@@ -34,21 +37,18 @@ namespace Model
                 }
             }   
         }
-
-        User test;
-        User[] test = new User[2];
-        User[] inputuser = new User[2];
         
         public void DBwrite()
         {
+            test[0] = new User();
+            test[0].name = "Bob";
+            test[0].password = "girls";
+            test[0].mail = "bob@pornhub.com";
 
-            // Test user
-
-            test.name = "Bob";
-            test.password = "girls";
-            test.mail = "bob@pornhub.com";
-
-
+            test[1] = new User();
+            test[1].name = "Alice";
+            test[1].password = "boys";
+            test[1].mail = "alice@mylittlepony.com";
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
@@ -61,26 +61,11 @@ namespace Model
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-              
+
                 e.GetBaseException();
                 Console.Write("Dont work");
-            test[0] = new User();
-            test[0].name = "Bob";
-            test[0].password = "girls";
-            test[0].mail = "bob@pornhub.com";
-
-            test[1] = new User();
-            test[1].name = "Alice";
-            test[1].password = "boys";
-            test[1].mail = "alice@mylittlepony.com";
-
-            // Output to file
-            using (StreamWriter file = File.CreateText(@"C:\Users\Nikla\Desktop\DB.txt"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, test);
             }
             
           
