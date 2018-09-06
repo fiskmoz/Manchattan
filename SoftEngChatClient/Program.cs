@@ -8,6 +8,7 @@ namespace SoftEngChatClient
 {
     class Program
     {
+        // Creates a new login window, and a winform thread (STAThread).
         [STAThread]
         static void Main(string[] args)
         {

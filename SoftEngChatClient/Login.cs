@@ -12,34 +12,32 @@ namespace SoftEngChatClient
 {
     public partial class Login : Form
     {
-        public ChatWindow chatWindow = new ChatWindow();
-
+        // Initializes parameters and settings for the Login window.
         public Login()
         {
             InitializeComponent();
         }
 
+        // Creates the ChatWindow when Login button is accepted. 
+        // NOTE: Should be a login check so user is accually allowed to login.
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            
+            ChatWindow chatWindow = new ChatWindow();
             this.Hide();
             chatWindow.Show();
         }
 
+        // Opens the register window making a registreation avalible
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            Register reg = new Register();
-            reg.ShowDialog();
+            Register registerWindow = new Register();
+            registerWindow.ShowDialog();
         }
 
+        // Exits the program.
         private void ExitLogin_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

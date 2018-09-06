@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -14,60 +15,80 @@ namespace SoftEngChatClient
 {
     public partial class ChatWindow : Form
     {
-        public TcpClient Client;
+        // Creating a public TCP client and a list for all previous messages to be displayed.
+        public TcpClient mainClient;
+        public List<string> messageList;
+        public object messageListLock;
 
-
+        // Creating the window,initalizing variables, creating threads to receive messages from server.
+        // Reading messages from previous conversation. 
         public ChatWindow()
         {
             InitializeComponent();
             Thread thread = new Thread(handle_message);
+            messageList = new List<string>();
+            messageListLock = new object();
+            try
+            {
+                messageList = File.ReadAllLines("MessageLog.txt").ToList();
+            }
+            catch(Exception e)
+            {
+                AppendTextBox("Failed to read previous messages" + System.Environment.NewLine);
+            }
             InitializeTCPConnection();
             thread.Start();
         }
 
+        // Initializes the TCP connection towards the server.
         public void InitializeTCPConnection()
         {
-            Client = new TcpClient();
-
+            mainClient = new TcpClient();
             try
             {
-                Client.Connect("127.0.0.1", 5300);
+                mainClient.Connect("127.0.0.1", 5300);
             }
             catch (Exception e)
             {
-                System.Windows.Forms.Application.Exit();
+                Application.Exit();
             }
         }
 
+        // When send button is clicked.
         private void SendButton_Click(object sender, EventArgs e)
         {
             SendMessageToStream();
         }
 
+        // Takes the message from the messageBox, encodes it and sends it to the stream.
         private void SendMessageToStream()
         {
-            var stream = Client.GetStream();
+            var stream = mainClient.GetStream();
             stream.Write(Encoding.ASCII.GetBytes(MessageBox.Text), 0, MessageBox.Text.Length);
             MessageBox.Clear();
         }
 
-        private void ChatWindow_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+        // When ChatWindow is closed, 
+        // Messages are saved in file then program closes.
         private void ChatWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            TextWriter tw = new StreamWriter("MessageLog.txt");
+            for (int i = 0; i < messageList.Count; i++)
+            {
+                tw.WriteLine(messageList[i]);
+            }
+            tw.Close();
+            Application.Exit();
         }
 
+        // Loop that keeps track of new messages. If new message arrives from server, print it in the ChatBox.
         private void handle_message()
         {
-            var stream = Client.GetStream();
-            byte[] buffer = new byte[Client.ReceiveBufferSize];
-            while (Client.Connected)
+            var stream = mainClient.GetStream();
+            byte[] buffer = new byte[mainClient.ReceiveBufferSize];
+            while (mainClient.Connected)
             {
-                int bytesRead = stream.Read(buffer, 0, Client.ReceiveBufferSize);
+                int bytesRead = stream.Read(buffer, 0, mainClient.ReceiveBufferSize);
                 if (bytesRead > 0)
                 {
                     string msg = Encoding.ASCII.GetString(buffer, 0, bytesRead);
@@ -78,6 +99,7 @@ namespace SoftEngChatClient
             }
         }
 
+        // Print a string to the ChatBox and add the message to the list.
         public void AppendTextBox(string value)
         {
             if(InvokeRequired)
@@ -86,18 +108,31 @@ namespace SoftEngChatClient
                 return;
             }
             ChatBox.Text += value;
+            lock(messageListLock)
+            {
+                messageList.Add(value);
+            }
+            
         }
 
-        private void ChatWindow_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
+        // When pressing enter while inside the MessageBox, send the message.
         private void MessageBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 SendMessageToStream();
+            }
+        }
+
+        // Experimental, isnt working as intented yet.
+        private void PreviousMessagesButton_Click(object sender, EventArgs e)
+        {
+            lock(messageListLock)
+            {
+                foreach (string s in messageList)
+                {
+                    AppendTextBox(s + System.Environment.NewLine);
+                }
             }
         }
     }
