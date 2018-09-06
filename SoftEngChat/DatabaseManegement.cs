@@ -31,7 +31,7 @@ namespace Model
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             
-            using(StreamWriter file = File.CreateText(@"C:\Users\Anders Olsson\Desktop\DBAnders.txt"))
+            using(StreamWriter file = File.CreateText(@"C:\Users\Nikla\Desktop\DB.txt"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                serializer.Serialize(file, test);
