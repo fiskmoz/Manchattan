@@ -55,7 +55,10 @@ namespace SoftEngChat
         internal void SendMessage(string message)
         {
             Console.WriteLine("Send Message " + message);
-            Client.GetStream().Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
+            if(Client.Connected)
+            {
+                Client.GetStream().Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
+            }
         }
     }
 
