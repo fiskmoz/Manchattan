@@ -56,7 +56,10 @@ namespace SoftEngChat
         internal void SendMessage(string message)
         {
             Console.WriteLine("Send Message " + message);
-            Client.GetStream().Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
+            if(Client.Connected)
+            {
+                Client.GetStream().Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
+            }
         }
     }
 
@@ -90,9 +93,10 @@ namespace SoftEngChat
 
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            //DatabaseManegement DBtest = new DatabaseManegement();
+            DatabaseManegement DBtest = new DatabaseManegement();
+            DBtest.DBread();
             ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }

@@ -47,6 +47,7 @@
             this.MessageBox.Name = "MessageBox";
             this.MessageBox.Size = new System.Drawing.Size(327, 55);
             this.MessageBox.TabIndex = 0;
+            this.MessageBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MessageBox_KeyPress);
             // 
             // SendButton
             // 
@@ -93,6 +94,7 @@
             this.ChatBox.Location = new System.Drawing.Point(182, 31);
             this.ChatBox.Multiline = true;
             this.ChatBox.Name = "ChatBox";
+            this.ChatBox.ReadOnly = true;
             this.ChatBox.Size = new System.Drawing.Size(411, 271);
             this.ChatBox.TabIndex = 4;
             // 
@@ -120,6 +122,7 @@
             this.Text = "ChatWindow";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.ChatWindow_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ChatWindow_KeyPress);
             this.ActiveChatPlaceholder.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

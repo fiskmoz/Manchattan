@@ -2,7 +2,7 @@
 
 public class User
 {
-    
+
 
     public struct user
     {
@@ -13,10 +13,10 @@ public class User
     }
 
     public User() { ID++; }
-	
-       
-    
-	
+
+
+
+
 
 // Get and set function for user.
     public int ID { get; private set; }
