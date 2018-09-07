@@ -38,6 +38,9 @@ namespace Model
             }   
         }
         
+
+        //Byt ut till DBWrite(String fileName) Bättre mer generisk och man 
+        //Kan slänga in vilken fil som helst i det.
         public void DBwrite()
         {
             test[0] = new User();
@@ -71,6 +74,8 @@ namespace Model
           
 
         }
+
+        //public void DBread(String fileName)
         public void DBread()
         {
             // Input from file to struct
@@ -79,14 +84,24 @@ namespace Model
 
             //List<Dictionary<string, string>> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(file);
 
-            using (StreamReader file = File.OpenText(@"C:\Users\Nikla\Desktop\DB.txt"))
+            using (StreamReader file = File.OpenText(filePath))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                inputuser[0] = (User)serializer.Deserialize(file, typeof(User));
+                //JsonSerializer serializer = new JsonSerializer();
+                //inputuser[0] = (User)serializer.Deserialize(file, typeof(User));
+                string json = file.ReadToEnd();
+                List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
 
+                foreach (var User in user)
+                {
+                    Console.WriteLine(User.name);
+                }
             }
-            Console.WriteLine("User 1: " +inputuser[0].name + " " + inputuser[0].password +" "+ inputuser[0].mail);
-            Console.WriteLine("User 2: " +inputuser[1].name + " " + inputuser[1].password + " " + inputuser[1].mail);
+
+           
+
+
+            // Console.WriteLine("User 1: " +inputuser[0].name + " " + inputuser[0].password +" "+ inputuser[0].mail);
+            //Console.WriteLine("User 2: " +inputuser[1].name + " " + inputuser[1].password + " " + inputuser[1].mail);
         }
     }
 }
