@@ -36,6 +36,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		private string BuildMessage(MessageType type, string message)
 		{
 			string outgoing = type + ":" + message;
+			return outgoing;
 		}
 
 		private void SendMessage(string outgoing)

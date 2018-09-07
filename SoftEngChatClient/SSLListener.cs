@@ -10,23 +10,35 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLListener
 	{
+		private SslStream stream;
+		private Thread listeningThread;
+
 		public SSLListener(SslStream stream)
 		{
-			Thread listeningThread = new Thread(StartListen);
-			listeningThread.Start(stream);
+			this.stream = stream;
+			listeningThread = new Thread(StartListen);
 		}
 
+		public void StopListen()
+		{
+			//listeningThread.
+		}
+
+		public void StartListen()
+		{
+			Thread listeningThread = new Thread(StartListen);
+			listeningThread.Start();
+		}
 		//Start to listen for incomming messages.
 		//Raises event when message arrives, if error: event message == 0
-		private void StartListen(SslStream sslStream)
+		private void Listen()
 		{
-			byte[] buffer = new byte[2048];
-			byte[] incommingMessage;
+			byte[] incommingMessage = new byte[2048];
 
 			while (true)
 			{
-				incommingMessage = ReadMessage(sslStream, buffer);
-				if (buffer != null)
+				ReadMessage(stream, incommingMessage);
+				if (incommingMessage != null)
 					RaiseEvent(incommingMessage);
 			}
 		}
@@ -36,16 +48,14 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		//OUT: fills buffer; Incomming message (byte[])
 		private void ReadMessage(SslStream stream, byte[] buffer)
 		{
-			string message = null;
 			try
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
 			}
 			catch (Exception e)
 			{
-				RaiseEvent(0);
+				RaiseEvent(null);
 				buffer = null;
-				continue;
 			}
 		}
 
