@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftEngChatServer", "SoftEn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftEngChatClient", "SoftEngChatClient\SoftEngChatClient.csproj", "{4844B12D-C4C9-49E9-8DC2-EF5F08BEC66E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestJsonParser", "UnitTestJsonParser\UnitTestJsonParser.csproj", "{B71B95FF-6DC7-40E4-B40B-0E3E9DB715C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4844B12D-C4C9-49E9-8DC2-EF5F08BEC66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4844B12D-C4C9-49E9-8DC2-EF5F08BEC66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4844B12D-C4C9-49E9-8DC2-EF5F08BEC66E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B71B95FF-6DC7-40E4-B40B-0E3E9DB715C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71B95FF-6DC7-40E4-B40B-0E3E9DB715C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71B95FF-6DC7-40E4-B40B-0E3E9DB715C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71B95FF-6DC7-40E4-B40B-0E3E9DB715C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

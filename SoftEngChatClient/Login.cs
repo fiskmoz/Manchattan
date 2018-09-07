@@ -15,7 +15,6 @@ namespace SoftEngChatClient
     public partial class Login : Form
     {
         TCPNetwork network;
-        public Boolean LoginFlag = false;
 
         // Initializes parameters and settings for the Login window.
         public Login()
@@ -23,6 +22,7 @@ namespace SoftEngChatClient
             InitializeComponent();
             network = new TCPNetwork();
             Thread thread = new Thread(handle_login);
+            thread.Start();
         }
 
         public void handle_login()
@@ -37,25 +37,28 @@ namespace SoftEngChatClient
                     string msg = Encoding.ASCII.GetString(buffer, 0, bytesRead);
                     if (msg == "true")
                     {
-                        LoginFlag = true;
+                        StartChatWindow();
                     }
-                    else LoginFlag = false;
                 }
             }
+        }
+
+        public void StartChatWindow()
+        {
+            ChatWindow chatWindow = new ChatWindow();
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                this.Hide();
+                chatWindow.Show();
+            });
+            
         }
 
         // Creates the ChatWindow when Login button is accepted. 
         // NOTE: Should be a login check so user is accually allowed to login.
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            network.SendMessageToServer(EnterEmail.Text, EnterEmail.Text.Length);
-
-            if(LoginFlag == true)
-            {
-                ChatWindow chatWindow = new ChatWindow();
-                this.Hide();
-                chatWindow.Show();
-            }
+            network.SendMessageToServer("1234|" + EnterEmail.Text + "|" + EnterPassword.Text, 5+EnterEmail.Text.Length+EnterPassword.Text.Length);
         }
 
         // Opens the register window making a registreation avalible

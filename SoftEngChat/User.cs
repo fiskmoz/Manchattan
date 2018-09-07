@@ -2,14 +2,21 @@
 
 public class User
 {
-    public User() { ID++; }
 
 
-// Get and set function for user.
+
+    private static int IDnr;
     public int ID { get;  set; }
-    public String name { get; set; }
-    public String password { get; set; }
-    public String mail { get; set; }
+    public string name { get; set; }
+    public string password { get; set; }
+    public string mail { get; set; }
+    
 
-
+    public User(string name, string mail, string Pass)
+    {
+        this.ID = ++IDnr;
+        this.name = name;
+        this.mail = mail;
+        this.password = Pass;
+    }
 }
