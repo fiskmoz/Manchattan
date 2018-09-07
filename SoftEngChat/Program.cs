@@ -9,58 +9,6 @@ using System.Threading;
 
 namespace SoftEngChat
 {
-    class ChatClient
-    {
-        public TcpClient Client { get; set; }
-        public ChatServer Server { get; set; }
-        public Thread MessageThread { get; set; }
-        public ChatClient(TcpClient client, ChatServer parent)
-        {
-            Client = client;
-            Server = parent;
-            MessageThread = new Thread(handle_message);
-            MessageThread.Start();
-        }
-        public void handle_message()
-        {
-            var stream = Client.GetStream();
-            byte[] buffer = new byte[Client.ReceiveBufferSize];
-            while (Client.Connected)
-            {
-                int bytesRead;
-                try
-                {
-                    bytesRead = stream.Read(buffer, 0, Client.ReceiveBufferSize);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    continue;
-                }
-                if (bytesRead > 0)
-                {
-                    string test = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Received Message " + test);
-                    try { 
-                        Server.SendAll(test);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
-            }
-        }
-
-        internal void SendMessage(string message)
-        {
-            Console.WriteLine("Send Message " + message);
-            if(Client.Connected)
-            {
-                Client.GetStream().Write(Encoding.ASCII.GetBytes(message), 0, message.Length);
-            }
-        }
-    }
 
     class ChatServer
     {

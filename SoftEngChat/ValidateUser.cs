@@ -21,7 +21,7 @@ namespace SoftEngChat
         {
             foreach(var User in userlist)
             {
-                if (User.name == userIn && User.password == passwordIn)
+                if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
                     return flag1;
             }
             return flag0;

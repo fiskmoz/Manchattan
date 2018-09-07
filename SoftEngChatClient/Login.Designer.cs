@@ -54,6 +54,7 @@
             this.EnterPassword.Name = "EnterPassword";
             this.EnterPassword.Size = new System.Drawing.Size(313, 20);
             this.EnterPassword.TabIndex = 2;
+
             // 
             // LoginButton
             // 
