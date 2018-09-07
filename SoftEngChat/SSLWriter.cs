@@ -11,6 +11,7 @@ namespace SoftEngChat.Model.SSLCommunication
 	{
 		private SslStream stream;
 		private SSLConnector server;
+
 		public SSLWriter(SslStream stream, SSLConnector server)
 		{
 			this.stream = stream;

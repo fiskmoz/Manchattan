@@ -56,6 +56,9 @@ namespace SoftEngChat.Model.SSLCommunication
 				}
 			}
 		}
+
+		//Writes latest message arrived at server to a client
+		//IN: Client who shall receive message.
 		private void Write(SSLClient client)
 		{
 			client.writer.Write(lastMessage, lastSender);
