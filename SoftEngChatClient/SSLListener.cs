@@ -12,16 +12,18 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	{
 		private SslStream stream;
 		private Thread listeningThread;
+		private bool stopListen;
 
 		public SSLListener(SslStream stream)
 		{
 			this.stream = stream;
+			stopListen = false;
 			listeningThread = new Thread(StartListen);
 		}
 
 		public void StopListen()
 		{
-			//listeningThread.
+			stopListen = true;
 		}
 
 		public void StartListen()
@@ -37,9 +39,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 			while (true)
 			{
-				ReadMessage(stream, incommingMessage);
-				if (incommingMessage != null)
-					RaiseEvent(incommingMessage);
+					ReadMessage(stream, incommingMessage);
+					if (incommingMessage != null)
+						RaiseEvent(incommingMessage);
+				if (stopListen) continue;
 			}
 		}
 
