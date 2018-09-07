@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
+	// Establishes encrypted (SSL) connection with server.
 	class SSLConnector
 	{
 		private TcpClient client;

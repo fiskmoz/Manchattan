@@ -7,40 +7,58 @@ using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
+	//Server driving object. Opens SSL Stream for clients to connect.
 	class SSLConnector
 	{
 		private List<SSLClient> clientList;
 		private TcpListener serverListener;
+		private string lastMessage;
+		private string lastSender;
 
 		public SSLConnector(IPAddress ip, int port)
 		{
 			X509Certificate2 cert = new X509Certificate2("server.crt", "keypw");
 			clientList = new List<SSLClient>();
 			serverListener = new TcpListener(ip, port);
+			serverListener.Start();
+
 			while (true)
 			{
-				var client = serverListener.AcceptTcpClient();
+				Console.WriteLine("Listening for connections....");
+				var client = serverListener.AcceptTcpClient(); //Client connects!
 				NetworkStream netStream = client.GetStream();
 				var ssl = new SslStream(netStream, false);
-				ssl.AuthenticateAsServer(cert, false, SslProtocols.Tls, true);
+				ssl.AuthenticateAsServer(cert, false, SslProtocols.Tls, true); //Server Authentication
 
-				clientList.Add(new SSLClient(ssl, this));
+				clientList.Add(new SSLClient(ssl, this)); //Client added to list!
+				Console.WriteLine("Client connected!");
 			}
 		}
 
+		//Send messages to all clients (IRC) but sender.
+		//IN: Username of client who sent message and the actual message.
 		public void WriteAll(string sender, string message)
 		{
+			lastMessage = message;
+			lastSender = sender;
 			foreach( var client in clientList)
 			{
+				//let each client handle it themselves
 				if(client.UserInfo.name != sender)
 				{
-					client.writer.Write(message, sender);
+					Thread messenger = new Thread(() => Write(client));
+					messenger.Start();
 				}
 			}
+		}
+		private void Write(SSLClient client)
+		{
+			client.writer.Write(lastMessage, lastSender);
 		}
 	}
 }
