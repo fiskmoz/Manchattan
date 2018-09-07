@@ -1,4 +1,6 @@
-﻿namespace SoftEngChatClient
+﻿using System.Windows.Forms;
+
+namespace SoftEngChatClient
 {
     partial class ChatWindow
     {
@@ -35,6 +37,7 @@
             this.ConctactsPlaceholder = new System.Windows.Forms.GroupBox();
             this.ChatBox = new System.Windows.Forms.TextBox();
             this.Toolbar = new System.Windows.Forms.GroupBox();
+            this.PreviousMessagesButton = new System.Windows.Forms.Button();
             this.ActiveChatPlaceholder.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +100,7 @@
             this.ChatBox.ReadOnly = true;
             this.ChatBox.Size = new System.Drawing.Size(411, 271);
             this.ChatBox.TabIndex = 4;
+            this.ChatBox.ScrollBars = ScrollBars.Vertical;
             // 
             // Toolbar
             // 
@@ -107,11 +111,23 @@
             this.Toolbar.TabStop = false;
             this.Toolbar.Text = "Toolbar";
             // 
+            // PreviousMessagesButton
+            // 
+            this.PreviousMessagesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PreviousMessagesButton.Location = new System.Drawing.Point(182, 5);
+            this.PreviousMessagesButton.Name = "PreviousMessagesButton";
+            this.PreviousMessagesButton.Size = new System.Drawing.Size(139, 20);
+            this.PreviousMessagesButton.TabIndex = 6;
+            this.PreviousMessagesButton.Text = "View previous messages";
+            this.PreviousMessagesButton.UseVisualStyleBackColor = true;
+            this.PreviousMessagesButton.Click += new System.EventHandler(this.PreviousMessagesButton_Click);
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 411);
+            this.Controls.Add(this.PreviousMessagesButton);
             this.Controls.Add(this.Toolbar);
             this.Controls.Add(this.ChatBox);
             this.Controls.Add(this.ConctactsPlaceholder);
@@ -121,8 +137,6 @@
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
-            this.Load += new System.EventHandler(this.ChatWindow_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ChatWindow_KeyPress);
             this.ActiveChatPlaceholder.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -138,5 +152,6 @@
         private System.Windows.Forms.GroupBox ConctactsPlaceholder;
         private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.GroupBox Toolbar;
+        private System.Windows.Forms.Button PreviousMessagesButton;
     }
 }

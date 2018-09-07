@@ -12,16 +12,19 @@ namespace SoftEngChatClient
 {
     public partial class Register : Form
     {
+        // Initializes parameters and settings for the Register window.
         public Register()
         {
             InitializeComponent();
         }
 
+        // What should happen if clicking Register in register window.
         private void RegisterAccept_Click(object sender, EventArgs e)
         {
 
         }
-
+        
+        // Cancels the registration and returns to Login window.
         private void RegisterCancel_Click(object sender, EventArgs e)
         {
             this.Close();
