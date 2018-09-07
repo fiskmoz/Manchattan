@@ -76,20 +76,20 @@ namespace SoftEngChat
         }
 
         //public void DBread(String fileName)
-        public void DBread()
+        public List<User> DBread()
         {
             // Input from file to struct
             inputuser[0] = new User();
             inputuser[1] = new User();
 
             //List<Dictionary<string, string>> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(file);
-
+            List<User> user;
             using (StreamReader file = File.OpenText(filePath))
             {
                 //JsonSerializer serializer = new JsonSerializer();
                 //inputuser[0] = (User)serializer.Deserialize(file, typeof(User));
                 string json = file.ReadToEnd();
-                List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
+                user = JsonConvert.DeserializeObject<List<User>>(json);
 
                 foreach (var User in user)
                 {
@@ -97,11 +97,13 @@ namespace SoftEngChat
                 }
             }
 
-           
+
 
 
             // Console.WriteLine("User 1: " +inputuser[0].name + " " + inputuser[0].password +" "+ inputuser[0].mail);
             //Console.WriteLine("User 2: " +inputuser[1].name + " " + inputuser[1].password + " " + inputuser[1].mail);
+
+            return user;
         }
     }
 }
