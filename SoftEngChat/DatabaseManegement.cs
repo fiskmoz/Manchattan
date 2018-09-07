@@ -17,7 +17,7 @@ namespace SoftEngChat
         //File path where the login file appears.
         static String fileName = "DB.txt";
         static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-
+        List<User> user;
         User[] test = new User[2];
         User[] inputuser = new User[2];
 
@@ -66,43 +66,27 @@ namespace SoftEngChat
             }
             catch (Exception e)
             {
-
                 e.GetBaseException();
                 Console.Write("Dont work");
             }
-            
-          
-
         }
 
-        //public void DBread(String fileName)
+        //Reads from databas(textfile) and returns a list of users.
         public List<User> DBread()
-        {
-            // Input from file to struct
-            inputuser[0] = new User();
-            inputuser[1] = new User();
-
-            //List<Dictionary<string, string>> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(file);
-            List<User> user;
-            using (StreamReader file = File.OpenText(filePath))
+        {   
+            try
             {
-                //JsonSerializer serializer = new JsonSerializer();
-                //inputuser[0] = (User)serializer.Deserialize(file, typeof(User));
-                string json = file.ReadToEnd();
-                user = JsonConvert.DeserializeObject<List<User>>(json);
-
-                foreach (var User in user)
+                using (StreamReader file = File.OpenText(filePath))
                 {
-                    Console.WriteLine(User.name);
+                    string json = file.ReadToEnd();
+                    user = JsonConvert.DeserializeObject<List<User>>(json);
                 }
             }
-
-
-
-
-            // Console.WriteLine("User 1: " +inputuser[0].name + " " + inputuser[0].password +" "+ inputuser[0].mail);
-            //Console.WriteLine("User 2: " +inputuser[1].name + " " + inputuser[1].password + " " + inputuser[1].mail);
-
+            catch(Exception e)
+            {
+                e.GetBaseException();
+            } 
+            
             return user;
         }
     }
