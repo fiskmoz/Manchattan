@@ -9,7 +9,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLWriter
 	{
-		protected enum MessageType { loginUserName=0, loginUserPassword=1, client=2}
+		public enum MessageType { loginUserName=0, loginUserPassword=1, client=2}
 		public SSLWriter(SslStream stream)
 		{
 
