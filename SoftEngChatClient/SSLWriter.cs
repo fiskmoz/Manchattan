@@ -9,10 +9,17 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLWriter
 	{
-		public enum MessageType { loginUserName=0, loginUserPassword=1, client=2}
+		public enum MessageType { loginUserName=0, loginUserPassword=1, client=2, login=3}
+		private SslStream stream;
 		public SSLWriter(SslStream stream)
 		{
+			this.stream = stream;
+		}
 
+		public void Write(string userName, string password, MessageType login)
+		{
+			string outgoing = BuildMessage(login, userName + ":" + password);
+			SendMessage(outgoing);
 		}
 
 		public void Write(string message, MessageType type)
@@ -41,7 +48,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		private void SendMessage(string outgoing)
 		{
-
+			stream.Write(Encoding.UTF8.GetBytes(outgoing), 0, outgoing.Length);
 		}
 
 	}

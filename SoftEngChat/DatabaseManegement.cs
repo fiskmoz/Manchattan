@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace SoftEngChat
 {
     public class JsonItem
     {
@@ -17,7 +17,7 @@ namespace Model
         //File path where the login file appears.
         static String fileName = "DB.txt";
         static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-
+        List<User> user;
         User[] test = new User[2];
         User[] inputuser = new User[2];
 
@@ -38,6 +38,9 @@ namespace Model
             }   
         }
         
+
+        //Byt ut till DBWrite(String fileName) Bättre mer generisk och man 
+        //Kan slänga in vilken fil som helst i det.
         public void DBwrite()
         {
             test[0] = new User();
@@ -63,30 +66,28 @@ namespace Model
             }
             catch (Exception e)
             {
-
                 e.GetBaseException();
                 Console.Write("Dont work");
             }
-            
-          
-
         }
-        public void DBread()
-        {
-            // Input from file to struct
-            inputuser[0] = new User();
-            inputuser[1] = new User();
 
-            //List<Dictionary<string, string>> obj = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(file);
-
-            using (StreamReader file = File.OpenText(@"C:\Users\Nikla\Desktop\DB.txt"))
+        //Reads from databas(textfile) and returns a list of users.
+        public List<User> DBread()
+        {   
+            try
             {
-                JsonSerializer serializer = new JsonSerializer();
-                inputuser[0] = (User)serializer.Deserialize(file, typeof(User));
-
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    string json = file.ReadToEnd();
+                    user = JsonConvert.DeserializeObject<List<User>>(json);
+                }
             }
-            Console.WriteLine("User 1: " +inputuser[0].name + " " + inputuser[0].password +" "+ inputuser[0].mail);
-            Console.WriteLine("User 2: " +inputuser[1].name + " " + inputuser[1].password + " " + inputuser[1].mail);
+            catch(Exception e)
+            {
+                e.GetBaseException();
+            } 
+            
+            return user;
         }
     }
 }
