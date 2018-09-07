@@ -12,11 +12,9 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLConnector
 	{
-		private SSLListener sslListener;
-		private SSLWriter sslWriter;
 		private TcpClient client;
 		private NetworkStream netStream;
-		private SslStream sslStream;
+		public SslStream sslStream { get; private set; }
 
 		public SSLConnector(string ip, int port)
 		{
@@ -42,8 +40,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 				client.Close();
 				return;
 			}
-			sslListener = new SSLListener(sslStream);
-			sslWriter = new SSLWriter(sslStream);
 
 		}
 
@@ -53,6 +49,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			if (sslPolicyErrors == SslPolicyErrors.None) return true;
 			return false;
 		}
-
+		
 	}
 }

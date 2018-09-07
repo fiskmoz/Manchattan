@@ -10,56 +10,60 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLListener
 	{
-		private SslStream sslStream;
+		private SslStream stream;
+		private Thread listeningThread;
 
 		public SSLListener(SslStream stream)
 		{
-			sslStream = stream;
+			this.stream = stream;
+			listeningThread = new Thread(StartListen);
+		}
 
+		public void StopListen()
+		{
+			//listeningThread.
+		}
+
+		public void StartListen()
+		{
 			Thread listeningThread = new Thread(StartListen);
 			listeningThread.Start();
 		}
-
 		//Start to listen for incomming messages.
-		private void StartListen()
+		//Raises event when message arrives, if error: event message == 0
+		private void Listen()
 		{
-			byte[] buffer = new byte[2048];
-			string incommingMessage;
+			byte[] incommingMessage = new byte[2048];
 
 			while (true)
 			{
-				incommingMessage = ReadMessage(sslStream, buffer);
-				RaiseEvent(incommingMessage);
-
+				ReadMessage(stream, incommingMessage);
+				if (incommingMessage != null)
+					RaiseEvent(incommingMessage);
 			}
 		}
 
 		//Read message from SSL stream.
 		//IN: SSL stream, buffer.
-		//OUT: Incomming message (string)
-		private string ReadMessage(SslStream stream, byte[] buffer)
+		//OUT: fills buffer; Incomming message (byte[])
+		private void ReadMessage(SslStream stream, byte[] buffer)
 		{
-			string message = null;
 			try
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
-				if (bytesRead > 0)
-				{
-					message = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-				}
-
-				return message;
 			}
 			catch (Exception e)
 			{
-				return e.InnerException.Message;
+				RaiseEvent(null);
+				buffer = null;
 			}
 		}
 
+		//Eventhandling
 		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
 		public static event EventHandler IncommingMessage;
 
-		public void RaiseEvent(string incomming)
+		public void RaiseEvent(byte[] incomming)
 		{
 			IncommingMessage message = new IncommingMessage();
 			message.Message = incomming;
@@ -69,6 +73,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 	class IncommingMessage : EventArgs
 	{
-		public string Message { get; set; }
+		public byte[] Message { get; set; }
 	}
 }
