@@ -18,8 +18,6 @@ namespace SoftEngChat
         static String fileName = "DB.txt";
         static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
         List<User> user;
-        User[] test = new User[2];
-        User[] inputuser = new User[2];
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
@@ -43,15 +41,12 @@ namespace SoftEngChat
         //Kan slänga in vilken fil som helst i det.
         public void DBwrite()
         {
-            test[0] = new User();
-            test[0].name = "Bob";
-            test[0].password = "girls";
-            test[0].mail = "bob@pornhub.com";
-
-            test[1] = new User();
-            test[1].name = "Alice";
-            test[1].password = "boys";
-            test[1].mail = "alice@mylittlepony.com";
+            var tester = new User("Anders", "maejfa", "1231293");
+            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
+            List<User> a = new List<User>();
+            a.Add(tester);
+            a.Add(tester2);
+            
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
@@ -59,7 +54,7 @@ namespace SoftEngChat
                 using (StreamWriter file = File.CreateText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, test);
+                    serializer.Serialize(file, a);
                     Console.WriteLine(filePath);
                 }
 
