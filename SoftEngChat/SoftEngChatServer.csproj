@@ -54,6 +54,7 @@
     <Compile Include="SSLListener.cs" />
     <Compile Include="SSLWriter.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="ValidateUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
