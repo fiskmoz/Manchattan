@@ -18,7 +18,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		public SSLConnector(IPAddress ip, int port)
 		{
-			X509Certificate2 cert = new X509Certificate2();
+			X509Certificate2 cert = new X509Certificate2("server.crt", "keypw");
 			clientList = new List<SSLClient>();
 			serverListener = new TcpListener(ip, port);
 			while (true)
@@ -26,7 +26,20 @@ namespace SoftEngChat.Model.SSLCommunication
 				var client = serverListener.AcceptTcpClient();
 				NetworkStream netStream = client.GetStream();
 				var ssl = new SslStream(netStream, false);
-				//ssl.AuthenticateAsServer()
+				ssl.AuthenticateAsServer(cert, false, SslProtocols.Tls, true);
+
+				clientList.Add(new SSLClient(ssl, this));
+			}
+		}
+
+		public void WriteAll(string sender, string message)
+		{
+			foreach( var client in clientList)
+			{
+				if(client.UserInfo.name != sender)
+				{
+					client.writer.Write(message, sender);
+				}
 			}
 		}
 	}

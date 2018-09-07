@@ -49,6 +49,7 @@
     <Compile Include="DatabaseManegement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSLClient.cs" />
     <Compile Include="SSLConnector.cs" />
     <Compile Include="SSLListener.cs" />
     <Compile Include="SSLWriter.cs" />

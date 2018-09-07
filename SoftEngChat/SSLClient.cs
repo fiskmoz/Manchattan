@@ -15,11 +15,15 @@ namespace SoftEngChat.Model.SSLCommunication
         public User UserInfo { get; set; }
 		public SSLListener listener;
 		public SSLWriter writer;
+		public SslStream stream;
+		private SSLConnector server;
 
-        public SSLClient(SslStream stream)
+        public SSLClient(SslStream stream, SSLConnector connector)
         {
+			server = connector;
+			this.stream = stream;
 			listener = new SSLListener(stream);
-			writer = new SSLWriter(stream, UserInfo.getName);
+			writer = new SSLWriter(stream, server);
 		}
     }
 
