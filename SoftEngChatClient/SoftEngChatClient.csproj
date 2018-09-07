@@ -74,6 +74,7 @@
     <Compile Include="SSLConnector.cs" />
     <Compile Include="SSLListener.cs" />
     <Compile Include="SSLWriter.cs" />
+    <Compile Include="TCPNetwork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -89,6 +90,12 @@
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftEngChat\SoftEngChatServer.csproj">
+      <Project>{812f09c6-e6b3-446b-9560-e154d5637a52}</Project>
+      <Name>SoftEngChatServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

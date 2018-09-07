@@ -40,6 +40,7 @@ namespace SoftEngChat
                 if (bytesRead > 0)
                 {
                     string test = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+
                     Console.WriteLine("Received Message " + test);
                     try { 
                         Server.SendAll(test);
