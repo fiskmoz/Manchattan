@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 namespace SoftEngChat.Model.SSLCommunication
 {
 	//Server driving object. Opens SSL Stream for clients to connect.
-	class SSLConnector
+	class SSLServer
 	{
 		private List<SSLClient> clientList;
 		private TcpListener serverListener;
 		private string lastMessage;
 		private string lastSender;
 
-		public SSLConnector(IPAddress ip, int port)
+		public SSLServer(IPAddress ip, int port)
 		{
 			X509Certificate2 cert = new X509Certificate2("server.crt", "keypw");
 			clientList = new List<SSLClient>();

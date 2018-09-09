@@ -17,11 +17,11 @@ namespace SoftEngChat.Model.SSLCommunication
 		public SSLListener listener;
 		public SSLWriter writer;
 		public SslStream stream;
-		private SSLConnector server;
+		private SSLServer server;
 		private Messagehandler messageHandler;
 		internal bool isVerifiedUser;
 
-        public SSLClient(SslStream stream, SSLConnector connector)
+        public SSLClient(SslStream stream, SSLServer connector)
         {
 			isVerifiedUser = false;
 			server = connector;

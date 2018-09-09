@@ -135,7 +135,7 @@ namespace SoftEngChat
             DatabaseManegement DBtest = new DatabaseManegement();
             DBtest.DBwrite();
             DBtest.DBread();
-			SSLConnector server = new SSLConnector(IPAddress.Loopback, 5300);
+			SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
             //ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }

@@ -6,11 +6,11 @@ namespace SoftEngChat.Model.SSLCommunication
 	internal class Messagehandler
 	{
 		private string userName;
-		private SSLConnector server;
+		private SSLServer server;
 		private SSLClient client;
 
 		//Handles messages arriving at server.
-		public Messagehandler(string userName, SSLConnector server, SSLClient client)
+		public Messagehandler(string userName, SSLServer server, SSLClient client)
 		{
 			this.userName = userName;
 			this.server = server;
