@@ -59,7 +59,9 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
 			}
+#pragma warning disable CS0168 // Variable is declared but never used
 			catch (Exception e)
+#pragma warning restore CS0168 // Variable is declared but never used
 			{
 				RaiseEvent(null);
 				buffer = null;
