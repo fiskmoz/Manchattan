@@ -34,8 +34,9 @@ namespace SoftEngChatClient.Controller
 
 		public ClientDriver()
 		{
-			ConstructGUI();
 			ConstructBackend();
+			ConstructGUI();
+			
 		}
 
 		private void ConstructBackend()
