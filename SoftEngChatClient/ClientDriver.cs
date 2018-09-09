@@ -56,8 +56,15 @@ namespace SoftEngChatClient.Controller
 		
 		private void ConstructGUI()
 		{
-			chatWindow = new ChatWindow();
-			loginWindow = new Login();
+			chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
+											//Print output for user
+
+			loginWindow = new Login();		//Only responsible for login-functionality (see SIP Principle)
+		}
+
+		private void UserLogin()
+		{
+			//login logic here
 		}
 	}
 }
