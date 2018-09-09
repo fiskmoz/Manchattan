@@ -24,7 +24,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		}
 
 		//Eventhandler, Consumes IncommingMessage Events.
-		internal void HandleMessage(object sender, IncommingMessage message)
+		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
 			if(message == null) //Error when event was raised.
 			{

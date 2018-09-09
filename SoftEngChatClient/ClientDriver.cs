@@ -11,6 +11,10 @@ namespace SoftEngChatClient.Controller
 	class ClientDriver
 	{
 		//Proper program controller/driver. GUI should generate events wich should be caught here.
+		//Create new event classes GUI.		e.g.	Consume button-click event => handle by gathering
+		//											the needed information and raise new event for
+		//											driver or messagehandler to consume.
+
 		private ChatWindow chatWindow;
 		private Login loginWindow;
 
@@ -30,12 +34,12 @@ namespace SoftEngChatClient.Controller
 
 		private void ConstructBackend()
 		{
-			connector = new SSLConnector(IP, PORT);
+			connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
 			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
 
-			streamListener.IncommingMessage += messagehandler.HandleMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
+			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
 
 		}
 
@@ -44,6 +48,7 @@ namespace SoftEngChatClient.Controller
 		public void Run() //Run the program
 		{
 			streamListener.StartListen(); //Start to listen for imcomming messages.
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(loginWindow);
