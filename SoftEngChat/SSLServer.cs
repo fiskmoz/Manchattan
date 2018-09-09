@@ -33,8 +33,22 @@ namespace SoftEngChat.Model.SSLCommunication
 				var client = serverListener.AcceptTcpClient(); //Client connects!
 				NetworkStream netStream = client.GetStream();
 				var ssl = new SslStream(netStream, false);
-				ssl.AuthenticateAsServer(cert, false, SslProtocols.Tls, true); //Server Authentication
+				try
+				{
+					ssl.AuthenticateAsServer(cert, false, SslProtocols.Tls, true); //Server Authentication
+				}
+				catch(Exception e)
+				{
+					Console.WriteLine("Exception: {0}", e.Message);
+					if (e.InnerException != null)
+					{
+						Console.WriteLine("Inner exception: {0}", e.InnerException.Message);
+					}
 
+					Console.WriteLine("Authentication failed - closing the connection.");
+					client.Close();
+					Console.ReadLine();
+				}
 				clientList.Add(new SSLClient(ssl, this)); //Client added to list!
 				Console.WriteLine("Client connected!");
 			}
