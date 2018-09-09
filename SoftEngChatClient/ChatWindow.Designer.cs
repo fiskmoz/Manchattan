@@ -98,9 +98,9 @@ namespace SoftEngChatClient
             this.ChatBox.Multiline = true;
             this.ChatBox.Name = "ChatBox";
             this.ChatBox.ReadOnly = true;
+            this.ChatBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ChatBox.Size = new System.Drawing.Size(411, 271);
             this.ChatBox.TabIndex = 4;
-            this.ChatBox.ScrollBars = ScrollBars.Vertical;
             // 
             // Toolbar
             // 
@@ -137,6 +137,7 @@ namespace SoftEngChatClient
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
+            this.Load += new System.EventHandler(this.ChatWindow_Load);
             this.ActiveChatPlaceholder.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
