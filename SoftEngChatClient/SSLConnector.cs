@@ -15,7 +15,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	{
 		private TcpClient client;
 		private NetworkStream netStream;
-		public SslStream sslStream { get; private set; }
+		public SslStream SslStream { get; private set; }
 
 		public SSLConnector(string ip, int port)
 		{
@@ -23,11 +23,11 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			//Client connected
 
 			netStream = client.GetStream();
-			sslStream = new SslStream(netStream, false, new RemoteCertificateValidationCallback(ValidateCert));
+			SslStream = new SslStream(netStream, false, new RemoteCertificateValidationCallback(ValidateCert));
 
 			try
 			{
-				sslStream.AuthenticateAsClient(ip);
+				SslStream.AuthenticateAsClient(ip);
 			}
 			catch (AuthenticationException e)
 			{
