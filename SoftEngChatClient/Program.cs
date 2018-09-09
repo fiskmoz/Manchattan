@@ -8,13 +8,11 @@ namespace SoftEngChatClient
 {
     class Program
     {
-        // Creates a new login window, and a winform thread (STAThread).
-        [STAThread]
+        
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+			Controller.ClientDriver client = new Controller.ClientDriver();
+			client.Run();
         }
     }
 }

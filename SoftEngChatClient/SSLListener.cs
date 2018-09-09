@@ -64,7 +64,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		//Eventhandling
 		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
-		public static event EventHandler IncommingMessage;
+		public event EventHandler IncommingMessage;
 
 		public void RaiseEvent(byte[] incomming)
 		{

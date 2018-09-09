@@ -43,7 +43,7 @@ namespace SoftEngChatClient
         // Initializes the TCP connection towards the server.
         private void handle_message()
         {
-            var stream = network.mainClient.GetStream();
+            var stream = network.mainClient.GetStream(); //Whats happening here? Exceptions when starting up!
             byte[] buffer = new byte[network.mainClient.ReceiveBufferSize];
             while (network.mainClient.Connected)
             {
