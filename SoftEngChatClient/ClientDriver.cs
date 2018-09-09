@@ -59,7 +59,7 @@ namespace SoftEngChatClient.Controller
 			chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
 											//Print output for user
 
-			loginWindow = new Login();		//Only responsible for login-functionality (see SIP Principle)
+			loginWindow = new Login();		//Only responsible for login-functionality (see SRP Principle)
 		}
 
 		private void UserLogin()
