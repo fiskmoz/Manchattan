@@ -22,7 +22,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		public SSLServer(IPAddress ip, int port)
 		{
-			X509Certificate2 cert = new X509Certificate2("server.crt", "keypw");
+			X509Certificate2 cert = new X509Certificate2("servercert.pfx", "keypw");
 			clientList = new List<SSLClient>();
 			serverListener = new TcpListener(ip, port);
 			serverListener.Start();
