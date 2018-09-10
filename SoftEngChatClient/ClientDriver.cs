@@ -66,7 +66,6 @@ namespace SoftEngChatClient.Controller
 											//Print output for user
 			loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
 			registerWindow = new Register();
-			GUIEventThread = new Thread(ListenForGUIEvents);
 		}
 
 		//Constructs backend modules
