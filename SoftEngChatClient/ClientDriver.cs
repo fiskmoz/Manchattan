@@ -101,7 +101,6 @@ namespace SoftEngChatClient.Controller
 
         private void cd_OpenRegisterWindow(object sender, EventArgs e)
         {
-            registerWindow = new Register();
             registerWindow.ShowDialog();
         }
 
