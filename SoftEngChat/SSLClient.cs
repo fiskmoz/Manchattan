@@ -26,12 +26,12 @@ namespace SoftEngChat.Model.SSLCommunication
 			isVerifiedUser = false;
 			server = connector;
 			this.stream = stream;
+            UserInfo = new User("NamePH", "MailPH", "PassPH");
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
 			writer = new SSLWriter(stream, server); //Writes into SSlStream
 			messageHandler = new Messagehandler(UserInfo.name, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
-			listener.StartListen(); //Starts to listen to the SSLStream
 		}
     }
 

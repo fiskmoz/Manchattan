@@ -18,6 +18,15 @@ namespace SoftEngChatClient
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
 
+        public string getUsername()
+        {
+            return EnterEmail.Text;
+        }
+        public string getPassword()
+        {
+            return EnterPassword.Text;
+        }
+
         // Initializes parameters and settings for the Login window.
         public Login()
         {

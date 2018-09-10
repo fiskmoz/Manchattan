@@ -106,12 +106,13 @@ namespace SoftEngChatClient.Controller
 
         private void cd_OpenLoginWindow(object sender, EventArgs e)
         {
-            // Send message to server for authentication.
+            writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
         }
 
         private void cd_ExitWindow(object sender, EventArgs e)
         {
             Application.Exit();
+            System.Environment.Exit(1);
         }
 
         private void cd_ClientRegister(object sender, EventArgs e)

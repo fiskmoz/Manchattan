@@ -20,8 +20,9 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			this.stream = stream;
 			stopListen = false;
-			listeningThread = new Thread(StartListen);
-		}
+			listeningThread = new Thread(Listen);
+            listeningThread.Start();
+        }
 
 		//Kills listening thread.
 		public void StopListen()
@@ -29,11 +30,6 @@ namespace SoftEngChat.Model.SSLCommunication
 			stopListen = true;
 		}
 
-		//Starts listening thread
-		public void StartListen()
-		{
-			listeningThread.Start();
-		}
 
 		//Start to listen for incomming messages.
 		//Raises event when message arrives, if error: event message == 0
