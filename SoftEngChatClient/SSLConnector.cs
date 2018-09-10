@@ -19,7 +19,15 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public SSLConnector(string ip, int port)
 		{
-			client = new TcpClient(ip, port);
+			try
+			{
+
+				client = new TcpClient(ip, port);
+			}
+			catch(Exception e)
+			{
+				return;
+			}
 			//Client connected
 
 			netStream = client.GetStream();
