@@ -27,7 +27,6 @@ namespace SoftEngChatClient.Controller
 		private Messagehandler messagehandler;
 
         public List<string> messageList;
-        private Thread GUIEventThread;
 
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;		//Serverport
@@ -83,8 +82,6 @@ namespace SoftEngChatClient.Controller
 		public void Run() //Run the program
 		{
 			streamListener.StartListen(); //Start to listen for incomming messages.
-            GUIEventThread.Start();
-
             Application.Run(loginWindow);
 		}
 
