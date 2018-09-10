@@ -17,7 +17,7 @@ namespace SoftEngChatClient
     {
         public event EventHandler sendButtonClicked;
         public event EventHandler chatWindowClosed;
-        public event EventHandler messageBoxKeyPressed;
+        public event KeyPressEventHandler messageBoxKeyPressed;
         public event EventHandler previousMessageButtonClick;
         public event EventHandler ChatWindowLoad;
 
@@ -73,6 +73,10 @@ namespace SoftEngChatClient
             L.Add(value);
         }
 
+        public string getTextMessageBox()
+        {
+            return MessageBox.Text;
+        }
 
     }
 }

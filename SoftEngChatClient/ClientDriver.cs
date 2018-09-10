@@ -34,19 +34,24 @@ namespace SoftEngChatClient.Controller
 
 		public ClientDriver()
 		{
-			ConstructBackend();
-			ConstructGUI();
-			
+            ConstructBackend();
 		}
 
 		private void ConstructBackend()
 		{
-			connector = new SSLConnector(IP, PORT); //Connect to server!
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
+                                            //Print output for user
+            loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
+            registerWindow = new Register();
+            connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
 			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
 
             GUIEventThread = new Thread(ListenForGUIEvents);
+
 
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
 
@@ -57,18 +62,9 @@ namespace SoftEngChatClient.Controller
 		public void Run() //Run the program
 		{
 			streamListener.StartListen(); //Start to listen for imcomming messages.
+            GUIEventThread.Start();
 
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(loginWindow);
-		}
-		
-		private void ConstructGUI()
-		{
-			chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
-											//Print output for user
-
-			loginWindow = new Login();		//Only responsible for login-functionality (see SRP Principle)
+            Application.Run(loginWindow);
 		}
 
 		private void UserLogin()
@@ -131,7 +127,7 @@ namespace SoftEngChatClient.Controller
 
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
-
+            writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
         }
 
         private void cd_ChatWindowClosed(object sender, EventArgs e)

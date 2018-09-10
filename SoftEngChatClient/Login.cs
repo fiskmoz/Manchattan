@@ -14,7 +14,6 @@ namespace SoftEngChatClient
 {
     public partial class Login : Form
     {
-        TCPNetwork network;
         public event EventHandler LoginButtonClick;
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
@@ -29,19 +28,19 @@ namespace SoftEngChatClient
         // NOTE: Should be a login check so user is accually allowed to login.
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            LoginButtonClick(this, new EventArgs());
+            LoginButtonClick(this, e);
         }
             
         // Opens the register window making a registreation avalible
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            RegisterButtonClick(this, new EventArgs());
+            RegisterButtonClick(this, e);
         }
             
         // Exits the program.
         private void ExitLogin_Click(object sender, EventArgs e)
         {
-            ExitButtonClicked(this, new EventArgs());
+            ExitButtonClicked(this, e);
         }
     }
 } 
