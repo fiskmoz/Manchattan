@@ -34,34 +34,56 @@ namespace SoftEngChatClient.Controller
 
 		public ClientDriver()
 		{
+			ConstructGUI();
             ConstructBackend();
+			SetupListeners();
 		}
 
+		//Sets up listeners for the different events.
+		//Not in loop or own thread or anything. Not polling but "interupts"
+		private void SetupListeners()
+		{
+			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
+
+			loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
+			loginWindow.LoginButtonClick += new EventHandler(cd_OpenLoginWindow);
+			loginWindow.ExitButtonClicked += new EventHandler(cd_ExitWindow);
+			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegister);
+			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterCancel);
+			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
+			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
+			chatWindow.messageBoxKeyPressed += new KeyPressEventHandler(cd_MessageBoxKeyPressed);
+			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
+			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+		}
+
+		//Constructs GUI windows
+		private void ConstructGUI()
+		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
+											//Print output for user
+			loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
+			registerWindow = new Register();
+			GUIEventThread = new Thread(ListenForGUIEvents);
+		}
+
+		//Constructs backend modules
 		private void ConstructBackend()
 		{
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
-                                            //Print output for user
-            loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
-            registerWindow = new Register();
+           
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
 			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
-
-            GUIEventThread = new Thread(ListenForGUIEvents);
-
-
-			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
-
 		}
 
 		// Creates winform thread (STAThread).
-		[STAThread]
+		[STAThread] // <- Makes win-forms to run in own thread!
 		public void Run() //Run the program
 		{
-			streamListener.StartListen(); //Start to listen for imcomming messages.
+			streamListener.StartListen(); //Start to listen for incomming messages.
             GUIEventThread.Start();
 
             Application.Run(loginWindow);
@@ -71,20 +93,6 @@ namespace SoftEngChatClient.Controller
 		{
 			//login logic here
 		}
-
-        private void ListenForGUIEvents()
-        {
-            loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
-            loginWindow.LoginButtonClick += new EventHandler(cd_OpenLoginWindow);
-            loginWindow.ExitButtonClicked += new EventHandler(cd_ExitWindow);
-            registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegister);
-            registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterCancel);
-            chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-            chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
-            chatWindow.messageBoxKeyPressed += new KeyPressEventHandler(cd_MessageBoxKeyPressed);
-            chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-            chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
-        }
 
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {

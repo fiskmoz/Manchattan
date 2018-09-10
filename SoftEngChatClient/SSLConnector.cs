@@ -15,20 +15,29 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	{
 		private TcpClient client;
 		private NetworkStream netStream;
+		private const int RECONNECT_TIME = 1000; //Time in miliseconds to wait before trying to connect to server again.
+		private const int MAX_RECONNECT_TRIES = 60; //maximal nuber of tries to connect to the server.
+
 		public SslStream SslStream { get; private set; }
 
 		public SSLConnector(string ip, int port)
 		{
-			try
+			int retryAttempts = 1;
+			do
 			{
-
-				client = new TcpClient(ip, port);
-			}
-			catch(Exception e)
-			{
-				return;
-			}
-			//Client connected
+				try
+				{
+					client = new TcpClient(ip, port);
+					break;
+				}
+				catch (Exception)
+				{
+					//Client connected
+					System.Threading.Thread.Sleep(RECONNECT_TIME); //Wait 1second before trying again.
+					retryAttempts += 1;
+				}
+			}while(retryAttempts < MAX_RECONNECT_TRIES);
+			if (retryAttempts >= MAX_RECONNECT_TRIES) return;
 
 			netStream = client.GetStream();
 			SslStream = new SslStream(netStream, false, new RemoteCertificateValidationCallback(ValidateCert));

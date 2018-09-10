@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		{
 			this.stream = stream;
 			stopListen = false;
-			listeningThread = new Thread(StartListen);
+			listeningThread = new Thread(Listen);
 		}
 
 		public void StopListen()
@@ -28,7 +28,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public void StartListen()
 		{
-			Thread listeningThread = new Thread(StartListen);
 			listeningThread.Start();
 		}
 		//Start to listen for incomming messages.
