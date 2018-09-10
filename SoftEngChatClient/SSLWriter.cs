@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
-	class SSLWriter
+    class SSLWriter
 	{
-		public enum MessageType { loginUserName=0, loginUserPassword=1, client=2, login=3}
-		private SslStream stream;
+        public enum MessageType { loginUserName=0, loginUserPassword=1, client=2, login=3}
+        private SslStream stream;
 		public SSLWriter(SslStream stream)
 		{
 			this.stream = stream;

@@ -50,25 +50,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatWindow.cs">
+    <Compile Include="GUI\ChatWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChatWindow.Designer.cs">
+    <Compile Include="GUI\ChatWindow.Designer.cs">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="ClientDriver.cs" />
+    <Compile Include="GUI\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="GUI\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.cs">
+    <Compile Include="GUI\Register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register.Designer.cs">
+    <Compile Include="GUI\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
     <Compile Include="SSLConnector.cs" />
@@ -81,13 +83,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ChatWindow.resx">
+    <EmbeddedResource Include="GUI\ChatWindow.resx">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="GUI\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register.resx">
+    <EmbeddedResource Include="GUI\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

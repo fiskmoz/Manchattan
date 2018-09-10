@@ -39,13 +39,13 @@ namespace SoftEngChat
 
         //Byt ut till DBWrite(String fileName) Bättre mer generisk och man 
         //Kan slänga in vilken fil som helst i det.
-        public void DBwrite()
+        public void DBwrite(List<User> userList)
         {
             var tester = new User("Anders", "maejfa", "1231293");
             var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
-            List<User> a = new List<User>();
-            a.Add(tester);
-            a.Add(tester2);
+
+            userList.Add(tester);
+            userList.Add(tester2);
             
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
@@ -54,7 +54,7 @@ namespace SoftEngChat
                 using (StreamWriter file = File.CreateText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, a);
+                    serializer.Serialize(file, userList);
                     Console.WriteLine(filePath);
                 }
 

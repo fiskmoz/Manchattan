@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using SoftEngChat.Model.SSLCommunication;
 
 namespace SoftEngChat
 {
@@ -132,10 +133,11 @@ namespace SoftEngChat
         public static void Main(string[] args)
         {
             DatabaseManegement DBtest = new DatabaseManegement();
-            DBtest.DBwrite();
+            List<User> userList = new List<User>();
+            DBtest.DBwrite(userList);
             DBtest.DBread();
-            
-            ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
+			SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
+            //ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
     }
 }

@@ -55,7 +55,9 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
 			}
+#pragma warning disable CS0168 // Variable is declared but never used
 			catch (Exception e)
+#pragma warning restore CS0168 // Variable is declared but never used
 			{
 				RaiseEvent(null);
 				buffer = null;
@@ -64,7 +66,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		//Eventhandling
 		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
-		public static event EventHandler IncommingMessage;
+		public event EventHandler IncommingMessage;
 
 		public void RaiseEvent(byte[] incomming)
 		{
