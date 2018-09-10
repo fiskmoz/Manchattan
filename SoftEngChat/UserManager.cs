@@ -15,11 +15,30 @@ namespace SoftEngChat
             userList = db.DBread();
         }
 
-        //Add a new user, when registrate.
+        //Add a new user, when registrate and write to database.
         public void AddUser(string name, string mail, string password)
         {
             userList.Add(new User(name, mail, password));
             db.DBwrite(userList);
+        }
+
+        //Remove user from database write back to database. This also 
+        //returns a list, dont know if it is nesesary. But it thus for now.
+        public List<User> RemoveUser(string name, string password)
+        {
+            ValidateUser validate = new ValidateUser();
+            
+            foreach(var user in userList)
+            {
+                if(validate.validate(user.name, user.password) == "true")
+                {
+                    userList.Remove(user);
+                }
+            }
+
+            db.DBwrite(userList);
+
+            return userList;
         }
 
     }
