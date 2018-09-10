@@ -18,8 +18,18 @@ namespace SoftEngChat
         //Add a new user, when registrate and write to database.
         public void AddUser(string name, string mail, string password)
         {
-            userList.Add(new User(name, mail, password));
-            db.DBwrite(userList);
+            foreach(var user in userList)
+            {
+                if(!(user.name == name))
+                {
+                    userList.Add(new User(name, mail, password));
+                    db.DBwrite(userList);
+                } 
+                else
+                {
+                    Console.WriteLine("User exist");
+                }
+            }
         }
 
         //Remove user from database write back to database. This also 
