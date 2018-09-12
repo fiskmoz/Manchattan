@@ -30,7 +30,6 @@ namespace SoftEngChat.Model.SSLCommunication
 			stopListen = true;
 		}
 
-
 		//Start to listen for incomming messages.
 		//Raises event when message arrives, if error: event message == 0
 		private void Listen()
@@ -39,28 +38,24 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			while (true)
 			{
-				ReadMessage(stream, incommingMessage);
-				if (incommingMessage != null)
-					RaiseEvent(incommingMessage);
+                int bytesRead = 0;
+                try
+                {
+                    bytesRead = stream.Read(incommingMessage, 0, incommingMessage.Length);
+                    if (bytesRead == 0) incommingMessage = null;
+                }
+                catch(Exception e )
+                {
+                    incommingMessage = null;
+                }
+                if(bytesRead > 0)
+                {
+                    if (incommingMessage != null)
+                    {
+                        RaiseEvent(incommingMessage);
+                    }
+                }
 				if (stopListen) continue;
-			}
-		}
-
-		//Read message from SSL stream.
-		//IN: SSL stream, buffer.
-		//OUT: fills buffer; Incomming message (byte[])
-		private void ReadMessage(SslStream stream, byte[] buffer)
-		{
-			try
-			{
-				int bytesRead = stream.Read(buffer, 0, buffer.Length);
-			}
-#pragma warning disable CS0168 // Variable is declared but never used
-			catch (Exception e)
-#pragma warning restore CS0168 // Variable is declared but never used
-			{
-				RaiseEvent(null);
-				buffer = null;
 			}
 		}
 
