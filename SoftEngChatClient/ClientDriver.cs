@@ -44,6 +44,8 @@ namespace SoftEngChatClient.Controller
 		private void SetupListeners()
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
+            messagehandler.LoginValid += this.Login;
+            messagehandler.ParsedIncommmingMessage += this.ChatWindowPrint;
 
 			loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_OpenLoginWindow);
@@ -57,8 +59,24 @@ namespace SoftEngChatClient.Controller
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
 		}
 
-		//Constructs GUI windows
-		private void ConstructGUI()
+        private void Login(object sender, LoginValid eventArgs)
+        {
+            if (loginWindow.InvokeRequired)
+            {
+                loginWindow.Invoke(new Action<object, LoginValid>(Login), new object[] { sender, eventArgs });
+                return;
+            }
+            loginWindow.Hide();
+            chatWindow.Show();
+        }
+        
+        private void ChatWindowPrint(object sender, ParsedIncommingMessage eventArgs)
+        {
+            chatWindow.AppendTextBox(eventArgs.sender + eventArgs.message);
+        }
+
+        //Constructs GUI windows
+        private void ConstructGUI()
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -132,8 +150,6 @@ namespace SoftEngChatClient.Controller
         {
             writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
             //TODO: change this back
-            //loginWindow.Hide();
-            //chatWindow.Show();
         }
 
         private void cd_ExitWindow(object sender, EventArgs e)

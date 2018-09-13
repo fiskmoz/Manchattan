@@ -70,7 +70,10 @@ namespace SoftEngChatClient
                 return;
             }
             ChatBox.Text += value;
-            //L.Add(value);
+        }
+        public void AppendTextBox(string value)
+        {
+            ChatBox.Text += value;
         }
 
         //Returnerar skrivfältet
