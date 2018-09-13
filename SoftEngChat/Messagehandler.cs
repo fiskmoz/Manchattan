@@ -92,7 +92,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private bool ValidateLoginMessage(string message)
 		{
-			int i = 3;
+			int i = 2;
 			string username = null;
 			string password = null;
 			
