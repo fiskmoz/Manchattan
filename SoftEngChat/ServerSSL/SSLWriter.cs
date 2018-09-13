@@ -22,7 +22,11 @@ namespace SoftEngChat.Model.SSLCommunication
 		//In: Outgoing message, sender of the message.
 		public void Write(string message, string sender)
 		{
-			stream.Write(Encoding.UTF8.GetBytes(sender + "@"+ message));
+			stream.Write(Encoding.UTF8.GetBytes("5:" + sender + ":"+ message));
+		}
+		public void WriteLoginACK(int flag)
+		{
+			stream.Write(Encoding.UTF8.GetBytes("4" + flag.ToString()));
 		}
 	}
 }

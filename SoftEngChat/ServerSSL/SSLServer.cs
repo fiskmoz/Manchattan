@@ -71,6 +71,11 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
+		internal void RemoveClient(SSLClient client)
+		{
+			clientList.Remove(client);
+		}
+
 		//Writes latest message arrived at server to a client
 		//IN: Client who shall receive message.
 		private void Write(SSLClient client)

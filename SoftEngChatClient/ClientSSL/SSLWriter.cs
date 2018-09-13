@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public void Write(string userName, string password, MessageType login)
 		{
-			string outgoing = BuildMessage(login, userName + ":" + password);
+			string outgoing = BuildMessage(login, userName , password);
 			SendMessage(outgoing);
 		}
 
@@ -36,13 +36,13 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		private string BuildMessage(MessageType type, string client, string message)
 		{
-			string outgoing = type + "@" + client + ":" + message;
+			string outgoing = ((int)type).ToString() + ":" + client + ":" + message;
 			return outgoing;
 		}
 
 		private string BuildMessage(MessageType type, string message)
 		{
-			string outgoing = type + ":" + message;
+			string outgoing = ((int)type).ToString() + ":" + message;
 			return outgoing;
 		}
 
