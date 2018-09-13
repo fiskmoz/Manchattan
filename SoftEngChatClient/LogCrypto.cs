@@ -25,6 +25,16 @@ namespace SoftEngChatClient
             
         }
 
+        public void SetNewKey(byte[] key)
+        {
+            aes.Key = key;
+        }
+
+        public void GenerateNewKey()
+        {
+            aes.GenerateKey();
+        }
+
 
         public byte[] EncryptString(string chatLog)
         {
