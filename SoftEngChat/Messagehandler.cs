@@ -99,11 +99,13 @@ namespace SoftEngChat.Model.SSLCommunication
 			while(message[i] != ':')
 			{
 				username += message[i];
+				i++;
 			}
 
 			while (i < message.Length)
 			{
 				password += message[i];
+				i++;
 			}
 
 			return true;
