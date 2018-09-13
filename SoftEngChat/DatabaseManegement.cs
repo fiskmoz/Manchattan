@@ -64,7 +64,7 @@ namespace SoftEngChat
         }
 
         // Writes the test users to the database if it does not already exsist.
-        public void DBInitWrite()
+        private void DBInitWrite()
         {
             try
             {
