@@ -53,5 +53,18 @@ namespace SoftEngChat
 
             return userList;
         }
+
+
+        public string validateUser(string userIn, string passwordIn)
+        {
+            DatabaseManegement DB = new DatabaseManegement();
+            List<User> userlist = DB.DBread();
+            foreach (var User in userlist)
+            {
+                if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
+                    return "true" ;
+            }
+            return "false";
+        }
     }
 }
