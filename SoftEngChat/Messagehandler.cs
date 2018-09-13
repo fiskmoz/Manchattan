@@ -53,6 +53,33 @@ namespace SoftEngChat.Model.SSLCommunication
 					Console.WriteLine(incomming);
 					break;
 			}
+			
+		}
+
+		private void HandleClientMessage(string incomming)
+		{
+			server.WriteAll(userName, ParseClientMessage(incomming));
+		}
+
+		private string ParseClientMessage(string message)
+		{
+			int i = 0;
+			string payload = null;
+			do
+			{
+				i++;
+			} while (message[i-1] != ':');
+
+			while (i < message.Length)
+			{
+				payload += message[i];
+			}
+			return payload;
+		}
+
+		private void HandleLogin(string incomming)
+		{
+
 		}
 	}
 }
