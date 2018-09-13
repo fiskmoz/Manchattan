@@ -74,7 +74,7 @@ namespace SoftEngChatClient.Controller
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
-			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
+			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
 		}
 
 		// Creates winform thread (STAThread).
@@ -110,7 +110,10 @@ namespace SoftEngChatClient.Controller
 
         private void cd_OpenLoginWindow(object sender, EventArgs e)
         {
-            writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            //writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            //TODO: change this back
+            loginWindow.Hide();
+            chatWindow.Show();
         }
 
         private void cd_ExitWindow(object sender, EventArgs e)
@@ -122,6 +125,7 @@ namespace SoftEngChatClient.Controller
         private void cd_ClientRegister(object sender, EventArgs e)
         {
             // Registration of client.
+            writer.Write("Bertil", MessageType.login);
         }
         
         private void cd_RegisterCancel(object sender, EventArgs e)
@@ -137,11 +141,14 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
             TextWriter tw = new StreamWriter("MessageLog.txt");
+
+
             for (int i = 0; i < messageList.Count; i++)
             {
                 tw.WriteLine(messageList[i]);
             }
             tw.Close();
+
             Application.Exit();
         }
 
@@ -150,6 +157,7 @@ namespace SoftEngChatClient.Controller
             if (e.KeyChar == (char)13)
             {
                 // Send the message inside messageBox from chatWindow
+                writer.Write("hej", MessageType.client);
                 chatWindow.clearMessageBox();
             }
 
@@ -159,7 +167,7 @@ namespace SoftEngChatClient.Controller
         {
             foreach (string s in messageList)
             {
-                chatWindow.AppendTextBox(messageList,s + System.Environment.NewLine);
+                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
             }
         }
     }
