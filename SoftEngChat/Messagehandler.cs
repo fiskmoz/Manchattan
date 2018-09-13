@@ -100,6 +100,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
+
 			return true;
 		}
 	}
