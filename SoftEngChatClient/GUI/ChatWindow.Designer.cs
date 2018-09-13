@@ -50,7 +50,7 @@ namespace SoftEngChatClient
             this.MessageBox.Name = "MessageBox";
             this.MessageBox.Size = new System.Drawing.Size(327, 55);
             this.MessageBox.TabIndex = 0;
-            this.MessageBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MessageBox_KeyPress);
+            this.MessageBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MessageBox_KeyUp);
             // 
             // SendButton
             // 

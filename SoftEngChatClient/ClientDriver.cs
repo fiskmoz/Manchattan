@@ -54,10 +54,11 @@ namespace SoftEngChatClient.Controller
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
-			chatWindow.messageBoxKeyPressed += new KeyPressEventHandler(cd_MessageBoxKeyPressed);
+			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_MessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
 		}
+
 
         private void Login(object sender, LoginValid eventArgs)
         {
@@ -75,7 +76,7 @@ namespace SoftEngChatClient.Controller
         
         private void ChatWindowPrint(object sender, ParsedIncommingMessage eventArgs)
         {
-            chatWindow.AppendTextBox(eventArgs.sender + eventArgs.message);
+            chatWindow.AppendTextBox("["+eventArgs.sender+"] : " + eventArgs.message);
         }
 
         //Constructs GUI windows
@@ -175,6 +176,8 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
             writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+            chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+            chatWindow.clearMessageBox();
         }
 
         private void cd_ChatWindowClosed(object sender, EventArgs e)
@@ -205,17 +208,6 @@ namespace SoftEngChatClient.Controller
             Application.Exit();
         }
 
-        private void cd_MessageBoxKeyPressed(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                // Send the message inside messageBox from chatWindow
-                writer.Write("hej", MessageType.client);
-                chatWindow.clearMessageBox();
-            }
-
-        }
-
         private void cd_PreviousMessageButtonClicked(object sender, EventArgs e)
         {
             foreach (string s in messageList)
@@ -223,5 +215,14 @@ namespace SoftEngChatClient.Controller
                 chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
             }
         }
+
+        private void cd_MessageBoxKeyReleased(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cd_ChatWindowSend(sender, e);
+            }
+        }
+
     }
 }
