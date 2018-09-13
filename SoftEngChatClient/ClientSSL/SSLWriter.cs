@@ -18,8 +18,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public void Write(string userName, string password, MessageType login)
 		{
-			string outgoing = BuildMessage(login, userName , password);
-			SendMessage(outgoing);
+            //string outgoing = BuildMessage(login, userName , password);
+            //SendMessage(outgoing);
+
+            SendMessage("3:bob:123");
 		}
 
 		public void Write(string message, MessageType type)
@@ -50,6 +52,5 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		{
 			stream.Write(Encoding.UTF8.GetBytes(outgoing), 0, outgoing.Length);
 		}
-
 	}
 }

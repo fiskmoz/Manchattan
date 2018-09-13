@@ -35,28 +35,70 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void Listen()
 		{
 			byte[] incommingMessage = new byte[2048];
+            StringBuilder messageData = new StringBuilder();
+            //stream.ReadTimeout = 100;
 
-			while (true)
+            while (true)
 			{
                 int bytesRead = 0;
                 try
                 {
                     bytesRead = stream.Read(incommingMessage, 0, incommingMessage.Length);
-                    if (bytesRead == 0) incommingMessage = null;
                 }
-                catch(Exception e )
+                catch(Exception)
+                { }
+                if (bytesRead > 0)
                 {
-                    incommingMessage = null;
-                }
-                if(bytesRead > 0)
-                {
-                    if (incommingMessage != null)
+                    string message = Encoding.UTF8.GetString(incommingMessage, 0, bytesRead);
+                    if (!message.Contains("\0") || message.Length > 1)
                     {
-                        RaiseEvent(incommingMessage);
+                        messageData.Append(message);
+                        if (messageData.ToString().Length > 1)
+                            RaiseEvent(messageData.ToString());
+                        message = null;
+                        //RaiseEvent(message);
                     }
+                    
                 }
-				if (stopListen) continue;
-			}
+                /*
+                do
+                {
+
+                    try
+                    {
+                        bytesRead = stream.Read(incommingMessage, 0, incommingMessage.Length);
+
+                    }
+                    catch (Exception e)
+                    {
+                        bytesRead = 0;
+                        message = null;
+                    }
+                    message = Encoding.UTF8.GetString(incommingMessage, 0, bytesRead).Replace('\0', ' ');
+                    //Decoder decoder = Encoding.UTF8.GetDecoder();
+                    //char[] chars = new char[decoder.GetCharCount(incommingMessage, 0, bytesRead)];
+                    messageData.Append(message);
+                    Console.WriteLine(messageData.ToString());
+                    if (messageData.ToString().Length != 0)
+                    {
+                        if (messageData.ToString()[0] == ' ')
+                        {
+                            messageData = new StringBuilder();
+                            bytesRead = 0;
+                        }
+                    }
+
+                    if (messageData.ToString().IndexOf("\r\n") > bytesRead && bytesRead != 0)
+                    {
+                        break;
+                    }
+                    
+                } while (bytesRead >= 0);
+                Console.WriteLine(messageData.ToString());
+                */
+                //RaiseEvent(messageData.ToString());
+                if (stopListen) continue;
+            }
 		}
 
 		//Eventhandling
@@ -65,7 +107,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		//Raises IncommingMessage event.
 		//IN: Byte array containing the message.
-		public void RaiseEvent(byte[] incomming)
+		public void RaiseEvent(string incomming)
 		{
 			IncommingMessage message = new IncommingMessage();
 			message.Message = incomming;
@@ -76,6 +118,6 @@ namespace SoftEngChat.Model.SSLCommunication
 	//IncommingMessage Event argument declaration. Needed to send let EventHandler catch message.
 	class IncommingMessage : EventArgs
 	{
-		public byte[] Message { get; set; }
+		public string Message { get; set; }
 	}
 }

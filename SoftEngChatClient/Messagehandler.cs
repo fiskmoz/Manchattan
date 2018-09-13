@@ -10,8 +10,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		//Eventhandler, Consumes IncommingMessage Events.
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
-			string incomming = Encoding.UTF8.GetString(message.Message); //Encoding!
-
+            string incomming = message.Message;
 			if ( (int) incomming[0] == (int) MessageType.loginACK){
 				//Raises event to inform client if the login was accepted by the server.
 				RaiseEvent((int)incomming[1] == 0 ? false : true);
