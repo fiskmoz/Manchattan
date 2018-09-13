@@ -16,10 +16,14 @@ namespace SoftEngChatClient.Model.SSLCommunication
 				//Raises event to inform client if the login was accepted by the server.
 				RaiseEvent((int)incomming[1] == 0 ? false : true);
 			}
-			else if((int)incomming[0] == (int)MessageType.incommingClient)
+			else if(incomming[0] == '5')
 			{
 				ClientMessage(incomming);
 			}
+            else
+            {
+                ClientMessage(incomming);
+            }
 		}
 
 		//Raises new event containing a message for the client
