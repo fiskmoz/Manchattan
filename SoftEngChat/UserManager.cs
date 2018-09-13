@@ -20,7 +20,7 @@ namespace SoftEngChat
         {
             foreach(var user in userList)
             {
-                if(!(user.name == name))
+                if(user.name != name)
                 {
                     userList.Add(new User(name, mail, password));
                     db.DBwrite(userList);
@@ -50,6 +50,5 @@ namespace SoftEngChat
 
             return userList;
         }
-
     }
 }

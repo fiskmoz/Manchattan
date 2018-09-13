@@ -50,10 +50,10 @@
     <Compile Include="DatabaseManegement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SSLClient.cs" />
-    <Compile Include="SSLServer.cs" />
-    <Compile Include="SSLListener.cs" />
-    <Compile Include="SSLWriter.cs" />
+    <Compile Include="ServerSSL\SSLClient.cs" />
+    <Compile Include="ServerSSL\SSLServer.cs" />
+    <Compile Include="ServerSSL\SSLListener.cs" />
+    <Compile Include="ServerSSL\SSLWriter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="ValidateUser.cs" />
