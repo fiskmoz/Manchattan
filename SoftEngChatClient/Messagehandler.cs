@@ -36,8 +36,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			int i;
 			string sender = null;
 			string message = null;
-			StringBuilder stringBuilder = new StringBuilder();
-			for (i = 1; incomming[i] != ':'; i++)
+			for (i = 2; incomming[i] != ':'; i++)
 			{
 				sender += incomming[i];
 			}

@@ -79,7 +79,32 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private void HandleLogin(string incomming)
 		{
+			bool valid = ValidateLoginMessage(incomming);
+			client.writer.WriteLoginACK(valid?1:0);
 
+			if (!valid)
+			{
+				server.RemoveClient(client);
+			}
+		}
+
+		private bool ValidateLoginMessage(string message)
+		{
+			int i = 3;
+			string username = null;
+			string password = null;
+			
+			while(message[i] != ':')
+			{
+				username += message[i];
+			}
+
+			while (i < message.Length)
+			{
+				password += message[i];
+			}
+
+			return true;
 		}
 	}
 }
