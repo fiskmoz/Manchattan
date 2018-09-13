@@ -15,9 +15,7 @@ namespace SoftEngChat
         public static void Main(string[] args)
         {
             DatabaseManegement DBtest = new DatabaseManegement();
-            List<User> userList = new List<User>();
-            DBtest.DBwrite(userList);
-            DBtest.DBread();
+            //DBtest.DBread();
 			SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
             //ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }
