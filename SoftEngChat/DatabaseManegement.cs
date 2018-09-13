@@ -33,7 +33,7 @@ namespace SoftEngChat
 
         public void TestUsers()
         {
-            var tester = new User("Anders", "maejfa", "1231293");
+            var tester = new User("Anders", "maejfa", "112");
             var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
             var tester3 = new User("name", "email", "pass");
             user.Add(tester);
