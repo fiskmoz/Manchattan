@@ -70,7 +70,7 @@ namespace SoftEngChatClient
                 return;
             }
             ChatBox.Text += value;
-            L.Add(value);
+            //L.Add(value);
         }
 
         public string getTextMessageBox()
