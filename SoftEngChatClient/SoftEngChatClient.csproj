@@ -76,7 +76,6 @@
     <Compile Include="SSLConnector.cs" />
     <Compile Include="SSLListener.cs" />
     <Compile Include="SSLWriter.cs" />
-    <Compile Include="TCPNetwork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
