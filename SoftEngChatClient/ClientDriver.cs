@@ -74,7 +74,7 @@ namespace SoftEngChatClient.Controller
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
-			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
+			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
 		}
 
 		// Creates winform thread (STAThread).
