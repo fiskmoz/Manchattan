@@ -17,7 +17,12 @@ namespace SoftEngChat
             DatabaseManegement DBtest = new DatabaseManegement();
             List<User> userList = new List<User>();
             DBtest.DBwrite(userList);
-            DBtest.DBread();
+            userList =  DBtest.DBread();
+
+            foreach(var u in userList)
+            {
+                Console.WriteLine(u.name);
+            }
 			SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
             //ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
         }

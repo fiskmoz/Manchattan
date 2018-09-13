@@ -18,23 +18,18 @@ namespace SoftEngChat
         //File path where the login file appears.
         static String fileName = "DB.txt";
         static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-        List<User> user;
+        public List<User> user;
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
         {
-            
+            while(!(File.Exists(filePath)))
                 CreateFile();
-            
-
         }
 
         public void CreateFile()
         {
-            var tester = new User("Anders", "maejfa", "1231293");
-            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
-            user.Add(tester);
-            user.Add(tester2);
+            
 
             try
             {
@@ -55,11 +50,7 @@ namespace SoftEngChat
         //Kan slänga in vilken fil som helst i det.
         public void DBwrite(List<User> userList)
         {
-            userList = user;
-
-            
-
-
+            userList.Add(new User("Anders", "sfjdofjsd", "1223"));
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
@@ -90,13 +81,19 @@ namespace SoftEngChat
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     string json = file.ReadToEnd();
+
+                    Console.Write(json);
+                    
+                      
                     user = JsonConvert.DeserializeObject<List<User>>(json);
+
+                  
                 }
             }
             catch(Exception e)
             {
                 e.GetBaseException();
-                Console.WriteLine("Dont work, DB read");
+                Console.WriteLine("Dont work, DB read" + e.GetBaseException());
                     
             } 
             
