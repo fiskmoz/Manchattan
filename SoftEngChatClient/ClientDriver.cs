@@ -135,7 +135,7 @@ namespace SoftEngChatClient.Controller
 
                 //messageList = File.ReadAllLines("MessageLog.txt").ToList();
             }
-            catch (Exception temp)
+            catch (Exception)
             {
                 chatWindow.AppendTextBox(messageList,"Failed to read previous messages" + System.Environment.NewLine);
             }

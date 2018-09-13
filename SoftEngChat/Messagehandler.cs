@@ -84,6 +84,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private bool ValidateLoginMessage(string message)
 		{
+            UserManager um = new UserManager();
 			int i = 2;
 			string username = null;
 			string password = null;
@@ -100,8 +101,13 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
-
-			return true;
+            if("true" == um.validateUser(username, password))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
 		}
 	}
 }
