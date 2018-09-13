@@ -26,16 +26,28 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		//Eventhandler, Consumes IncommingMessage Events.
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
-			if(message.Message == null) //Error when event was raised.
-			{
-				Console.WriteLine("ERROR: Event for incomming message was raised but no message arrived.");
-				return;
-			}
-
 			string incomming = Encoding.UTF8.GetString(message.Message); //Encoding!
 
+			if ( (int) incomming[0] == (int) MessageType.loginACK){
+			}
 			// Insert code how to handle a message here!
 			
 		}
+
+		public delegate void EventHandler(Object sender, LoginValid eventArgs);
+		public event EventHandler LoginValid;
+
+		private void RaiseEvent(bool isValid)
+		{
+			LoginValid flag = new LoginValid();
+			flag.isValid = isValid;
+			LoginValid(this, flag);
+		}
+
+	}
+
+	class LoginValid : EventArgs
+	{
+		public bool isValid;
 	}
 }
