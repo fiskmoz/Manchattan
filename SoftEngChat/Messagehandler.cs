@@ -35,6 +35,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				case '0':
 					Console.WriteLine("Message arrived; Clientmessage:");
 					Console.WriteLine(incomming);
+					HandleClientMessage(incomming);
 					break;
 				case '1':
 					Console.WriteLine("Message arrived; Login username:");
@@ -47,6 +48,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				case '3':
 					Console.WriteLine("Message arrived; Credentials:");
 					Console.WriteLine(incomming);
+					HandleLogin(incomming);
 					break;
 				default:
 					Console.WriteLine("Message arrived; Error:");
