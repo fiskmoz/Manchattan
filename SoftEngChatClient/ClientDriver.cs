@@ -93,6 +93,7 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
+
             try
             {
                 messageList = File.ReadAllLines("MessageLog.txt").ToList();
@@ -142,10 +143,16 @@ namespace SoftEngChatClient.Controller
         {
             TextWriter tw = new StreamWriter("MessageLog.txt");
 
+            var str = chatWindow.getChatBox();
 
-            for (int i = 0; i < messageList.Count; i++)
+            string[] lines = str.Split(
+            new[] { Environment.NewLine },
+            StringSplitOptions.None
+            );
+
+            for (int i = 0; i < lines.Length; i++)
             {
-                tw.WriteLine(messageList[i]);
+                tw.WriteLine(lines[i]);
             }
             tw.Close();
 

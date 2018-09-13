@@ -84,6 +84,5 @@ namespace SoftEngChatClient
         {
             return ChatBox.Text;
         }
-
     }
 }
