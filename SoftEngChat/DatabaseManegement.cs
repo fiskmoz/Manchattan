@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;   
 
 namespace SoftEngChat
@@ -16,24 +17,37 @@ namespace SoftEngChat
     {
         //File path where the login file appears.
         static String fileName = "DB.txt";
-        static String filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+        static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
         List<User> user;
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
         {
-            if(!File.Exists(filePath))
+            
+                CreateFile();
+            
+
+        }
+
+        public void CreateFile()
+        {
+            var tester = new User("Anders", "maejfa", "1231293");
+            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
+            user.Add(tester);
+            user.Add(tester2);
+
+            try
             {
-                try
-                {
-                    File.Create(filePath);
-                }
-                catch(Exception e)
-                {
-                    e.GetBaseException();
-                    Console.WriteLine("Couldnt create file");
-                }
-            }   
+                File.Create(filePath);
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+                Console.WriteLine("Couldnt create file");
+            }
+            
+            File.Delete(filePath);
+            Console.WriteLine( File.Exists(filePath));
         }
         
 
@@ -41,34 +55,36 @@ namespace SoftEngChat
         //Kan slänga in vilken fil som helst i det.
         public void DBwrite(List<User> userList)
         {
-            var tester = new User("Anders", "maejfa", "1231293");
-            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
+            userList = user;
 
-            userList.Add(tester);
-            userList.Add(tester2);
             
+
+
 
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
             {
-                using (StreamWriter file = File.CreateText(filePath))
+                using (StreamWriter file = File.AppendText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Serialize(file, userList);
                     Console.WriteLine(filePath);
                 }
-
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 e.GetBaseException();
-                Console.Write("Dont work");
             }
         }
 
         //Reads from databas(textfile) and returns a list of users.
         public List<User> DBread()
-        {   
+        {
+            while (!File.Exists(filePath))
+            {
+                CreateFile();
+            }
+
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
@@ -80,6 +96,8 @@ namespace SoftEngChat
             catch(Exception e)
             {
                 e.GetBaseException();
+                Console.WriteLine("Dont work, DB read");
+                    
             } 
             
             return user;
