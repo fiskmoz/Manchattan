@@ -92,18 +92,20 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private bool ValidateLoginMessage(string message)
 		{
-			int i = 3;
+			int i = 2;
 			string username = null;
 			string password = null;
 			
 			while(message[i] != ':')
 			{
 				username += message[i];
+				i++;
 			}
 
 			while (i < message.Length)
 			{
 				password += message[i];
+				i++;
 			}
 
 			return true;
