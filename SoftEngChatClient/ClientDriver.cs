@@ -175,9 +175,12 @@ namespace SoftEngChatClient.Controller
 
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
-            writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
-            chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
-            chatWindow.clearMessageBox();
+            if(chatWindow.getTextMessageBox().Length > 0)
+            {
+                writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+                chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+                chatWindow.clearMessageBox();
+            }
         }
 
         private void cd_ChatWindowClosed(object sender, EventArgs e)

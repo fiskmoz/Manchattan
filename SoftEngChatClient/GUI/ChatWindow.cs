@@ -63,7 +63,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<List<string>, string>(AppendTextBox), new object[] { L, value });
                 return;
             }
-            ChatBox.Text += value += System.Environment.NewLine;
+            ChatBox.AppendText(value + System.Environment.NewLine);
         }
         public void AppendTextBox(string value)
         {
@@ -72,7 +72,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
                 return;
             }
-            ChatBox.Text += value;
+            ChatBox.AppendText(value + System.Environment.NewLine);
         }
 
         //Returnerar skrivfältet

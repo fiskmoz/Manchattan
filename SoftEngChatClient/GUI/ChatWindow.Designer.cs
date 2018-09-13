@@ -129,11 +129,11 @@ namespace SoftEngChatClient
             this.ClientSize = new System.Drawing.Size(784, 411);
             this.Controls.Add(this.PreviousMessagesButton);
             this.Controls.Add(this.Toolbar);
-            this.Controls.Add(this.ChatBox);
             this.Controls.Add(this.ConctactsPlaceholder);
             this.Controls.Add(this.ActiveChatPlaceholder);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MessageBox);
+            this.Controls.Add(this.ChatBox);
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
