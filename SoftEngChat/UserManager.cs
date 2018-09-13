@@ -54,7 +54,7 @@ namespace SoftEngChat
             return userList;
         }
 
-
+        //Validate user from login and checks with users on database.
         public string validateUser(string userIn, string passwordIn)
         {
             DatabaseManegement DB = new DatabaseManegement();
