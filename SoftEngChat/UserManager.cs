@@ -61,9 +61,15 @@ namespace SoftEngChat
             List<User> userlist = DB.DBread();
             foreach (var User in userlist)
             {
+                Console.WriteLine("Login: " + "|"+userIn+"|" + " " + "|"+passwordIn+"|" + ":" + " |"+User.name+"|" + " " + User.password);
                 if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
-                    return "true" ;
+                {
+                    Console.WriteLine(User.name + User.password);
+                    return "true";
+                }
+                    
             }
+            Console.WriteLine("returning false");
             return "false";
         }
         

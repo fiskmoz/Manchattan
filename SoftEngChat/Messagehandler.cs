@@ -94,7 +94,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				username += message[i];
 				i++;
 			}
-
+            i++;
 			while (i < message.Length)
 			{
 				password += message[i];

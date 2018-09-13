@@ -61,13 +61,16 @@ namespace SoftEngChatClient.Controller
 
         private void Login(object sender, LoginValid eventArgs)
         {
-            if (loginWindow.InvokeRequired)
+            if(eventArgs.isValid)
             {
-                loginWindow.Invoke(new Action<object, LoginValid>(Login), new object[] { sender, eventArgs });
-                return;
+                if (loginWindow.InvokeRequired)
+                {
+                    loginWindow.Invoke(new Action<object, LoginValid>(Login), new object[] { sender, eventArgs });
+                    return;
+                }
+                loginWindow.Hide();
+                chatWindow.Show();
             }
-            loginWindow.Hide();
-            chatWindow.Show();
         }
         
         private void ChatWindowPrint(object sender, ParsedIncommingMessage eventArgs)
