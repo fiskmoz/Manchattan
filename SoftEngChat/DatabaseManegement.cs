@@ -23,31 +23,22 @@ namespace SoftEngChat
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
         {
-            
-                CreateFile();
-            
-
+            user = new List<User>();
+            if (!File.Exists(filePath))
+            {
+                TestUsers();
+                DBInitWrite();
+            }
         }
 
-        public void CreateFile()
+        public void TestUsers()
         {
             var tester = new User("Anders", "maejfa", "1231293");
             var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
+            var tester3 = new User("name", "email", "pass");
             user.Add(tester);
             user.Add(tester2);
-
-            try
-            {
-                File.Create(filePath);
-            }
-            catch (Exception e)
-            {
-                e.GetBaseException();
-                Console.WriteLine("Couldnt create file");
-            }
-            
-            File.Delete(filePath);
-            Console.WriteLine( File.Exists(filePath));
+            user.Add(tester3);
         }
         
 
@@ -55,12 +46,6 @@ namespace SoftEngChat
         //Kan slänga in vilken fil som helst i det.
         public void DBwrite(List<User> userList)
         {
-            userList = user;
-
-            
-
-
-
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
             {
@@ -74,17 +59,32 @@ namespace SoftEngChat
             catch(Exception e)
             {
                 e.GetBaseException();
+                Console.WriteLine("DBWrite Exception" + e.ToString());
+            }
+        }
+
+        // Writes the test users to the database if it does not already exsist.
+        private void DBInitWrite()
+        {
+            try
+            {
+                using (StreamWriter file = File.AppendText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, user);
+                    Console.WriteLine(filePath);
+                }
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+                Console.WriteLine("Could not create initial users");
             }
         }
 
         //Reads from databas(textfile) and returns a list of users.
         public List<User> DBread()
         {
-            while (!File.Exists(filePath))
-            {
-                CreateFile();
-            }
-
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
@@ -96,7 +96,7 @@ namespace SoftEngChat
             catch(Exception e)
             {
                 e.GetBaseException();
-                Console.WriteLine("Dont work, DB read");
+                Console.WriteLine("Dont work, DB read"+ e.ToString());
                     
             } 
             
