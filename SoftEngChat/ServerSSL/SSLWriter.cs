@@ -24,5 +24,9 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			stream.Write(Encoding.UTF8.GetBytes("5:" + sender + ":"+ message));
 		}
+		public void WriteLoginACK(int flag)
+		{
+			stream.Write(Encoding.UTF8.GetBytes("4" + flag.ToString()));
+		}
 	}
 }
