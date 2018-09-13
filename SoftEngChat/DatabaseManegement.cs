@@ -31,6 +31,7 @@ namespace SoftEngChat
             }
         }
 
+        //Test function adds users 
         public void TestUsers()
         {
             var tester = new User("Anders", "maejfa", "112");
@@ -42,8 +43,7 @@ namespace SoftEngChat
         }
         
 
-        //Byt ut till DBWrite(String fileName) Bättre mer generisk och man 
-        //Kan slänga in vilken fil som helst i det.
+        //Append a list of users in db.txt files, with the help of JSON.
         public void DBwrite(List<User> userList)
         {
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
