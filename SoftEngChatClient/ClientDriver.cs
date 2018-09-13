@@ -159,7 +159,7 @@ namespace SoftEngChatClient.Controller
         {
             foreach (string s in messageList)
             {
-                chatWindow.AppendTextBox(messageList,s + System.Environment.NewLine);
+                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
             }
         }
     }
