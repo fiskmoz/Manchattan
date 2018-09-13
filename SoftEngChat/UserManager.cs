@@ -9,15 +9,17 @@ namespace SoftEngChat
     class UserManager
     {
         private List<User> userList;
-        private DatabaseManegement db = new DatabaseManegement();
+        private DatabaseManegement db; 
+
         public UserManager()
         {
-            userList = db.DBread();
+            
         }
 
         //Add a new user, when registrate and write to database.
         public void AddUser(string name, string mail, string password)
         {
+            userList = db.DBread();
             foreach(var user in userList)
             {
                 if(user.name != name)
@@ -36,6 +38,7 @@ namespace SoftEngChat
         //returns a list, dont know if it is nesesary. But it thus for now.
         public List<User> RemoveUser(string name, string password)
         {
+            userList = db.DBread();
             ValidateUser validate = new ValidateUser();
             
             foreach(var user in userList)
@@ -49,6 +52,19 @@ namespace SoftEngChat
             db.DBwrite(userList);
 
             return userList;
+        }
+
+        //Validate user from login and checks with users on database.
+        public string validateUser(string userIn, string passwordIn)
+        {
+            DatabaseManegement DB = new DatabaseManegement();
+            List<User> userlist = DB.DBread();
+            foreach (var User in userlist)
+            {
+                if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
+                    return "true" ;
+            }
+            return "false";
         }
     }
 }

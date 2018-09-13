@@ -25,6 +25,7 @@ namespace SoftEngChatClient.Controller
 		private SSLListener streamListener;
 		private SSLWriter writer;
 		private Messagehandler messagehandler;
+        private LogCrypto logCrypto;
 
         public List<string> messageList;
 
@@ -75,6 +76,12 @@ namespace SoftEngChatClient.Controller
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
 			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
+            logCrypto = new LogCrypto();
+
+            //Change to something different.
+            string input = "hejhejjkjdueoplikmnakduehgjdmnju";
+            byte[] array = Encoding.ASCII.GetBytes(input);
+            logCrypto.SetNewKey(array);
 		}
 
 		// Creates winform thread (STAThread).
@@ -85,20 +92,32 @@ namespace SoftEngChatClient.Controller
             Application.Run(loginWindow);
 		}
 
+        //
 		private void UserLogin()
 		{
 			//login logic here
 		}
 
+
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
-
             try
             {
-                messageList = File.ReadAllLines("MessageLog.txt").ToList();
+                /*        
+                var fs = new FileStream("MessageLog.txt", FileMode.Open);
+                fs.Read(ba, 0, 20);
+                */
+
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\MessageLog.txt";
+                byte[] ba = File.ReadAllBytes(filePath);
+
+                var goodString = logCrypto.DecryptBytes(ba);
+                chatWindow.AppendTextBox(messageList, goodString);
+
+                //messageList = File.ReadAllLines("MessageLog.txt").ToList();
             }
-            catch (Exception)
+            catch (Exception temp)
             {
                 chatWindow.AppendTextBox(messageList,"Failed to read previous messages" + System.Environment.NewLine);
             }
@@ -141,10 +160,18 @@ namespace SoftEngChatClient.Controller
 
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
-            TextWriter tw = new StreamWriter("MessageLog.txt");
+            //TextWriter tw = new StreamWriter("MessageLog.txt");
 
             var str = chatWindow.getChatBox();
 
+            var byteArray = logCrypto.EncryptString(str);
+
+            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
+            fs.Write(byteArray, 0, byteArray.Length);
+
+            fs.Close();
+
+            /*
             string[] lines = str.Split(
             new[] { Environment.NewLine },
             StringSplitOptions.None
@@ -155,7 +182,7 @@ namespace SoftEngChatClient.Controller
                 tw.WriteLine(lines[i]);
             }
             tw.Close();
-
+            */
             Application.Exit();
         }
 
