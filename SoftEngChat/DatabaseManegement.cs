@@ -18,31 +18,27 @@ namespace SoftEngChat
         //File path where the login file appears.
         static String fileName = "DB.txt";
         static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-        public List<User> user;
+        List<User> user;
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
         {
-            while(!(File.Exists(filePath)))
-                CreateFile();
+            user = new List<User>();
+            if (!File.Exists(filePath))
+            {
+                TestUsers();
+                DBInitWrite();
+            }
         }
 
-        public void CreateFile()
+        public void TestUsers()
         {
-            
-
-            try
-            {
-                File.Create(filePath);
-            }
-            catch (Exception e)
-            {
-                e.GetBaseException();
-                Console.WriteLine("Couldnt create file");
-            }
-            
-            File.Delete(filePath);
-            Console.WriteLine( File.Exists(filePath));
+            var tester = new User("Anders", "maejfa", "1231293");
+            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
+            var tester3 = new User("name", "email", "pass");
+            user.Add(tester);
+            user.Add(tester2);
+            user.Add(tester3);
         }
         
 
@@ -50,8 +46,6 @@ namespace SoftEngChat
         //Kan slänga in vilken fil som helst i det.
         public void DBwrite(List<User> userList)
         {
-            userList.Add(new User("Anders", "sfjdofjsd", "1223"));
-
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
             {
@@ -65,35 +59,44 @@ namespace SoftEngChat
             catch(Exception e)
             {
                 e.GetBaseException();
+                Console.WriteLine("DBWrite Exception" + e.ToString());
+            }
+        }
+
+        // Writes the test users to the database if it does not already exsist.
+        public void DBInitWrite()
+        {
+            try
+            {
+                using (StreamWriter file = File.AppendText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, user);
+                    Console.WriteLine(filePath);
+                }
+            }
+            catch (Exception e)
+            {
+                e.GetBaseException();
+                Console.WriteLine("Could not create initial users");
             }
         }
 
         //Reads from databas(textfile) and returns a list of users.
         public List<User> DBread()
         {
-            while (!File.Exists(filePath))
-            {
-                CreateFile();
-            }
-
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     string json = file.ReadToEnd();
-
-                    Console.Write(json);
-                    
-                      
                     user = JsonConvert.DeserializeObject<List<User>>(json);
-
-                  
                 }
             }
             catch(Exception e)
             {
                 e.GetBaseException();
-                Console.WriteLine("Dont work, DB read" + e.GetBaseException());
+                Console.WriteLine("Dont work, DB read"+ e.ToString());
                     
             } 
             
