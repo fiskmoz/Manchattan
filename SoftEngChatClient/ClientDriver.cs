@@ -85,10 +85,12 @@ namespace SoftEngChatClient.Controller
             Application.Run(loginWindow);
 		}
 
+        //
 		private void UserLogin()
 		{
 			//login logic here
 		}
+
 
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
