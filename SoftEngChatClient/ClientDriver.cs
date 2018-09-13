@@ -155,7 +155,6 @@ namespace SoftEngChatClient.Controller
                 tw.WriteLine(lines[i]);
             }
             tw.Close();
-
             Application.Exit();
         }
 
