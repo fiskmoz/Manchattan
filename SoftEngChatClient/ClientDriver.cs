@@ -111,10 +111,10 @@ namespace SoftEngChatClient.Controller
 
         private void cd_OpenLoginWindow(object sender, EventArgs e)
         {
-            //writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
             //TODO: change this back
-            loginWindow.Hide();
-            chatWindow.Show();
+            //loginWindow.Hide();
+            //chatWindow.Show();
         }
 
         private void cd_ExitWindow(object sender, EventArgs e)
