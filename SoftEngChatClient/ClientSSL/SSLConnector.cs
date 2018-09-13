@@ -61,10 +61,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		private static bool ValidateCert(object sender, X509Certificate certificate,
 										X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
-			if (sslPolicyErrors == SslPolicyErrors.None) return true;
-			return false;
+			//if (sslPolicyErrors == SslPolicyErrors.None) return true;
+			//return false;
 		
-			//return true;
+			return true;
 		}
 		
 	}

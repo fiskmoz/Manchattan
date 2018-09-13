@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
-    public enum MessageType { loginUserName = 0, loginUserPassword = 1, client = 2, login = 3 }
 
     class SSLWriter
 	{

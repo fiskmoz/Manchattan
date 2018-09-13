@@ -73,9 +73,16 @@ namespace SoftEngChatClient
             //L.Add(value);
         }
 
+        //Returnerar skrivfältet
         public string getTextMessageBox()
         {
             return MessageBox.Text;
+        }
+
+        //Returnerar läsfältet
+        public string getChatBox()
+        {
+            return ChatBox.Text;
         }
 
     }
