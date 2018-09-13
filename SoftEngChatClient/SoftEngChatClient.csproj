@@ -73,9 +73,9 @@
     <Compile Include="GUI\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="SSLConnector.cs" />
-    <Compile Include="SSLListener.cs" />
-    <Compile Include="SSLWriter.cs" />
+    <Compile Include="ClientSSL\SSLConnector.cs" />
+    <Compile Include="ClientSSL\SSLListener.cs" />
+    <Compile Include="ClientSSL\SSLWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
