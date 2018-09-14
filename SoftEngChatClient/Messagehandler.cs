@@ -1,41 +1,94 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
 	internal class Messagehandler
 	{
-		private string userName;
-		private SSLConnector server;
-
-		/********************************************************************************************/
-		/*		README:																				*/
-		/*			1.	Maybe catch incomming message event in driver instead of message handler?	*/
-		/*				Let driver use messagehandler-functions instead.							*/
-		/*			2.	Maybe raise events in MessageHandler for driver to catch depending			*/
-		/*				on type of incomming message?												*/
-		/********************************************************************************************/
-
 		//Handles messages arriving at Client.
-		public Messagehandler(string userName, SSLConnector server)
-		{
-			this.userName = userName;
-			this.server = server;
-		}
-
 		//Eventhandler, Consumes IncommingMessage Events.
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
-			if(message.Message == null) //Error when event was raised.
-			{
-				Console.WriteLine("ERROR: Event for incomming message was raised but no message arrived.");
-				return;
+            string incomming = message.Message;
+			if (incomming[0] == '4')
+            {
+				//Raises event to inform client if the login was accepted by the server.
+				RaiseEvent(incomming[1] == '0' ? false : true);
 			}
+			else if(incomming[0] == '5')
+			{
+				ClientMessage(incomming);
+			}
+            else
+            {
+                ClientMessage(incomming);
+            }
+		}
 
-			string incomming = Encoding.UTF8.GetString(message.Message); //Encoding!
+		//Raises new event containing a message for the client
+		private void ClientMessage(string incomming)
+		{
+			List<string> list = ParseIncomming(incomming);
+			RaiseEvent(list[0], list[1]);
+		}
 
-			// Insert code how to handle a message here!
-			
+		//Parses incomming client message
+		private List<string> ParseIncomming(string incomming)
+		{
+			List<string> list = new List<string>();
+			int i;
+			string sender = null;
+			string message = null;
+			for (i = 2; incomming[i] != ':'; i++)
+			{
+				sender += incomming[i];
+			}
+			for (int j = ++i; j < incomming.Length; j++)
+			{
+				message += incomming[j];
+			}
+			list.Add(sender);
+			list.Add(message);
+
+			return list;
+		}
+
+		public delegate void LoginEventHandler(Object sender, LoginValid eventArgs);
+		public delegate void IncommingEventHandler(Object sender, ParsedIncommingMessage eventArgs);
+
+		public event LoginEventHandler LoginValid;
+		public event IncommingEventHandler ParsedIncommmingMessage;
+
+		private void RaiseEvent(bool isValid)
+		{
+			LoginValid flag = new LoginValid();
+			flag.isValid = isValid;
+			LoginValid(this, flag);
+		}
+
+		private void RaiseEvent(string sender, string message)
+		{
+			ParsedIncommingMessage messageEvent = new ParsedIncommingMessage(sender, message);
+			ParsedIncommmingMessage(this, messageEvent);
+		}
+
+	}
+
+	class LoginValid : EventArgs
+	{
+		public bool isValid;
+	}
+
+	class ParsedIncommingMessage : EventArgs
+	{
+
+		public string sender;
+		public string message;
+		public ParsedIncommingMessage(string sender, string message)
+		{
+			this.sender = sender;
+			this.message = message;
 		}
 	}
 }

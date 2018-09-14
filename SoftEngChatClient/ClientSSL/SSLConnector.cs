@@ -58,13 +58,14 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		}
 
+        //Validates the certificate of the server
 		private static bool ValidateCert(object sender, X509Certificate certificate,
 										X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
-			if (sslPolicyErrors == SslPolicyErrors.None) return true;
-			return false;
-		
-			//return true;
+            /*if (sslPolicyErrors == SslPolicyErrors.None) return true;
+			return false;*/
+            //Since our cert. is self-signed the validation code above won't accept it
+            return true;
 		}
 		
 	}

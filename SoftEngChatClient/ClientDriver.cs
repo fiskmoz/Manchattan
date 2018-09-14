@@ -25,6 +25,7 @@ namespace SoftEngChatClient.Controller
 		private SSLListener streamListener;
 		private SSLWriter writer;
 		private Messagehandler messagehandler;
+        private LogCrypto logCrypto;
 
         public List<string> messageList;
 
@@ -43,6 +44,8 @@ namespace SoftEngChatClient.Controller
 		private void SetupListeners()
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
+            messagehandler.LoginValid += this.Login;
+            messagehandler.ParsedIncommmingMessage += this.ChatWindowPrint;
 
 			loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_OpenLoginWindow);
@@ -51,13 +54,33 @@ namespace SoftEngChatClient.Controller
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
-			chatWindow.messageBoxKeyPressed += new KeyPressEventHandler(cd_MessageBoxKeyPressed);
+			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_MessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
 		}
 
-		//Constructs GUI windows
-		private void ConstructGUI()
+
+        private void Login(object sender, LoginValid eventArgs)
+        {
+            if(eventArgs.isValid)
+            {
+                if (loginWindow.InvokeRequired)
+                {
+                    loginWindow.Invoke(new Action<object, LoginValid>(Login), new object[] { sender, eventArgs });
+                    return;
+                }
+                loginWindow.Hide();
+                chatWindow.Show();
+            }
+        }
+        
+        private void ChatWindowPrint(object sender, ParsedIncommingMessage eventArgs)
+        {
+            chatWindow.AppendTextBox("["+eventArgs.sender+"] : " + eventArgs.message);
+        }
+
+        //Constructs GUI windows
+        private void ConstructGUI()
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -74,7 +97,13 @@ namespace SoftEngChatClient.Controller
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
-			messagehandler = new Messagehandler("Placeholder", connector); //Needs to be changed, see Readme in MessegeHandler class
+			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
+            logCrypto = new LogCrypto();
+
+            //Change to something different.
+            string input = "hejhejjkjdueoplikmnakduehgjdmnju";
+            byte[] array = Encoding.ASCII.GetBytes(input);
+            logCrypto.SetNewKey(array);
 		}
 
 		// Creates winform thread (STAThread).
@@ -85,19 +114,32 @@ namespace SoftEngChatClient.Controller
             Application.Run(loginWindow);
 		}
 
+        //
 		private void UserLogin()
 		{
 			//login logic here
 		}
+
 
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
             try
             {
-                messageList = File.ReadAllLines("MessageLog.txt").ToList();
+                /*        
+                var fs = new FileStream("MessageLog.txt", FileMode.Open);
+                fs.Read(ba, 0, 20);
+                */
+
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\MessageLog.txt";
+                byte[] ba = File.ReadAllBytes(filePath);
+
+                var goodString = logCrypto.DecryptBytes(ba);
+                chatWindow.AppendTextBox(messageList, goodString);
+
+                //messageList = File.ReadAllLines("MessageLog.txt").ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 chatWindow.AppendTextBox(messageList,"Failed to read previous messages" + System.Environment.NewLine);
             }
@@ -111,6 +153,7 @@ namespace SoftEngChatClient.Controller
         private void cd_OpenLoginWindow(object sender, EventArgs e)
         {
             writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            //TODO: change this back
         }
 
         private void cd_ExitWindow(object sender, EventArgs e)
@@ -122,6 +165,7 @@ namespace SoftEngChatClient.Controller
         private void cd_ClientRegister(object sender, EventArgs e)
         {
             // Registration of client.
+            writer.Write("Bertil", MessageType.login);
         }
         
         private void cd_RegisterCancel(object sender, EventArgs e)
@@ -131,36 +175,57 @@ namespace SoftEngChatClient.Controller
 
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
-            writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+            if(chatWindow.getTextMessageBox().Length > 0)
+            {
+                writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+                chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+                chatWindow.clearMessageBox();
+            }
         }
 
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
-            TextWriter tw = new StreamWriter("MessageLog.txt");
-            for (int i = 0; i < messageList.Count; i++)
+            //TextWriter tw = new StreamWriter("MessageLog.txt");
+
+            var str = chatWindow.getChatBox();
+
+            var byteArray = logCrypto.EncryptString(str);
+
+            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
+            fs.Write(byteArray, 0, byteArray.Length);
+
+            fs.Close();
+
+            /*
+            string[] lines = str.Split(
+            new[] { Environment.NewLine },
+            StringSplitOptions.None
+            );
+
+            for (int i = 0; i < lines.Length; i++)
             {
-                tw.WriteLine(messageList[i]);
+                tw.WriteLine(lines[i]);
             }
             tw.Close();
+            */
             Application.Exit();
-        }
-
-        private void cd_MessageBoxKeyPressed(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                // Send the message inside messageBox from chatWindow
-                chatWindow.clearMessageBox();
-            }
-
         }
 
         private void cd_PreviousMessageButtonClicked(object sender, EventArgs e)
         {
             foreach (string s in messageList)
             {
-                chatWindow.AppendTextBox(messageList,s + System.Environment.NewLine);
+                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
             }
         }
+
+        private void cd_MessageBoxKeyReleased(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cd_ChatWindowSend(sender, e);
+            }
+        }
+
     }
 }

@@ -33,6 +33,11 @@ namespace SoftEngChat.Model.SSLCommunication
 			messageHandler = new Messagehandler(UserInfo.name, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
+
+        public void setUserName (string text)
+        {
+            UserInfo.name = text;
+        }
     }
 
 }
