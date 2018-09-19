@@ -44,29 +44,26 @@
             // EnterEmail
             // 
             this.EnterEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterEmail.Location = new System.Drawing.Point(234, 340);
-            this.EnterEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterEmail.Location = new System.Drawing.Point(156, 221);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(468, 26);
+            this.EnterEmail.Size = new System.Drawing.Size(313, 20);
             this.EnterEmail.TabIndex = 1;
             // 
             // EnterPassword
             // 
             this.EnterPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterPassword.Location = new System.Drawing.Point(234, 477);
-            this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterPassword.Location = new System.Drawing.Point(156, 310);
             this.EnterPassword.Name = "EnterPassword";
-            this.EnterPassword.Size = new System.Drawing.Size(468, 26);
+            this.EnterPassword.Size = new System.Drawing.Size(313, 20);
             this.EnterPassword.TabIndex = 2;
             // 
             // LoginButton
             // 
             this.LoginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LoginButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginButton.Location = new System.Drawing.Point(388, 546);
-            this.LoginButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LoginButton.Location = new System.Drawing.Point(259, 355);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(135, 42);
+            this.LoginButton.Size = new System.Drawing.Size(90, 27);
             this.LoginButton.TabIndex = 3;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -77,22 +74,20 @@
             this.MailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MailLabel.AutoSize = true;
             this.MailLabel.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MailLabel.Location = new System.Drawing.Point(384, 282);
-            this.MailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MailLabel.Location = new System.Drawing.Point(256, 183);
             this.MailLabel.Name = "MailLabel";
-            this.MailLabel.Size = new System.Drawing.Size(112, 38);
+            this.MailLabel.Size = new System.Drawing.Size(108, 25);
             this.MailLabel.TabIndex = 4;
-            this.MailLabel.Text = "E-mail";
+            this.MailLabel.Text = "Username";
             // 
             // PasswordLabel
             // 
             this.PasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLabel.Location = new System.Drawing.Point(387, 422);
-            this.PasswordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.PasswordLabel.Location = new System.Drawing.Point(258, 274);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(140, 34);
+            this.PasswordLabel.Size = new System.Drawing.Size(91, 23);
             this.PasswordLabel.TabIndex = 5;
             this.PasswordLabel.Text = "Password";
             // 
@@ -102,11 +97,10 @@
             this.Title.AutoSize = true;
             this.Title.Cursor = System.Windows.Forms.Cursors.Default;
             this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(214, 97);
-            this.Title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Title.MinimumSize = new System.Drawing.Size(489, 55);
+            this.Title.Location = new System.Drawing.Point(143, 63);
+            this.Title.MinimumSize = new System.Drawing.Size(326, 36);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(489, 55);
+            this.Title.Size = new System.Drawing.Size(326, 37);
             this.Title.TabIndex = 6;
             this.Title.Text = "Manchattan 2k18";
             // 
@@ -114,20 +108,18 @@
             // 
             this.RegisterLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RegisterLabel.AutoSize = true;
-            this.RegisterLabel.Location = new System.Drawing.Point(34, 632);
-            this.RegisterLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.RegisterLabel.Location = new System.Drawing.Point(23, 411);
             this.RegisterLabel.Name = "RegisterLabel";
-            this.RegisterLabel.Size = new System.Drawing.Size(143, 20);
+            this.RegisterLabel.Size = new System.Drawing.Size(95, 13);
             this.RegisterLabel.TabIndex = 7;
             this.RegisterLabel.Text = "Become a member";
             // 
             // RegisterButton
             // 
             this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterButton.Location = new System.Drawing.Point(39, 657);
-            this.RegisterButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RegisterButton.Location = new System.Drawing.Point(26, 427);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(112, 35);
+            this.RegisterButton.Size = new System.Drawing.Size(75, 23);
             this.RegisterButton.TabIndex = 8;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -136,10 +128,9 @@
             // ExitLogin
             // 
             this.ExitLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ExitLogin.Location = new System.Drawing.Point(674, 657);
-            this.ExitLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ExitLogin.Location = new System.Drawing.Point(449, 427);
             this.ExitLogin.Name = "ExitLogin";
-            this.ExitLogin.Size = new System.Drawing.Size(112, 35);
+            this.ExitLogin.Size = new System.Drawing.Size(75, 23);
             this.ExitLogin.TabIndex = 9;
             this.ExitLogin.Text = "Exit";
             this.ExitLogin.UseVisualStyleBackColor = true;
@@ -148,18 +139,19 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(142, 55);
+            this.pictureBox1.Location = new System.Drawing.Point(95, 36);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(658, 160);
+            this.pictureBox1.Size = new System.Drawing.Size(439, 104);
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(876, 786);
+            this.ClientSize = new System.Drawing.Size(584, 487);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitLogin);
             this.Controls.Add(this.RegisterButton);
@@ -170,7 +162,6 @@
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.EnterPassword);
             this.Controls.Add(this.EnterEmail);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
