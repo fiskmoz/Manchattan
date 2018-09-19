@@ -115,6 +115,7 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 userName = username;
                 client.updateUserInfo(username, "emailPH", password);
+                server.SendOnlineListToAllClient();
                 return true;
             }else
             {
