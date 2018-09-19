@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace SoftEngChat.Model.SSLCommunication
@@ -112,6 +113,20 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 return false;
             }
+		}
+		
+		private void HandleRegistration(string incomming)
+		{
+			string[] userInfo = ParseRegistration(incomming);
+		}
+
+		private string[] ParseRegistration(string incomming)
+		{
+			string[] userInfo;
+
+			userInfo = incomming.Split(':');
+
+			return userInfo;
 		}
 	}
 }
