@@ -16,6 +16,7 @@ namespace SoftEngChatClient
         public event EventHandler IndividualChatWindowLoaded;
         public event KeyEventHandler IndividualMessageBoxReleased;
         public event EventHandler IndividualSendButtonClicked;
+        public event EventHandler IndivudualFormClosed;
 
         public IndividualChatWindow(string username)
         {
@@ -78,6 +79,16 @@ namespace SoftEngChatClient
         {
             return this.UsernameLabel.Text;
 
+        }
+
+        private void IndividualChatWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void IndividualChatWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            IndivudualFormClosed(this, e);
         }
     }
 }

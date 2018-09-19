@@ -32,5 +32,10 @@ namespace SoftEngChatClient
         {
             CancelButtonClicked(this, e);
         }
+
+        private void EmailLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

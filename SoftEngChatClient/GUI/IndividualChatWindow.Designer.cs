@@ -37,26 +37,29 @@
             // 
             // IndividualChatBox
             // 
-            this.IndividualChatBox.Location = new System.Drawing.Point(44, 39);
+            this.IndividualChatBox.Location = new System.Drawing.Point(66, 60);
+            this.IndividualChatBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualChatBox.Multiline = true;
             this.IndividualChatBox.Name = "IndividualChatBox";
-            this.IndividualChatBox.Size = new System.Drawing.Size(283, 226);
+            this.IndividualChatBox.Size = new System.Drawing.Size(422, 346);
             this.IndividualChatBox.TabIndex = 0;
             // 
             // IndividualMessageBox
             // 
-            this.IndividualMessageBox.Location = new System.Drawing.Point(44, 297);
+            this.IndividualMessageBox.Location = new System.Drawing.Point(66, 457);
+            this.IndividualMessageBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualMessageBox.Multiline = true;
             this.IndividualMessageBox.Name = "IndividualMessageBox";
-            this.IndividualMessageBox.Size = new System.Drawing.Size(207, 51);
+            this.IndividualMessageBox.Size = new System.Drawing.Size(308, 76);
             this.IndividualMessageBox.TabIndex = 1;
             this.IndividualMessageBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IndividualMessageBox_KeyUp);
             // 
             // IndividualSendButton
             // 
-            this.IndividualSendButton.Location = new System.Drawing.Point(257, 297);
+            this.IndividualSendButton.Location = new System.Drawing.Point(386, 457);
+            this.IndividualSendButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualSendButton.Name = "IndividualSendButton";
-            this.IndividualSendButton.Size = new System.Drawing.Size(69, 51);
+            this.IndividualSendButton.Size = new System.Drawing.Size(104, 78);
             this.IndividualSendButton.TabIndex = 2;
             this.IndividualSendButton.Text = "Send";
             this.IndividualSendButton.UseVisualStyleBackColor = true;
@@ -65,33 +68,38 @@
             // YouAreChattingWith
             // 
             this.YouAreChattingWith.AutoSize = true;
-            this.YouAreChattingWith.Location = new System.Drawing.Point(44, 13);
+            this.YouAreChattingWith.Location = new System.Drawing.Point(66, 20);
+            this.YouAreChattingWith.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.YouAreChattingWith.Name = "YouAreChattingWith";
-            this.YouAreChattingWith.Size = new System.Drawing.Size(113, 13);
+            this.YouAreChattingWith.Size = new System.Drawing.Size(166, 20);
             this.YouAreChattingWith.TabIndex = 3;
             this.YouAreChattingWith.Text = "You are chatting with: ";
             // 
             // UsernameLabel
             // 
             this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Location = new System.Drawing.Point(163, 13);
+            this.UsernameLabel.Location = new System.Drawing.Point(244, 20);
+            this.UsernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(55, 13);
+            this.UsernameLabel.Size = new System.Drawing.Size(83, 20);
             this.UsernameLabel.TabIndex = 4;
             this.UsernameLabel.Text = "Username";
             // 
             // IndividualChatWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 360);
+            this.ClientSize = new System.Drawing.Size(586, 554);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.YouAreChattingWith);
             this.Controls.Add(this.IndividualSendButton);
             this.Controls.Add(this.IndividualMessageBox);
             this.Controls.Add(this.IndividualChatBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "IndividualChatWindow";
             this.Text = "IndividualChatWindow";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndividualChatWindow_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IndividualChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.IndividualChatWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

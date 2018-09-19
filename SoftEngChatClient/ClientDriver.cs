@@ -20,6 +20,7 @@ namespace SoftEngChatClient.Controller
 		private ChatWindow chatWindow;
 		private Login loginWindow;
         private Register registerWindow;
+
         private List<IndividualChatWindow> individualChatWindows;
 
 		private SSLConnector connector;
@@ -61,7 +62,8 @@ namespace SoftEngChatClient.Controller
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-		}
+            
+        }
 
         private void addNewIndividualChatWindow(string username)
         {
@@ -75,6 +77,11 @@ namespace SoftEngChatClient.Controller
             }
 
             individualChatWindows.Add(new IndividualChatWindow(username));
+        }
+
+        private void addItemsToListBox(string username)
+        {
+            chatWindow.listBox1.Items.Add(username);
         }
 
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
@@ -124,7 +131,7 @@ namespace SoftEngChatClient.Controller
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
-			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
+			messagehandler = new Messagehandler(this); //Needs to be changed, see Readme in MessegeHandler class
             logCrypto = new LogCrypto();
 
             //Change to something different.
@@ -195,6 +202,9 @@ namespace SoftEngChatClient.Controller
             // Registration of client.
             //writer.Write("Bertil", MessageType.login);
             //writer.WriteClient(MessageType.client,this.userna)
+
+
+
         }
         
         private void cd_RegisterCancel(object sender, EventArgs e)
@@ -207,7 +217,7 @@ namespace SoftEngChatClient.Controller
             if(chatWindow.getTextMessageBox().Length > 0)
             {
                 //writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
-                writer.WriteClient(MessageType.client, this.username, "Nicklas", "Placeholder message");
+                writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
                 chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
                 chatWindow.clearMessageBox();
             }
@@ -259,5 +269,14 @@ namespace SoftEngChatClient.Controller
             }
         }
 
+        public void UpdateOnlineList(string str)
+        {
+            string[] usernames;
+            usernames = str.Split(':');
+            for (int i = 1; i < usernames.Length; i++)
+            {
+                addItemsToListBox(usernames[i]);
+            }
+        }
     }
 }
