@@ -1,4 +1,4 @@
-﻿namespace SoftEngChatClient.GUI
+﻿namespace SoftEngChatClient
 {
     partial class IndividualChatWindow
     {

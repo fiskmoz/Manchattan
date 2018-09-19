@@ -20,6 +20,7 @@ namespace SoftEngChatClient
         public event KeyEventHandler messageBoxKeyReleased;
         public event EventHandler previousMessageButtonClick;
         public event EventHandler ChatWindowLoad;
+        public event EventHandler usernamePressed;
 
         public ChatWindow()
         {
@@ -90,6 +91,11 @@ namespace SoftEngChatClient
         private void MessageBox_KeyUp(object sender, KeyEventArgs e)
         {
             messageBoxKeyReleased(this, e);
+        }
+
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            usernamePressed(this, e);
         }
     }
 }

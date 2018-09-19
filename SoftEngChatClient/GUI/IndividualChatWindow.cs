@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SoftEngChatClient.GUI
+namespace SoftEngChatClient
 {
     public partial class IndividualChatWindow : Form
     {
@@ -17,24 +17,25 @@ namespace SoftEngChatClient.GUI
         public event KeyEventHandler IndividualMessageBoxReleased;
         public event EventHandler IndividualSendButtonClicked;
 
-        public IndividualChatWindow()
+        public IndividualChatWindow(string username)
         {
             InitializeComponent();
+            this.UsernameLabel.Text = username;
         }
 
         private void IndividualSendButton_Click(object sender, EventArgs e)
         {
-            IndividualSendButtonClicked(this, e);
+            //IndividualSendButtonClicked(this, e);
         }
 
         private void IndividualChatWindow_Load(object sender, EventArgs e)
         {
-            IndividualChatWindowLoaded(this, e);
+           // IndividualChatWindowLoaded(this, e);
         }
 
         private void IndividualMessageBox_KeyUp(object sender, KeyEventArgs e)
         {
-            IndividualMessageBoxReleased(this, e);
+            //IndividualMessageBoxReleased(this, e);
         }
 
         public void clearMessageBox()
@@ -72,6 +73,11 @@ namespace SoftEngChatClient.GUI
         public string getChatBox()
         {
             return IndividualChatBox.Text;
+        }
+        public string getUserName()
+        {
+            return this.UsernameLabel.Text;
+
         }
     }
 }
