@@ -164,6 +164,8 @@ namespace SoftEngChatClient.Controller
 
             var str = chatWindow.getChatBox();
 
+            str = str + "hejhejhej";
+
             var byteArray = logCrypto.EncryptString(str);
 
             var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
