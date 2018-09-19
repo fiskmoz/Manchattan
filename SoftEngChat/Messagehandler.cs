@@ -111,7 +111,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
-            if("true" == userManager.validateUser(username, password))
+            if(userManager.validateUser(username, password))
             {
                 userName = username;
                 client.updateUserInfo(username, "emailPH", password);
