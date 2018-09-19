@@ -30,13 +30,13 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
 			writer = new SSLWriter(stream, server); //Writes into SSlStream
-			messageHandler = new Messagehandler(UserInfo.name, server, client: this);	//Handles incomming messages.
+			messageHandler = new Messagehandler(UserInfo.UserName, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
 
         public void setUserName (string text)
         {
-            UserInfo.name = text;
+            UserInfo.UserName = text;
         }
     }
 

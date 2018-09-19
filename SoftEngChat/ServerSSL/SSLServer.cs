@@ -64,7 +64,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.UserInfo.name != sender)
+				if(client.UserInfo.UserName != sender)
 				{
 					Thread messenger = new Thread(() => Write(client));
 					messenger.Start();
