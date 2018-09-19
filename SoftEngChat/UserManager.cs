@@ -8,6 +8,9 @@ namespace SoftEngChat
 {
     class UserManager
     {
+
+        static String fileName = "DB.txt";
+        static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
         private List<User> userList;
         private DatabaseManegement db; 
 
@@ -19,13 +22,13 @@ namespace SoftEngChat
         //Add a new user, when registrate and write to database.
         public void AddUser(string name, string mail, string password)
         {
-            userList = db.DBread();
+            //userList = db.DBread(filePath);
             foreach(var user in userList)
             {
                 if(user.name != name)
                 {
                     userList.Add(new User(name, mail, password));
-                    db.DBwrite(userList);
+                    db.DBwrite(userList,filePath);
                 } 
                 else
                 {
@@ -38,7 +41,7 @@ namespace SoftEngChat
         //returns a list, dont know if it is nesesary. But it thus for now.
         public List<User> RemoveUser(string name, string password)
         {
-            userList = db.DBread();
+            userList = db.DBread(filePath);
             ValidateUser validate = new ValidateUser();
             
             foreach(var user in userList)
@@ -49,7 +52,7 @@ namespace SoftEngChat
                 }
             }
 
-            db.DBwrite(userList);
+            db.DBwrite(userList,filePath);
 
             return userList;
         }
@@ -58,13 +61,20 @@ namespace SoftEngChat
         public string validateUser(string userIn, string passwordIn)
         {
             DatabaseManegement DB = new DatabaseManegement();
-            List<User> userlist = DB.DBread();
+            List<User> userlist = DB.DBread(filePath);
             foreach (var User in userlist)
             {
+                Console.WriteLine("Login: " + "|"+userIn+"|" + " " + "|"+passwordIn+"|" + ":" + " |"+User.name+"|" + " " + User.password);
                 if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
-                    return "true" ;
+                {
+                    Console.WriteLine(User.name + User.password);
+                    return "true";
+                }
+                    
             }
+            Console.WriteLine("returning false");
             return "false";
         }
+        
     }
 }

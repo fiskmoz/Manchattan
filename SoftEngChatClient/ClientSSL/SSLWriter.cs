@@ -18,10 +18,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public void Write(string userName, string password, MessageType login)
 		{
-            //string outgoing = BuildMessage(login, userName , password);
-            //SendMessage(outgoing);
-
-            SendMessage("3:bob:123");
+            string outgoing = BuildMessage(login, userName , password);
+            SendMessage(outgoing);
 		}
 
 		public void Write(string message, MessageType type)

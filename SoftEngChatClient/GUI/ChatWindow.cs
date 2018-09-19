@@ -17,7 +17,7 @@ namespace SoftEngChatClient
     {
         public event EventHandler sendButtonClicked;
         public event EventHandler chatWindowClosed;
-        public event KeyPressEventHandler messageBoxKeyPressed;
+        public event KeyEventHandler messageBoxKeyReleased;
         public event EventHandler previousMessageButtonClick;
         public event EventHandler ChatWindowLoad;
 
@@ -37,12 +37,6 @@ namespace SoftEngChatClient
         private void ChatWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             chatWindowClosed(this, e);
-        }
-
-        // When pressing enter while inside the MessageBox, send the message.
-        private void MessageBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            messageBoxKeyPressed(this, e);   
         }
 
         // Experimental, isnt working as intented yet.
@@ -69,8 +63,16 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<List<string>, string>(AppendTextBox), new object[] { L, value });
                 return;
             }
-            ChatBox.Text += value;
-            //L.Add(value);
+            ChatBox.AppendText(value + System.Environment.NewLine);
+        }
+        public void AppendTextBox(string value)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
+                return;
+            }
+            ChatBox.AppendText(value + System.Environment.NewLine);
         }
 
         //Returnerar skrivfältet
@@ -83,6 +85,11 @@ namespace SoftEngChatClient
         public string getChatBox()
         {
             return ChatBox.Text;
+        }
+
+        private void MessageBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            messageBoxKeyReleased(this, e);
         }
     }
 }

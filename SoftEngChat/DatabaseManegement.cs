@@ -44,7 +44,7 @@ namespace SoftEngChat
         
 
         //Append a list of users in db.txt files, with the help of JSON.
-        public void DBwrite(List<User> userList)
+        public void DBwrite(List<User> userList, string filePath)
         {
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
@@ -83,7 +83,7 @@ namespace SoftEngChat
         }
 
         //Reads from databas(textfile) and returns a list of users.
-        public List<User> DBread()
+        public List<User> DBread(String filePath)
         {
             try
             {

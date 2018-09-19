@@ -54,7 +54,11 @@ namespace SoftEngChatClient.Model.SSLCommunication
                     {
                         messageData.Append(message);
                         if (messageData.ToString().Length > 1)
+                        {
                             RaiseEvent(messageData.ToString());
+                            messageData.Clear();
+                        }
+                            
                         message = null;
                         //RaiseEvent(message);
                     }
