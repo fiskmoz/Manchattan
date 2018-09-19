@@ -14,7 +14,7 @@ namespace SoftEngChat
         public ValidateUser()
         {
             DatabaseManegement DB = new DatabaseManegement();
-            userlist = DB.DBread();
+            //userlist = DB.DBread();
 
         }
         public string validate(string userIn, string passwordIn)
