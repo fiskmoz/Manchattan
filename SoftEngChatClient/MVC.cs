@@ -12,7 +12,7 @@ namespace SoftEngChatClient
 		{
 			public enum MessageType
             {
-				reigster = 0, // "0:username:mail:pass:name:surname"
+				register = 0, // "0:username:mail:pass:name:surname"
                 registerACK = 1, // "1:0/1"
                 client = 2, // "2:sender:receiver:message"
                 login = 3,  // "3:username:password"

@@ -5,96 +5,72 @@ using System.Text;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
-	internal class Messagehandler
-	{
+    internal class Messagehandler
+    {
         ClientDriver driver;
+
         public Messagehandler(ClientDriver Driver)
         {
             driver = Driver;
         }
 
-		//Handles messages arriving at Client.
-		//Eventhandler, Consumes IncommingMessage Events.
-		internal void HandleIncommingMessage(object sender, IncommingMessage message)
-		{
+        //Handles messages arriving at Client.
+        //Eventhandler, Consumes IncommingMessage Events.
+        internal void HandleIncommingMessage(object sender, IncommingMessage message)
+        {
             string incomming = message.Message;
             int INTcomming = incomming[0] - '0';
-            switch(INTcomming)
+            switch (INTcomming)
             {
                 case 1:
+                    HandleRegistrationACK(incomming);
                     break;
                 case 2:
+                    HandleClientMessage(incomming);
                     break;
                 case 4:
-                    RaiseEvent(incomming[1] == '0' ? false : true);
+                    HandleLoginACK(incomming);
                     break;
                 case 6:
-                    driver.UpdateOnlineList(incomming);
+                    HandleUpdateOnlineList(incomming);
                     break;
             }
-		}
+        }
 
-		//Raises new event containing a message for the client
-		private void ClientMessage(string incomming)
-		{
-			List<string> list = ParseIncomming(incomming);
-			RaiseEvent(list[0], list[1]);
-		}
+        private void HandleRegistrationACK(string inc)
+        {
+            if(inc[1] == '1')
+            {
+                // REGISTRATION SUCCESS, DISPLAY?
+            }
+            else
+            {
+                // REGISTRATION FAILED, DISPLAY?
+            }
+        }
 
-		//Parses incomming client message
-		private List<string> ParseIncomming(string incomming)
-		{
-			List<string> list = new List<string>();
-			int i;
-			string sender = null;
-			string message = null;
-			for (i = 2; incomming[i] != ':'; i++)
-			{
-				sender += incomming[i];
-			}
-			for (int j = ++i; j < incomming.Length; j++)
-			{
-				message += incomming[j];
-			}
-			list.Add(sender);
-			list.Add(message);
+        private void HandleClientMessage(string inc)
+        {
+            string sender = "Nicklas"; // SHOULD APPLY CODE TO FILTER OUT SENDER, RECEIVER AND MESSAGE
+            driver.AddNewIndividualChatWindow(sender);
+        }
 
-			return list;
-		}
+        private void HandleLoginACK(string inc)
+        {
+            if(inc[1] == '1')
+            {
+                // LOGIN SUCCESS, CALLING LOGIN FUNCTION
+                driver.Login(inc);
+            }
+            else
+            {
+                // DISPLAY LOGIN FAILED.
+            }
+        }
 
-		public delegate void LoginEventHandler(Object sender, LoginValid eventArgs);
-		public delegate void IncommingEventHandler(Object sender, ParsedIncommingMessage eventArgs);
-
-		public event LoginEventHandler LoginValid;
-		public event IncommingEventHandler ParsedIncommmingMessage;
-
-		private void RaiseEvent(bool isValid)
-		{
-			LoginValid flag = new LoginValid();
-			flag.isValid = isValid;
-			LoginValid(this, flag);
-		}
-
-		private void RaiseEvent(string sender, string message)
-		{
-			ParsedIncommingMessage messageEvent = new ParsedIncommingMessage(sender, message);
-			ParsedIncommmingMessage(this, messageEvent);
-		}
-	}
-
-	class LoginValid : EventArgs
-	{
-		public bool isValid;
-	}
-
-	class ParsedIncommingMessage : EventArgs
-	{
-		public string sender;
-		public string message;
-		public ParsedIncommingMessage(string sender, string message)
-		{
-			this.sender = sender;
-			this.message = message;
-		}
-	}
+        private void HandleUpdateOnlineList(string inc)
+        {
+            driver.UpdateOnlineList(inc);
+        }
+    }
 }
