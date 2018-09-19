@@ -56,6 +56,7 @@
             this.EnterPassword.Location = new System.Drawing.Point(234, 477);
             this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EnterPassword.Name = "EnterPassword";
+            this.EnterPassword.PasswordChar = '*';
             this.EnterPassword.Size = new System.Drawing.Size(468, 26);
             this.EnterPassword.TabIndex = 2;
             // 
