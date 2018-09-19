@@ -61,19 +61,26 @@ namespace SoftEngChatClient.Controller
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
 		}
 
+        private void addNewIndividualChatWindow(string username)
+        {
+            foreach (IndividualChatWindow icw in individualChatWindows)
+            {
+                if (icw.getUserName() == username)
+                {
+                    icw.Show();
+                    return;
+                }
+            }
+
+            individualChatWindows.Add(new IndividualChatWindow(username));
+        }
+
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
         {
             var index = chatWindow.listBox1.SelectedItem;
             string username = chatWindow.listBox1.GetItemText(index);
 
-            individualChatWindows.Add(new IndividualChatWindow(username));
-            foreach(IndividualChatWindow icw in individualChatWindows)
-            {
-                if(icw.getUserName() == username)
-                {
-                    icw.Show();
-                }
-            }
+            addNewIndividualChatWindow(username);
         }
 
         private void Login(object sender, LoginValid eventArgs)
