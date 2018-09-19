@@ -87,12 +87,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void HandleLogin(string incomming)
 		{
 			bool valid = ValidateLoginMessage(incomming);
-			client.writer.WriteLoginACK(valid?1:0);
-
-			if (!valid)
-			{
-				server.RemoveClient(client);
-			}
+            client.writer.WriteLoginACK(valid ? 1 : 0);
 		}
 
 		private bool ValidateLoginMessage(string message)
