@@ -9,15 +9,17 @@ namespace SoftEngChat
     class UserManager
     {
 
-        static String fileName = "DB.txt";
-        static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+        private const String FILE_NAME = "DB.txt";
+		static string filePath;
         private List<User> userList;
         private DatabaseManegement db; 
 
         public UserManager()
         {
-            
-        }
+
+			filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + FILE_NAME;
+			userList = db.DBread(filePath);
+		}
 
         //Add a new user, when registrate and write to database.
         public void AddUser(string name, string mail, string password)
@@ -75,6 +77,20 @@ namespace SoftEngChat
             Console.WriteLine("returning false");
             return "false";
         }
-        
-    }
+
+		internal bool AddUser(List<string> newUser)
+		{
+			foreach (var user in userList)
+			{
+				if (user.name == newUser[0] && user.mail == newUser[1])
+				{
+					return false;
+				}
+			}
+
+			userList.Add(new User(newUser[0], newUser[1], newUser[2]));
+			db.DBwrite(userList, filePath);
+			return true;
+		}
+	}
 }
