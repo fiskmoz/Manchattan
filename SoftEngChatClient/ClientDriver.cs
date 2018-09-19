@@ -124,7 +124,7 @@ namespace SoftEngChatClient.Controller
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			writer = new SSLWriter(connector.SslStream);
 			streamListener = new SSLListener(connector.SslStream);
-			messagehandler = new Messagehandler(); //Needs to be changed, see Readme in MessegeHandler class
+			messagehandler = new Messagehandler(this); //Needs to be changed, see Readme in MessegeHandler class
             logCrypto = new LogCrypto();
 
             //Change to something different.
@@ -258,6 +258,5 @@ namespace SoftEngChatClient.Controller
                 cd_ChatWindowSend(sender, e);
             }
         }
-
     }
 }
