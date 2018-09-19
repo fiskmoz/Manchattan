@@ -34,9 +34,17 @@ namespace SoftEngChat.Model.SSLCommunication
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
 
-        public void setUserName (string text)
+        public void updateUserInfo(string username, string email, string password)
         {
-            UserInfo.name = text;
+            UserInfo.name = username;
+            UserInfo.mail = email;
+            UserInfo.password = password;
+        }
+
+
+        public string getUserName()
+        {
+            return UserInfo.name;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace SoftEngChat.Model.SSLCommunication
@@ -8,6 +9,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private string userName;
 		private SSLServer server;
 		private SSLClient client;
+		private UserManager userManager;
 
 		//Handles messages arriving at server.
 		public Messagehandler(string userName, SSLServer server, SSLClient client)
@@ -15,6 +17,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			this.userName = userName;
 			this.server = server;
 			this.client = client;
+			userManager = new UserManager();
 		}
 
         //Eventhandler, Consumes IncommingMessage Events.
@@ -92,7 +95,6 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private bool ValidateLoginMessage(string message)
 		{
-            UserManager um = new UserManager();
 			int i = 2;
 			string username = null;
 			string password = null;
@@ -109,15 +111,33 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
-            if("true" == um.validateUser(username, password))
+            if(userManager.validateUser(username, password))
             {
                 userName = username;
-                client.setUserName(username);
+                client.updateUserInfo(username, "emailPH", password);
                 return true;
             }else
             {
                 return false;
             }
+		}
+		
+		private void HandleRegistration(string incomming)
+		{
+			List<string> user = new List<string>(ParseRegistration(incomming));
+
+			user.RemoveAt(0);
+			bool regFlag = userManager.AddUser(user);
+			client.writer.WriteRegAck(regFlag);
+		}
+
+		private string[] ParseRegistration(string incomming)
+		{
+			string[] userInfo;
+
+			userInfo = incomming.Split(':');
+
+			return userInfo;
 		}
 	}
 }

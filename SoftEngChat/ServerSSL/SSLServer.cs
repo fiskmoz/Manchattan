@@ -51,8 +51,14 @@ namespace SoftEngChat.Model.SSLCommunication
 				}
 				clientList.Add(new SSLClient(ssl, this)); //Client added to list!
 				Console.WriteLine("Client connected!");
+                SendAllOnlineUsers();
 			}
 		}
+
+        private void SendAllOnlineUsers()
+        {
+
+        }
 
 		//Send messages to all clients (IRC) but sender.
 		//IN: Username of client who sent message and the actual message.
@@ -64,7 +70,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.UserInfo.name != sender)
+				if(client.UserInfo.UserName != sender)
 				{
 					Thread messenger = new Thread(() => Write(client));
 					messenger.Start();
