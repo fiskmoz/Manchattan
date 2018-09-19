@@ -20,6 +20,7 @@ namespace SoftEngChatClient.Controller
 		private ChatWindow chatWindow;
 		private Login loginWindow;
         private Register registerWindow;
+        private List<IndividualChatWindow> individualChatWindows;
 
 		private SSLConnector connector;
 		private SSLListener streamListener;
@@ -59,8 +60,30 @@ namespace SoftEngChatClient.Controller
 			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_MessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+            chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
 		}
 
+        private void addNewIndividualChatWindow(string username)
+        {
+            foreach (IndividualChatWindow icw in individualChatWindows)
+            {
+                if (icw.getUserName() == username)
+                {
+                    icw.Show();
+                    return;
+                }
+            }
+
+            individualChatWindows.Add(new IndividualChatWindow(username));
+        }
+
+        private void cd_HandleUsernamePressed(object sender, EventArgs e)
+        {
+            var index = chatWindow.listBox1.SelectedItem;
+            string username = chatWindow.listBox1.GetItemText(index);
+
+            addNewIndividualChatWindow(username);
+        }
 
         private void Login(object sender, LoginValid eventArgs)
         {
@@ -91,6 +114,7 @@ namespace SoftEngChatClient.Controller
 											//Print output for user
 			loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
 			registerWindow = new Register();
+            individualChatWindows = new List<IndividualChatWindow>();
 		}
 
 		//Constructs backend modules

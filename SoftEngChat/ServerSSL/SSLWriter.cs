@@ -18,26 +18,24 @@ namespace SoftEngChat.Model.SSLCommunication
 			this.server = server;
 		}
 
-        public void WriteRegACK(MessageType type, int flag)
-        {
-            string isValid = flag == 0 ? "0" : "1";
-            stream.Write(Encoding.UTF8.GetBytes(((int)type).ToString() + ":" + isValid));
-            Console.WriteLine("Registration is: " + isValid);
-        }
-
 		//Sends a message to the client the writer belongs to.
 		//In: Outgoing message, sender of the message.
-		public void WriteClient(MessageType type,string sender, string receiver, string message)
+		public void Write(string message, string sender)
 		{
-            string outgoing = ((int)type).ToString() + ":" + sender + ":" + receiver + ":" + message;
-            stream.Write(Encoding.UTF8.GetBytes(outgoing));
-
-        }
-        public void WriteLoginACK(MessageType type, int flag)
+			stream.Write(Encoding.UTF8.GetBytes("5:" + sender + ":"+ message));
+		}
+        public void WriteLoginACK(int flag)
         {
             string isValid = flag == 0 ? "0" : "1";
-            stream.Write(Encoding.UTF8.GetBytes(((int)type).ToString() + ":" + isValid));
+            stream.Write(Encoding.UTF8.GetBytes("3:" + isValid));
             Console.WriteLine("Write login is: " + isValid);
         }
+
+		internal void WriteRegAck(bool flag)
+		{
+			string isValid = flag ? "1" : "0";
+			stream.Write(Encoding.UTF8.GetBytes("1:" + isValid));
+			Console.WriteLine("Sent regAck: " + isValid);
+		}
 	}
 }
