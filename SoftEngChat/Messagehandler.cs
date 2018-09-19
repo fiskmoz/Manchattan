@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace SoftEngChat.Model.SSLCommunication
@@ -25,12 +26,11 @@ namespace SoftEngChat.Model.SSLCommunication
 			switch (incomming[0])//Handle different message types (temporary placeholders here)
 			{
 				case '0':
-                    Console.WriteLine("Message arrived; Login username:");
+                    Console.WriteLine("Message arrived; Register Attempt:");
                     Console.WriteLine(incomming);
-					
 					break;
 				case '1':
-                    Console.WriteLine("Message arrived; Login password:");
+                    Console.WriteLine("Message arrived; Register ACK:");
                     Console.WriteLine(incomming);
 					break;
 				case '2':
@@ -43,7 +43,19 @@ namespace SoftEngChat.Model.SSLCommunication
 					Console.WriteLine(incomming);
 					HandleLogin(incomming);
 					break;
-				default:
+                case '4':
+                    Console.WriteLine("Message arrived; Login ACK:");
+                    Console.WriteLine(incomming);
+                    break;
+                case '5':
+                    Console.WriteLine("Message arrived; Logout Message:");
+                    Console.WriteLine(incomming);
+                    break;
+                case '6':
+                    Console.WriteLine("Message arrived; OnlineList:");
+                    Console.WriteLine(incomming);
+                    break;
+                default:
 					Console.WriteLine("Message arrived; Error:");
 					Console.WriteLine(incomming);
 					break;
@@ -76,12 +88,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void HandleLogin(string incomming)
 		{
 			bool valid = ValidateLoginMessage(incomming);
-			client.writer.WriteLoginACK(valid?1:0);
-
-			if (!valid)
-			{
-				server.RemoveClient(client);
-			}
+            client.writer.WriteLoginACK(valid ? 1 : 0);
 		}
 
 		private bool ValidateLoginMessage(string message)
@@ -112,6 +119,20 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 return false;
             }
+		}
+		
+		private void HandleRegistration(string incomming)
+		{
+			string[] userInfo = ParseRegistration(incomming);
+		}
+
+		private string[] ParseRegistration(string incomming)
+		{
+			string[] userInfo;
+
+			userInfo = incomming.Split(':');
+
+			return userInfo;
 		}
 	}
 }
