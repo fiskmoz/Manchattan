@@ -204,6 +204,9 @@ namespace SoftEngChatClient.Controller
             // Registration of client.
             //writer.Write("Bertil", MessageType.login);
             //writer.WriteClient(MessageType.client,this.userna)
+
+
+
         }
         
         private void cd_RegisterCancel(object sender, EventArgs e)
