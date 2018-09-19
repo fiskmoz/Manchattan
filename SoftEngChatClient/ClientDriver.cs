@@ -20,6 +20,7 @@ namespace SoftEngChatClient.Controller
 		private ChatWindow chatWindow;
 		private Login loginWindow;
         private Register registerWindow;
+
         private List<IndividualChatWindow> individualChatWindows;
 
 		private SSLConnector connector;
@@ -80,10 +81,7 @@ namespace SoftEngChatClient.Controller
 
         private void addItemsToListBox(string username)
         {
-            for(int i = 1; i < 20; i++)
-            {
-                chatWindow.listBox1.Items.Add("Nicklas" + i);
-            }
+            chatWindow.listBox1.Items.Add(username);
         }
 
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
@@ -265,6 +263,16 @@ namespace SoftEngChatClient.Controller
             if (e.KeyCode == Keys.Enter)
             {
                 cd_ChatWindowSend(sender, e);
+            }
+        }
+
+        public void UpdateOnlineList(string str)
+        {
+            string[] usernames;
+            usernames = str.Split(':');
+            for (int i = 1; i < usernames.Length; i++)
+            {
+                addItemsToListBox(usernames[i]);
             }
         }
     }
