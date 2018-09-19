@@ -46,7 +46,7 @@ namespace SoftEngChatClient.Controller
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
             messagehandler.LoginValid += this.Login;
             messagehandler.ParsedIncommmingMessage += this.ChatWindowPrint;
-
+           
 			loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_OpenLoginWindow);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_ExitWindow);
