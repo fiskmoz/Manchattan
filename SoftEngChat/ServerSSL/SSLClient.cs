@@ -26,17 +26,22 @@ namespace SoftEngChat.Model.SSLCommunication
 			isVerifiedUser = false;
 			server = connector;
 			this.stream = stream;
-            UserInfo = new User("NamePH", "MailPH", "PassPH");
+
+			List<string> info = new List<string>();
+			info.Add("User");
+			info.Add("Mail");
+			info.Add("Pass");
+			UserInfo = new User(info);
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
 			writer = new SSLWriter(stream, server); //Writes into SSlStream
-			messageHandler = new Messagehandler(UserInfo.name, server, client: this);	//Handles incomming messages.
+			messageHandler = new Messagehandler(UserInfo.UserName, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
 
         public void updateUserInfo(string username, string email, string password)
         {
-            UserInfo.name = username;
+            UserInfo.UserName = username;
             UserInfo.mail = email;
             UserInfo.password = password;
         }
@@ -44,7 +49,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public string getUserName()
         {
-            return UserInfo.name;
+            return UserInfo.UserName;
         }
     }
 

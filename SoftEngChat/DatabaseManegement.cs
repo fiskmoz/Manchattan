@@ -26,11 +26,11 @@ namespace SoftEngChat
             user = new List<User>();
             if (!File.Exists(filePath))
             {
-                TestUsers();
+                //TestUsers();
                 DBInitWrite();
             }
         }
-
+		/*
         //Test function adds users 
         public void TestUsers()
         {
@@ -41,7 +41,7 @@ namespace SoftEngChat
             user.Add(tester2);
             user.Add(tester3);
         }
-        
+        */
 
         //Append a list of users in db.txt files, with the help of JSON.
         public void DBwrite(List<User> userList, string filePath)

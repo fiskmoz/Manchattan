@@ -6,7 +6,7 @@ namespace UnitTestJsonParser
 {
     [TestClass]
     public class UnitTest1
-    {
+    {/*
         List<User> userList = new List<User>();
         static String fileName = "NUit.txt";
         static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
@@ -27,6 +27,6 @@ namespace UnitTestJsonParser
         {
             userList = db.DBread(filePath);
             Assert.IsNotNull(userList);
-        }
+        }*/
     }
 }
