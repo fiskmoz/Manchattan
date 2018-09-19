@@ -51,8 +51,14 @@ namespace SoftEngChat.Model.SSLCommunication
 				}
 				clientList.Add(new SSLClient(ssl, this)); //Client added to list!
 				Console.WriteLine("Client connected!");
+                SendAllOnlineUsers();
 			}
 		}
+
+        private void SendAllOnlineUsers()
+        {
+
+        }
 
 		//Send messages to all clients (IRC) but sender.
 		//IN: Username of client who sent message and the actual message.
