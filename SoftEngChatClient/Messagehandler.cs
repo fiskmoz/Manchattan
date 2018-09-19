@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngChatClient.Controller;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,12 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	internal class Messagehandler
 	{
+        ClientDriver driver;
+        public Messagehandler(ClientDriver Driver)
+        {
+            driver = Driver;
+        }
+
 		//Handles messages arriving at Client.
 		//Eventhandler, Consumes IncommingMessage Events.
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
@@ -22,6 +29,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
                     RaiseEvent(incomming[1] == '0' ? false : true);
                     break;
                 case 6:
+                    driver.UpdateOnlineList(incomming);
                     break;
             }
 		}
