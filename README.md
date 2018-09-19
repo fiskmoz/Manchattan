@@ -1,6 +1,6 @@
-#HEJ
+# HEJ
 
-##Minnesregler
+### Minnesregler
 
 #### Messagetypes 
 #### 0: Register        |   0:username:mail:pass:name:surname
