@@ -72,7 +72,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			ParsedIncommingMessage messageEvent = new ParsedIncommingMessage(sender, message);
 			ParsedIncommmingMessage(this, messageEvent);
 		}
-
 	}
 
 	class LoginValid : EventArgs
@@ -82,7 +81,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 	class ParsedIncommingMessage : EventArgs
 	{
-
 		public string sender;
 		public string message;
 		public ParsedIncommingMessage(string sender, string message)
