@@ -11,18 +11,18 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
             string incomming = message.Message;
-			if (incomming[0] == '4')
+            int INTcomming = incomming[0] - '0';
+            switch(INTcomming)
             {
-				//Raises event to inform client if the login was accepted by the server.
-				RaiseEvent(incomming[1] == '0' ? false : true);
-			}
-			else if(incomming[0] == '5')
-			{
-				ClientMessage(incomming);
-			}
-            else
-            {
-                ClientMessage(incomming);
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 4:
+                    RaiseEvent(incomming[1] == '0' ? false : true);
+                    break;
+                case 6:
+                    break;
             }
 		}
 

@@ -27,6 +27,8 @@ namespace SoftEngChatClient.Controller
 		private Messagehandler messagehandler;
         private LogCrypto logCrypto;
 
+        private string username;
+
         public List<string> messageList;
 
 		private const string IP = "127.0.0.1";	//ServerIP
@@ -69,6 +71,7 @@ namespace SoftEngChatClient.Controller
                     loginWindow.Invoke(new Action<object, LoginValid>(Login), new object[] { sender, eventArgs });
                     return;
                 }
+                username = loginWindow.getUsername();
                 loginWindow.Hide();
                 chatWindow.Show();
             }
@@ -152,7 +155,8 @@ namespace SoftEngChatClient.Controller
 
         private void cd_OpenLoginWindow(object sender, EventArgs e)
         {
-            writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            //writer.Write(loginWindow.getUsername(), loginWindow.getPassword(), MessageType.login);
+            writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
             //TODO: change this back
         }
 
@@ -165,7 +169,8 @@ namespace SoftEngChatClient.Controller
         private void cd_ClientRegister(object sender, EventArgs e)
         {
             // Registration of client.
-            writer.Write("Bertil", MessageType.login);
+            //writer.Write("Bertil", MessageType.login);
+            //writer.WriteClient(MessageType.client,this.userna)
         }
         
         private void cd_RegisterCancel(object sender, EventArgs e)
@@ -177,7 +182,8 @@ namespace SoftEngChatClient.Controller
         {
             if(chatWindow.getTextMessageBox().Length > 0)
             {
-                writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+                //writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
+                writer.WriteClient(MessageType.client, this.username, "Nicklas", "Placeholder message");
                 chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
                 chatWindow.clearMessageBox();
             }
