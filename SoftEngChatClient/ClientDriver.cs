@@ -61,7 +61,8 @@ namespace SoftEngChatClient.Controller
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-		}
+            
+        }
 
         private void addNewIndividualChatWindow(string username)
         {
@@ -75,6 +76,14 @@ namespace SoftEngChatClient.Controller
             }
 
             individualChatWindows.Add(new IndividualChatWindow(username));
+        }
+
+        private void addItemsToListBox(string username)
+        {
+            for(int i = 1; i < 20; i++)
+            {
+                chatWindow.listBox1.Items.Add("Nicklas" + i);
+            }
         }
 
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
@@ -207,7 +216,7 @@ namespace SoftEngChatClient.Controller
             if(chatWindow.getTextMessageBox().Length > 0)
             {
                 //writer.Write(chatWindow.getTextMessageBox(), "Placeholder Client");
-                writer.WriteClient(MessageType.client, this.username, "Nicklas", "Placeholder message");
+                writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
                 chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
                 chatWindow.clearMessageBox();
             }
