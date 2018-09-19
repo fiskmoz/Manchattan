@@ -57,6 +57,12 @@
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientDriver.cs" />
+    <Compile Include="GUI\IndividualChatWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\IndividualChatWindow.Designer.cs">
+      <DependentUpon>IndividualChatWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,11 @@
     <Compile Include="ClientSSL\SSLConnector.cs" />
     <Compile Include="ClientSSL\SSLListener.cs" />
     <Compile Include="ClientSSL\SSLWriter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -86,11 +97,18 @@
     <EmbeddedResource Include="GUI\ChatWindow.resx">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\IndividualChatWindow.resx">
+      <DependentUpon>IndividualChatWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +116,9 @@
       <Project>{812f09c6-e6b3-446b-9560-e154d5637a52}</Project>
       <Name>SoftEngChatServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

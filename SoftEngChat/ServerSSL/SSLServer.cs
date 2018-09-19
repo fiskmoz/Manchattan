@@ -60,7 +60,8 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			lastMessage = message;
 			lastSender = sender;
-			foreach( var client in clientList)
+            //clientList[0].writer.Write(lastMessage, lastSender); // REMOVE LATER
+            foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
 				if(client.UserInfo.name != sender)

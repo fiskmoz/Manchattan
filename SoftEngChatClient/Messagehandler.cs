@@ -10,16 +10,20 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		//Eventhandler, Consumes IncommingMessage Events.
 		internal void HandleIncommingMessage(object sender, IncommingMessage message)
 		{
-			string incomming = Encoding.UTF8.GetString(message.Message); //Encoding!
-
-			if ( (int) incomming[0] == (int) MessageType.loginACK){
+            string incomming = message.Message;
+			if (incomming[0] == '4')
+            {
 				//Raises event to inform client if the login was accepted by the server.
-				RaiseEvent((int)incomming[1] == 0 ? false : true);
+				RaiseEvent(incomming[1] == '0' ? false : true);
 			}
-			else if((int)incomming[0] == (int)MessageType.incommingClient)
+			else if(incomming[0] == '5')
 			{
 				ClientMessage(incomming);
 			}
+            else
+            {
+                ClientMessage(incomming);
+            }
 		}
 
 		//Raises new event containing a message for the client
@@ -68,7 +72,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			ParsedIncommingMessage messageEvent = new ParsedIncommingMessage(sender, message);
 			ParsedIncommmingMessage(this, messageEvent);
 		}
-
 	}
 
 	class LoginValid : EventArgs
@@ -78,7 +81,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 	class ParsedIncommingMessage : EventArgs
 	{
-
 		public string sender;
 		public string message;
 		public ParsedIncommingMessage(string sender, string message)

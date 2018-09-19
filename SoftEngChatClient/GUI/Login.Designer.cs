@@ -37,6 +37,8 @@
             this.RegisterLabel = new System.Windows.Forms.Label();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.ExitLogin = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // EnterEmail
@@ -54,7 +56,6 @@
             this.EnterPassword.Name = "EnterPassword";
             this.EnterPassword.Size = new System.Drawing.Size(313, 20);
             this.EnterPassword.TabIndex = 2;
-
             // 
             // LoginButton
             // 
@@ -75,9 +76,9 @@
             this.MailLabel.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MailLabel.Location = new System.Drawing.Point(256, 183);
             this.MailLabel.Name = "MailLabel";
-            this.MailLabel.Size = new System.Drawing.Size(76, 25);
+            this.MailLabel.Size = new System.Drawing.Size(108, 25);
             this.MailLabel.TabIndex = 4;
-            this.MailLabel.Text = "E-mail";
+            this.MailLabel.Text = "Username";
             // 
             // PasswordLabel
             // 
@@ -135,12 +136,23 @@
             this.ExitLogin.UseVisualStyleBackColor = true;
             this.ExitLogin.Click += new System.EventHandler(this.ExitLogin_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(95, 36);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(439, 104);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(584, 511);
+            this.ClientSize = new System.Drawing.Size(584, 487);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitLogin);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.RegisterLabel);
@@ -152,6 +164,7 @@
             this.Controls.Add(this.EnterEmail);
             this.Name = "Login";
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +180,6 @@
         private System.Windows.Forms.Label RegisterLabel;
         private System.Windows.Forms.Button RegisterButton;
         private System.Windows.Forms.Button ExitLogin;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
