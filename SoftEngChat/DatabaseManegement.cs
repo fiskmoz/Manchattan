@@ -66,6 +66,13 @@ namespace SoftEngChat
         // Writes the test users to the database if it does not already exsist.
         private void DBInitWrite()
         {
+			List<string> info = new List<string>();
+			info.Add("Admin");
+			info.Add("mail");
+			info.Add("112");
+			info.Add("Admin");
+			info.Add("Adminson");
+			user.Add(new User(info));
             try
             {
                 using (StreamWriter file = File.AppendText(filePath))

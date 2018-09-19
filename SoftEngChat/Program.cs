@@ -16,12 +16,12 @@ namespace SoftEngChat
         {
            
 
-            DatabaseManegement DBtest = new DatabaseManegement();
+           // DatabaseManegement DBtest = new DatabaseManegement();
 			/*
             User u = new User("Anders", "mail", "112");
 			*/
         
-            UserManager um = new UserManager();
+            //UserManager um = new UserManager();
             //Console.WriteLine(um.validateUser(u.name, u.password));
             SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
 

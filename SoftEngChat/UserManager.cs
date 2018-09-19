@@ -16,7 +16,7 @@ namespace SoftEngChat
 
         public UserManager()
         {
-
+			db = new DatabaseManegement();
 			filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + FILE_NAME;
 			userList = db.DBread(filePath);
 		}

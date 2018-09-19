@@ -20,17 +20,21 @@ namespace SoftEngChat.Model.SSLCommunication
 		private SSLServer server;
 		private Messagehandler messageHandler;
 		internal bool isVerifiedUser;
+		public List<string> info;
 
-        public SSLClient(SslStream stream, SSLServer connector)
+
+		public SSLClient(SslStream stream, SSLServer connector)
         {
 			isVerifiedUser = false;
 			server = connector;
 			this.stream = stream;
 
-			List<string> info = new List<string>();
+			info = new List<string>();
 			info.Add("User");
 			info.Add("Mail");
 			info.Add("Pass");
+			info.Add("firstname");
+			info.Add("lastname");
 			UserInfo = new User(info);
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
