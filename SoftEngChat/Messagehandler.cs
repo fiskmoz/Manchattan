@@ -113,7 +113,7 @@ namespace SoftEngChat.Model.SSLCommunication
             if("true" == um.validateUser(username, password))
             {
                 userName = username;
-                client.setUserName(username);
+                client.updateUserInfo(username, "emailPH", password);
                 return true;
             }else
             {
