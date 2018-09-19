@@ -12,8 +12,13 @@ namespace SoftEngChatClient
 		{
 			public enum MessageType
 			{
-				loginUserName = 0, loginUserPassword = 1, client = 2, login = 3, //Outgoing
-				loginACK = 4, incommingClient = 5   //Incomming
+				reigster = 0,
+                registerACK = 1,
+                client = 2,
+                login = 3,
+				loginACK = 4,
+                logout = 5,
+                onlineList = 6
 			}
 		}
 	}
