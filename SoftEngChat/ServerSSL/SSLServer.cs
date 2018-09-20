@@ -63,7 +63,11 @@ namespace SoftEngChat.Model.SSLCommunication
             str.Append((int)MessageType.onlineList);
             foreach (SSLClient client in clientList)
             {
-                str.Append(":" + client.getUserName());
+                // If client has yet to log in, do not send.
+                if(client.getUserName() != "User")
+                {
+                    str.Append(":" + client.getUserName());
+                }
             }
             foreach (SSLClient client in clientList)
             {
