@@ -26,11 +26,11 @@ namespace SoftEngChat
             user = new List<User>();
             if (!File.Exists(filePath))
             {
-                TestUsers();
+                //TestUsers();
                 DBInitWrite();
             }
         }
-
+		/*
         //Test function adds users 
         public void TestUsers()
         {
@@ -41,10 +41,10 @@ namespace SoftEngChat
             user.Add(tester2);
             user.Add(tester3);
         }
-        
+        */
 
         //Append a list of users in db.txt files, with the help of JSON.
-        public void DBwrite(List<User> userList)
+        public void DBwrite(List<User> userList, string filePath)
         {
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
@@ -66,6 +66,13 @@ namespace SoftEngChat
         // Writes the test users to the database if it does not already exsist.
         private void DBInitWrite()
         {
+			List<string> info = new List<string>();
+			info.Add("Admin");
+			info.Add("mail");
+			info.Add("112");
+			info.Add("Admin");
+			info.Add("Adminson");
+			user.Add(new User(info));
             try
             {
                 using (StreamWriter file = File.AppendText(filePath))
@@ -83,14 +90,23 @@ namespace SoftEngChat
         }
 
         //Reads from databas(textfile) and returns a list of users.
-        public List<User> DBread()
+        public List<User> DBread(String filePath)
         {
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     string json = file.ReadToEnd();
-                    user = JsonConvert.DeserializeObject<List<User>>(json);
+					try
+					{
+						user = JsonConvert.DeserializeObject<List<User>>(json);
+					}
+					catch(Exception e)
+					{
+						Console.WriteLine();
+						Console.WriteLine(e.Message);
+					}
+					
                 }
             }
             catch(Exception e)

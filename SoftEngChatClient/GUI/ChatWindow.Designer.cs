@@ -35,10 +35,12 @@ namespace SoftEngChatClient
             this.ActiveChatPlaceholder = new System.Windows.Forms.GroupBox();
             this.ProfilePlaceholder = new System.Windows.Forms.GroupBox();
             this.ConctactsPlaceholder = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.ChatBox = new System.Windows.Forms.TextBox();
             this.Toolbar = new System.Windows.Forms.GroupBox();
             this.PreviousMessagesButton = new System.Windows.Forms.Button();
             this.ActiveChatPlaceholder.SuspendLayout();
+            this.ConctactsPlaceholder.SuspendLayout();
             this.SuspendLayout();
             // 
             // MessageBox
@@ -84,12 +86,23 @@ namespace SoftEngChatClient
             // 
             // ConctactsPlaceholder
             // 
+            this.ConctactsPlaceholder.Controls.Add(this.listBox1);
             this.ConctactsPlaceholder.Location = new System.Drawing.Point(622, 13);
             this.ConctactsPlaceholder.Name = "ConctactsPlaceholder";
             this.ConctactsPlaceholder.Size = new System.Drawing.Size(150, 386);
             this.ConctactsPlaceholder.TabIndex = 3;
             this.ConctactsPlaceholder.TabStop = false;
             this.ConctactsPlaceholder.Text = "Conctacts";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(0, 18);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(151, 368);
+            this.listBox1.TabIndex = 0;
+            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // ChatBox
             // 
@@ -139,6 +152,7 @@ namespace SoftEngChatClient
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.ChatWindow_Load);
             this.ActiveChatPlaceholder.ResumeLayout(false);
+            this.ConctactsPlaceholder.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +168,6 @@ namespace SoftEngChatClient
         private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.GroupBox Toolbar;
         private System.Windows.Forms.Button PreviousMessagesButton;
+        public ListBox listBox1;
     }
 }

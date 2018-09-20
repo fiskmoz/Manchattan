@@ -56,6 +56,7 @@
             this.EnterPassword.Location = new System.Drawing.Point(234, 477);
             this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EnterPassword.Name = "EnterPassword";
+            this.EnterPassword.PasswordChar = '*';
             this.EnterPassword.Size = new System.Drawing.Size(468, 26);
             this.EnterPassword.TabIndex = 2;
             // 
@@ -80,9 +81,9 @@
             this.MailLabel.Location = new System.Drawing.Point(384, 282);
             this.MailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MailLabel.Name = "MailLabel";
-            this.MailLabel.Size = new System.Drawing.Size(112, 38);
+            this.MailLabel.Size = new System.Drawing.Size(161, 38);
             this.MailLabel.TabIndex = 4;
-            this.MailLabel.Text = "E-mail";
+            this.MailLabel.Text = "Username";
             // 
             // PasswordLabel
             // 
@@ -159,7 +160,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(876, 786);
+            this.ClientSize = new System.Drawing.Size(876, 749);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitLogin);
             this.Controls.Add(this.RegisterButton);

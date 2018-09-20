@@ -9,22 +9,20 @@ namespace SoftEngChat
     class ValidateUser
     {
         List<User> userlist;
-        string flag1 = "true";
-        string flag0 = "false";
-        public ValidateUser()
+        public ValidateUser(string filePath)
         {
             DatabaseManegement DB = new DatabaseManegement();
-            userlist = DB.DBread();
+            userlist = DB.DBread(filePath);
 
         }
-        public string validate(string userIn, string passwordIn)
+        public bool validate(string userIn, string passwordIn)
         {
             foreach(var User in userlist)
             {
-                if ((User.name == userIn || User.mail == userIn) && User.password == passwordIn)
-                    return flag1;
+                if ((User.UserName == userIn || User.mail == userIn) && User.password == passwordIn)
+                    return true;
             }
-            return flag0;
+            return false;
         }
     }
 }

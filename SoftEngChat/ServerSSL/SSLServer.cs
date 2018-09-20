@@ -26,6 +26,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			clientList = new List<SSLClient>();
 			serverListener = new TcpListener(ip, port);
 			serverListener.Start();
+            
 
 			while (true)
 			{
@@ -54,6 +55,20 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
+        public void SendOnlineListToAllClient()
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append(MessageType.onlineList.ToString());
+            foreach (SSLClient client in clientList)
+            {
+                str.Append(":" + client.getUserName());
+            }
+            foreach (SSLClient client in clientList)
+            {
+                client.writer.WriteOnlineList(str.ToString());
+            }
+        }
+
 		//Send messages to all clients (IRC) but sender.
 		//IN: Username of client who sent message and the actual message.
 		public void WriteAll(string sender, string message)
@@ -64,10 +79,10 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.UserInfo.name != sender)
+				if(client.UserInfo.UserName != sender)
 				{
-					Thread messenger = new Thread(() => Write(client));
-					messenger.Start();
+					//Thread messenger = new Thread(() => Write(client));
+					//messenger.Start();
 				}
 			}
 		}
@@ -81,7 +96,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		//IN: Client who shall receive message.
 		private void Write(SSLClient client)
 		{
-			client.writer.Write(lastMessage, lastSender);
+			//client.writer.Write(lastMessage, lastSender);
 		}
 	}
 }
