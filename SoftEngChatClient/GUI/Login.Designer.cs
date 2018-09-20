@@ -49,6 +49,7 @@
             this.EnterEmail.Name = "EnterEmail";
             this.EnterEmail.Size = new System.Drawing.Size(468, 26);
             this.EnterEmail.TabIndex = 1;
+            this.EnterEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             // 
             // EnterPassword
             // 
@@ -59,6 +60,7 @@
             this.EnterPassword.PasswordChar = '*';
             this.EnterPassword.Size = new System.Drawing.Size(468, 26);
             this.EnterPassword.TabIndex = 2;
+            this.EnterPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             // 
             // LoginButton
             // 
@@ -174,6 +176,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Login";
             this.Text = "Login";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

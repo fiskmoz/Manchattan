@@ -89,7 +89,9 @@ namespace SoftEngChatClient.Controller
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
-			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
+           // loginWindow.LoginBoxKeyReleased += new EventHandler(cd_LoginBoxKeyReleased);
+
+            registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
@@ -194,7 +196,6 @@ namespace SoftEngChatClient.Controller
                 cd_ChatWindowSend(sender, e);
             }
         }
-
         public void AddNewIndividualChatWindow(string username)
         {
             foreach (IndividualChatWindow icw in individualChatWindows)
