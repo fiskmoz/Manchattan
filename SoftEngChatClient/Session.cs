@@ -8,7 +8,7 @@ namespace SoftEngChatClient
 {
     class Session
     {
-        public int sessionID { get; set; };
+        public int sessionID { get; set; }
         private string sessionUser;
         private string userPassword;
         private bool rememberMe;
