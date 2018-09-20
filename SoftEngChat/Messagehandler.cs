@@ -78,7 +78,7 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             else
             {
-                //WRITE INDIVIUALLY
+                server.WriteIndivualMessage(sender, receiver, message);
             }
 			
 		}

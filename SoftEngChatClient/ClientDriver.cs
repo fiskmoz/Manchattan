@@ -138,7 +138,7 @@ namespace SoftEngChatClient.Controller
             var index = chatWindow.listBox1.SelectedItem;
             string username = chatWindow.listBox1.GetItemText(index);
 
-            AddNewIndividualChatWindow(username);
+            AddNewIndividualChat(username);
         }
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
@@ -223,7 +223,7 @@ namespace SoftEngChatClient.Controller
             }
         }
 
-        public void AddNewIndividualChatWindow(string receiver)
+        public void AddNewIndividualChat(string receiver)
         {
             foreach (IndividualChatDriver icd in individualChatDrivers)
             {

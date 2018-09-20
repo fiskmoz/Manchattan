@@ -12,7 +12,6 @@ namespace SoftEngChatClient
 {
     public partial class IndividualChatWindow : Form
     {
-        public event EventHandler IndividuaChatWindowClosed;
         public event EventHandler IndividualChatWindowLoaded;
         public event KeyEventHandler IndividualMessageBoxReleased;
         public event EventHandler IndividualSendButtonClicked;
@@ -31,7 +30,7 @@ namespace SoftEngChatClient
 
         private void IndividualChatWindow_Load(object sender, EventArgs e)
         {
-           // IndividualChatWindowLoaded(this, e);
+           IndividualChatWindowLoaded(this, e);
         }
 
         private void IndividualMessageBox_KeyUp(object sender, KeyEventArgs e)
@@ -78,11 +77,6 @@ namespace SoftEngChatClient
         public string getUserName()
         {
             return this.UsernameLabel.Text;
-
-        }
-
-        private void IndividualChatWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
 
         }
 
