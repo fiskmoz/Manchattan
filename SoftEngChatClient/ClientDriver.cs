@@ -41,16 +41,45 @@ namespace SoftEngChatClient.Controller
             Application.Run(loginWindow);
         }
 
-        // When creating the ClientDriver in main (program.cs)
-        public ClientDriver()
+		internal void CloseRegWindow()
+		{
+			if (loginWindow.InvokeRequired)
+			{
+				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
+				return;
+			}
+			
+
+
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.Hide));
+				return;
+			}
+			loginWindow.RegistrationOKinfo();
+			registerWindow.Hide();
+		}
+
+		// When creating the ClientDriver in main (program.cs)
+		public ClientDriver()
 		{
 			ConstructGUI();
             ConstructBackend();
 			SetupListeners();
 		}
 
-        //Constructs GUI windows and list of individual chat windows.
-        private void ConstructGUI()
+		internal void RegistrationRejected()
+		{
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.RegistrationRejected));
+				return;
+			}
+			registerWindow.RegistrationRejected();
+		}
+
+		//Constructs GUI windows and list of individual chat windows.
+		private void ConstructGUI()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

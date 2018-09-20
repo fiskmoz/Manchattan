@@ -58,5 +58,10 @@ namespace SoftEngChatClient
         {
             return this.EnterSurname.Text;
         }
-    }
+
+		internal void RegistrationRejected()
+		{
+			regRejectLbl.Visible = true;
+		}
+	}
 }
