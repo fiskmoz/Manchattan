@@ -82,7 +82,7 @@ namespace SoftEngChatClient.Controller
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
 
-            System.Timers.Timer timer = new System.Timers.Timer(2000);
+            System.Timers.Timer timer = new System.Timers.Timer(5000);
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
@@ -162,7 +162,7 @@ namespace SoftEngChatClient.Controller
             }
             else
             {
-                chatWindow.AppendTextBox("[Program] Don´t spam and wait two seconds");
+                chatWindow.AppendTextBox("[Program] Don´t spam");
             }
            
         }
