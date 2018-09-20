@@ -207,6 +207,11 @@ namespace SoftEngChatClient.Controller
         {
             string[] usernames;
             usernames = str.Split(':');
+            for (int n = chatWindow.listBox1.Items.Count -1; n >= 0; --n)
+            {
+                chatWindow.listBox1.Items.RemoveAt(n);
+            }
+
             for (int i = 1; i < usernames.Length; i++)
             {
                 chatWindow.listBox1.Items.Add(usernames[i]);

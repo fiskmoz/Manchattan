@@ -60,7 +60,7 @@ namespace SoftEngChat.Model.SSLCommunication
         public void SendOnlineListToAllClient()
         {
             StringBuilder str = new StringBuilder();
-            str.Append(MessageType.onlineList.ToString());
+            str.Append((int)MessageType.onlineList);
             foreach (SSLClient client in clientList)
             {
                 str.Append(":" + client.getUserName());
