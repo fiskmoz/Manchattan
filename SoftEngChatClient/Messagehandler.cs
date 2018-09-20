@@ -19,19 +19,18 @@ namespace SoftEngChatClient.Model.SSLCommunication
         internal void HandleIncommingMessage(object sender, IncommingMessage message)
         {
             string incomming = message.Message;
-            int INTcomming = incomming[0] - '0';
-            switch (INTcomming)
+            switch (incomming[0])
             {
-                case 1:
+                case '1':
                     HandleRegistrationACK(incomming);
                     break;
-                case 2:
+                case '2':
                     HandleClientMessage(incomming);
                     break;
-                case 4:
+                case '4':
                     HandleLoginACK(incomming);
                     break;
-                case 6:
+                case '6':
                     HandleUpdateOnlineList(incomming);
                     break;
             }
