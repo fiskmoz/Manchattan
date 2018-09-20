@@ -273,7 +273,18 @@ namespace SoftEngChatClient.Controller
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
 
-		public void SetUserName(string name)
+        public void IndividualChatPrint(string sender, string message)
+        {
+            foreach (var icd in individualChatDrivers)
+            {
+                if (sender == icd.getUsername())
+                {
+                    icd.ReceiveMessage(message);
+                }
+            }
+        }
+
+        public void SetUserName(string name)
 		{
 			if (chatWindow.InvokeRequired)
 			{
