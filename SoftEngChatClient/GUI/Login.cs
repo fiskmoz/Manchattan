@@ -14,9 +14,11 @@ namespace SoftEngChatClient
 {
     public partial class Login : Form
     {
+
         public event EventHandler LoginButtonClick;
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
+        public event KeyEventHandler LoginBoxKeyReleased;
 
         public string getUsername()
         {
@@ -39,15 +41,30 @@ namespace SoftEngChatClient
         {
             LoginButtonClick(this, e);
         }
-            
+
+        // Creates the ChatWindow when Login button is accepted. 
+        // NOTE: Should be a login check so user is accually allowed to login.
+        private void Login_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoginButtonClick(this, e);
+            }
+        }
+
         // Opens the register window making a registreation avalible
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             RegisterButtonClick(this, e);
         }
-            
-        // Exits the program.
-        private void ExitLogin_Click(object sender, EventArgs e)
+
+		internal void RegistrationOKinfo()
+		{
+			label1.Visible = true;
+		}
+
+		// Exits the program.
+		private void ExitLogin_Click(object sender, EventArgs e)
         {
             ExitButtonClicked(this, e);
         }

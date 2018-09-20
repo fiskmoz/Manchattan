@@ -17,8 +17,6 @@ namespace SoftEngChat.Model.SSLCommunication
 	{
 		private List<SSLClient> clientList;
 		private TcpListener serverListener;
-		private string lastMessage;
-		private string lastSender;
         public UserManager userManager;
 
 		public SSLServer(IPAddress ip, int port)
@@ -63,7 +61,11 @@ namespace SoftEngChat.Model.SSLCommunication
             str.Append((int)MessageType.onlineList);
             foreach (SSLClient client in clientList)
             {
-                str.Append(":" + client.getUserName());
+                // If client has yet to log in, do not send.
+                if(client.getUserName() != "User")
+                {
+                    str.Append(":" + client.getUserName());
+                }
             }
             foreach (SSLClient client in clientList)
             {
@@ -75,17 +77,16 @@ namespace SoftEngChat.Model.SSLCommunication
 		//IN: Username of client who sent message and the actual message.
 		public void WriteAll(string sender, string message)
 		{
-			lastMessage = message;
-			lastSender = sender;
-            //clientList[0].writer.Write(lastMessage, lastSender); // REMOVE LATER
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
 				if(client.UserInfo.UserName != sender)
 				{
-					//Thread messenger = new Thread(() => Write(client));
-					//messenger.Start();
-				}
+                    if (client.getUserName() != "User" || client.getUserName() != sender)
+                    {
+                        client.writer.WriteClient(MessageType.client, sender, "All", message);
+                    }
+                }
 			}
 		}
 
