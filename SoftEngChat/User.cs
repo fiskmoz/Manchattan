@@ -1,41 +1,46 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
 public class User
 {
+
+
+
     private static int IDnr;
     public int ID { get;  set; }
     public string UserName { get; set; }
-    public string Mail { get; set; }
-	public string Password { get; set; }
+    public string mail { get; set; }
+	public string password { get; set; }
 	public string Firstname { get; set;}
     public string LastName { get; set; }
+	public string key { get; set; }
 
-    public User(List<string> userInfo)
-    {
-        this.ID = ++IDnr;
-        this.UserName = userInfo[0];
-        this.Mail = userInfo[1];
-        this.Password = userInfo[2];
-        this.Firstname = userInfo[3];
-        this.LastName = userInfo[4];
-    }
-
-    [JsonConstructor]
-    public User(int id, string username, string mail, string password, string firstName, string lastName)
+	public User(int id, string username, string mail, string password, string firstName, string lastName, string key)
 	{
 		this.ID			= id;
 		this.UserName	= username;
-		this.Mail		= mail;
-		this.Password	= password;
+		this.mail		= mail;
+		this.password	= password;
 		this.Firstname	= firstName;
 		this.LastName	= lastName;
+		this.key		= key;
 	}
 
-    /*
+	public User(List<string> userInfo)
+    {
+        //this.ID = ++IDnr;
+        this.ID = 1;
+        this.UserName	=	userInfo[0];
+		this.mail		=	userInfo[1];
+		this.password	=	userInfo[2];
+		this.Firstname	=	userInfo[3];
+		this.LastName	=	userInfo[4];
+
+		GenerateKey();
+    }
+
     //Set key by byte array
     public void SetKey(byte[] byteArrayKey)
     {
@@ -53,5 +58,5 @@ public class User
         AesManaged aes = new AesManaged();
         aes.GenerateKey();
         SetKey(aes.Key);
-    }*/
+    }
 }
