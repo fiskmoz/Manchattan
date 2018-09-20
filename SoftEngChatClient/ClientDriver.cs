@@ -268,7 +268,7 @@ namespace SoftEngChatClient.Controller
             chatWindow.Show();
         }
 
-        private void ChatWindowPrint(string sender, string message)
+        public void ChatWindowPrint(string sender, string message)
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }

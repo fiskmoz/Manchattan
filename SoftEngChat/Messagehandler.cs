@@ -81,6 +81,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			
 		}
 
+
 		private void HandleLogin(string incomming)
 		{
 			bool valid = ValidateLoginMessage(incomming);

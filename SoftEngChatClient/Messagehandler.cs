@@ -52,7 +52,20 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
         private void HandleClientMessage(string inc)
         {
-            string sender = "Nicklas"; // SHOULD APPLY CODE TO FILTER OUT SENDER, RECEIVER AND MESSAGE
+            string[] parsed = ParseMessage(inc);
+            string sender = parsed[1];
+            string receiver = parsed[2];
+            string message = parsed[3];
+            if (receiver == "All")
+            {
+                driver.ChatWindowPrint(sender,message);
+            }
+            else
+            {
+                //WRITE INDIVIUALLY
+            }
+
+
             driver.AddNewIndividualChatWindow(sender);
         }
 
