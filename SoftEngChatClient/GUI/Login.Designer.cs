@@ -161,6 +161,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.ForeColor = System.Drawing.Color.Green;
 			this.label1.Location = new System.Drawing.Point(333, 190);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(153, 17);
