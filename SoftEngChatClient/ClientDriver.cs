@@ -143,7 +143,8 @@ namespace SoftEngChatClient.Controller
         }
         private void cd_ClientRegisterButtonClick(object sender, EventArgs e)
         {
-            //writer.WriteRegister(MessageType.register, registerWindow.)
+            writer.WriteRegister(MessageType.register, registerWindow.getUserName(), registerWindow.getEmail(), registerWindow.getPassword(),
+              registerWindow.getForename(), registerWindow.getSurname());
         }
         private void cd_RegisterWindowCancel(object sender, EventArgs e)
         {

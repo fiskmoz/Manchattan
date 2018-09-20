@@ -37,5 +37,26 @@ namespace SoftEngChatClient
         {
 
         }
+
+        public string getUserName()
+        {
+            return this.EnterUsername.Text;
+        }
+        public string getPassword()
+        {
+            return this.EnterPassword.Text;
+        }
+        public string getEmail()
+        {
+            return this.EnterEmail.Text;
+        }
+        public string getForename()
+        {
+            return this.EnterForename.Text;
+        }
+        public string getSurname()
+        {
+            return this.EnterSurname.Text;
+        }
     }
 }

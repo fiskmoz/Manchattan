@@ -28,6 +28,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				case '0':
                     Console.WriteLine("Message arrived; Register Attempt:");
                     Console.WriteLine(incomming);
+                    HandleRegistration(incomming);
 					break;
 				case '1':
                     Console.WriteLine("Message arrived; Register ACK:");
@@ -128,6 +129,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			user.RemoveAt(0);
 			bool regFlag = server.userManager.AddUser(user);
+
 			client.writer.WriteRegAck(regFlag);
 		}
 
