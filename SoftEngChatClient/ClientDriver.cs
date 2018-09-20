@@ -206,6 +206,11 @@ namespace SoftEngChatClient.Controller
         }
         public void UpdateOnlineList(string str)
         {
+            if (chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
+                return;
+            }
             string[] usernames;
             usernames = str.Split(':');
             for (int n = chatWindow.listBox1.Items.Count -1; n >= 0; --n)
