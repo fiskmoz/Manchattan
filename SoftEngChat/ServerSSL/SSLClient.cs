@@ -46,8 +46,8 @@ namespace SoftEngChat.Model.SSLCommunication
         public void updateUserInfo(string username, string email, string password)
         {
             UserInfo.UserName = username;
-            UserInfo.mail = email;
-            UserInfo.password = password;
+            UserInfo.Mail = email;
+            UserInfo.Password = password;
         }
 
 

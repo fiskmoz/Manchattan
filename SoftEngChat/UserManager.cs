@@ -30,7 +30,7 @@ namespace SoftEngChat
             
             foreach(var user in userList)
             {
-                if(validate.validate(user.UserName, user.password))
+                if(validate.validate(user.UserName, user.Password))
                 {
                     userList.Remove(user);
                 }
@@ -48,10 +48,10 @@ namespace SoftEngChat
             List<User> userlist = DB.DBread(filePath);
             foreach (var User in userlist)
             {
-                Console.WriteLine("Login: " + "|"+userIn+"|" + " " + "|"+passwordIn+"|" + ":" + " |"+User.UserName+"|" + " " + User.password);
-                if ((User.UserName == userIn || User.mail == userIn) && User.password == passwordIn)
+                Console.WriteLine("Login: " + "|"+userIn+"|" + " " + "|"+passwordIn+"|" + ":" + " |"+User.UserName+"|" + " " + User.Password);
+                if ((User.UserName == userIn || User.Mail == userIn) && User.Password == passwordIn)
                 {
-                    Console.WriteLine(User.UserName + User.password);
+                    Console.WriteLine(User.UserName + User.Password);
                     return true;
                 }
                     
@@ -64,7 +64,7 @@ namespace SoftEngChat
 		{
 			foreach (var user in userList)
 			{
-				if (user.UserName == newUser[0] && user.mail == newUser[1])
+				if (user.UserName == newUser[0] && user.Mail == newUser[1])
 				{
 					return false;
 				}

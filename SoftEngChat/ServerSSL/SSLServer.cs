@@ -19,6 +19,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private TcpListener serverListener;
 		private string lastMessage;
 		private string lastSender;
+        public UserManager userManager;
 
 		public SSLServer(IPAddress ip, int port)
 		{
@@ -26,6 +27,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			clientList = new List<SSLClient>();
 			serverListener = new TcpListener(ip, port);
 			serverListener.Start();
+            userManager = new UserManager();
             
 
 			while (true)
