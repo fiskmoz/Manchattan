@@ -18,7 +18,6 @@ namespace SoftEngChatClient
         public event EventHandler LoginButtonClick;
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
-        public event KeyEventHandler LoginBoxKeyReleased;
 
         public string getUsername()
         {

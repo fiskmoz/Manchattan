@@ -62,7 +62,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
             }
             else
             {
-                driver.AddNewIndividualChatWindow(sender);
+                driver.AddNewIndividualChat(sender);
             }
         }
 

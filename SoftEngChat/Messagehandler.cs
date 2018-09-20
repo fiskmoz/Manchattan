@@ -51,7 +51,9 @@ namespace SoftEngChat.Model.SSLCommunication
                 case '5':
                     Console.WriteLine("Message arrived; Logout Message:");
                     Console.WriteLine(incomming);
-                    break;
+					HandleLogout();
+
+					break;
                 case '6':
                     Console.WriteLine("Message arrived; OnlineList:");
                     Console.WriteLine(incomming);
@@ -76,7 +78,7 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             else
             {
-                //WRITE INDIVIUALLY
+                server.WriteIndivualMessage(sender, receiver, message);
             }
 			
 		}
@@ -136,6 +138,12 @@ namespace SoftEngChat.Model.SSLCommunication
 			messageArray = incomming.Split(':');
 
 			return messageArray;
+		}
+
+		private void HandleLogout()
+		{
+			client.listener.StopListen();
+			server.RemoveClient(client);
 		}
 	}
 }
