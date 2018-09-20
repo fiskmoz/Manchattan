@@ -7,11 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SoftEngChatClient.Model.SSLCommunication;
+using System.Timers;
 
 namespace SoftEngChatClient.Controller
 {
 	class ClientDriver
 	{
+        int spam;
 		private ChatWindow chatWindow;
 		private Login loginWindow;
         private Register registerWindow;
@@ -80,7 +82,11 @@ namespace SoftEngChatClient.Controller
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
 
-			loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
+            System.Timers.Timer timer = new System.Timers.Timer(2000);
+            timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
+            timer.Enabled = true;
+
+            loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
@@ -91,6 +97,11 @@ namespace SoftEngChatClient.Controller
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
+        }
+
+        private void cd_TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            spam = 0; 
         }
 
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
@@ -140,12 +151,20 @@ namespace SoftEngChatClient.Controller
         }
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
-            if(chatWindow.getTextMessageBox().Length > 0)
+            spam++;
+            if((chatWindow.getTextMessageBox().Length > 0) && spam < 10)
             {
-                writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
-                chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
-                chatWindow.clearMessageBox();
+                {
+                    writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
+                    chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+                    chatWindow.clearMessageBox();
+                }
             }
+            else
+            {
+                chatWindow.AppendTextBox("[Program] Don´t spam and wait two seconds");
+            }
+           
         }
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
