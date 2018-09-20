@@ -43,8 +43,21 @@ namespace SoftEngChatClient.Controller
 
 		internal void CloseRegWindow()
 		{
-			registerWindow.Hide();
+			if (loginWindow.InvokeRequired)
+			{
+				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
+				return;
+			}
+			
+
+
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.Hide));
+				return;
+			}
 			loginWindow.RegistrationOKinfo();
+			registerWindow.Hide();
 		}
 
 		// When creating the ClientDriver in main (program.cs)
@@ -57,6 +70,11 @@ namespace SoftEngChatClient.Controller
 
 		internal void RegistrationRejected()
 		{
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.RegistrationRejected));
+				return;
+			}
 			registerWindow.RegistrationRejected();
 		}
 
