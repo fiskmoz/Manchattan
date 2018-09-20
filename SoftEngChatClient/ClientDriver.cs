@@ -93,7 +93,7 @@ namespace SoftEngChatClient.Controller
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
 
-            System.Timers.Timer timer = new System.Timers.Timer(5000);
+            System.Timers.Timer timer = new System.Timers.Timer(1000);
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
@@ -112,7 +112,10 @@ namespace SoftEngChatClient.Controller
 
         private void cd_TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            spam = 0; 
+            if (spam >= 0)
+            {
+                spam--;
+            }
         }
 
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
@@ -164,7 +167,7 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
             spam++;
-            if((chatWindow.getTextMessageBox().Length > 0) && spam < 10)
+            if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
             {
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
@@ -217,6 +220,11 @@ namespace SoftEngChatClient.Controller
         }
         public void UpdateOnlineList(string str)
         {
+            if (chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
+                return;
+            }
             string[] usernames;
             usernames = str.Split(':');
             for (int n = chatWindow.listBox1.Items.Count -1; n >= 0; --n)
