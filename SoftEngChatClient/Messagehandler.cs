@@ -62,11 +62,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
             }
             else
             {
-                //WRITE INDIVIUALLY
+                driver.AddNewIndividualChatWindow(sender);
             }
-
-
-            driver.AddNewIndividualChatWindow(sender);
         }
 
         private void HandleLoginACK(string inc)

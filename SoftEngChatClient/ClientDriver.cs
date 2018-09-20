@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Controller
 		private Login loginWindow;
         private Register registerWindow;
 
-        private List<IndividualChatWindow> individualChatWindows;
+        private List<IndividualChatDriver> individualChatDrivers;
 
 		private SSLConnector connector;
 		private SSLListener streamListener;
@@ -87,7 +87,7 @@ namespace SoftEngChatClient.Controller
                                             //Print output for user
             loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
             registerWindow = new Register();
-            individualChatWindows = new List<IndividualChatWindow>();
+            individualChatDrivers = new List<IndividualChatDriver>();
         }
 
         //Constructs backend modules
@@ -224,17 +224,17 @@ namespace SoftEngChatClient.Controller
             }
         }
 
-        public void AddNewIndividualChatWindow(string username)
+        public void AddNewIndividualChatWindow(string receiver)
         {
-            foreach (IndividualChatWindow icw in individualChatWindows)
+            foreach (IndividualChatDriver icd in individualChatDrivers)
             {
-                if (icw.getUserName() == username)
+                if (icd.getUsername() == username)
                 {
-                    icw.Show();
+                    icd.displayWindow();
                     return;
                 }
             }
-            individualChatWindows.Add(new IndividualChatWindow(username));
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, receiver));
         }
         public void UpdateOnlineList(string str)
         {
