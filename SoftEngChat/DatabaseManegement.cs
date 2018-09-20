@@ -49,11 +49,12 @@ namespace SoftEngChat
             //File.WriteAllText(@"DB.json", JsonConvert.SerializeObject("name"));
             try
             {
-                using (StreamWriter file = File.AppendText(filePath))
+                // using (StreamWriter file = File.AppendText(filePath))
+                using (StreamWriter file = File.CreateText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Serialize(file, userList);
-                    Console.WriteLine(filePath);
+                    //Console.WriteLine(filePath);
                 }
             }
             catch(Exception e)
