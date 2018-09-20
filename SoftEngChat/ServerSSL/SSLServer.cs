@@ -90,16 +90,20 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
+        public void WriteIndivualMessage(string sender, string receiver, string message)
+        {
+            foreach (var client in clientList)
+            {
+                if(client.UserInfo.UserName == receiver)
+                {
+                    client.writer.WriteClient(MessageType.client, sender, receiver, message);
+                }
+            }
+        }
+
 		internal void RemoveClient(SSLClient client)
 		{
 			clientList.Remove(client);
-		}
-
-		//Writes latest message arrived at server to a client
-		//IN: Client who shall receive message.
-		private void Write(SSLClient client)
-		{
-			//client.writer.Write(lastMessage, lastSender);
 		}
 	}
 }

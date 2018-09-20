@@ -19,14 +19,17 @@ namespace SoftEngChatClient
         {
             username = Username;
             receiver = Receiver;
+            window = new IndividualChatWindow(receiver);
             SetupListners();
             writer = sllWriter;
-            window = new IndividualChatWindow(username);
+            window.ShowDialog();
+            
+            
         }
 
         private void SetupListners()
         {
-            window.IndividuaChatWindowClosed += new EventHandler(icd_WindowClosed);
+            window.IndivudualFormClosed += new EventHandler(icd_WindowClosed);
             window.IndividualSendButtonClicked += new EventHandler(icd_SendButtonClicked);
             window.IndividualMessageBoxReleased += new KeyEventHandler(icd_EnterKeyReleased);
             window.IndividualChatWindowLoaded += new EventHandler(icd_WindowLoaded);
@@ -59,7 +62,7 @@ namespace SoftEngChatClient
 
         public void displayWindow()
         {
-            window.Show();
+            window.ShowDialog();
         }
     }
 }
