@@ -61,8 +61,9 @@ namespace SoftEngChatClient.Model.SSLCommunication
                 driver.ChatWindowPrint(sender,message);
             }
             else
-            {
+            {   
                 driver.AddNewIndividualChat(sender);
+                driver.IndividualChatPrint(sender, message);
             }
         }
 

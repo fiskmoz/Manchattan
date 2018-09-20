@@ -11,7 +11,7 @@ namespace RegisterTesting
     {
         static void Main(string[] args)
         {
-            UserManager UM = new UserManager();
+            //UserManager UM = new UserManager();
             List<string> testUser = new List<string>();
             string username, mail, password, firstname, lastname;
             username = "AuntyLover";

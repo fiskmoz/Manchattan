@@ -97,5 +97,10 @@ namespace SoftEngChatClient
         {
             usernamePressed(this, e);
         }
+
+		public void SetUserName(string name)
+		{
+			userNameLbl.Text = name;
+		}
     }
 }

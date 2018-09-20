@@ -97,6 +97,7 @@ namespace SoftEngChat.Model.SSLCommunication
                 if(client.UserInfo.UserName == receiver)
                 {
                     client.writer.WriteClient(MessageType.client, sender, receiver, message);
+                    return;
                 }
             }
         }
