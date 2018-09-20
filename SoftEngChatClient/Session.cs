@@ -27,7 +27,6 @@ namespace SoftEngChatClient
                 
                 // Gör saker
             }
-            else
                 //terminate instance of Class
             
             
