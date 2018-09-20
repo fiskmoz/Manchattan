@@ -89,6 +89,8 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			bool valid = ValidateLoginMessage(incomming);
             client.writer.WriteLoginACK(valid ? 1 : 0);
+			if(valid) server.SendOnlineListToAllClient();
+			
 		}
 
 		private bool ValidateLoginMessage(string message)
@@ -113,7 +115,6 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 userName = username;
                 client.updateUserInfo(username, "emailPH", password);
-                server.SendOnlineListToAllClient();
                 return true;
             }else
             {
