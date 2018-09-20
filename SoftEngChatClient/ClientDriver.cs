@@ -164,6 +164,7 @@ namespace SoftEngChatClient.Controller
         private void cd_TryLogin(object sender, EventArgs e)
         {
             writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
+			SetUserName(loginWindow.getUsername());
         }
         private void cd_LoginExitWindow(object sender, EventArgs e)
         {
@@ -271,5 +272,15 @@ namespace SoftEngChatClient.Controller
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
+
+		public void SetUserName(string name)
+		{
+			if (chatWindow.InvokeRequired)
+			{
+				chatWindow.Invoke(new Action<string>(chatWindow.SetUserName), name);
+				return;
+			}
+			chatWindow.SetUserName(name);
+		}
     }
 }
