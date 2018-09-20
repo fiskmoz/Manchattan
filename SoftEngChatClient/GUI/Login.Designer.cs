@@ -46,27 +46,29 @@
 			// 
 			this.EnterEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.EnterEmail.Location = new System.Drawing.Point(208, 272);
-			this.EnterEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.EnterEmail.Margin = new System.Windows.Forms.Padding(4);
 			this.EnterEmail.Name = "EnterEmail";
 			this.EnterEmail.Size = new System.Drawing.Size(416, 22);
 			this.EnterEmail.TabIndex = 1;
+			this.EnterEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
 			// 
 			// EnterPassword
 			// 
 			this.EnterPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.EnterPassword.Location = new System.Drawing.Point(208, 382);
-			this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.EnterPassword.Margin = new System.Windows.Forms.Padding(4);
 			this.EnterPassword.Name = "EnterPassword";
 			this.EnterPassword.PasswordChar = '*';
 			this.EnterPassword.Size = new System.Drawing.Size(416, 22);
 			this.EnterPassword.TabIndex = 2;
+			this.EnterPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
 			// 
 			// LoginButton
 			// 
 			this.LoginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.LoginButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.LoginButton.Location = new System.Drawing.Point(345, 437);
-			this.LoginButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.LoginButton.Margin = new System.Windows.Forms.Padding(4);
 			this.LoginButton.Name = "LoginButton";
 			this.LoginButton.Size = new System.Drawing.Size(120, 34);
 			this.LoginButton.TabIndex = 3;
@@ -127,7 +129,7 @@
 			// 
 			this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.RegisterButton.Location = new System.Drawing.Point(35, 526);
-			this.RegisterButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.RegisterButton.Margin = new System.Windows.Forms.Padding(4);
 			this.RegisterButton.Name = "RegisterButton";
 			this.RegisterButton.Size = new System.Drawing.Size(100, 28);
 			this.RegisterButton.TabIndex = 8;
@@ -139,7 +141,7 @@
 			// 
 			this.ExitLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.ExitLogin.Location = new System.Drawing.Point(599, 526);
-			this.ExitLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ExitLogin.Margin = new System.Windows.Forms.Padding(4);
 			this.ExitLogin.Name = "ExitLogin";
 			this.ExitLogin.Size = new System.Drawing.Size(100, 28);
 			this.ExitLogin.TabIndex = 9;
@@ -187,9 +189,11 @@
 			this.Controls.Add(this.LoginButton);
 			this.Controls.Add(this.EnterPassword);
 			this.Controls.Add(this.EnterEmail);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "Login";
+			this.Opacity = 0.95D;
 			this.Text = "Login";
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
