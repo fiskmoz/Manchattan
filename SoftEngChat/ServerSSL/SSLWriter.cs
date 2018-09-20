@@ -28,15 +28,14 @@ namespace SoftEngChat.Model.SSLCommunication
         }
         public void WriteLoginACK(int flag)
         {
-            string isValid = flag == 0 ? "0" : "1";
-            stream.Write(Encoding.UTF8.GetBytes("3:" + isValid));
-            Console.WriteLine("Write login is: " + isValid);
+            stream.Write(Encoding.UTF8.GetBytes(((int)MessageType.loginACK).ToString() + flag.ToString()));
+            Console.WriteLine("Write login is: " + flag.ToString());
         }
 
 		internal void WriteRegAck(bool flag)
 		{
 			string isValid = flag ? "1" : "0";
-			stream.Write(Encoding.UTF8.GetBytes("1:" + isValid));
+			stream.Write(Encoding.UTF8.GetBytes(((int)MessageType.registerACK).ToString() + isValid));
 			Console.WriteLine("Sent regAck: " + isValid);
 		}
 
