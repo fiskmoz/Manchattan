@@ -224,17 +224,19 @@ namespace SoftEngChatClient.Controller
             }
         }
 
-        public void AddNewIndividualChat(string receiver)
+        public void AddNewIndividualChat(string sender)
         {
+            bool found = false;
             foreach (IndividualChatDriver icd in individualChatDrivers)
             {
-                if (icd.getUsername() == username)
+                if (icd.getSender() == sender)
                 {
-                    icd.displayWindow();
-                    return;
+                    found = true;
+                    //icd.displayWindow();
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, receiver));
+            if(found == false)
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender));
         }
         public void UpdateOnlineList(string str)
         {
@@ -277,7 +279,7 @@ namespace SoftEngChatClient.Controller
         {
             foreach (var icd in individualChatDrivers)
             {
-                if (sender == icd.getUsername())
+                if (sender == icd.getSender())
                 {
                     icd.ReceiveMessage(message);
                 }

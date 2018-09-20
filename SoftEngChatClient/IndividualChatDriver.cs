@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,7 +23,7 @@ namespace SoftEngChatClient
             window = new IndividualChatWindow(receiver);
             SetupListners();
             writer = sllWriter;
-            window.ShowDialog();
+            new Thread(() => window.ShowDialog()).Start();
         }
 
         private void SetupListners()
@@ -60,6 +61,11 @@ namespace SoftEngChatClient
             return username;
         }
 
+        public string getSender()
+        {
+            return receiver;
+        }
+
         public void displayWindow()
         {
             window.ShowDialog();
@@ -67,7 +73,7 @@ namespace SoftEngChatClient
 
         public void ReceiveMessage(string message)
         {
-            window.AppendTextBox("["+receiver+"]"+message);
+            window.AppendTextBox("["+receiver+"] : "+message);
         }
     }
 }
