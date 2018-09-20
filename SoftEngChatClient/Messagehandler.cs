@@ -40,18 +40,30 @@ namespace SoftEngChatClient.Model.SSLCommunication
         {
             if(inc[1] == '1')
             {
+				driver.CloseRegWindow();
                 // REGISTRATION SUCCESS, DISPLAY?
             }
             else
             {
-                // REGISTRATION FAILED, DISPLAY?
+				// REGISTRATION FAILED, DISPLAY?
+				driver.RegistrationRejected();
             }
         }
 
         private void HandleClientMessage(string inc)
         {
-            string sender = "Nicklas"; // SHOULD APPLY CODE TO FILTER OUT SENDER, RECEIVER AND MESSAGE
-            driver.AddNewIndividualChatWindow(sender);
+            string[] parsed = ParseMessage(inc);
+            string sender = parsed[1];
+            string receiver = parsed[2];
+            string message = parsed[3];
+            if (receiver == "All")
+            {
+                driver.ChatWindowPrint(sender,message);
+            }
+            else
+            {
+                driver.AddNewIndividualChatWindow(sender);
+            }
         }
 
         private void HandleLoginACK(string inc)
@@ -70,6 +82,15 @@ namespace SoftEngChatClient.Model.SSLCommunication
         private void HandleUpdateOnlineList(string inc)
         {
             driver.UpdateOnlineList(inc);
+        }
+
+        private string[] ParseMessage(string incomming)
+        {
+            string[] messageArray;
+
+            messageArray = incomming.Split(':');
+
+            return messageArray;
         }
     }
 }

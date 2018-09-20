@@ -26,7 +26,7 @@ namespace SoftEngChatClient
 
         private void IndividualSendButton_Click(object sender, EventArgs e)
         {
-            //IndividualSendButtonClicked(this, e);
+            IndividualSendButtonClicked(this, e);
         }
 
         private void IndividualChatWindow_Load(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace SoftEngChatClient
 
         private void IndividualMessageBox_KeyUp(object sender, KeyEventArgs e)
         {
-            //IndividualMessageBoxReleased(this, e);
+            IndividualMessageBoxReleased(this, e);
         }
 
         public void clearMessageBox()

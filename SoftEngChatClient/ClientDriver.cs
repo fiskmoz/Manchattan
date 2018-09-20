@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Controller
 		private Login loginWindow;
         private Register registerWindow;
 
-        private List<IndividualChatWindow> individualChatWindows;
+        private List<IndividualChatDriver> individualChatDrivers;
 
 		private SSLConnector connector;
 		private SSLListener streamListener;
@@ -41,16 +41,42 @@ namespace SoftEngChatClient.Controller
             Application.Run(loginWindow);
         }
 
-        // When creating the ClientDriver in main (program.cs)
-        public ClientDriver()
+		internal void CloseRegWindow()
+		{
+			if (loginWindow.InvokeRequired)
+			{
+				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
+			}
+
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.Close));
+				return;
+			}
+			loginWindow.RegistrationOKinfo();
+			registerWindow.Close();
+		}
+
+		// When creating the ClientDriver in main (program.cs)
+		public ClientDriver()
 		{
 			ConstructGUI();
             ConstructBackend();
 			SetupListeners();
 		}
 
-        //Constructs GUI windows and list of individual chat windows.
-        private void ConstructGUI()
+		internal void RegistrationRejected()
+		{
+			if (registerWindow.InvokeRequired)
+			{
+				registerWindow.Invoke(new Action(registerWindow.RegistrationRejected));
+				return;
+			}
+			registerWindow.RegistrationRejected();
+		}
+
+		//Constructs GUI windows and list of individual chat windows.
+		private void ConstructGUI()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -58,7 +84,7 @@ namespace SoftEngChatClient.Controller
                                             //Print output for user
             loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
             registerWindow = new Register();
-            individualChatWindows = new List<IndividualChatWindow>();
+            individualChatDrivers = new List<IndividualChatDriver>();
         }
 
         //Constructs backend modules
@@ -89,9 +115,7 @@ namespace SoftEngChatClient.Controller
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
-           // loginWindow.LoginBoxKeyReleased += new EventHandler(cd_LoginBoxKeyReleased);
-
-            registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
+			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
@@ -161,7 +185,7 @@ namespace SoftEngChatClient.Controller
             if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
             {
                 {
-                    writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
+                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.getTextMessageBox());
                     chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
                     chatWindow.clearMessageBox();
                 }
@@ -196,17 +220,18 @@ namespace SoftEngChatClient.Controller
                 cd_ChatWindowSend(sender, e);
             }
         }
-        public void AddNewIndividualChatWindow(string username)
+
+        public void AddNewIndividualChatWindow(string receiver)
         {
-            foreach (IndividualChatWindow icw in individualChatWindows)
+            foreach (IndividualChatDriver icd in individualChatDrivers)
             {
-                if (icw.getUserName() == username)
+                if (icd.getUsername() == username)
                 {
-                    icw.Show();
+                    icd.displayWindow();
                     return;
                 }
             }
-            individualChatWindows.Add(new IndividualChatWindow(username));
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, receiver));
         }
         public void UpdateOnlineList(string str)
         {
@@ -240,7 +265,7 @@ namespace SoftEngChatClient.Controller
             chatWindow.Show();
         }
 
-        private void ChatWindowPrint(string sender, string message)
+        public void ChatWindowPrint(string sender, string message)
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }

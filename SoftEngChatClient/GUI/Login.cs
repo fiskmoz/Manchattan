@@ -57,9 +57,14 @@ namespace SoftEngChatClient
         {
             RegisterButtonClick(this, e);
         }
-            
-        // Exits the program.
-        private void ExitLogin_Click(object sender, EventArgs e)
+
+		internal void RegistrationOKinfo()
+		{
+			label1.Visible = true;
+		}
+
+		// Exits the program.
+		private void ExitLogin_Click(object sender, EventArgs e)
         {
             ExitButtonClicked(this, e);
         }
