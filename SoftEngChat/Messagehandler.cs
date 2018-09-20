@@ -66,24 +66,19 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private void HandleClientMessage(string incomming)
 		{
-			server.WriteAll(userName, ParseClientMessage(incomming));
-		}
-
-		private string ParseClientMessage(string message)
-		{
-			int i = 2;
-			string payload = null;
-			do
-			{
-				i++;
-			} while (message[i-1] != ':');
-
-			while (i < message.Length)
-			{
-				payload += message[i++];
-			}
-            Console.WriteLine("Parsed message : " + payload);
-			return payload;
+            string[] parsed = ParseMessage(incomming);
+            string sender = parsed[1];
+            string receiver = parsed[2];
+            string message = parsed[3];
+            if (receiver == "All")
+            {
+                server.WriteAll(sender, message);
+            }
+            else
+            {
+                //WRITE INDIVIUALLY
+            }
+			
 		}
 
 		private void HandleLogin(string incomming)
@@ -125,7 +120,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		
 		private void HandleRegistration(string incomming)
 		{
-			List<string> user = new List<string>(ParseRegistration(incomming));
+			List<string> user = new List<string>(ParseMessage(incomming));
 
 			user.RemoveAt(0);
 			bool regFlag = server.userManager.AddUser(user);
@@ -133,13 +128,13 @@ namespace SoftEngChat.Model.SSLCommunication
 			client.writer.WriteRegAck(regFlag);
 		}
 
-		private string[] ParseRegistration(string incomming)
+		private string[] ParseMessage(string incomming)
 		{
-			string[] userInfo;
+			string[] messageArray;
 
-			userInfo = incomming.Split(':');
+			messageArray = incomming.Split(':');
 
-			return userInfo;
+			return messageArray;
 		}
 	}
 }

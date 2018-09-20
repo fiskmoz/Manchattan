@@ -71,5 +71,14 @@ namespace SoftEngChatClient.Model.SSLCommunication
         {
             driver.UpdateOnlineList(inc);
         }
+
+        private string[] ParseMessage(string incomming)
+        {
+            string[] messageArray;
+
+            messageArray = incomming.Split(':');
+
+            return messageArray;
+        }
     }
 }
