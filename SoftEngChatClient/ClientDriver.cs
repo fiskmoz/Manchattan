@@ -185,7 +185,7 @@ namespace SoftEngChatClient.Controller
             if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
             {
                 {
-                    writer.WriteClient(MessageType.client, this.username, "All", "Placeholder message");
+                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.getTextMessageBox());
                     chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
                     chatWindow.clearMessageBox();
                 }
@@ -265,7 +265,7 @@ namespace SoftEngChatClient.Controller
             chatWindow.Show();
         }
 
-        private void ChatWindowPrint(string sender, string message)
+        public void ChatWindowPrint(string sender, string message)
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
