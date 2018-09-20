@@ -46,18 +46,15 @@ namespace SoftEngChatClient.Controller
 			if (loginWindow.InvokeRequired)
 			{
 				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
-				return;
 			}
-			
-
 
 			if (registerWindow.InvokeRequired)
 			{
-				registerWindow.Invoke(new Action(registerWindow.Hide));
+				registerWindow.Invoke(new Action(registerWindow.Close));
 				return;
 			}
 			loginWindow.RegistrationOKinfo();
-			registerWindow.Hide();
+			registerWindow.Close();
 		}
 
 		// When creating the ClientDriver in main (program.cs)

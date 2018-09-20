@@ -50,7 +50,7 @@
 			this.RegisterAccept.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.RegisterAccept.Name = "RegisterAccept";
 			this.RegisterAccept.Size = new System.Drawing.Size(100, 28);
-			this.RegisterAccept.TabIndex = 0;
+			this.RegisterAccept.TabIndex = 5;
 			this.RegisterAccept.Text = "Register";
 			this.RegisterAccept.UseVisualStyleBackColor = true;
 			this.RegisterAccept.Click += new System.EventHandler(this.RegisterAccept_Click);
@@ -62,7 +62,7 @@
 			this.RegisterCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.RegisterCancel.Name = "RegisterCancel";
 			this.RegisterCancel.Size = new System.Drawing.Size(100, 28);
-			this.RegisterCancel.TabIndex = 1;
+			this.RegisterCancel.TabIndex = 6;
 			this.RegisterCancel.Text = "Cancel";
 			this.RegisterCancel.UseVisualStyleBackColor = true;
 			this.RegisterCancel.Click += new System.EventHandler(this.RegisterCancel_Click);
@@ -74,7 +74,7 @@
 			this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.EnterPassword.Name = "EnterPassword";
 			this.EnterPassword.Size = new System.Drawing.Size(289, 22);
-			this.EnterPassword.TabIndex = 2;
+			this.EnterPassword.TabIndex = 1;
 			// 
 			// EnterUsername
 			// 
@@ -83,7 +83,7 @@
 			this.EnterUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.EnterUsername.Name = "EnterUsername";
 			this.EnterUsername.Size = new System.Drawing.Size(289, 22);
-			this.EnterUsername.TabIndex = 3;
+			this.EnterUsername.TabIndex = 0;
 			// 
 			// EmailLabel
 			// 
@@ -132,7 +132,7 @@
 			this.EnterEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.EnterEmail.Name = "EnterEmail";
 			this.EnterEmail.Size = new System.Drawing.Size(289, 22);
-			this.EnterEmail.TabIndex = 6;
+			this.EnterEmail.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -154,7 +154,7 @@
 			this.EnterForename.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.EnterForename.Name = "EnterForename";
 			this.EnterForename.Size = new System.Drawing.Size(289, 22);
-			this.EnterForename.TabIndex = 8;
+			this.EnterForename.TabIndex = 3;
 			// 
 			// label3
 			// 
@@ -176,7 +176,7 @@
 			this.EnterSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.EnterSurname.Name = "EnterSurname";
 			this.EnterSurname.Size = new System.Drawing.Size(289, 22);
-			this.EnterSurname.TabIndex = 10;
+			this.EnterSurname.TabIndex = 4;
 			// 
 			// regRejectLbl
 			// 
