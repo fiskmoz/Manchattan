@@ -16,7 +16,7 @@ namespace SoftEngChat
     public class DatabaseManegement
     {
         //File path where the login file appears.
-        static String fileName = "DB.txt";
+        static string fileName = "DB.txt";
         static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
         List<User> user;
 
@@ -96,20 +96,11 @@ namespace SoftEngChat
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
-                    List<string> info = new List<string>();
-                    info.Add("Admin");
-                    info.Add("mail");
-                    info.Add("112");
-                    info.Add("Admin");
-                    info.Add("Adminson");
-                    user.Add(new User(info));
-                    User a = new User(info);
-           
+                    string json = file.ReadToEnd();
 					try
 					{
-                        Console.WriteLine("This is it" + JsonConvert.DeserializeObject<List<User>>(json));
-						user = JsonConvert.DeserializeObject<List<User>>(a);
-					}
+                        user = JsonConvert.DeserializeObject<List<User>>(json);
+                    }
 					catch(Exception e)
 					{
 						Console.WriteLine();
