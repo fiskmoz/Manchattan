@@ -34,7 +34,8 @@ namespace SoftEngChatClient
         }
         public bool openNewSession(int SID, string user)
         {
-            return getSessionAck(SID, user);
+            //return getSessionAck(SID, user);
+            return true;
         }
         private bool checkRememberMe(bool remember)
         {
