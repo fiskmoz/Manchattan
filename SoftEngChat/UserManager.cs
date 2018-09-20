@@ -12,11 +12,11 @@ namespace SoftEngChat
         private const string FILE_NAME = "DB.txt";
 		static string filePath;
         private List<User> userList;
-        private DatabaseManegement db; 
+        private DatabaseManegement db = new DatabaseManegement();
 
         public UserManager()
         {
-			db = new DatabaseManegement();
+		
 			filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + FILE_NAME;
 			userList = db.DBread(filePath);
 		}

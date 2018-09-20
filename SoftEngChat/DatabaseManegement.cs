@@ -96,10 +96,19 @@ namespace SoftEngChat
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
-                    string json = file.ReadToEnd();
+                    List<string> info = new List<string>();
+                    info.Add("Admin");
+                    info.Add("mail");
+                    info.Add("112");
+                    info.Add("Admin");
+                    info.Add("Adminson");
+                    user.Add(new User(info));
+                    User a = new User(info);
+           
 					try
 					{
-						user = JsonConvert.DeserializeObject<List<User>>(json);
+                        Console.WriteLine("This is it" + JsonConvert.DeserializeObject<List<User>>(json));
+						user = JsonConvert.DeserializeObject<List<User>>(a);
 					}
 					catch(Exception e)
 					{

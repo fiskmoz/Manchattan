@@ -17,7 +17,7 @@ public class User
     public string LastName { get; set; }
 	public string key { get; set; }
 
-	public User(int id, string username, string mail, string password, string firstName, string lastName, string key)
+	/*public User(int id, string username, string mail, string password, string firstName, string lastName, string key)
 	{
 		this.ID			= id;
 		this.UserName	= username;
@@ -26,11 +26,12 @@ public class User
 		this.Firstname	= firstName;
 		this.LastName	= lastName;
 		this.key		= key;
-	}
+	}*/
 
 	public User(List<string> userInfo)
     {
-        this.ID = ++IDnr;
+        //this.ID = ++IDnr;
+        this.ID = 1;
         this.UserName	=	userInfo[0];
 		this.mail		=	userInfo[1];
 		this.password	=	userInfo[2];

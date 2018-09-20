@@ -115,7 +115,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			IncommingMessage message = new IncommingMessage();
 			message.Message = incomming;
-			IncommingMessage(this, message);
+			//IncommingMessage(this, message);
 		}
 	}
 
