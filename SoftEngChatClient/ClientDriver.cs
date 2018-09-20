@@ -160,6 +160,10 @@ namespace SoftEngChatClient.Controller
                     chatWindow.clearMessageBox();
                 }
             }
+            else
+            {
+                chatWindow.AppendTextBox("[Program] Don´t spam and wait two seconds");
+            }
            
         }
         private void cd_ChatWindowClosed(object sender, EventArgs e)
