@@ -8,7 +8,7 @@ namespace SoftEngChatClient
 {
     class Session
     {
-        public int sessionID { get; set; };
+        public int sessionID { get; set; }
         private string sessionUser;
         private string userPassword;
         private bool rememberMe;
@@ -28,13 +28,17 @@ namespace SoftEngChatClient
                 // Gör saker
             }
             else
+            {
+
+            }
                 //terminate instance of Class
             
             
         }
         public bool openNewSession(int SID, string user)
         {
-            return getSessionAck(SID, user);
+            return true; 
+                //getSessionAck(SID, user);
         }
         private bool checkRememberMe(bool remember)
         {

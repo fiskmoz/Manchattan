@@ -229,7 +229,7 @@ namespace SoftEngChatClient.Controller
             {
                 if (icd.getUsername() == username)
                 {
-                    icd.displayWindow();
+                    //icd.displayWindow();
                     return;
                 }
             }
@@ -270,6 +270,17 @@ namespace SoftEngChatClient.Controller
         public void ChatWindowPrint(string sender, string message)
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
+        }
+
+        public void IndividualChatPrint(string sender, string message)
+        {
+            foreach (var icd in individualChatDrivers)
+            {
+                if(sender == icd.getUsername())
+                {
+                    icd.ReceiveMessage(message);
+                }
+            }
         }
     }
 }

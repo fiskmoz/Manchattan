@@ -23,8 +23,6 @@ namespace SoftEngChatClient
             SetupListners();
             writer = sllWriter;
             window.ShowDialog();
-            
-            
         }
 
         private void SetupListners()
@@ -48,6 +46,8 @@ namespace SoftEngChatClient
         private void icd_SendButtonClicked(object sender, EventArgs e)
         {
             writer.WriteClient(MessageType.client, username, receiver, window.getTextMessageBox());
+            window.AppendTextBox("[ME] : " + window.getTextMessageBox());
+            window.clearMessageBox();
         }
 
         private void icd_WindowClosed(object obj, EventArgs e)
@@ -63,6 +63,11 @@ namespace SoftEngChatClient
         public void displayWindow()
         {
             window.ShowDialog();
+        }
+
+        public void ReceiveMessage(string message)
+        {
+            window.AppendTextBox("["+receiver+"]"+message);
         }
     }
 }
