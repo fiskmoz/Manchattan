@@ -97,7 +97,16 @@ namespace SoftEngChat
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     string json = file.ReadToEnd();
-                    user = JsonConvert.DeserializeObject<List<User>>(json);
+					try
+					{
+						user = JsonConvert.DeserializeObject<List<User>>(json);
+					}
+					catch(Exception e)
+					{
+						Console.WriteLine();
+						Console.WriteLine(e.Message);
+					}
+					
                 }
             }
             catch(Exception e)

@@ -9,7 +9,7 @@ namespace SoftEngChat
     class UserManager
     {
 
-        private const String FILE_NAME = "DB.txt";
+        private const string FILE_NAME = "DB.txt";
 		static string filePath;
         private List<User> userList;
         private DatabaseManegement db; 
@@ -26,11 +26,11 @@ namespace SoftEngChat
         public List<User> RemoveUser(string name, string password)
         {
             userList = db.DBread(filePath);
-            ValidateUser validate = new ValidateUser();
+            ValidateUser validate = new ValidateUser(FILE_NAME);
             
             foreach(var user in userList)
             {
-                if(validate.validate(user.UserName, user.password) == "true")
+                if(validate.validate(user.UserName, user.password))
                 {
                     userList.Remove(user);
                 }
