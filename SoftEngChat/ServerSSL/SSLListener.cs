@@ -64,44 +64,7 @@ namespace SoftEngChat.Model.SSLCommunication
                     }
                     
                 }
-                /*
-                do
-                {
-
-                    try
-                    {
-                        bytesRead = stream.Read(incommingMessage, 0, incommingMessage.Length);
-
-                    }
-                    catch (Exception e)
-                    {
-                        bytesRead = 0;
-                        message = null;
-                    }
-                    message = Encoding.UTF8.GetString(incommingMessage, 0, bytesRead).Replace('\0', ' ');
-                    //Decoder decoder = Encoding.UTF8.GetDecoder();
-                    //char[] chars = new char[decoder.GetCharCount(incommingMessage, 0, bytesRead)];
-                    messageData.Append(message);
-                    Console.WriteLine(messageData.ToString());
-                    if (messageData.ToString().Length != 0)
-                    {
-                        if (messageData.ToString()[0] == ' ')
-                        {
-                            messageData = new StringBuilder();
-                            bytesRead = 0;
-                        }
-                    }
-
-                    if (messageData.ToString().IndexOf("\r\n") > bytesRead && bytesRead != 0)
-                    {
-                        break;
-                    }
-                    
-                } while (bytesRead >= 0);
-                Console.WriteLine(messageData.ToString());
-                */
-                //RaiseEvent(messageData.ToString());
-                if (stopListen) continue;
+                if (stopListen) break;
             }
 		}
 
