@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SoftEngChatClient
-{
+{/*
     class Session
     {
         public int sessionID { get; set; };
@@ -49,5 +49,5 @@ namespace SoftEngChatClient
         {
             //print to file
         }
-    }
+    }*/
 }
