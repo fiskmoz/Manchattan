@@ -35,9 +35,6 @@ namespace SoftEngChatClient
                 e.GetBaseException();
             }
 
-
-
-
             return decryptadText; 
         } 
 

@@ -39,6 +39,7 @@
             this.ExitLogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.rememberMeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,12 +173,24 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Visible = false;
             // 
+            // rememberMeCheckBox
+            // 
+            this.rememberMeCheckBox.AutoSize = true;
+            this.rememberMeCheckBox.Location = new System.Drawing.Point(176, 559);
+            this.rememberMeCheckBox.Name = "rememberMeCheckBox";
+            this.rememberMeCheckBox.Size = new System.Drawing.Size(149, 24);
+            this.rememberMeCheckBox.TabIndex = 12;
+            this.rememberMeCheckBox.Text = "Remember Me?";
+            this.rememberMeCheckBox.UseVisualStyleBackColor = true;
+            this.rememberMeCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(876, 749);
+            this.Controls.Add(this.rememberMeCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ExitLogin);
@@ -193,6 +206,7 @@
             this.Name = "Login";
             this.Opacity = 0.95D;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -201,8 +215,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox EnterEmail;
-        private System.Windows.Forms.TextBox EnterPassword;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label MailLabel;
         private System.Windows.Forms.Label PasswordLabel;
@@ -212,5 +224,8 @@
         private System.Windows.Forms.Button ExitLogin;
         private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label label1;
-	}
+        public System.Windows.Forms.CheckBox rememberMeCheckBox;
+        public System.Windows.Forms.TextBox EnterEmail;
+        public System.Windows.Forms.TextBox EnterPassword;
+    }
 }

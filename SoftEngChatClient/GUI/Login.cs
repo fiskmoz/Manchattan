@@ -17,6 +17,8 @@ namespace SoftEngChatClient
         public event EventHandler LoginButtonClick;
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
+        public event EventHandler CheckButtonChanged;
+        public event EventHandler LoginLoaded;
 
         public string getUsername()
         {
@@ -63,6 +65,16 @@ namespace SoftEngChatClient
 		private void ExitLogin_Click(object sender, EventArgs e)
         {
             ExitButtonClicked(this, e);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckButtonChanged(sender, e);
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            LoginLoaded(sender, e);
         }
     }
 } 

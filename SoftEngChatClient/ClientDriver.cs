@@ -29,6 +29,7 @@ namespace SoftEngChatClient.Controller
         private string username;
 
         public List<string> messageList;
+        private bool rememberMe;
 
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
@@ -115,6 +116,8 @@ namespace SoftEngChatClient.Controller
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
+            loginWindow.CheckButtonChanged += new EventHandler(cd_CheckBoxChanged);
+            loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
@@ -123,6 +126,43 @@ namespace SoftEngChatClient.Controller
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
+            
+        }
+
+        private void cd_LoginIsLoaded(object sender, EventArgs e)
+        {
+            FileManager fileManager = new FileManager();
+            string loginCredentials;
+            loginCredentials = fileManager.ReadFromFile("SessionSave.txt");
+
+            string username;
+            string password;
+
+            if (loginCredentials == "")
+            {
+                return;
+            }
+            string[] userInfo;
+            userInfo = loginCredentials.Split(':');
+
+            username = userInfo[0];
+            password = userInfo[1];
+
+            loginWindow.EnterEmail.Text = username;
+            loginWindow.EnterPassword.Text = password;
+            loginWindow.rememberMeCheckBox.Checked = true;
+        }
+
+        private void cd_CheckBoxChanged(object sender, EventArgs e)
+        {
+            if (loginWindow.rememberMeCheckBox.Checked == true)
+            {
+                rememberMe = true;
+            }
+            else
+            {
+                rememberMe = false;
+            }
         }
 
         private void cd_TimerElapsed(object sender, ElapsedEventArgs e)
@@ -201,6 +241,9 @@ namespace SoftEngChatClient.Controller
         }
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
+
+           // Session session = new Session(this.username, "123", rememberMe);
+
             var str = chatWindow.getChatBox();
             var byteArray = logCrypto.EncryptString(str);
             var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);

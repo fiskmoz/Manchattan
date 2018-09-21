@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SoftEngChatClient
-{/*
+{
     class Session
     {
         public int sessionID { get; set; }
@@ -48,7 +48,7 @@ namespace SoftEngChatClient
         {
             FileManager FM = new FileManager();
             string[] userInfo = { user, pass };
-            FM.readToFile(userInfo);
+          //  FM.readToFile(userInfo);
         }
-    }*/
+    }
 }
