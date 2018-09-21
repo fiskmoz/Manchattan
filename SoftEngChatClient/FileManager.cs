@@ -24,6 +24,32 @@ namespace SoftEngChatClient
         }
 
 
+        public string ReadFromFile(string filePath) 
+        {
+
+            int size;
+            byte[] data;
+            int byteCounter;
+
+            // Opens a stream to the path chosen in the open file dialog
+            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                size = (int)stream.Length; // Returns the length of the file
+                data = new byte[size]; // Initializes and array in which to store the file
+                stream.Read(data, 0, size); // Begins to read from the constructed stream
+
+                byteCounter = 0;
+                while (byteCounter < size)
+                {
+                    int i = data[byteCounter];
+
+                    byteCounter++;
+                 
+                }
+            }
+                return cyptoMessage.DecryptBytes(data); 
+        } 
+
         
         //Encrypt and read to file.
         public void WriteToFile(string filePath, string[] readObject)
