@@ -41,7 +41,10 @@ namespace SoftEngChatClient
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode == Keys.Enter)
+            {
+                icd_SendButtonClicked(sender, e);
+            }
         }
 
         private void icd_SendButtonClicked(object sender, EventArgs e)
