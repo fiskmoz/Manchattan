@@ -9,9 +9,7 @@ namespace SoftEngChatClient
 {
     class FileManager
     {
-
         private LogCrypto cyptoMessage;
-        private string text;
 
        public FileManager()
         {
@@ -23,31 +21,24 @@ namespace SoftEngChatClient
             cyptoMessage.SetNewKey(array);
         }
 
-
+        //Reads and decrypt from file.
         public string ReadFromFile(string filePath) 
         {
-
-            int size;
-            byte[] data;
-            int byteCounter;
-
-            // Opens a stream to the path chosen in the open file dialog
-            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            string decryptadText = "";
+            try
             {
-                size = (int)stream.Length; // Returns the length of the file
-                data = new byte[size]; // Initializes and array in which to store the file
-                stream.Read(data, 0, size); // Begins to read from the constructed stream
-
-                byteCounter = 0;
-                while (byteCounter < size)
-                {
-                    int i = data[byteCounter];
-
-                    byteCounter++;
-                 
-                }
+                byte[] data = File.ReadAllBytes(filePath);
+                decryptadText = cyptoMessage.DecryptBytes(data);
             }
-                return cyptoMessage.DecryptBytes(data); 
+            catch(IOException e)
+            {
+                e.GetBaseException();
+            }
+
+
+
+
+            return decryptadText; 
         } 
 
         
@@ -59,7 +50,8 @@ namespace SoftEngChatClient
 
             foreach (var textFromParamater in readObject)
             {
-                text += textFromParamater;
+                text += textFromParamater + ":";
+
             }
             encryptedString = cyptoMessage.EncryptString(text);
         
