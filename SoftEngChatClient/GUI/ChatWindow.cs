@@ -21,6 +21,7 @@ namespace SoftEngChatClient
         public event EventHandler previousMessageButtonClick;
         public event EventHandler chatWindowLoad;
         public event EventHandler usernamePressed;
+		public event EventHandler logoutEvent;
 
         public ChatWindow()
         {
@@ -111,5 +112,10 @@ namespace SoftEngChatClient
             }
             return MessageBox.Text;
         }
-    }
+
+		private void logoutBtn_Click(object sender, EventArgs e)
+		{
+			logoutEvent(sender, e);
+		}
+	}
 }

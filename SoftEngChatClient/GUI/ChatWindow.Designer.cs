@@ -40,6 +40,7 @@ namespace SoftEngChatClient
 			this.Toolbar = new System.Windows.Forms.GroupBox();
 			this.PreviousMessagesButton = new System.Windows.Forms.Button();
 			this.userNameLbl = new System.Windows.Forms.Label();
+			this.logoutBtn = new System.Windows.Forms.Button();
 			this.ActiveChatPlaceholder.SuspendLayout();
 			this.ConctactsPlaceholder.SuspendLayout();
 			this.SuspendLayout();
@@ -49,7 +50,7 @@ namespace SoftEngChatClient
 			this.MessageBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.MessageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.MessageBox.Location = new System.Drawing.Point(243, 423);
-			this.MessageBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.MessageBox.Margin = new System.Windows.Forms.Padding(4);
 			this.MessageBox.Multiline = true;
 			this.MessageBox.Name = "MessageBox";
 			this.MessageBox.Size = new System.Drawing.Size(435, 67);
@@ -60,7 +61,7 @@ namespace SoftEngChatClient
 			// 
 			this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.SendButton.Location = new System.Drawing.Point(687, 423);
-			this.SendButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.SendButton.Margin = new System.Windows.Forms.Padding(4);
 			this.SendButton.Name = "SendButton";
 			this.SendButton.Size = new System.Drawing.Size(104, 68);
 			this.SendButton.TabIndex = 1;
@@ -72,9 +73,9 @@ namespace SoftEngChatClient
 			// 
 			this.ActiveChatPlaceholder.Controls.Add(this.ProfilePlaceholder);
 			this.ActiveChatPlaceholder.Location = new System.Drawing.Point(16, 116);
-			this.ActiveChatPlaceholder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ActiveChatPlaceholder.Margin = new System.Windows.Forms.Padding(4);
 			this.ActiveChatPlaceholder.Name = "ActiveChatPlaceholder";
-			this.ActiveChatPlaceholder.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ActiveChatPlaceholder.Padding = new System.Windows.Forms.Padding(4);
 			this.ActiveChatPlaceholder.Size = new System.Drawing.Size(193, 361);
 			this.ActiveChatPlaceholder.TabIndex = 2;
 			this.ActiveChatPlaceholder.TabStop = false;
@@ -83,9 +84,9 @@ namespace SoftEngChatClient
 			// ProfilePlaceholder
 			// 
 			this.ProfilePlaceholder.Location = new System.Drawing.Point(8, 23);
-			this.ProfilePlaceholder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ProfilePlaceholder.Margin = new System.Windows.Forms.Padding(4);
 			this.ProfilePlaceholder.Name = "ProfilePlaceholder";
-			this.ProfilePlaceholder.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ProfilePlaceholder.Padding = new System.Windows.Forms.Padding(4);
 			this.ProfilePlaceholder.Size = new System.Drawing.Size(177, 105);
 			this.ProfilePlaceholder.TabIndex = 3;
 			this.ProfilePlaceholder.TabStop = false;
@@ -95,9 +96,9 @@ namespace SoftEngChatClient
 			// 
 			this.ConctactsPlaceholder.Controls.Add(this.listBox1);
 			this.ConctactsPlaceholder.Location = new System.Drawing.Point(829, 16);
-			this.ConctactsPlaceholder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ConctactsPlaceholder.Margin = new System.Windows.Forms.Padding(4);
 			this.ConctactsPlaceholder.Name = "ConctactsPlaceholder";
-			this.ConctactsPlaceholder.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ConctactsPlaceholder.Padding = new System.Windows.Forms.Padding(4);
 			this.ConctactsPlaceholder.Size = new System.Drawing.Size(200, 475);
 			this.ConctactsPlaceholder.TabIndex = 3;
 			this.ConctactsPlaceholder.TabStop = false;
@@ -118,7 +119,7 @@ namespace SoftEngChatClient
 			// 
 			this.ChatBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.ChatBox.Location = new System.Drawing.Point(243, 38);
-			this.ChatBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ChatBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ChatBox.Multiline = true;
 			this.ChatBox.Name = "ChatBox";
 			this.ChatBox.ReadOnly = true;
@@ -129,9 +130,9 @@ namespace SoftEngChatClient
 			// Toolbar
 			// 
 			this.Toolbar.Location = new System.Drawing.Point(243, 380);
-			this.Toolbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Toolbar.Margin = new System.Windows.Forms.Padding(4);
 			this.Toolbar.Name = "Toolbar";
-			this.Toolbar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Toolbar.Padding = new System.Windows.Forms.Padding(4);
 			this.Toolbar.Size = new System.Drawing.Size(548, 36);
 			this.Toolbar.TabIndex = 5;
 			this.Toolbar.TabStop = false;
@@ -141,7 +142,7 @@ namespace SoftEngChatClient
 			// 
 			this.PreviousMessagesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.PreviousMessagesButton.Location = new System.Drawing.Point(243, 6);
-			this.PreviousMessagesButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.PreviousMessagesButton.Margin = new System.Windows.Forms.Padding(4);
 			this.PreviousMessagesButton.Name = "PreviousMessagesButton";
 			this.PreviousMessagesButton.Size = new System.Drawing.Size(185, 25);
 			this.PreviousMessagesButton.TabIndex = 6;
@@ -159,11 +160,27 @@ namespace SoftEngChatClient
 			this.userNameLbl.TabIndex = 7;
 			this.userNameLbl.Text = "UserName";
 			// 
+			// logoutBtn
+			// 
+			this.logoutBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
+			this.logoutBtn.FlatAppearance.BorderSize = 0;
+			this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.logoutBtn.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.logoutBtn.Location = new System.Drawing.Point(64, 73);
+			this.logoutBtn.Name = "logoutBtn";
+			this.logoutBtn.Size = new System.Drawing.Size(87, 25);
+			this.logoutBtn.TabIndex = 100;
+			this.logoutBtn.Text = "Logout";
+			this.logoutBtn.UseVisualStyleBackColor = false;
+			this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
+			// 
 			// ChatWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1045, 506);
+			this.Controls.Add(this.logoutBtn);
 			this.Controls.Add(this.userNameLbl);
 			this.Controls.Add(this.PreviousMessagesButton);
 			this.Controls.Add(this.Toolbar);
@@ -172,7 +189,7 @@ namespace SoftEngChatClient
 			this.Controls.Add(this.SendButton);
 			this.Controls.Add(this.MessageBox);
 			this.Controls.Add(this.ChatBox);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "ChatWindow";
 			this.Text = "ChatWindow";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
@@ -196,5 +213,6 @@ namespace SoftEngChatClient
         private System.Windows.Forms.Button PreviousMessagesButton;
         public ListBox listBox1;
 		private Label userNameLbl;
+		private Button logoutBtn;
 	}
 }
