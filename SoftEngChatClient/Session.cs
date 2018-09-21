@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SoftEngChatClient
-{/*
+{
     class Session
     {
         private string sessionUser;
@@ -22,13 +22,13 @@ namespace SoftEngChatClient
 
             string[] userInfo = { sessionUser, userPassword };
 
-            if (checkRememberMe(saveUserToNextSession))
-                printRememberMeToFile(userInfo);
+            if (CheckRememberMe(saveUserToNextSession))
+                PrintRememberMeToFile(userInfo);
             else
-                printRememberMeToFile(overwrite);
+                PrintRememberMeToFile(overwrite);
         }
         
-        private bool checkRememberMe(bool remember)
+        private bool CheckRememberMe(bool remember)
         {
             if (remember == true)
                 return true;
@@ -36,9 +36,9 @@ namespace SoftEngChatClient
                 return false;
                 
         }
-        private void printRememberMeToFile(string[] userInfo)
+        private void PrintRememberMeToFile(string[] userInfo)
         {
-            saveToFile.readToFile(sessionSavePath, userInfo);
+            saveToFile.WriteToFile(sessionSavePath, userInfo);
         }
-    }*/
+    }
 }
