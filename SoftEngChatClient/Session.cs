@@ -8,34 +8,26 @@ namespace SoftEngChatClient
 {
     class Session
     {
-        public int sessionID { get; set; }
         private string sessionUser;
         private string userPassword;
-        private bool rememberMe;
-        public Session(string username, string password, bool saveInfo, int sessionCounter)
+        static string sessionSaveName = "SessionSave.txt";
+        public string sessionSavePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + sessionSaveName;
+        public string[] overwrite = { " " };
+        FileManager saveToFile;
+        public Session(string username, string password, bool saveUserToNextSession)
         {
-            sessionID = ++sessionCounter;
             sessionUser = username;
             userPassword = password;
-            rememberMe = saveInfo;
+            saveToFile = new FileManager();
 
-            if(openNewSession(sessionID, sessionUser))
-            {
-                if(checkRememberMe(rememberMe))
-                    printRememberMeToFile(sessionUser, userPassword);
+            string[] userInfo = { sessionUser, userPassword };
 
-                
-                // Gör saker
-            }
-                //terminate instance of Class
-            
-            
+            if (checkRememberMe(saveUserToNextSession))
+                printRememberMeToFile(userInfo);
+            else
+                printRememberMeToFile(overwrite);
         }
-        public bool openNewSession(int SID, string user)
-        {
-            //return getSessionAck(SID, user);
-            return true;
-        }
+        
         private bool checkRememberMe(bool remember)
         {
             if (remember == true)
@@ -44,11 +36,9 @@ namespace SoftEngChatClient
                 return false;
                 
         }
-        private void printRememberMeToFile(string user, string pass)
+        private void printRememberMeToFile(string[] userInfo)
         {
-            FileManager FM = new FileManager();
-            string[] userInfo = { user, pass };
-            FM.readToFile(userInfo);
+            saveToFile.readToFile(sessionSavePath, userInfo);
         }
     }
 }
