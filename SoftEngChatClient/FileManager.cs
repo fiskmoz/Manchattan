@@ -50,7 +50,8 @@ namespace SoftEngChatClient
 
             foreach (var textFromParamater in readObject)
             {
-                text += textFromParamater;
+                text += textFromParamater + ":";
+
             }
             encryptedString = cyptoMessage.EncryptString(text);
         
