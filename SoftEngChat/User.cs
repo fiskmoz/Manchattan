@@ -34,24 +34,4 @@ public class User
 		this.Firstname	= firstName;
 		this.LastName	= lastName;
 	}
-
-    /*
-    //Set key by byte array
-    public void SetKey(byte[] byteArrayKey)
-    {
-        this.key = Encoding.UTF8.GetString(byteArrayKey);
-    }
-
-    //Get key as byte array
-    public byte[] GetBytesKey()
-    {
-        return Encoding.UTF8.GetBytes(key);
-    }
-
-    public void GenerateKey()
-    {
-        AesManaged aes = new AesManaged();
-        aes.GenerateKey();
-        SetKey(aes.Key);
-    }*/
 }
