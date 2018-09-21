@@ -27,6 +27,7 @@ namespace SoftEngChatClient.Controller
         private LogCrypto logCrypto;
 
         private string username;
+        private string rememberMePassword;
 
         public List<string> messageList;
         private bool rememberMe;
@@ -207,7 +208,17 @@ namespace SoftEngChatClient.Controller
         {
             writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
 			SetUserName(loginWindow.getUsername());
+            if (rememberMe == true)
+            {
+                SetPassword(loginWindow.getPassword());
+            }
         }
+
+        private void SetPassword(string password)
+        {
+            rememberMePassword = password;
+        }
+
         private void cd_LoginExitWindow(object sender, EventArgs e)
         {
             Application.Exit();
@@ -242,7 +253,7 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
 
-           // Session session = new Session(this.username, "123", rememberMe);
+            Session session = new Session(this.username, rememberMePassword, rememberMe);
 
             var str = chatWindow.getChatBox();
             var byteArray = logCrypto.EncryptString(str);
