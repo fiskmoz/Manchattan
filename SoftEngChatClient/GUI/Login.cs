@@ -14,7 +14,6 @@ namespace SoftEngChatClient
 {
     public partial class Login : Form
     {
-
         public event EventHandler LoginButtonClick;
         public event EventHandler RegisterButtonClick;
         public event EventHandler ExitButtonClicked;
@@ -35,14 +34,12 @@ namespace SoftEngChatClient
         }
             
         // Creates the ChatWindow when Login button is accepted. 
-        // NOTE: Should be a login check so user is accually allowed to login.
         private void LoginButton_Click(object sender, EventArgs e)
         {
             LoginButtonClick(this, e);
         }
 
         // Creates the ChatWindow when Login button is accepted. 
-        // NOTE: Should be a login check so user is accually allowed to login.
         private void Login_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

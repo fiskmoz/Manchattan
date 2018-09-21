@@ -121,7 +121,7 @@ namespace SoftEngChatClient.Controller
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
 			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
         }
 
@@ -164,6 +164,7 @@ namespace SoftEngChatClient.Controller
         private void cd_TryLogin(object sender, EventArgs e)
         {
             writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
+			SetUserName(loginWindow.getUsername());
         }
         private void cd_LoginExitWindow(object sender, EventArgs e)
         {
@@ -186,8 +187,8 @@ namespace SoftEngChatClient.Controller
             if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
             {
                 {
-                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.getTextMessageBox());
-                    chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
+                    chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
                     chatWindow.clearMessageBox();
                 }
             }
@@ -223,17 +224,19 @@ namespace SoftEngChatClient.Controller
             }
         }
 
-        public void AddNewIndividualChat(string receiver)
+        public void AddNewIndividualChat(string sender)
         {
+            bool found = false;
             foreach (IndividualChatDriver icd in individualChatDrivers)
             {
-                if (icd.getUsername() == username)
+                if (icd.getSender() == sender)
                 {
-                    icd.displayWindow();
-                    return;
+                    found = true;
+                    //icd.displayWindow();
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, receiver));
+            if(found == false)
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender));
         }
         public void UpdateOnlineList(string str)
         {
@@ -271,5 +274,26 @@ namespace SoftEngChatClient.Controller
         {
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
+
+        public void IndividualChatPrint(string sender, string message)
+        {
+            foreach (var icd in individualChatDrivers)
+            {
+                if (sender == icd.getSender())
+                {
+                    icd.ReceiveMessage(message);
+                }
+            }
+        }
+
+        public void SetUserName(string name)
+		{
+			if (chatWindow.InvokeRequired)
+			{
+				chatWindow.Invoke(new Action<string>(chatWindow.SetUserName), name);
+				return;
+			}
+			chatWindow.SetUserName(name);
+		}
     }
 }

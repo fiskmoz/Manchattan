@@ -19,7 +19,7 @@ namespace SoftEngChatClient
         public event EventHandler chatWindowClosed;
         public event KeyEventHandler messageBoxKeyReleased;
         public event EventHandler previousMessageButtonClick;
-        public event EventHandler ChatWindowLoad;
+        public event EventHandler chatWindowLoad;
         public event EventHandler usernamePressed;
 
         public ChatWindow()
@@ -48,7 +48,7 @@ namespace SoftEngChatClient
 
         private void ChatWindow_Load(object sender, EventArgs e)
         {
-            ChatWindowLoad(this, e);
+            chatWindowLoad(this, e);
         }
 
         public void clearMessageBox()
@@ -64,7 +64,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<List<string>, string>(AppendTextBox), new object[] { L, value });
                 return;
             }
-            ChatBox.AppendText(value + System.Environment.NewLine);
+            ChatBox.AppendText(value);
         }
         public void AppendTextBox(string value)
         {
@@ -73,7 +73,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
                 return;
             }
-            ChatBox.AppendText(value + System.Environment.NewLine);
+            ChatBox.AppendText(value + System.Environment.NewLine );
         }
 
         //Returnerar skrivfältet
@@ -96,6 +96,20 @@ namespace SoftEngChatClient
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             usernamePressed(this, e);
+        }
+
+		public void SetUserName(string name)
+		{
+			userNameLbl.Text = name;
+		}
+
+        public string removeEnterWhenSending()
+        {
+            if(MessageBox.Text.Contains(System.Environment.NewLine))
+            {
+                return MessageBox.Text.Remove(MessageBox.Text.IndexOf(System.Environment.NewLine));
+            }
+            return MessageBox.Text;
         }
     }
 }

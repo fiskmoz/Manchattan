@@ -41,11 +41,9 @@ namespace SoftEngChatClient.Model.SSLCommunication
             if(inc[1] == '1')
             {
 				driver.CloseRegWindow();
-                // REGISTRATION SUCCESS, DISPLAY?
             }
             else
             {
-				// REGISTRATION FAILED, DISPLAY?
 				driver.RegistrationRejected();
             }
         }
@@ -61,8 +59,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
                 driver.ChatWindowPrint(sender,message);
             }
             else
-            {
+            {   
                 driver.AddNewIndividualChat(sender);
+                System.Threading.Thread.Sleep(100);
+                driver.IndividualChatPrint(sender, message);
             }
         }
 
@@ -70,12 +70,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
         {
             if(inc[1] == '1')
             {
-                // LOGIN SUCCESS, CALLING LOGIN FUNCTION
                 driver.Login(inc);
             }
             else
             {
-                // DISPLAY LOGIN FAILED.
             }
         }
 
