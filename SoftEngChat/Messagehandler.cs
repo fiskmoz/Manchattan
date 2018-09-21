@@ -110,7 +110,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
-            if(server.userManager.validateUser(username, password))
+            if((server.userManager.validateUser(username, password)) && server.IsUserOnline(username)==false)
             {
                 userName = username;
                 client.updateUserInfo(username, "emailPH", password);

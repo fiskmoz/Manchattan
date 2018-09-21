@@ -72,6 +72,18 @@ namespace SoftEngChat.Model.SSLCommunication
                 client.writer.WriteOnlineList(str.ToString());
             }
         }
+        
+        public bool IsUserOnline(string username)
+        {
+            foreach (var client in clientList)
+            {
+                if (client.getUserName()==username)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 		//Send messages to all clients (IRC) but sender.
 		//IN: Username of client who sent message and the actual message.
