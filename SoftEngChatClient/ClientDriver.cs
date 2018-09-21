@@ -187,8 +187,8 @@ namespace SoftEngChatClient.Controller
             if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
             {
                 {
-                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.getTextMessageBox());
-                    chatWindow.AppendTextBox("[ME] : " + chatWindow.getTextMessageBox());
+                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
+                    chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
                     chatWindow.clearMessageBox();
                 }
             }

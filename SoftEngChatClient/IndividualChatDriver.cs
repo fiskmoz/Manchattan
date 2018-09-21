@@ -46,8 +46,8 @@ namespace SoftEngChatClient
 
         private void icd_SendButtonClicked(object sender, EventArgs e)
         {
-            writer.WriteClient(MessageType.client, username, receiver, window.getTextMessageBox());
-            window.AppendTextBox("[ME] : " + window.getTextMessageBox());
+            writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
+            window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());
             window.clearMessageBox();
         }
 
