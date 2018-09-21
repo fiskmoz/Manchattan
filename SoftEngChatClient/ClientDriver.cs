@@ -141,6 +141,7 @@ namespace SoftEngChatClient.Controller
 
             if (loginCredentials == "")
             {
+                loginWindow.rememberMeCheckBox.Checked = false;
                 return;
             }
             string[] userInfo;
