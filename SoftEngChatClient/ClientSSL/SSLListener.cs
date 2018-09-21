@@ -30,6 +30,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		{
 			listeningThread.Start();
 		}
+
 		//Start to listen for incomming messages.
 		//Raises event when message arrives, if error: event message == 0
 		private void Listen()
@@ -77,9 +78,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			{
 				int bytesRead = stream.Read(buffer, 0, buffer.Length);
 			}
-#pragma warning disable CS0168 // Variable is declared but never used
-			catch (Exception e)
-#pragma warning restore CS0168 // Variable is declared but never used
+			catch (Exception)
 			{
 				RaiseEvent(null);
 				buffer = null;

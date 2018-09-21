@@ -147,6 +147,5 @@ namespace SoftEngChatClient
             }
             return plaintext;
         }
-
     }
 }
