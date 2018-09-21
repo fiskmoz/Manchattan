@@ -24,7 +24,7 @@ namespace SoftEngChat.Model.SSLCommunication
             listeningThread.Start();
         }
 
-		//Kills listening thread.
+
 		public void StopListen()
 		{
 			stopListen = true;
@@ -65,15 +65,15 @@ namespace SoftEngChat.Model.SSLCommunication
                     
                 }
                 if (stopListen) break;
+				Thread.Sleep(250);
             }
 		}
+
+
 
 		//Eventhandling
 		public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
 		public event EventHandler IncommingMessage;
-
-		//Raises IncommingMessage event.
-		//IN: Byte array containing the message.
 		public void RaiseEvent(string incomming)
 		{
 			IncommingMessage message = new IncommingMessage();
@@ -82,7 +82,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		}
 	}
 
-	//IncommingMessage Event argument declaration. Needed to send let EventHandler catch message.
+	//IncommingMessage Event argument declaration.
 	class IncommingMessage : EventArgs
 	{
 		public string Message { get; set; }
