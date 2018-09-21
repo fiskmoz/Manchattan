@@ -14,13 +14,13 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	// Establishes encrypted (SSL) connection with server.
 	class SSLConnector
 	{
-		private TcpClient client;
+		public TcpClient client;
 		private NetworkStream netStream;
 		private const int RECONNECT_TIME = 1000;
 		private const int MAX_RECONNECT_TRIES = 10;
 		private string serverIP;
 		private int serverPort;
-		public SslStream SslStream { get; private set; }
+		public SslStream SslStream { get; set; }
 
 		public SSLConnector(string ip, int port)
 		{
@@ -69,6 +69,24 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		{
 			//Since cert. is self-signed standard validation code won't accept it.
 			return true;
+		}
+
+
+
+
+		public void Dispose()
+		{
+			if (SslStream != null)
+			{
+				SslStream.Dispose();
+				SslStream = null;
+			}
+
+			if (client != null)
+			{
+				client.Close();
+				client = null;
+			}
 		}
 	}
 }

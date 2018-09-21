@@ -131,26 +131,39 @@ namespace SoftEngChatClient.Controller
 			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
         }
 
+
+
+
 		private void cd_HandleLogout(object sender, EventArgs e)
 		{
-			writer.WriteLogout(MessageType.logout);
-			connector.SslStream.Dispose();
+			CloseCurrentConnection();
 			chatWindow.Hide();
 			
 			loginWindow.EnterEmail.Text = "";
 			loginWindow.EnterPassword.Text = "";
-			
+
+			OpenNewConnection();
 			Session session = new Session(username, rememberMePassword, rememberMe);
+
+			loginWindow.Show();
+		}
+
+		private void CloseCurrentConnection()
+		{
+			writer.WriteLogout(MessageType.logout);
+			streamListener.StopListen();
+			connector.Dispose();
+		}
+		private void OpenNewConnection()
+		{
 			connector.Connect();
 			streamListener = new SSLListener(connector.SslStream);
 			writer = new SSLWriter(connector.SslStream);
 
-			SetupListeners();
-
 			streamListener.StartListen();
-
-			loginWindow.Show();
 		}
+
+
 		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
             FileManager fileManager = new FileManager();
