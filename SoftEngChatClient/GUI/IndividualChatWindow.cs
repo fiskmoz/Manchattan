@@ -15,7 +15,7 @@ namespace SoftEngChatClient
         public event EventHandler IndividualChatWindowLoaded;
         public event KeyEventHandler IndividualMessageBoxReleased;
         public event EventHandler IndividualSendButtonClicked;
-        public event EventHandler IndivudualFormClosed;
+        public event FormClosingEventHandler IndivudualFormClosed;
 
         public IndividualChatWindow(string username)
         {
@@ -36,6 +36,11 @@ namespace SoftEngChatClient
         private void IndividualMessageBox_KeyUp(object sender, KeyEventArgs e)
         {
             IndividualMessageBoxReleased(this, e);
+        }
+
+        private void IndividualChatWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IndivudualFormClosed(this, e);
         }
 
         public void clearMessageBox()
@@ -78,11 +83,6 @@ namespace SoftEngChatClient
         {
             return this.UsernameLabel.Text;
 
-        }
-
-        private void IndividualChatWindow_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            IndivudualFormClosed(this, e);
         }
 
         public string removeEnterWhenSending()

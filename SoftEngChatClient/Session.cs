@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SoftEngChatClient
-{
+{/*
     class Session
     {
         private string sessionUser;
@@ -40,5 +40,5 @@ namespace SoftEngChatClient
         {
             saveToFile.readToFile(sessionSavePath, userInfo);
         }
-    }
+    }*/
 }

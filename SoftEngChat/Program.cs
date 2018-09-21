@@ -14,22 +14,8 @@ namespace SoftEngChat
     {
         public static void Main(string[] args)
         {
-           
-
-           // DatabaseManegement DBtest = new DatabaseManegement();
-			/*
-            User u = new User("Anders", "mail", "112");
-			*/
-        
-            //UserManager um = new UserManager();
-            //Console.WriteLine(um.validateUser(u.name, u.password));
+            //Starting the server that runs the whole program
             SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
-
-            
-
-
-            //ChatServer server = new ChatServer(IPAddress.Loopback, 5300);
-
         }
     }
 }

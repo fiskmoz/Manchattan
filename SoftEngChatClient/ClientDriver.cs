@@ -136,9 +136,11 @@ namespace SoftEngChatClient.Controller
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
         {
             var index = chatWindow.listBox1.SelectedItem;
-            string username = chatWindow.listBox1.GetItemText(index);
-
-            AddNewIndividualChat(username);
+            string receiver = chatWindow.listBox1.GetItemText(index);
+            if(receiver != username)
+            {
+                AddNewIndividualChat(receiver);
+            }
         }
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
@@ -189,14 +191,13 @@ namespace SoftEngChatClient.Controller
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
-                    chatWindow.clearMessageBox();
                 }
             }
             else
             {
                 chatWindow.AppendTextBox("[Program] Don´t spam");
             }
-           
+            chatWindow.clearMessageBox();
         }
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
@@ -232,7 +233,10 @@ namespace SoftEngChatClient.Controller
                 if (icd.getSender() == sender)
                 {
                     found = true;
-                    //icd.displayWindow();
+                    if(!icd.isWindowVisible())
+                    {
+                        icd.displayWindow();
+                    }
                 }
             }
             if(found == false)
