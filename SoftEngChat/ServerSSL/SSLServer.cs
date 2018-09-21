@@ -119,6 +119,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		internal void RemoveClient(SSLClient client)
 		{
 			clientList.Remove(client);
+            SendOnlineListToAllClient();
 		}
 	}
 }

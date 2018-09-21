@@ -136,9 +136,9 @@ namespace SoftEngChatClient.Controller
         private void cd_HandleUsernamePressed(object sender, EventArgs e)
         {
             var index = chatWindow.listBox1.SelectedItem;
-            string username = chatWindow.listBox1.GetItemText(index);
+            string receiver = chatWindow.listBox1.GetItemText(index);
 
-            AddNewIndividualChat(username);
+            AddNewIndividualChat(receiver);
         }
         private void cd_ChatWindowLoaded(object sender, EventArgs e)
         {
