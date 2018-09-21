@@ -41,7 +41,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void WriteOnlineList(string str)
         {
-            stream.Write(Encoding.UTF8.GetBytes(str));
+				stream.Write(Encoding.UTF8.GetBytes(str));
         }
 	}
 }

@@ -39,9 +39,9 @@ namespace SoftEngChatClient.Controller
         [STAThread] // <- Makes win-forms to run in own thread!
         public void Run() //Run the program
         {
-            streamListener.StartListen(); //Start to listen for incomming messages.
-            Application.Run(loginWindow);
-        }
+			streamListener.StartListen();
+			Application.Run(loginWindow);
+		}
 
 		internal void CloseRegWindow()
 		{
@@ -94,6 +94,7 @@ namespace SoftEngChatClient.Controller
         {
 
             connector = new SSLConnector(IP, PORT); //Connect to server!
+			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
             streamListener = new SSLListener(connector.SslStream);
             messagehandler = new Messagehandler(this); //Needs to be changed, see Readme in MessegeHandler class
@@ -132,9 +133,24 @@ namespace SoftEngChatClient.Controller
 
 		private void cd_HandleLogout(object sender, EventArgs e)
 		{
+			writer.WriteLogout(MessageType.logout);
+			connector.SslStream.Dispose();
+			chatWindow.Hide();
 			
-		}
+			loginWindow.EnterEmail.Text = "";
+			loginWindow.EnterPassword.Text = "";
+			
+			Session session = new Session(username, rememberMePassword, rememberMe);
+			connector.Connect();
+			streamListener = new SSLListener(connector.SslStream);
+			writer = new SSLWriter(connector.SslStream);
 
+			SetupListeners();
+
+			streamListener.StartListen();
+
+			loginWindow.Show();
+		}
 		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
             FileManager fileManager = new FileManager();

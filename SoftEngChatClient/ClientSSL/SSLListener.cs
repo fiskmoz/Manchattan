@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		{
 			this.stream = stream;
 			stopListen = false;
-			listeningThread = new Thread(Listen);
+		//	listeningThread = new Thread(Listen);
 		}
 
 		public void StopListen()
@@ -28,6 +28,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		public void StartListen()
 		{
+			listeningThread = new Thread(Listen);
 			listeningThread.Start();
 		}
 
@@ -92,8 +93,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		private void RaiseEvent(string incomming)
 		{
-			IncommingMessage message = new IncommingMessage();
-			message.Message = incomming;
+			IncommingMessage message = new IncommingMessage(incomming);
+			//message.Message = incomming;
 			IncommingMessage(this, message);
 		}
 	}
@@ -101,5 +102,9 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	class IncommingMessage : EventArgs
 	{
 		public string Message { get; set; }
+		public IncommingMessage(string message)
+		{
+			Message = message;
+		}
 	}
 }

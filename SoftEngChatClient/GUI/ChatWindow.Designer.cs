@@ -167,9 +167,9 @@ namespace SoftEngChatClient
 			this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.logoutBtn.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.logoutBtn.Location = new System.Drawing.Point(64, 73);
+			this.logoutBtn.Location = new System.Drawing.Point(63, 64);
 			this.logoutBtn.Name = "logoutBtn";
-			this.logoutBtn.Size = new System.Drawing.Size(87, 25);
+			this.logoutBtn.Size = new System.Drawing.Size(87, 36);
 			this.logoutBtn.TabIndex = 100;
 			this.logoutBtn.Text = "Logout";
 			this.logoutBtn.UseVisualStyleBackColor = false;
