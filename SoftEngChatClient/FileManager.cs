@@ -23,9 +23,10 @@ namespace SoftEngChatClient
             cyptoMessage.SetNewKey(array);
         }
 
+
         
         //Encrypt and read to file.
-        public void readToFile(string filePath, string[] readObject)
+        public void WriteToFile(string filePath, string[] readObject)
         {
             string text = "";
             byte[] encryptedString;
