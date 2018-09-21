@@ -94,7 +94,7 @@ namespace SoftEngChatClient
 
         public void displayWindow()
         {
-            window.ShowDialog();
+            new Thread(() => window.ShowDialog()).Start();
         }
 
         public void ReceiveMessage(string message)
