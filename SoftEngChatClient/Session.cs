@@ -46,7 +46,9 @@ namespace SoftEngChatClient
         }
         private void printRememberMeToFile(string user, string pass)
         {
-            //print to file
+            FileManager FM = new FileManager();
+            string[] userInfo = { user, pass };
+            FM.readToFile(userInfo);
         }
     }
 }
