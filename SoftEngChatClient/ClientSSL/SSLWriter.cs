@@ -39,36 +39,6 @@ namespace SoftEngChatClient.Model.SSLCommunication
             string outgoing = ((int)type).ToString() + ":1";
             SendMessage(outgoing);
         }
-        /*
-		public void Write(string userName, string password, MessageType login)
-		{
-            string outgoing = BuildMessage(login, userName , password);
-            SendMessage(outgoing);
-		}
-
-		public void Write(string message, MessageType type)
-		{
-			string outgoing = BuildMessage(type, message);
-			SendMessage(outgoing);
-		}
-
-		public void Write(string message, string client)
-		{
-			string outgoing = BuildMessage(MessageType.client, client, message);
-			SendMessage(outgoing);
-		}
-
-		private string BuildMessage(MessageType type, string client, string message)
-		{
-			string outgoing = ((int)type).ToString() + ":" + client + ":" + message;
-			return outgoing;
-		}
-
-		private string BuildMessage(MessageType type, string message)
-		{
-			string outgoing = ((int)type).ToString() + ":" + message;
-			return outgoing;
-		}*/
 
 		private void SendMessage(string outgoing)
 		{

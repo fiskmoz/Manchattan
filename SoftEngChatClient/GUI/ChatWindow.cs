@@ -19,7 +19,7 @@ namespace SoftEngChatClient
         public event EventHandler chatWindowClosed;
         public event KeyEventHandler messageBoxKeyReleased;
         public event EventHandler previousMessageButtonClick;
-        public event EventHandler ChatWindowLoad;
+        public event EventHandler chatWindowLoad;
         public event EventHandler usernamePressed;
 
         public ChatWindow()
@@ -48,7 +48,7 @@ namespace SoftEngChatClient
 
         private void ChatWindow_Load(object sender, EventArgs e)
         {
-            ChatWindowLoad(this, e);
+            chatWindowLoad(this, e);
         }
 
         public void clearMessageBox()

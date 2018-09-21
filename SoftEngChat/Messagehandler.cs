@@ -52,7 +52,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine("Message arrived; Logout Message:");
                     Console.WriteLine(incomming);
 					HandleLogout();
-
 					break;
                 case '6':
                     Console.WriteLine("Message arrived; OnlineList:");

@@ -8,7 +8,6 @@ namespace SoftEngChat
 {
     class UserManager
     {
-
         private const string FILE_NAME = "DB.txt";
 		static string filePath;
         private List<User> userList;
@@ -35,9 +34,7 @@ namespace SoftEngChat
                     userList.Remove(user);
                 }
             }
-
             db.DBwrite(userList,filePath);
-
             return userList;
         }
 
@@ -54,7 +51,6 @@ namespace SoftEngChat
                     Console.WriteLine(User.UserName + User.Password);
                     return true;
                 }
-                    
             }
             Console.WriteLine("returning false");
             return false;

@@ -121,7 +121,7 @@ namespace SoftEngChatClient.Controller
 			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
 			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-			chatWindow.ChatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
         }
 
