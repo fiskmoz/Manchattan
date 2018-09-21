@@ -106,5 +106,10 @@ namespace SoftEngChatClient
         {
             window.AppendTextBox("["+receiver+"] : "+message);
         }
+
+        public bool isWindowVisible()
+        {
+            return window.Visible;
+        }
     }
 }

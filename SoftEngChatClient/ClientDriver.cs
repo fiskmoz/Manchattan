@@ -233,7 +233,10 @@ namespace SoftEngChatClient.Controller
                 if (icd.getSender() == sender)
                 {
                     found = true;
-                    icd.displayWindow();
+                    if(!icd.isWindowVisible())
+                    {
+                        icd.displayWindow();
+                    }
                 }
             }
             if(found == false)
