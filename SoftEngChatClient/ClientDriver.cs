@@ -231,7 +231,7 @@ namespace SoftEngChatClient.Controller
                 if (icd.getSender() == sender)
                 {
                     found = true;
-                    //icd.displayWindow();
+                    icd.displayWindow();
                 }
             }
             if(found == false)
