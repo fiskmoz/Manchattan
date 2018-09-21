@@ -12,7 +12,7 @@ namespace SoftEngChatClient
         private string userPassword;
         static string sessionSaveName = "SessionSave.txt";
         public string sessionSavePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + sessionSaveName;
-        public string[] overwrite = { " " };
+        public string[] overwrite = { "" };
         FileManager saveToFile;
         public Session(string username, string password, bool saveUserToNextSession)
         {
