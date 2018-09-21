@@ -9,9 +9,7 @@ namespace SoftEngChatClient
 {
     class FileManager
     {
-
         private LogCrypto cyptoMessage;
-        private string text;
 
        public FileManager()
         {
