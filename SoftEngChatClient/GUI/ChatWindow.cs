@@ -64,7 +64,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<List<string>, string>(AppendTextBox), new object[] { L, value });
                 return;
             }
-            ChatBox.AppendText(value + System.Environment.NewLine);
+            ChatBox.AppendText(value);
         }
         public void AppendTextBox(string value)
         {
@@ -73,7 +73,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
                 return;
             }
-            ChatBox.AppendText(value + System.Environment.NewLine);
+            ChatBox.AppendText(value + System.Environment.NewLine );
         }
 
         //Returnerar skrivfältet
@@ -102,5 +102,14 @@ namespace SoftEngChatClient
 		{
 			userNameLbl.Text = name;
 		}
+
+        public string removeEnterWhenSending()
+        {
+            if(MessageBox.Text.Contains(System.Environment.NewLine))
+            {
+                return MessageBox.Text.Remove(MessageBox.Text.IndexOf(System.Environment.NewLine));
+            }
+            return MessageBox.Text;
+        }
     }
 }

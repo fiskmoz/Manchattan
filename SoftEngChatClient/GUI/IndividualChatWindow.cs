@@ -51,7 +51,7 @@ namespace SoftEngChatClient
                 this.Invoke(new Action<List<string>, string>(AppendTextBox), new object[] { L, value });
                 return;
             }
-            IndividualChatBox.AppendText(value + System.Environment.NewLine);
+            IndividualChatBox.AppendText(value);
         }
         public void AppendTextBox(string value)
         {
@@ -83,6 +83,15 @@ namespace SoftEngChatClient
         private void IndividualChatWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             IndivudualFormClosed(this, e);
+        }
+
+        public string removeEnterWhenSending()
+        {
+            if (IndividualMessageBox.Text.Contains(System.Environment.NewLine))
+            {
+                return IndividualMessageBox.Text.Remove(IndividualMessageBox.Text.IndexOf(System.Environment.NewLine));
+            }
+            return IndividualMessageBox.Text;
         }
     }
 }
