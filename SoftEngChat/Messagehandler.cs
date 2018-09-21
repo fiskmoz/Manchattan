@@ -52,7 +52,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine("Message arrived; Logout Message:");
                     Console.WriteLine(incomming);
 					HandleLogout();
-
 					break;
                 case '6':
                     Console.WriteLine("Message arrived; OnlineList:");
@@ -110,7 +109,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				i++;
 			}
 
-            if(server.userManager.validateUser(username, password))
+            if((server.userManager.validateUser(username, password)) && server.IsUserOnline(username)==false)
             {
                 userName = username;
                 client.updateUserInfo(username, "emailPH", password);

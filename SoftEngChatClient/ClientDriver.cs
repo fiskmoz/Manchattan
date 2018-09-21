@@ -189,14 +189,13 @@ namespace SoftEngChatClient.Controller
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
-                    chatWindow.clearMessageBox();
                 }
             }
             else
             {
                 chatWindow.AppendTextBox("[Program] Don´t spam");
             }
-           
+            chatWindow.clearMessageBox();
         }
         private void cd_ChatWindowClosed(object sender, EventArgs e)
         {
