@@ -18,6 +18,8 @@ namespace SoftEngChat.Model.SSLCommunication
 		private List<SSLClient> clientList;
 		private TcpListener serverListener;
         public UserManager userManager;
+        public int sessionIDCounter = 0;
+
 
 		public SSLServer(IPAddress ip, int port)
 		{
@@ -50,7 +52,7 @@ namespace SoftEngChat.Model.SSLCommunication
 					client.Close();
 					Console.ReadLine();
 				}
-				clientList.Add(new SSLClient(ssl, this)); //Client added to list!
+				clientList.Add(new SSLClient(ssl, this, ++sessionIDCounter)); //Client added to list!
 				Console.WriteLine("Client connected!");
 			}
 		}
