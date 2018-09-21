@@ -93,7 +93,7 @@
             this.Controls.Add(this.IndividualChatBox);
             this.Name = "IndividualChatWindow";
             this.Text = "IndividualChatWindow";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IndividualChatWindow_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndividualChatWindow_FormClosing);
             this.Load += new System.EventHandler(this.IndividualChatWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

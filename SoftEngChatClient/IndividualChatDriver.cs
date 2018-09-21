@@ -26,6 +26,7 @@ namespace SoftEngChatClient
             SetupListners();
             writer = sllWriter;
             new Thread(() => window.ShowDialog()).Start();
+            
         }
 
         private void SetupListners()
@@ -34,7 +35,7 @@ namespace SoftEngChatClient
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
-            window.IndivudualFormClosed += new EventHandler(icd_WindowClosed);
+            window.IndivudualFormClosed += new FormClosingEventHandler(icd_WindowClosed);
             window.IndividualSendButtonClicked += new EventHandler(icd_SendButtonClicked);
             window.IndividualMessageBoxReleased += new KeyEventHandler(icd_EnterKeyReleased);
             window.IndividualChatWindowLoaded += new EventHandler(icd_WindowLoaded);
@@ -77,9 +78,13 @@ namespace SoftEngChatClient
 
         }
 
-        private void icd_WindowClosed(object obj, EventArgs e)
+        private void icd_WindowClosed(object obj, FormClosingEventArgs e)
         {
-
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                window.Hide();
+            }
         }
 
         public string getUsername()
@@ -94,7 +99,7 @@ namespace SoftEngChatClient
 
         public void displayWindow()
         {
-            new Thread(() => window.ShowDialog()).Start();
+            window.ShowDialog();
         }
 
         public void ReceiveMessage(string message)

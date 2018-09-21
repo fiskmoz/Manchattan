@@ -41,7 +41,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
             while (true)
             {
-                System.Threading.Thread.Sleep(250);
+                System.Threading.Thread.Sleep(50);
                 int bytesRead = 0;
                 try
                 {
