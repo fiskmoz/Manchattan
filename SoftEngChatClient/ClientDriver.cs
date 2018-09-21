@@ -127,10 +127,15 @@ namespace SoftEngChatClient.Controller
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
             chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-            
+			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
         }
 
-        private void cd_LoginIsLoaded(object sender, EventArgs e)
+		private void cd_HandleLogout(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
             FileManager fileManager = new FileManager();
             string loginCredentials;
