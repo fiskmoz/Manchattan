@@ -130,16 +130,17 @@ namespace SoftEngChatClient.Controller
         }
 
 
-        private void cd_WindowClosing(object obj, FormClosingEventArgs e)
+        private void cd_WindowClosed(object obj, FormClosedEventArgs e)
         {
             var str = chatWindow.getChatBox();
             var byteArray = logCrypto.EncryptString(str);
             var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
             fs.Write(byteArray, 0, byteArray.Length);
             fs.Close();
-            if (e.CloseReason == CloseReason.UserClosing && loggingOut == false)
+            if (loggingOut == false)
             {
                 writer.WriteLogout(MessageType.logout);
+                Thread.Sleep(1000);
                 Application.Exit();
                 System.Environment.Exit(1);
             }
@@ -181,7 +182,7 @@ namespace SoftEngChatClient.Controller
 			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
 			chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
 			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
-			chatWindow.formClosing += new FormClosingEventHandler(cd_WindowClosing);
+			chatWindow.formClose += new FormClosedEventHandler(cd_WindowClosed);
 		}
 
 		private void cd_LoginIsLoaded(object sender, EventArgs e)

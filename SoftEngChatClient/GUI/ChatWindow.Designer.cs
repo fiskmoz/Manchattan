@@ -68,7 +68,7 @@ namespace SoftEngChatClient
             this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.SendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.SendButton.Font = new System.Drawing.Font("Rockwell Extra Bold", 14F, System.Drawing.FontStyle.Bold);
+            this.SendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.SendButton.ForeColor = System.Drawing.Color.White;
             this.SendButton.Location = new System.Drawing.Point(656, 431);
             this.SendButton.Name = "SendButton";
@@ -82,14 +82,14 @@ namespace SoftEngChatClient
             // 
             this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.Font = new System.Drawing.Font("Rockwell Extra Bold", 14F, System.Drawing.FontStyle.Bold);
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.listBox1.ForeColor = System.Drawing.Color.White;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 22;
+            this.listBox1.ItemHeight = 24;
             this.listBox1.Location = new System.Drawing.Point(2, 34);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(199, 418);
+            this.listBox1.Size = new System.Drawing.Size(199, 408);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -124,12 +124,12 @@ namespace SoftEngChatClient
             // 
             this.userNameLbl.AutoSize = true;
             this.userNameLbl.BackColor = System.Drawing.Color.Transparent;
-            this.userNameLbl.Font = new System.Drawing.Font("Rockwell Extra Bold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameLbl.ForeColor = System.Drawing.Color.SteelBlue;
             this.userNameLbl.Location = new System.Drawing.Point(24, 15);
             this.userNameLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.userNameLbl.Name = "userNameLbl";
-            this.userNameLbl.Size = new System.Drawing.Size(160, 28);
+            this.userNameLbl.Size = new System.Drawing.Size(137, 29);
             this.userNameLbl.TabIndex = 7;
             this.userNameLbl.Text = "UserName";
             // 
@@ -153,11 +153,11 @@ namespace SoftEngChatClient
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Rockwell Extra Bold", 16F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label1.Location = new System.Drawing.Point(451, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 26);
+            this.label1.Size = new System.Drawing.Size(138, 26);
             this.label1.TabIndex = 101;
             this.label1.Text = "Global Chat";
             // 
@@ -178,7 +178,7 @@ namespace SoftEngChatClient
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(8, 55);
             this.panel1.Name = "panel1";
@@ -190,7 +190,7 @@ namespace SoftEngChatClient
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(65, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 19);
+            this.label3.Size = new System.Drawing.Size(101, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "Active Chat";
             // 
@@ -208,10 +208,10 @@ namespace SoftEngChatClient
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label2.Location = new System.Drawing.Point(47, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 19);
+            this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Contacts";
             // 
@@ -239,6 +239,7 @@ namespace SoftEngChatClient
             this.Name = "ChatWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.ChatWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
