@@ -67,6 +67,12 @@ namespace SoftEngChatClient
             ExitButtonClicked(this, e);
         }
 
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+            System.Environment.Exit(1);
+        }
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             CheckButtonChanged(sender, e);

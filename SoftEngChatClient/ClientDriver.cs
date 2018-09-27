@@ -137,6 +137,7 @@ namespace SoftEngChatClient.Controller
             var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
             fs.Write(byteArray, 0, byteArray.Length);
             fs.Close();
+            Session session = new Session(username, rememberMePassword, rememberMe);
             if (loggingOut == false)
             {
                 writer.WriteLogout(MessageType.logout);
@@ -144,7 +145,6 @@ namespace SoftEngChatClient.Controller
                 Application.Exit();
                 System.Environment.Exit(1);
             }
-            Session session = new Session(username, rememberMePassword, rememberMe);
         }
 
         private void cd_HandleLogout(object sender, EventArgs e)
@@ -158,7 +158,8 @@ namespace SoftEngChatClient.Controller
 		private void CloseCurrentSession()
 		{
 			loggingOut = true;
-			chatWindow.Close();
+            cd_WindowClosed(this, new FormClosedEventArgs(CloseReason.None));
+            chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
             loginWindow.resetLoginFields();
 			Thread.Sleep(2000);
