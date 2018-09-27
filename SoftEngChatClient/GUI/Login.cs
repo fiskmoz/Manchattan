@@ -79,12 +79,13 @@ namespace SoftEngChatClient
 
         private void EnterEmail_TextChanged(object sender, EventArgs e)
         {
-
+            LoginButtonEnabled();
         }
 
         private void EnterEmail_Enter(object sender, EventArgs e)
         {
-            if(EnterEmail.Text == "Username" || EnterEmail.ForeColor == Color.Gray)
+            LoginButtonEnabled();
+            if (EnterEmail.Text == "Username" || EnterEmail.ForeColor == Color.Gray)
             {
                 EnterEmail.Text = "";
                 EnterEmail.ForeColor = Color.White;
@@ -99,7 +100,8 @@ namespace SoftEngChatClient
 
         private void EnterEmail_Leave(object sender, EventArgs e)
         {
-            if(EnterEmail.Text == "")
+            LoginButtonEnabled();
+            if (EnterEmail.Text == "")
             {
                 EnterEmail.Text = "Username";
                 EnterEmail.ForeColor = Color.Gray;
@@ -108,17 +110,20 @@ namespace SoftEngChatClient
 
         private void EnterPassword_Enter(object sender, EventArgs e)
         {
-            if(EnterPassword.Text == "Password" || EnterPassword.ForeColor == Color.Gray)
+            LoginButtonEnabled();
+            if (EnterPassword.Text == "Password" || EnterPassword.ForeColor == Color.Gray)
             {
                 EnterPassword.Text = "";
                 EnterPassword.PasswordChar = '*';
                 EnterPassword.ForeColor = Color.White;
 
             }
+            
         }
 
         private void EnterPassword_Leave(object sender, EventArgs e)
         {
+            LoginButtonEnabled();
             if (EnterPassword.Text == "")
             {
                 EnterPassword.Text = "Password";
@@ -126,6 +131,23 @@ namespace SoftEngChatClient
                 EnterPassword.ForeColor = Color.Gray;
 
             }
+        }
+        private void LoginButtonEnabled()
+        {
+            if ((String.IsNullOrWhiteSpace(EnterEmail.Text) || EnterEmail.Text == "Username") || (String.IsNullOrWhiteSpace(EnterPassword.Text) || EnterPassword.Text == "Password"))
+            {
+                LoginButton.Enabled = false;
+                LoginButton.BackColor = Color.FromArgb(59, 177, 226);
+                return;
+            }
+
+            LoginButton.Enabled = true;
+            LoginButton.BackColor = Color.FromArgb(64, 64, 64);
+        }
+
+        private void EnterPassword_TextChanged(object sender, EventArgs e)
+        {
+            LoginButtonEnabled();
         }
     }
 } 

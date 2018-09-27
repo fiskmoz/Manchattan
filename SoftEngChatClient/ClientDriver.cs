@@ -32,6 +32,8 @@ namespace SoftEngChatClient.Controller
         public List<string> messageList;
         private bool rememberMe;
 
+        private bool loggingOut = false;
+
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
 
@@ -116,7 +118,7 @@ namespace SoftEngChatClient.Controller
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
-            chatWindow.formClosed += new FormClosingEventHandler(cd_WindowClosing);
+            
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
@@ -124,12 +126,7 @@ namespace SoftEngChatClient.Controller
             loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
-			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
-			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
-            chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
+			setupChatWindowListeners();
         }
 
 
@@ -140,11 +137,9 @@ namespace SoftEngChatClient.Controller
             var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
             fs.Write(byteArray, 0, byteArray.Length);
             fs.Close();
-            writer.WriteLogout(MessageType.logout);
-
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && loggingOut == false)
             {
-                ///e.Cancel = true;
+                writer.WriteLogout(MessageType.logout);
                 Application.Exit();
                 System.Environment.Exit(1);
             }
@@ -152,33 +147,38 @@ namespace SoftEngChatClient.Controller
 
         private void cd_HandleLogout(object sender, EventArgs e)
 		{
-            chatWindow.Close ();
-            CloseCurrentConnection();
-            loginWindow.Show();
-			chatWindow = new ChatWindow();
-
-			OpenNewConnection();
-			Session session = new Session(username, rememberMePassword, rememberMe);
-			SetupListeners();
-			streamListener.StartListen();
-			//Application.Restart();
+			CloseCurrentSession();
+            chatWindow = new ChatWindow();
+			setupChatWindowListeners();
+			OpenNewSession();
 		}
 
-		private void CloseCurrentConnection()
+		private void CloseCurrentSession()
 		{
+			loggingOut = true;
+			chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
-			streamListener.StopListen();
-			connector.Dispose();
+			Thread.Sleep(2000);
 		}
-		private void OpenNewConnection()
+		private void OpenNewSession()
 		{
-			connector = new SSLConnector(IP, PORT);
 			connector.Connect();
-			streamListener = new SSLListener(connector.SslStream);
-			writer = new SSLWriter(connector.SslStream);
-			messagehandler = new Messagehandler(this);
+			writer.stream = connector.SslStream;
+			streamListener.stream = connector.SslStream;
+			loginWindow.Show();
+			loggingOut = false;
 		}
 
+		private void setupChatWindowListeners()
+		{
+			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
+			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
+			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
+			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+			chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
+			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
+			chatWindow.formClosing += new FormClosingEventHandler(cd_WindowClosing);
+		}
 
 		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
@@ -293,7 +293,7 @@ namespace SoftEngChatClient.Controller
             spam++;
             if(spam < 5)
             {
-                if(chatWindow.removeEnterWhenSending().Length > 1)
+                if(chatWindow.removeEnterWhenSending().Length > 0)
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());

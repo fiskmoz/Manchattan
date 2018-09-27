@@ -66,7 +66,7 @@ namespace SoftEngChatClient
 
             if (spam < 5)
             {
-                if(window.removeEnterWhenSending().Length > 1)
+                if(window.removeEnterWhenSending().Length > 0)
                 {
                     writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
                     window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());

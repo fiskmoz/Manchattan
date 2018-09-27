@@ -15,13 +15,11 @@ namespace SoftEngChat
 
         public UserManager()
         {
-		
 			filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + FILE_NAME;
 			userList = db.DBread(filePath);
 		}
 
-        //Remove user from database write back to database. This also 
-        //returns a list, dont know if it is nesesary. But it thus for now.
+        //Remove user from database.
         public List<User> RemoveUser(string name, string password)
         {
             userList = db.DBread(filePath);
@@ -39,7 +37,7 @@ namespace SoftEngChat
         }
 
         //Validate user from login and checks with users on database.
-        public bool validateUser(string userIn, string passwordIn)
+        public bool ValidateUser(string userIn, string passwordIn)
         {
             DatabaseManegement DB = new DatabaseManegement();
             List<User> userlist = DB.DBread(filePath);
@@ -56,6 +54,7 @@ namespace SoftEngChat
             return false;
         }
 
+        //Add user to database from Register.
 		internal bool AddUser(List<string> newUser)
 		{
 			foreach (var user in userList)

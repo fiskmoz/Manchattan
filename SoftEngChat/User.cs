@@ -14,6 +14,7 @@ public class User
 	public string Firstname { get; set;}
     public string LastName { get; set; }
 
+    //Standard constructor.
     public User(List<string> userInfo)
     {
         this.ID = ++IDnr;
@@ -24,6 +25,7 @@ public class User
         this.LastName = userInfo[4];
     }
 
+    //Constructor when parsing JSON.
     [JsonConstructor]
     public User(int id, string username, string mail, string password, string firstName, string lastName)
 	{
