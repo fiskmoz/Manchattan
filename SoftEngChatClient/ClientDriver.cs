@@ -116,6 +116,7 @@ namespace SoftEngChatClient.Controller
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
+            chatWindow.formClosed += new FormClosingEventHandler(cd_WindowClosing);
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
@@ -124,7 +125,6 @@ namespace SoftEngChatClient.Controller
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-			chatWindow.chatWindowClosed += new EventHandler(cd_ChatWindowClosed);
 			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
 			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
 			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
@@ -133,20 +133,35 @@ namespace SoftEngChatClient.Controller
         }
 
 
+        private void cd_WindowClosing(object obj, FormClosingEventArgs e)
+        {
+            var str = chatWindow.getChatBox();
+            var byteArray = logCrypto.EncryptString(str);
+            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
+            fs.Write(byteArray, 0, byteArray.Length);
+            fs.Close();
+            writer.WriteLogout(MessageType.logout);
 
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                ///e.Cancel = true;
+                Application.Exit();
+                System.Environment.Exit(1);
+            }
+        }
 
-		private void cd_HandleLogout(object sender, EventArgs e)
+        private void cd_HandleLogout(object sender, EventArgs e)
 		{
-			CloseCurrentConnection();
-			chatWindow.Hide();
-			
-			loginWindow.EnterEmail.Text = "";
-			loginWindow.EnterPassword.Text = "";
+            chatWindow.Close ();
+            CloseCurrentConnection();
+            loginWindow.Show();
+			chatWindow = new ChatWindow();
 
 			OpenNewConnection();
 			Session session = new Session(username, rememberMePassword, rememberMe);
-
-			loginWindow.Show();
+			SetupListeners();
+			streamListener.StartListen();
+			//Application.Restart();
 		}
 
 		private void CloseCurrentConnection()
@@ -157,11 +172,11 @@ namespace SoftEngChatClient.Controller
 		}
 		private void OpenNewConnection()
 		{
+			connector = new SSLConnector(IP, PORT);
 			connector.Connect();
 			streamListener = new SSLListener(connector.SslStream);
 			writer = new SSLWriter(connector.SslStream);
-
-			streamListener.StartListen();
+			messagehandler = new Messagehandler(this);
 		}
 
 
@@ -276,11 +291,12 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
             spam++;
-            if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
+            if(spam < 5)
             {
+                if(chatWindow.removeEnterWhenSending().Length > 1)
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
-                    chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
+                    chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());
                 }
             }
             else
@@ -288,20 +304,6 @@ namespace SoftEngChatClient.Controller
                 chatWindow.AppendTextBox("[Program] Don´t spam");
             }
             chatWindow.clearMessageBox();
-        }
-        private void cd_ChatWindowClosed(object sender, EventArgs e)
-        {
-
-            Session session = new Session(this.username, rememberMePassword, rememberMe);
-
-            var str = chatWindow.getChatBox();
-            var byteArray = logCrypto.EncryptString(str);
-            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
-            fs.Write(byteArray, 0, byteArray.Length);
-            fs.Close();
-            Application.Exit();
-			writer.WriteLogout(MessageType.logout);
-			System.Environment.Exit(1);
         }
         private void cd_PreviousMessageButtonClicked(object sender, EventArgs e)
         {

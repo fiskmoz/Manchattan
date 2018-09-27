@@ -60,7 +60,7 @@ namespace SoftEngChat
 		{
 			foreach (var user in userList)
 			{
-				if (user.UserName == newUser[0] && user.Mail == newUser[1])
+				if (user.UserName == newUser[0] || user.Mail == newUser[1])
 				{
 					return false;
 				}

@@ -97,6 +97,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			int i = 2;
 			string username = null;
 			string password = null;
+           // string mail = null;
 			
 			while(message[i] != ':')
 			{
