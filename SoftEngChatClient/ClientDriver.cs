@@ -159,8 +159,7 @@ namespace SoftEngChatClient.Controller
 			loggingOut = true;
 			chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
-			loginWindow.EnterEmail.Text = "";
-			loginWindow.EnterPassword.Text = "";
+            loginWindow.resetLoginFields();
 			Session session = new Session(username, rememberMePassword, rememberMe);
 
 			Thread.Sleep(2000);

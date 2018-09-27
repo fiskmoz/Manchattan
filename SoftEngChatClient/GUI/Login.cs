@@ -149,5 +149,15 @@ namespace SoftEngChatClient
         {
             LoginButtonEnabled();
         }
+        public void resetLoginFields()
+        {
+            EnterEmail.Text = "Username";
+            EnterPassword.Text = "Password";
+            EnterPassword.PasswordChar = '*';
+            EnterEmail.ForeColor = Color.Gray;
+            EnterPassword.ForeColor = Color.Gray;
+            rememberMeCheckBox.Checked = false;
+        }
+        
     }
 } 
