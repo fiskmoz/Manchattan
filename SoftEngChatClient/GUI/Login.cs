@@ -153,7 +153,7 @@ namespace SoftEngChatClient
         {
             EnterEmail.Text = "Username";
             EnterPassword.Text = "Password";
-            EnterPassword.PasswordChar = '*';
+            EnterPassword.PasswordChar = '\0';
             EnterEmail.ForeColor = Color.Gray;
             EnterPassword.ForeColor = Color.Gray;
             rememberMeCheckBox.Checked = false;
