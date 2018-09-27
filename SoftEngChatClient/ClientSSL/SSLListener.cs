@@ -10,7 +10,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 {
 	class SSLListener
 	{
-		private SslStream stream;
+		public SslStream stream;
 		private Thread listeningThread;
 		private bool stopListen;
 
@@ -94,7 +94,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		private void RaiseEvent(string incomming)
 		{
 			IncommingMessage message = new IncommingMessage(incomming);
-			//message.Message = incomming;
+			message.Message = incomming;
 			IncommingMessage(this, message);
 		}
 	}

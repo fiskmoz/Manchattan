@@ -10,7 +10,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
     class SSLWriter
 	{
-        private SslStream stream;
+        public SslStream stream;
 		public SSLWriter(SslStream stream)
 		{
 			this.stream = stream;
