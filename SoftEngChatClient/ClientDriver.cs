@@ -161,8 +161,6 @@ namespace SoftEngChatClient.Controller
 			chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
             loginWindow.resetLoginFields();
-			Session session = new Session(username, rememberMePassword, rememberMe);
-
 			Thread.Sleep(2000);
 		}
 		private void OpenNewSession()
