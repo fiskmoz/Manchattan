@@ -60,6 +60,7 @@ namespace SoftEngChat.Model.SSLCommunication
                 default:
 					Console.WriteLine("Message arrived; Error:");
 					Console.WriteLine(incomming);
+					HandleLogout();
 					break;
 			}
 			

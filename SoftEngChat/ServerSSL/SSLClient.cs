@@ -57,6 +57,15 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             return UserInfo.UserName;
         }
-    }
+
+		internal void Dispose()
+		{
+			if (stream != null)
+			{
+				stream.Dispose();
+				stream = null;
+			}
+		}
+	}
 
 }

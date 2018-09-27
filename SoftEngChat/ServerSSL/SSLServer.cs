@@ -59,20 +59,28 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void SendOnlineListToAllClient()
         {
-            StringBuilder str = new StringBuilder();
-            str.Append((int)MessageType.onlineList);
-            foreach (SSLClient client in clientList)
-            {
-                // If client has yet to log in, do not send.
-                if(client.getUserName() != "User")
-                {
-                    str.Append(":" + client.getUserName());
-                }
-            }
-            foreach (SSLClient client in clientList)
-            {
-                client.writer.WriteOnlineList(str.ToString());
-            }
+			Thread.BeginCriticalRegion();
+
+			lock (clientList)
+			{
+				StringBuilder str = new StringBuilder();
+				str.Append((int)MessageType.onlineList);
+				foreach (SSLClient client in clientList)
+				{
+					// If client has yet to log in, do not send.
+					if (client.getUserName() != "User")
+					{
+						str.Append(":" + client.getUserName());
+					}
+				}
+				foreach (SSLClient client in clientList)
+				{
+					client.writer.WriteOnlineList(str.ToString());
+				}
+			}
+            
+
+			Thread.EndCriticalRegion();
         }
         
         public bool IsUserOnline(string username)
@@ -118,8 +126,16 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		internal void RemoveClient(SSLClient client)
 		{
-			clientList.Remove(client);
-            SendOnlineListToAllClient();
+			Thread.BeginCriticalRegion();
+
+			lock (clientList)
+			{
+				client.Dispose();
+				clientList.Remove(client);
+				SendOnlineListToAllClient();
+			}
+			
+			Thread.EndCriticalRegion();
 		}
 	}
 }

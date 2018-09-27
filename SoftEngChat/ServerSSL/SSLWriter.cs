@@ -41,7 +41,16 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void WriteOnlineList(string str)
         {
-            stream.Write(Encoding.UTF8.GetBytes(str));
+			try
+			{
+				stream.Write(Encoding.UTF8.GetBytes(str));
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine();
+				Console.WriteLine("Write OnlineList Exception:");
+				Console.WriteLine(e.Message);
+			}
         }
 	}
 }

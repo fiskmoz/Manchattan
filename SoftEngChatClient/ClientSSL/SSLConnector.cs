@@ -14,57 +14,79 @@ namespace SoftEngChatClient.Model.SSLCommunication
 	// Establishes encrypted (SSL) connection with server.
 	class SSLConnector
 	{
-		private TcpClient client;
+		public TcpClient client;
 		private NetworkStream netStream;
-		private const int RECONNECT_TIME = 1000; //Time in miliseconds to wait before trying to connect to server again.
-		private const int MAX_RECONNECT_TRIES = 10; //maximal nuber of tries to connect to the server.
-
-		public SslStream SslStream { get; private set; }
+		private const int RECONNECT_TIME = 1000;
+		private const int MAX_RECONNECT_TRIES = 10;
+		private string serverIP;
+		private int serverPort;
+		public SslStream SslStream { get; set; }
 
 		public SSLConnector(string ip, int port)
+		{
+			serverIP = ip;
+			serverPort = port;
+		}
+
+		internal void Connect()
 		{
 			int retryAttempts = 1;
 			do
 			{
 				try
 				{
-					client = new TcpClient(ip, port);
-					//Client connected
+					client = new TcpClient(serverIP, serverPort);
 					break;
 				}
 				catch (Exception)
 				{
-					System.Threading.Thread.Sleep(RECONNECT_TIME); //Wait 1second before trying again.
+					System.Threading.Thread.Sleep(RECONNECT_TIME);
 					retryAttempts += 1;
-					//Will in future sprint raise event each time to tell that server can't be reached.
 				}
-			}while(retryAttempts < MAX_RECONNECT_TRIES);
-			if (retryAttempts >= MAX_RECONNECT_TRIES) Environment.Exit(0); //Closes down if timed out! Will in future sprint rais event.
+			} while (retryAttempts < MAX_RECONNECT_TRIES);
+			if (retryAttempts >= MAX_RECONNECT_TRIES) Environment.Exit(0);
+			EncryptConnection();
+		}
 
-			//Encrypt connection
+		private void EncryptConnection()
+		{
 			netStream = client.GetStream();
 			SslStream = new SslStream(netStream, false, new RemoteCertificateValidationCallback(ValidateCert));
 
 			try
 			{
-				SslStream.AuthenticateAsClient("Manchattan"); //Authenticate server.
+				SslStream.AuthenticateAsClient("Manchattan");
 			}
 			catch (Exception)
 			{
-				//  !!!Authentication failed!!!
-				client.Close(); //Close connection
-				return; //Raise event in future sprint!
+				client.Close();
+				return;
 			}
-
 		}
 
-        //Validates the certificate of the server
 		private static bool ValidateCert(object sender, X509Certificate certificate,
 										X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
-            //Since our cert. is self-signed the validation code above won't accept it
-            return true;
+			//Since cert. is self-signed standard validation code won't accept it.
+			return true;
 		}
-		
+
+
+
+
+		public void Dispose()
+		{
+			if (SslStream != null)
+			{
+				SslStream.Dispose();
+				SslStream = null;
+			}
+
+			if (client != null)
+			{
+				client.Close();
+				client = null;
+			}
+		}
 	}
 }
