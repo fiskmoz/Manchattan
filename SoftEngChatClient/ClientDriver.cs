@@ -126,13 +126,7 @@ namespace SoftEngChatClient.Controller
             loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
-			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
-			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
-            chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
-            chatWindow.formClosing += new FormClosingEventHandler(cd_WindowClosing);
+			setupChatWindowListeners();
         }
 
 
@@ -153,47 +147,38 @@ namespace SoftEngChatClient.Controller
 
         private void cd_HandleLogout(object sender, EventArgs e)
 		{
-            loggingOut = true;
-            chatWindow.Close ();
-            //CloseCurrentConnection();
-            writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(2000);
+			CloseCurrentSession();
             chatWindow = new ChatWindow();
-            chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-            chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
-            chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-            chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
-            chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-            chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
-            chatWindow.formClosing += new FormClosingEventHandler(cd_WindowClosing);
-            connector.Connect();
-            writer.stream = connector.SslStream;
-            streamListener.stream = connector.SslStream;
-            loginWindow.Show();
-			
-
-			//OpenNewConnection();
-			//Session session = new Session(username, rememberMePassword, rememberMe);
-			//streamListener.StartListen();
-            //Application.Restart();
-            loggingOut = false;
+			setupChatWindowListeners();
+			OpenNewSession();
 		}
 
-		private void CloseCurrentConnection()
+		private void CloseCurrentSession()
 		{
+			loggingOut = true;
+			chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
-			streamListener.StopListen();
-			connector.Dispose();
+			Thread.Sleep(2000);
 		}
-		private void OpenNewConnection()
+		private void OpenNewSession()
 		{
-			//connector = new SSLConnector(IP, PORT);
 			connector.Connect();
-			streamListener = new SSLListener(connector.SslStream);
-			writer = new SSLWriter(connector.SslStream);
-			messagehandler = new Messagehandler(this);
+			writer.stream = connector.SslStream;
+			streamListener.stream = connector.SslStream;
+			loginWindow.Show();
+			loggingOut = false;
 		}
 
+		private void setupChatWindowListeners()
+		{
+			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
+			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
+			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
+			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
+			chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
+			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
+			chatWindow.formClosing += new FormClosingEventHandler(cd_WindowClosing);
+		}
 
 		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
