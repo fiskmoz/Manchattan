@@ -25,17 +25,27 @@ namespace SoftEngChatClient
         private void RegisterAccept_Click(object sender, EventArgs e)
         {
             RegisterButtonClick(this, e);
-            EnterUsername.Text = "Username";
-            EnterPassword.Text = "Password";
-            EnterEmail.Text = "Email";
-            EnterForename.Text = "Forename";
-            EnterSurname.Text = "Surname";
+            ClearFields();
         }
         
         // Cancels the registration and returns to Login window.
         private void RegisterCancel_Click(object sender, EventArgs e)
         {
             CancelButtonClicked(this, e);
+            ClearFields();
+        }
+        private void ClearFields()
+        {
+            EnterUsername.Text = "Username";
+            EnterPassword.Text = "Password";
+            EnterEmail.Text = "Email";
+            EnterForename.Text = "Forename";
+            EnterSurname.Text = "Surname";
+            EnterUsername.ForeColor = Color.Gray;
+            EnterPassword.ForeColor = Color.Gray;
+            EnterEmail.ForeColor = Color.Gray;
+            EnterForename.ForeColor = Color.Gray;
+            EnterSurname.ForeColor = Color.Gray;
         }
 
         private void EmailLabel_Click(object sender, EventArgs e)
@@ -157,6 +167,45 @@ namespace SoftEngChatClient
                 EnterSurname.Text = "Surname";
                 EnterSurname.ForeColor = Color.Gray;
             }
+        }
+        private void RegisterButtonEnabled()
+        {
+            if ((String.IsNullOrWhiteSpace(EnterUsername.Text) || EnterUsername.Text == "Username") ||
+                (String.IsNullOrWhiteSpace(EnterPassword.Text) || EnterPassword.Text == "Password") ||
+                (String.IsNullOrWhiteSpace(EnterEmail.Text) || EnterEmail.Text == "Email") ||
+                (String.IsNullOrWhiteSpace(EnterForename.Text) || EnterForename.Text == "Forename") ||
+                (String.IsNullOrWhiteSpace(EnterSurname.Text) || EnterSurname.Text == "Surname")) 
+
+            {
+                RegisterAccept.Enabled = false;
+                RegisterAccept.BackColor = Color.FromArgb(41, 164, 221);
+                return;
+            }
+
+            RegisterAccept.Enabled = true;
+            RegisterAccept.BackColor = Color.FromArgb(64, 64, 64);
+
+        }
+
+        private void EnterUsername_TextChanged(object sender, EventArgs e)
+        {
+            RegisterButtonEnabled();
+        }
+        private void EnterPassword_TextChanged(object sender, EventArgs e)
+        {
+            RegisterButtonEnabled();
+        }
+        private void EnterEmail_TextChanged(object sender, EventArgs e)
+        {
+            RegisterButtonEnabled();
+        }
+        private void EnterForename_TextChanged(object sender, EventArgs e)
+        {
+            RegisterButtonEnabled();
+        }
+        private void EnterSurname_TextChanged(object sender, EventArgs e)
+        {
+            RegisterButtonEnabled();
         }
     }
 }

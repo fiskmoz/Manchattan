@@ -30,18 +30,6 @@ namespace SoftEngChat
                 DBInitWrite();
             }
         }
-		/*
-        //Test function adds users 
-        public void TestUsers()
-        {
-            var tester = new User("Anders", "maejfa", "112");
-            var tester2 = new User("Nicklas", "mdfmsdkf", "123123");
-            var tester3 = new User("name", "email", "pass");
-            user.Add(tester);
-            user.Add(tester2);
-            user.Add(tester3);
-        }
-        */
 
         //Append a list of users in db.txt files, with the help of JSON.
         public void DBwrite(List<User> userList, string filePath)

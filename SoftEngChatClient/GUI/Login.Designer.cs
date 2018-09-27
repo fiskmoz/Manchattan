@@ -56,7 +56,7 @@
             this.EnterEmail.MaximumSize = new System.Drawing.Size(543, 50);
             this.EnterEmail.MinimumSize = new System.Drawing.Size(443, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(443, 29);
+            this.EnterEmail.Size = new System.Drawing.Size(443, 30);
             this.EnterEmail.TabIndex = 1;
             this.EnterEmail.TabStop = false;
             this.EnterEmail.Tag = "";
@@ -77,10 +77,11 @@
             this.EnterPassword.MaximumSize = new System.Drawing.Size(443, 50);
             this.EnterPassword.MinimumSize = new System.Drawing.Size(443, 30);
             this.EnterPassword.Name = "EnterPassword";
-            this.EnterPassword.Size = new System.Drawing.Size(443, 29);
+            this.EnterPassword.Size = new System.Drawing.Size(443, 30);
             this.EnterPassword.TabIndex = 2;
             this.EnterPassword.TabStop = false;
             this.EnterPassword.Text = "Password";
+            this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
             this.EnterPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             this.EnterPassword.Leave += new System.EventHandler(this.EnterPassword_Leave);
@@ -88,7 +89,8 @@
             // LoginButton
             // 
             this.LoginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.LoginButton.Enabled = false;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.LoginButton.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
@@ -246,9 +248,12 @@
             this.Controls.Add(this.EnterPassword);
             this.Controls.Add(this.EnterEmail);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Login";
-            this.Opacity = 0.95D;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ManChattan - Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
