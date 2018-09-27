@@ -42,7 +42,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		private void SendMessage(string outgoing)
 		{
-			stream.Write(Encoding.UTF8.GetBytes(outgoing), 0, outgoing.Length);
+            byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
+            stream.Write(outgoingBytes, 0, outgoingBytes.Length);
 		}
 	}
 }
