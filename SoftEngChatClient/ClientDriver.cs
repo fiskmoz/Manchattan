@@ -144,6 +144,7 @@ namespace SoftEngChatClient.Controller
                 Application.Exit();
                 System.Environment.Exit(1);
             }
+            Session session = new Session(username, rememberMePassword, rememberMe);
         }
 
         private void cd_HandleLogout(object sender, EventArgs e)
@@ -159,8 +160,7 @@ namespace SoftEngChatClient.Controller
 			loggingOut = true;
 			chatWindow.Close();
 			writer.WriteLogout(MessageType.logout);
-			loginWindow.EnterEmail.Text = "";
-			loginWindow.EnterPassword.Text = "";
+            loginWindow.resetLoginFields();
 			Session session = new Session(username, rememberMePassword, rememberMe);
 
 			Thread.Sleep(2000);
