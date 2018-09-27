@@ -93,6 +93,7 @@ namespace SoftEngChatClient
                 EnterPassword.PasswordChar = '\0';
 
                 rememberMeCheckBox.Checked = false;
+
             }
         }
 
