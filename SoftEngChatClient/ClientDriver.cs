@@ -139,14 +139,15 @@ namespace SoftEngChatClient.Controller
 		{
 			CloseCurrentConnection();
 			chatWindow.Hide();
-			
-			loginWindow.EnterEmail.Text = "";
-			loginWindow.EnterPassword.Text = "";
+			loginWindow = new Login();
+			chatWindow = new ChatWindow();
 
 			OpenNewConnection();
 			Session session = new Session(username, rememberMePassword, rememberMe);
-
+			SetupListeners();
+			streamListener.StartListen();
 			loginWindow.Show();
+			Application.Restart();
 		}
 
 		private void CloseCurrentConnection()
@@ -157,11 +158,11 @@ namespace SoftEngChatClient.Controller
 		}
 		private void OpenNewConnection()
 		{
+			connector = new SSLConnector(IP, PORT);
 			connector.Connect();
 			streamListener = new SSLListener(connector.SslStream);
 			writer = new SSLWriter(connector.SslStream);
-
-			streamListener.StartListen();
+			messagehandler = new Messagehandler(this);
 		}
 
 
