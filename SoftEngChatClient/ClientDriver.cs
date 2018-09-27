@@ -39,6 +39,7 @@ namespace SoftEngChatClient.Controller
         [STAThread] // <- Makes win-forms to run in own thread!
         public void Run() //Run the program
         {
+            
 			streamListener.StartListen();
 			Application.Run(loginWindow);
 		}
@@ -166,7 +167,9 @@ namespace SoftEngChatClient.Controller
 
 		private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
+            CheckSessionFileExist();
             FileManager fileManager = new FileManager();
+            
             string loginCredentials;
             loginCredentials = fileManager.ReadFromFile("SessionSave.txt");
 
@@ -389,5 +392,17 @@ namespace SoftEngChatClient.Controller
 			}
 			chatWindow.SetUserName(name);
 		}
+        public void CheckSessionFileExist()
+        {
+            FileManager fileManager = new FileManager();
+            string sessionPathCreate = AppDomain.CurrentDomain.BaseDirectory + @"\" + "SessionSave.txt";
+            string[] emptyString = { "" };
+            Console.WriteLine("CheckSessionFileExist");
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\" + "SessionSave.txt"))
+            {
+                Console.WriteLine("No File present, trying to add");
+                fileManager.WriteToFile(sessionPathCreate, emptyString);
+            }
+        }
     }
 }
