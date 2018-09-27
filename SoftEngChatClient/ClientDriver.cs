@@ -280,7 +280,7 @@ namespace SoftEngChatClient.Controller
             {
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
-                    chatWindow.AppendTextBox("[ME] : " + chatWindow.removeEnterWhenSending());
+                    chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());
                 }
             }
             else
