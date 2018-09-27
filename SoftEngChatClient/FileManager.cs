@@ -39,7 +39,7 @@ namespace SoftEngChatClient
         } 
 
         
-        //Encrypt and read to file.
+        //Encrypt and write to file.
         public void WriteToFile(string filePath, string[] readObject)
         {
             string text = "";
@@ -51,11 +51,18 @@ namespace SoftEngChatClient
 
             }
             encryptedString = cyptoMessage.EncryptString(text);
-        
-            var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-            fs.Write(encryptedString, 0, encryptedString.Length);
-            fs.Close();
 
+
+            try
+            {
+                var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                fs.Write(encryptedString, 0, encryptedString.Length);
+                fs.Close();
+            }
+            catch(IOException e)
+            {
+                e.GetBaseException();
+            }
         }
     }
 }
