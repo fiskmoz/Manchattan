@@ -276,8 +276,9 @@ namespace SoftEngChatClient.Controller
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
             spam++;
-            if((chatWindow.getTextMessageBox().Length > 0) && spam < 5)
+            if(spam < 5)
             {
+                if(chatWindow.removeEnterWhenSending().Length > 1)
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());

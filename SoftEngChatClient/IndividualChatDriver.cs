@@ -64,12 +64,14 @@ namespace SoftEngChatClient
         {
             spam++;
 
-            if ((window.getTextMessageBox().Length > 0) && spam < 5)
+            if (spam < 5)
             {
-                writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
-                window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());
+                if(window.removeEnterWhenSending().Length > 1)
+                {
+                    writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
+                    window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());
+                }
             }
-
             else
             {
                 window.AppendTextBox("[Program] Don´t spam");
