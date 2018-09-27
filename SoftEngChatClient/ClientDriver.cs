@@ -308,7 +308,7 @@ namespace SoftEngChatClient.Controller
             spam++;
             if(spam < 5)
             {
-                if(chatWindow.removeEnterWhenSending().Length > 1)
+                if(chatWindow.removeEnterWhenSending().Length > 0)
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());
