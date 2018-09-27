@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Register));
             this.RegisterAccept = new System.Windows.Forms.Button();
             this.RegisterCancel = new System.Windows.Forms.Button();
             this.EnterPassword = new System.Windows.Forms.TextBox();
@@ -41,62 +42,88 @@
             this.label3 = new System.Windows.Forms.Label();
             this.EnterSurname = new System.Windows.Forms.TextBox();
             this.regRejectLbl = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // RegisterAccept
             // 
             this.RegisterAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterAccept.Location = new System.Drawing.Point(106, 528);
-            this.RegisterAccept.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RegisterAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RegisterAccept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.RegisterAccept.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold);
+            this.RegisterAccept.ForeColor = System.Drawing.Color.White;
+            this.RegisterAccept.Location = new System.Drawing.Point(91, 278);
             this.RegisterAccept.Name = "RegisterAccept";
-            this.RegisterAccept.Size = new System.Drawing.Size(112, 35);
+            this.RegisterAccept.Size = new System.Drawing.Size(184, 44);
             this.RegisterAccept.TabIndex = 5;
             this.RegisterAccept.Text = "Register";
-            this.RegisterAccept.UseVisualStyleBackColor = true;
+            this.RegisterAccept.UseVisualStyleBackColor = false;
             this.RegisterAccept.Click += new System.EventHandler(this.RegisterAccept_Click);
             // 
             // RegisterCancel
             // 
             this.RegisterCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterCancel.Location = new System.Drawing.Point(320, 528);
-            this.RegisterCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.RegisterCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RegisterCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.RegisterCancel.Font = new System.Drawing.Font("Rockwell Extra Bold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterCancel.ForeColor = System.Drawing.Color.White;
+            this.RegisterCancel.Location = new System.Drawing.Point(132, 334);
             this.RegisterCancel.Name = "RegisterCancel";
-            this.RegisterCancel.Size = new System.Drawing.Size(112, 35);
+            this.RegisterCancel.Size = new System.Drawing.Size(104, 32);
             this.RegisterCancel.TabIndex = 6;
             this.RegisterCancel.Text = "Cancel";
-            this.RegisterCancel.UseVisualStyleBackColor = true;
+            this.RegisterCancel.UseVisualStyleBackColor = false;
             this.RegisterCancel.Click += new System.EventHandler(this.RegisterCancel_Click);
             // 
             // EnterPassword
             // 
             this.EnterPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterPassword.Location = new System.Drawing.Point(113, 198);
-            this.EnterPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.EnterPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterPassword.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnterPassword.ForeColor = System.Drawing.Color.Gray;
+            this.EnterPassword.Location = new System.Drawing.Point(16, 125);
+            this.EnterPassword.MaximumSize = new System.Drawing.Size(335, 50);
+            this.EnterPassword.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterPassword.Name = "EnterPassword";
-            this.EnterPassword.Size = new System.Drawing.Size(325, 26);
+            this.EnterPassword.Size = new System.Drawing.Size(335, 30);
             this.EnterPassword.TabIndex = 1;
+            this.EnterPassword.TabStop = false;
+            this.EnterPassword.Text = "Password";
+            this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
+            this.EnterPassword.Leave += new System.EventHandler(this.EnterPassword_Leave);
             // 
             // EnterUsername
             // 
             this.EnterUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterUsername.Location = new System.Drawing.Point(113, 105);
-            this.EnterUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.EnterUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterUsername.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnterUsername.ForeColor = System.Drawing.Color.Gray;
+            this.EnterUsername.Location = new System.Drawing.Point(16, 89);
+            this.EnterUsername.MaximumSize = new System.Drawing.Size(335, 50);
+            this.EnterUsername.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterUsername.Name = "EnterUsername";
-            this.EnterUsername.Size = new System.Drawing.Size(325, 26);
+            this.EnterUsername.Size = new System.Drawing.Size(335, 30);
             this.EnterUsername.TabIndex = 0;
+            this.EnterUsername.TabStop = false;
+            this.EnterUsername.Text = "Username";
+            this.EnterUsername.Enter += new System.EventHandler(this.EnterUsername_Enter);
+            this.EnterUsername.Leave += new System.EventHandler(this.EnterUsername_Leave);
             // 
             // EmailLabel
             // 
             this.EmailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.EmailLabel.AutoSize = true;
             this.EmailLabel.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailLabel.Location = new System.Drawing.Point(192, 64);
-            this.EmailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.EmailLabel.Location = new System.Drawing.Point(12, 367);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(148, 34);
+            this.EmailLabel.Size = new System.Drawing.Size(96, 23);
             this.EmailLabel.TabIndex = 4;
             this.EmailLabel.Text = "Username";
             this.EmailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EmailLabel.Visible = false;
             this.EmailLabel.Click += new System.EventHandler(this.EmailLabel_Click);
             // 
             // PasswordLabel
@@ -104,98 +131,144 @@
             this.PasswordLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLabel.Location = new System.Drawing.Point(199, 156);
-            this.PasswordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.PasswordLabel.Location = new System.Drawing.Point(17, 367);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(140, 34);
+            this.PasswordLabel.Size = new System.Drawing.Size(91, 23);
             this.PasswordLabel.TabIndex = 5;
             this.PasswordLabel.Text = "Password";
             this.PasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PasswordLabel.Visible = false;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(212, 249);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(13, 367);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 34);
+            this.label1.Size = new System.Drawing.Size(68, 23);
             this.label1.TabIndex = 7;
             this.label1.Text = "E-Mail";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Visible = false;
             // 
             // EnterEmail
             // 
             this.EnterEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterEmail.Location = new System.Drawing.Point(113, 290);
-            this.EnterEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.EnterEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterEmail.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnterEmail.ForeColor = System.Drawing.Color.Gray;
+            this.EnterEmail.Location = new System.Drawing.Point(16, 161);
+            this.EnterEmail.MaximumSize = new System.Drawing.Size(335, 50);
+            this.EnterEmail.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(325, 26);
+            this.EnterEmail.Size = new System.Drawing.Size(335, 30);
             this.EnterEmail.TabIndex = 2;
+            this.EnterEmail.TabStop = false;
+            this.EnterEmail.Text = "Email";
+            this.EnterEmail.Enter += new System.EventHandler(this.EnterEmail_Enter);
+            this.EnterEmail.Leave += new System.EventHandler(this.EnterEmail_Leave);
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(199, 345);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(13, 367);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 34);
+            this.label2.Size = new System.Drawing.Size(95, 23);
             this.label2.TabIndex = 9;
             this.label2.Text = "Forename";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Visible = false;
             // 
             // EnterForename
             // 
             this.EnterForename.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterForename.Location = new System.Drawing.Point(113, 386);
-            this.EnterForename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterForename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.EnterForename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterForename.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnterForename.ForeColor = System.Drawing.Color.Gray;
+            this.EnterForename.Location = new System.Drawing.Point(17, 197);
+            this.EnterForename.MaximumSize = new System.Drawing.Size(335, 50);
+            this.EnterForename.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterForename.Name = "EnterForename";
-            this.EnterForename.Size = new System.Drawing.Size(325, 26);
+            this.EnterForename.Size = new System.Drawing.Size(335, 30);
             this.EnterForename.TabIndex = 3;
+            this.EnterForename.TabStop = false;
+            this.EnterForename.Text = "Forename";
+            this.EnterForename.Enter += new System.EventHandler(this.EnterForename_Enter);
+            this.EnterForename.Leave += new System.EventHandler(this.EnterForename_Leave);
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Georgia", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(205, 439);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Rockwell Extra Bold", 25F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(95, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 34);
+            this.label3.Size = new System.Drawing.Size(190, 40);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Surname";
+            this.label3.Text = "Register";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EnterSurname
             // 
             this.EnterSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EnterSurname.Location = new System.Drawing.Point(106, 480);
-            this.EnterSurname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EnterSurname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.EnterSurname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterSurname.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnterSurname.ForeColor = System.Drawing.Color.Gray;
+            this.EnterSurname.Location = new System.Drawing.Point(17, 233);
+            this.EnterSurname.MaximumSize = new System.Drawing.Size(335, 50);
+            this.EnterSurname.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterSurname.Name = "EnterSurname";
-            this.EnterSurname.Size = new System.Drawing.Size(325, 26);
+            this.EnterSurname.Size = new System.Drawing.Size(335, 30);
             this.EnterSurname.TabIndex = 4;
+            this.EnterSurname.TabStop = false;
+            this.EnterSurname.Text = "Surname";
+            this.EnterSurname.Enter += new System.EventHandler(this.EnterSurname_Enter);
+            this.EnterSurname.Leave += new System.EventHandler(this.EnterSurname_Leave);
             // 
             // regRejectLbl
             // 
             this.regRejectLbl.AutoSize = true;
-            this.regRejectLbl.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.regRejectLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.regRejectLbl.Location = new System.Drawing.Point(182, 11);
+            this.regRejectLbl.BackColor = System.Drawing.Color.Transparent;
+            this.regRejectLbl.Font = new System.Drawing.Font("Georgia", 10F);
+            this.regRejectLbl.ForeColor = System.Drawing.Color.Red;
+            this.regRejectLbl.Location = new System.Drawing.Point(127, 9);
+            this.regRejectLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.regRejectLbl.Name = "regRejectLbl";
-            this.regRejectLbl.Size = new System.Drawing.Size(164, 18);
+            this.regRejectLbl.Size = new System.Drawing.Size(148, 17);
             this.regRejectLbl.TabIndex = 12;
             this.regRejectLbl.Text = "Registration Rejected!";
             this.regRejectLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.regRejectLbl.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.pictureBox1.Location = new System.Drawing.Point(42, 20);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(60, 60);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(60, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // Register
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 614);
+            this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(363, 399);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.regRejectLbl);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.EnterSurname);
@@ -209,9 +282,10 @@
             this.Controls.Add(this.EnterPassword);
             this.Controls.Add(this.RegisterCancel);
             this.Controls.Add(this.RegisterAccept);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Register";
-            this.Text = "Register";
+            this.Text = "ManChattan - Register";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,5 +306,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox EnterSurname;
 		private System.Windows.Forms.Label regRejectLbl;
-	}
+        private System.Windows.Forms.PictureBox pictureBox1;
+    }
 }

@@ -123,5 +123,38 @@
   <ItemGroup>
     <None Include="Resources\logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\manhattan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\manchattan2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\background3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\background4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\Background5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\Background6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\background7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\manchattan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

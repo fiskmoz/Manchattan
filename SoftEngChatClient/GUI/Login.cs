@@ -76,5 +76,55 @@ namespace SoftEngChatClient
         {
             LoginLoaded(sender, e);
         }
+
+        private void EnterEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnterEmail_Enter(object sender, EventArgs e)
+        {
+            if(EnterEmail.Text == "Username" || EnterEmail.ForeColor == Color.Gray)
+            {
+                EnterEmail.Text = "";
+                EnterEmail.ForeColor = Color.White;
+
+                EnterPassword.Text = "Password";
+                EnterPassword.PasswordChar = '\0';
+
+                rememberMeCheckBox.Checked = false;
+            }
+        }
+
+        private void EnterEmail_Leave(object sender, EventArgs e)
+        {
+            if(EnterEmail.Text == "")
+            {
+                EnterEmail.Text = "Username";
+                EnterEmail.ForeColor = Color.Gray;
+            }
+        }
+
+        private void EnterPassword_Enter(object sender, EventArgs e)
+        {
+            if(EnterPassword.Text == "Password" || EnterPassword.ForeColor == Color.Gray)
+            {
+                EnterPassword.Text = "";
+                EnterPassword.PasswordChar = '*';
+                EnterPassword.ForeColor = Color.White;
+
+            }
+        }
+
+        private void EnterPassword_Leave(object sender, EventArgs e)
+        {
+            if (EnterPassword.Text == "")
+            {
+                EnterPassword.Text = "Password";
+                EnterPassword.PasswordChar = '\0';
+                EnterPassword.ForeColor = Color.Gray;
+
+            }
+        }
     }
 } 

@@ -157,6 +157,7 @@ namespace SoftEngChatClient.Controller
 
             loginWindow.EnterEmail.Text = username;
             loginWindow.EnterPassword.Text = password;
+            loginWindow.EnterPassword.PasswordChar = '*';
             loginWindow.rememberMeCheckBox.Checked = true;
         }
 
