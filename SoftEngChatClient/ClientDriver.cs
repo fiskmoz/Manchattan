@@ -143,6 +143,7 @@ namespace SoftEngChatClient.Controller
                 Application.Exit();
                 System.Environment.Exit(1);
             }
+            Session session = new Session(username, rememberMePassword, rememberMe);
         }
 
         private void cd_HandleLogout(object sender, EventArgs e)
