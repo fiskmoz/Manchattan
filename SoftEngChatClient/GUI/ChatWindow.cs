@@ -16,12 +16,12 @@ namespace SoftEngChatClient
     public partial class ChatWindow : Form
     {
         public event EventHandler sendButtonClicked;
-        public event EventHandler chatWindowClosed;
         public event KeyEventHandler messageBoxKeyReleased;
         public event EventHandler previousMessageButtonClick;
         public event EventHandler chatWindowLoad;
         public event EventHandler usernamePressed;
 		public event EventHandler logoutEvent;
+        public event FormClosingEventHandler formClosed;
 
         public ChatWindow()
         {
@@ -36,9 +36,10 @@ namespace SoftEngChatClient
 
         // When ChatWindow is closed, 
         // Messages are saved in file then program closes.
-        private void ChatWindow_FormClosed(object sender, FormClosedEventArgs e)
+        private void ChatWindow_FormClosed(object sender, FormClosingEventArgs e)
         {
-            chatWindowClosed(this, e);
+            //chatWindowClosed(this, e);
+            formClosed(this, e);
         }
 
         // Experimental, isnt working as intented yet.
