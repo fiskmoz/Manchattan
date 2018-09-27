@@ -41,9 +41,9 @@ namespace SoftEngChatClient
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -185,6 +185,15 @@ namespace SoftEngChatClient
             this.panel1.Size = new System.Drawing.Size(246, 455);
             this.panel1.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(65, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(117, 19);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Active Chat";
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -206,15 +215,6 @@ namespace SoftEngChatClient
             this.label2.TabIndex = 1;
             this.label2.Text = "Contacts";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 19);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Active Chat";
-            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,8 +233,11 @@ namespace SoftEngChatClient
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MessageBox);
             this.Controls.Add(this.ChatBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ChatWindow";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.ChatWindow_Load);

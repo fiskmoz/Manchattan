@@ -127,8 +127,11 @@
             this.Controls.Add(this.IndividualSendButton);
             this.Controls.Add(this.IndividualMessageBox);
             this.Controls.Add(this.IndividualChatBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "IndividualChatWindow";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndividualChatWindow_FormClosing);
             this.Load += new System.EventHandler(this.IndividualChatWindow_Load);

@@ -49,7 +49,8 @@
             // RegisterAccept
             // 
             this.RegisterAccept.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RegisterAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(164)))), ((int)(((byte)(221)))));
+            this.RegisterAccept.Enabled = false;
             this.RegisterAccept.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.RegisterAccept.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold);
             this.RegisterAccept.ForeColor = System.Drawing.Color.White;
@@ -91,6 +92,7 @@
             this.EnterPassword.TabIndex = 1;
             this.EnterPassword.TabStop = false;
             this.EnterPassword.Text = "Password";
+            this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
             this.EnterPassword.Leave += new System.EventHandler(this.EnterPassword_Leave);
             // 
@@ -109,6 +111,7 @@
             this.EnterUsername.TabIndex = 0;
             this.EnterUsername.TabStop = false;
             this.EnterUsername.Text = "Username";
+            this.EnterUsername.TextChanged += new System.EventHandler(this.EnterUsername_TextChanged);
             this.EnterUsername.Enter += new System.EventHandler(this.EnterUsername_Enter);
             this.EnterUsername.Leave += new System.EventHandler(this.EnterUsername_Leave);
             // 
@@ -167,6 +170,7 @@
             this.EnterEmail.TabIndex = 2;
             this.EnterEmail.TabStop = false;
             this.EnterEmail.Text = "Email";
+            this.EnterEmail.TextChanged += new System.EventHandler(this.EnterEmail_TextChanged);
             this.EnterEmail.Enter += new System.EventHandler(this.EnterEmail_Enter);
             this.EnterEmail.Leave += new System.EventHandler(this.EnterEmail_Leave);
             // 
@@ -198,6 +202,7 @@
             this.EnterForename.TabIndex = 3;
             this.EnterForename.TabStop = false;
             this.EnterForename.Text = "Forename";
+            this.EnterForename.TextChanged += new System.EventHandler(this.EnterForename_TextChanged);
             this.EnterForename.Enter += new System.EventHandler(this.EnterForename_Enter);
             this.EnterForename.Leave += new System.EventHandler(this.EnterForename_Leave);
             // 
@@ -230,6 +235,7 @@
             this.EnterSurname.TabIndex = 4;
             this.EnterSurname.TabStop = false;
             this.EnterSurname.Text = "Surname";
+            this.EnterSurname.TextChanged += new System.EventHandler(this.EnterSurname_TextChanged);
             this.EnterSurname.Enter += new System.EventHandler(this.EnterSurname_Enter);
             this.EnterSurname.Leave += new System.EventHandler(this.EnterSurname_Leave);
             // 
@@ -282,8 +288,11 @@
             this.Controls.Add(this.EnterPassword);
             this.Controls.Add(this.RegisterCancel);
             this.Controls.Add(this.RegisterAccept);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Register";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan - Register";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
