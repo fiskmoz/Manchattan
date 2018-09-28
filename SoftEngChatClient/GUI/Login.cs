@@ -39,6 +39,7 @@ namespace SoftEngChatClient
         // Creates the ChatWindow when Login button is accepted. 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            label1.Visible = false;
             LoginButtonClick(this, e);
         }
 
