@@ -97,8 +97,11 @@ namespace SoftEngChatClient
                 EnterEmail.Text = "";
                 EnterEmail.ForeColor = Color.White;
 
-                EnterPassword.Text = "Password";
-                EnterPassword.PasswordChar = '\0';
+                if (EnterPassword.Text == "")
+                {
+                    EnterPassword.Text = "Password";
+                    EnterPassword.PasswordChar = '\0';
+                }
 
                 rememberMeCheckBox.Checked = false;
 
