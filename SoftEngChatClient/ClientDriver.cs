@@ -48,7 +48,8 @@ namespace SoftEngChatClient.Controller
 
 		internal void CloseRegWindow()
 		{
-			if (loginWindow.InvokeRequired)
+            registerWindow.RegLabelSet(false);
+            if (loginWindow.InvokeRequired)
 			{
 				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
 			}
@@ -56,9 +57,10 @@ namespace SoftEngChatClient.Controller
 			if (registerWindow.InvokeRequired)
 			{
 				registerWindow.Invoke(new Action(registerWindow.Close));
-				return;
+                return;
 			}
 			loginWindow.RegistrationOKinfo();
+            
 			registerWindow.Close();
 		}
 

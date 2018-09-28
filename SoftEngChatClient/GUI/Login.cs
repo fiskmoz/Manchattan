@@ -60,6 +60,7 @@ namespace SoftEngChatClient
 
 		internal void RegistrationOKinfo()
 		{
+            
 			label1.Visible = true;
 		}
 

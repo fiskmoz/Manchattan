@@ -32,6 +32,7 @@ namespace SoftEngChatClient
         private void RegisterCancel_Click(object sender, EventArgs e)
         {
             CancelButtonClicked(this, e);
+            RegLabelSet(false);
             ClearFields();
         }
         private void ClearFields()
@@ -206,6 +207,10 @@ namespace SoftEngChatClient
         private void EnterSurname_TextChanged(object sender, EventArgs e)
         {
             RegisterButtonEnabled();
+        }
+        public void RegLabelSet(bool set)
+        {
+            regRejectLbl.Visible = set;
         }
     }
 }
