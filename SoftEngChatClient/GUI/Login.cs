@@ -19,6 +19,7 @@ namespace SoftEngChatClient
         public event EventHandler ExitButtonClicked;
         public event EventHandler CheckButtonChanged;
         public event EventHandler LoginLoaded;
+        public event FormClosedEventHandler loginClosed;
 
         public string getUsername()
         {
@@ -70,8 +71,7 @@ namespace SoftEngChatClient
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
-            System.Environment.Exit(1);
+            loginClosed(sender, e);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

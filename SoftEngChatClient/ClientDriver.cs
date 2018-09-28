@@ -124,6 +124,7 @@ namespace SoftEngChatClient.Controller
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
             loginWindow.CheckButtonChanged += new EventHandler(cd_CheckBoxChanged);
             loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
+            loginWindow.loginClosed += new FormClosedEventHandler(cd_LoginExitWindow);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			setupChatWindowListeners();
@@ -279,8 +280,9 @@ namespace SoftEngChatClient.Controller
 
         private void cd_LoginExitWindow(object sender, EventArgs e)
         {
+            writer.WriteLogout(MessageType.logout);
+            Thread.Sleep(1000);
             Application.Exit();
-			writer.WriteLogout(MessageType.logout);
             System.Environment.Exit(1);
         }
         private void cd_ClientRegisterButtonClick(object sender, EventArgs e)
