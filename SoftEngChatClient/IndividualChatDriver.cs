@@ -62,19 +62,18 @@ namespace SoftEngChatClient
 
         private void icd_SendButtonClicked(object sender, EventArgs e)
         {
-            spam++;
-
-            if (spam < 5)
+            if (window.removeEnterWhenSending().Length > 0)
             {
-                if(window.removeEnterWhenSending().Length > 0)
+                spam++;
+                if (spam < 5)
                 {
                     writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
                     window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());
                 }
-            }
-            else
-            {
-                window.AppendTextBox("[Program] Don´t spam");
+                else
+                {
+                    window.AppendTextBox("[Program] Don´t spam");
+                }
             }
             window.clearMessageBox();
 

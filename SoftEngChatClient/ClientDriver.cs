@@ -296,18 +296,18 @@ namespace SoftEngChatClient.Controller
         }
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
-            spam++;
-            if(spam < 5)
+            if (chatWindow.removeEnterWhenSending().Length > 0)
             {
-                if(chatWindow.removeEnterWhenSending().Length > 0)
+                spam++;
+                if (spam < 5)
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
-                    chatWindow.AppendTextBox("["+username+"] : " + chatWindow.removeEnterWhenSending());
+                    chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
                 }
-            }
-            else
-            {
-                chatWindow.AppendTextBox("[Program] Don´t spam");
+                else
+                {
+                    chatWindow.AppendTextBox("[Program] Don´t spam");
+                }
             }
             chatWindow.clearMessageBox();
         }
