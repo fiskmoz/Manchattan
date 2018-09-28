@@ -61,12 +61,15 @@ namespace SoftEngChatClient
             this.MessageBox.Name = "MessageBox";
             this.MessageBox.Size = new System.Drawing.Size(390, 79);
             this.MessageBox.TabIndex = 0;
+            this.MessageBox.TextChanged += new System.EventHandler(this.MessageBox_TextChanged);
+            this.MessageBox.Enter += new System.EventHandler(this.MessageBox_Enter);
             this.MessageBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MessageBox_KeyUp);
             // 
             // SendButton
             // 
             this.SendButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.SendButton.Enabled = false;
             this.SendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.SendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.SendButton.ForeColor = System.Drawing.Color.White;

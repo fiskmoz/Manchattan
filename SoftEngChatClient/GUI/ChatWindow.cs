@@ -118,5 +118,20 @@ namespace SoftEngChatClient
 		{
 			logoutEvent(sender, e);
 		}
-	}
+
+        private void MessageBox_Enter(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void MessageBox_TextChanged(object sender, EventArgs e)
+        {
+            if (MessageBox.Text == "")
+            {
+                SendButton.Enabled = false;
+            }
+            else
+                SendButton.Enabled = true;
+        }
+    }
 }

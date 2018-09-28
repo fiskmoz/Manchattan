@@ -258,7 +258,7 @@ namespace SoftEngChatClient.Controller
             }
             catch (Exception)
             {
-                chatWindow.AppendTextBox(messageList,"Failed to read previous messages" + System.Environment.NewLine);
+                chatWindow.AppendTextBox(messageList,"" + System.Environment.NewLine);
             }
         }
         private void cd_OpenRegisterWindow(object sender, EventArgs e)
