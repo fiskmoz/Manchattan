@@ -99,12 +99,5 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		}
 	}
 
-	class IncommingMessage : EventArgs
-	{
-		public string Message { get; set; }
-		public IncommingMessage(string message)
-		{
-			Message = message;
-		}
-	}
+
 }
