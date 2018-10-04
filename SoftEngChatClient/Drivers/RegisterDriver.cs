@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using SoftEngChatClient.Model;
 using SoftEngChatClient.Model.SSLCommunication;
 
 namespace SoftEngChatClient.Controller
@@ -47,6 +48,11 @@ namespace SoftEngChatClient.Controller
             // TextChanged
             register.TextChanged += new EventHandler(RD_TextChanged);
         }
+
+		public void RD_Subscribe(Messagehandler mh)
+		{
+			mh.IncommingRegAck += new EventHandler(RD_RegisterCheck);
+		}
         // Button Clicks
         private void RD_RegisterButtonClick(object sender, EventArgs e)
         {
@@ -59,9 +65,9 @@ namespace SoftEngChatClient.Controller
             register.RegLabelSet(false);
         }
         // Check Register ACK
-        public void RD_RegisterCheck(object sender, RegAck ack)
+        public void RD_RegisterCheck(object sender, EventArgs ack)
         {
-            if (ack.message == true)
+            if (((RegAck)ack).message == true)
             {
                 RD_ClearFields();
                 register.Close();
