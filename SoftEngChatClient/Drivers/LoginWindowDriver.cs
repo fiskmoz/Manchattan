@@ -17,6 +17,7 @@ namespace SoftEngChatClient.Drivers
         Login loginWindow;
         private RegisterDriver regDriver;
 
+        private string username;
         private string rememberMePassword;
         private bool rememberMe;
 
@@ -25,6 +26,7 @@ namespace SoftEngChatClient.Drivers
             loginWindow = new Login();
             regDriver = new RegisterDriver(writer);
             this.writer = writer;
+            SetupListeners();
         }
         private void SetupListeners()
         {
@@ -97,17 +99,13 @@ namespace SoftEngChatClient.Drivers
             System.Environment.Exit(1);
         }
 
-        private void cd_OpenRegisterWindow(object sender, EventArgs e)
-        {
-            //regDriver.DisplayRegWindow();
-        }
         private void LoginButtonClicked(object sender, EventArgs e)
         {
             writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
-            SetUserName(loginWindow.getUsername());
+            username = loginWindow.getUsername();
             if (rememberMe == true)
             {
-                SetPassword(loginWindow.getPassword());
+                rememberMePassword = loginWindow.getPassword();
             }
         }
 
@@ -135,13 +133,7 @@ namespace SoftEngChatClient.Drivers
 
        public Login GetLoginForm()
         {
-            return loginWindow();
+            return loginWindow;
         }
-
-        /*private void cd_ClientRegisterButtonClick(object sender, EventArgs e)
-        {
-            writer.WriteRegister(MessageType.register, regDriver.getUserName(), regDriver.getEmail(), regDriver.getPassword(),
-              regDriver.getForename(), regDriver.getSurname());
-        }*/
     }
 }
