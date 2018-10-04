@@ -21,7 +21,7 @@ namespace SoftEngChatClient.Controller
 		private SSLListener streamListener;
 		private SSLWriter writer;
 		private Messagehandler messagehandler;
-        private LogCrypto logCrypto;
+        private Cryptography logCrypto;
 
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
@@ -55,7 +55,7 @@ namespace SoftEngChatClient.Controller
             writer = new SSLWriter(connector.SslStream);
             streamListener = new SSLListener(connector.SslStream);
             messagehandler = new Messagehandler(); 
-            logCrypto = new LogCrypto();
+            logCrypto = new Cryptography();
 
             //Random input for encryption 
             string input = "hejhejjkjdueoplikmnakduehgjdmnju";

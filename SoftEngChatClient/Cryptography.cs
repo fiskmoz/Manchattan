@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient
 {
-    class LogCrypto
+    class Cryptography
     {
         private AesManaged aes;
 
-        public LogCrypto()
+        public Cryptography()
         {
             aes = new AesManaged();
             aes.GenerateKey();
         }
 
-        public LogCrypto(byte[] key)
+        public Cryptography(byte[] key)
         {
             aes = new AesManaged();
             aes.Key = key;
@@ -146,6 +146,24 @@ namespace SoftEngChatClient
                 }
             }
             return plaintext;
+        }
+
+        //Method to hash a string
+        //To be implemented with login messages
+        public static string Sha256_hash(string plaintext)
+        {
+            StringBuilder sb = new StringBuilder();
+            using(SHA256 hash = SHA256.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(plaintext));
+
+                foreach(Byte b in result)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+            }
+            return sb.ToString();
         }
     }
 }

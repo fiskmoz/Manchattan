@@ -74,7 +74,7 @@
     </Compile>
     <Compile Include="MessageHandling\IncommingMessages.cs" />
     <Compile Include="Drivers\IndividualChatDriver.cs" />
-    <Compile Include="LogCrypto.cs" />
+    <Compile Include="Cryptography.cs" />
     <Compile Include="MessageHandling\Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="Program.cs" />
