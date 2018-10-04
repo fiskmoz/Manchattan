@@ -40,25 +40,18 @@ namespace SoftEngChatClient.Controller
 		// When creating the ClientDriver in main (program.cs)
 		public ClientDriver()
 		{
-            
-			ConstructGUI();
-            ConstructBackend();
-			SetupListeners();
-            chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
-
-        }
-
-		//Constructs GUI windows and list of individual chat windows.
-		private void ConstructGUI()
-        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-        }
+            ConstructBackend();
+            chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
+            loginWindowDriver = new LoginWindowDriver(writer);
+            SetupListeners();
+            
 
+        }
         //Constructs backend modules
         private void ConstructBackend()
         {
-            
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
