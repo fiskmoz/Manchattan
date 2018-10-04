@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\ChatWindowDriver.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GUI\ChatWindow.cs">
       <SubType>Form</SubType>
