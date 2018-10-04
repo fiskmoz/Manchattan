@@ -14,12 +14,13 @@ public class User
     //Standard constructor.
     public User(List<string> userInfo)
     {
-        this.ID         = ++IDnr;
-        this.userName   = userInfo[0];
-        this.mail       = userInfo[1];
-        this.password   = userInfo[2];
-        this.firstName  = userInfo[3];
-        this.lastName   = userInfo[4];
+
+        ID         = ++IDnr;
+        userName   = userInfo[0];
+        mail       = userInfo[1];
+        password   = userInfo[2];
+        firstName  = userInfo[3];
+        lastName   = userInfo[4];
     }
 
     //Constructor when parsing in JSON.
