@@ -65,6 +65,7 @@ namespace SoftEngChatClient.Controller
             {
                 RD_ClearFields();
                 register.Close();
+                register.RegLabelSet(false);
             }
 
             else
