@@ -52,8 +52,7 @@ namespace SoftEngChatClient.Controller
 		private void ConstructGUI()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false)
-            
+            Application.SetCompatibleTextRenderingDefault(false);
         }
 
         //Constructs backend modules
