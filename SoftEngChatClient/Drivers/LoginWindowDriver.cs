@@ -28,7 +28,20 @@ namespace SoftEngChatClient.Drivers
             this.writer = writer;
             SetupListeners();
         }
-        private void SetupListeners()
+
+		public void Subscribe(Model.Messagehandler mh)
+		{
+			mh.IncommingLoginAck += new EventHandler(Login);
+			mh.IncommingRegAck += new EventHandler(RegistrationSucceeded);
+		}
+
+		private void RegistrationSucceeded(object sender, EventArgs e)
+		{
+			if (((RegAck)e).message)
+				loginWindow.RegistrationOKinfo();
+		}
+
+		private void SetupListeners()
         {
             loginWindow.RegisterButtonClick += new EventHandler(regDriver.RD_OpenRegisterWindow);
             loginWindow.LoginButtonClick += new EventHandler(LoginButtonClicked);
@@ -109,16 +122,20 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-        public void Login(string inc)
+        public void Login(object sender, EventArgs eventArgs)
         {
-            if (loginWindow.InvokeRequired)
-            {
-                loginWindow.Invoke(new Action<string>(Login), new object[] { inc });
-                return;
-            }
-            username = loginWindow.getUsername();
-            Session session = new Session(username, rememberMePassword, rememberMe);
-            loginWindow.Hide();
+			if (((LoginAck)eventArgs).message)
+			{
+
+				if (loginWindow.InvokeRequired)
+				{
+					loginWindow.Invoke(new Action<object, EventArgs>(Login), new object[] { sender, eventArgs });
+					return;
+				}
+				username = loginWindow.getUsername();
+				Session session = new Session(username, rememberMePassword, rememberMe);
+				loginWindow.Hide();
+			}
         }
 
         public void HideLoginWindow()
