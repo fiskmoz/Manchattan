@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SoftEngChatClient.Model.SSLCommunication
+namespace SoftEngChatClient.Model
 {
     internal class Messagehandler
     {
