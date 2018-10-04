@@ -41,21 +41,21 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
 			writer = new SSLWriter(stream, server); //Writes into SSlStream
-			messageHandler = new Messagehandler(UserInfo.UserName, server, client: this);	//Handles incomming messages.
+			messageHandler = new Messagehandler(UserInfo.userName, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
 
         public void updateUserInfo(string username, string email, string password)
         {
-            UserInfo.UserName = username;
-            UserInfo.Mail = email;
-            UserInfo.Password = password;
+            UserInfo.userName = username;
+            UserInfo.mail = email;
+            UserInfo.password = password;
         }
 
 
         public string getUserName()
         {
-            return UserInfo.UserName;
+            return UserInfo.userName;
         }
 
 		internal void Dispose()
