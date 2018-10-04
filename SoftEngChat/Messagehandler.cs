@@ -6,14 +6,12 @@ namespace SoftEngChat.Model.SSLCommunication
 {
 	internal class Messagehandler
 	{
-		private string userName;
 		private SSLServer server;
 		private SSLClient client;
 
 		//Handles messages arriving at server.
 		public Messagehandler(string userName, SSLServer server, SSLClient client)
 		{
-			this.userName = userName;
 			this.server = server;
 			this.client = client;
 		}
@@ -92,29 +90,22 @@ namespace SoftEngChat.Model.SSLCommunication
 			
 		}
 
+        //IN:   Login message
+        //OUT:  True if username and password is correct and user not already logged in.
+        //      False otherwise
 		private bool ValidateLoginMessage(string message)
 		{
-			int i = 2;
 			string username = null;
 			string password = null;
-           // string mail = null;
-			
-			while(message[i] != ':')
-			{
-				username += message[i];
-				i++;
-			}
-            i++;
-			while (i < message.Length)
-			{
-				password += message[i];
-				i++;
-			}
+            // string mail = null;
+
+            string[] messageArray = ParseMessage(message);
+            username = messageArray[1];
+            password = messageArray[2];
 
             if((server.userManager.ValidateUser(username, password)) && server.IsUserOnline(username)==false)
             {
-                userName = username;
-                client.updateUserInfo(username, "emailPH", password);
+                client.userName = username;
                 return true;
             }else
             {

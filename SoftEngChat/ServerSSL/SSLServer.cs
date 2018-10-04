@@ -68,9 +68,9 @@ namespace SoftEngChat.Model.SSLCommunication
 				foreach (SSLClient client in clientList)
 				{
 					// If client has yet to log in, do not send.
-					if (client.getUserName() != "User")
+					if (client.userName != "User")
 					{
-						str.Append(":" + client.getUserName());
+						str.Append(":" + client.userName);
 					}
 				}
 				foreach (SSLClient client in clientList)
@@ -87,7 +87,7 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             foreach (var client in clientList)
             {
-                if (client.getUserName()==username)
+                if (client.userName == username)
                 {
                     return true;
                 }
@@ -102,12 +102,9 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.UserInfo.UserName != sender)
+				if(client.userName != sender || client.userName != null)
 				{
-                    if (client.getUserName() != "User" || client.getUserName() != sender)
-                    {
-                        client.writer.WriteClient(MessageType.client, sender, "All", message);
-                    }
+                    client.writer.WriteClient(MessageType.client, sender, "All", message);
                 }
 			}
 		}
@@ -116,7 +113,7 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             foreach (var client in clientList)
             {
-                if(client.UserInfo.UserName == receiver)
+                if(client.userName == receiver)
                 {
                     client.writer.WriteClient(MessageType.client, sender, receiver, message);
                     return;
