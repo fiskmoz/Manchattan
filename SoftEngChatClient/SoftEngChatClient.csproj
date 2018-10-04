@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RegisterDriver.cs" />
     <Compile Include="Session.cs" />
   </ItemGroup>
   <ItemGroup>
