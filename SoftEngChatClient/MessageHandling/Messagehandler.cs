@@ -11,7 +11,7 @@ namespace SoftEngChatClient.Model
         {
         }
 
-		public delegate void EventHandler(Object sender, EventArgs eventArgs);
+		//public delegate void EventHandler(Object sender, EventArgs eventArgs);
 		public event EventHandler IncommingRegAck;
 		public event EventHandler IncommingLoginAck;
 		public event EventHandler IncommingClientMessage;
