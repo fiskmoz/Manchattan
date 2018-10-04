@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Security;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
-	class SSLWriter
+    class SSLWriter
 	{
 		private SslStream stream;
 		private SSLServer server;
