@@ -34,37 +34,29 @@ namespace SoftEngChatClient.Controller
         {
             
 			streamListener.StartListen();
-			Application.Run(loginWindow);
+			Application.Run(loginWindowDriver.GetLoginForm());
 		}
 
 		// When creating the ClientDriver in main (program.cs)
 		public ClientDriver()
 		{
-            
-			ConstructGUI();
-            ConstructBackend();
-			SetupListeners();
-            chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
-
-        }
-
-		//Constructs GUI windows and list of individual chat windows.
-		private void ConstructGUI()
-        {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false)
+            Application.SetCompatibleTextRenderingDefault(false);
+            ConstructBackend();
+            chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
+            loginWindowDriver = new LoginWindowDriver(writer);
+            SetupListeners();
             
-        }
 
+        }
         //Constructs backend modules
         private void ConstructBackend()
         {
-            
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
             streamListener = new SSLListener(connector.SslStream);
-            messagehandler = new Messagehandler(this); //Needs to be changed, see Readme in MessegeHandler class
+            messagehandler = new Messagehandler(); 
             logCrypto = new LogCrypto();
 
             //Random input for encryption 
@@ -86,11 +78,6 @@ namespace SoftEngChatClient.Controller
             writer.stream = connector.SslStream;
             streamListener.stream = connector.SslStream;
             loginWindowDriver.ShowLoginWindow();
-        }
-
-        private void cd_RegisterWindowCancel(object sender, EventArgs e)
-        {
-            registerWindow.Close();
         }
     }
 }

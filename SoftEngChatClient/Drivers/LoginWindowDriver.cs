@@ -133,6 +133,11 @@ namespace SoftEngChatClient.Drivers
             loginWindow.Show();
         }
 
+       public Login GetLoginForm()
+        {
+            return loginWindow();
+        }
+
         /*private void cd_ClientRegisterButtonClick(object sender, EventArgs e)
         {
             writer.WriteRegister(MessageType.register, regDriver.getUserName(), regDriver.getEmail(), regDriver.getPassword(),
