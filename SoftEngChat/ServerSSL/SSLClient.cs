@@ -13,14 +13,13 @@ namespace SoftEngChat.Model.SSLCommunication
 	//A client we are connected to.
     class SSLClient
     {
-        public User UserInfo { get; set; }
+        public string userName { set; get; }
 		public SSLListener listener;
 		public SSLWriter writer;
 		public SslStream stream;
 		private SSLServer server;
 		private Messagehandler messageHandler;
 		internal bool isVerifiedUser;
-		public List<string> info;
         public int sessionID;
 
 
@@ -31,32 +30,13 @@ namespace SoftEngChat.Model.SSLCommunication
 			this.stream = stream;
             this.sessionID = incomingID;
 
-			info = new List<string>();
-			info.Add("User");
-			info.Add("Mail");
-			info.Add("Pass");
-			info.Add("firstname");
-			info.Add("lastname");
-			UserInfo = new User(info);
+            userName = null;
 
 			listener = new SSLListener(stream);		//Listens to SSLStream
 			writer = new SSLWriter(stream, server); //Writes into SSlStream
-			messageHandler = new Messagehandler(UserInfo.userName, server, client: this);	//Handles incomming messages.
+			messageHandler = new Messagehandler(userName, server, client: this);	//Handles incomming messages.
 			listener.IncommingMessage += messageHandler.HandleMessage;  //Client starts to listen for incomming messages.
 		}
-
-        public void updateUserInfo(string username, string email, string password)
-        {
-            UserInfo.userName = username;
-            UserInfo.mail = email;
-            UserInfo.password = password;
-        }
-
-
-        public string getUserName()
-        {
-            return UserInfo.userName;
-        }
 
 		internal void Dispose()
 		{

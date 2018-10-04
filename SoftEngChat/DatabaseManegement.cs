@@ -12,9 +12,9 @@ namespace SoftEngChat
     public class DatabaseManegement
     {
         //File path where the login file appears.
-        static String fileName = "DB.txt";
-        static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-        List<User> user;
+        private static readonly string fileName = "DB.txt";
+        private static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+        private List<User> user;
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
@@ -59,6 +59,7 @@ namespace SoftEngChat
                 "Adminson"
             };
             user.Add(new User(info));
+
             try
             {
                 using (StreamWriter file = File.AppendText(filePath))
@@ -102,7 +103,6 @@ namespace SoftEngChat
                 Console.WriteLine("Dont work, DB read"+ e.ToString());
                     
             } 
-            
             return user;
         }
     }
