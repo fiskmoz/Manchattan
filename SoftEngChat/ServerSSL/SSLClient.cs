@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Security;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Net.Security;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
-	//A client we are connected to.
+    //A client we are connected to.
     class SSLClient
     {
         public string userName { set; get; }
