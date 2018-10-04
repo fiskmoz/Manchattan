@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SoftEngChatClient.Controller;
 
 namespace SoftEngChatClient
 {
@@ -14,6 +15,24 @@ namespace SoftEngChatClient
     {
         public event EventHandler RegisterButtonClick;
         public event EventHandler CancelButtonClicked;
+
+        public event EventHandler EnterUsernameClicked;
+        public event EventHandler EnterUsernameLeaved;
+
+        public event EventHandler EnterPasswordClicked;
+        public event EventHandler EnterPasswordLeaved;
+
+        public event EventHandler EnterEmailClicked;
+        public event EventHandler EnterEmailLeaved;
+
+        public event EventHandler EnterForenameClicked;
+        public event EventHandler EnterForenameLeaved;
+
+        public event EventHandler EnterSurnameClicked;
+        public event EventHandler EnterSurnameLeaved;
+
+        public event EventHandler TextChanged;
+        
 
         // Initializes parameters and settings for the Register window.
         public Register()
@@ -25,188 +44,162 @@ namespace SoftEngChatClient
         private void RegisterAccept_Click(object sender, EventArgs e)
         {
             RegisterButtonClick(this, e);
-            ClearFields();
         }
         
         // Cancels the registration and returns to Login window.
         private void RegisterCancel_Click(object sender, EventArgs e)
         {
             CancelButtonClicked(this, e);
-            RegLabelSet(false);
-            ClearFields();
         }
-        private void ClearFields()
-        {
-            EnterUsername.Text = "Username";
-            EnterPassword.Text = "Password";
-            EnterEmail.Text = "Email";
-            EnterForename.Text = "Forename";
-            EnterSurname.Text = "Surname";
-            EnterUsername.ForeColor = Color.Gray;
-            EnterPassword.ForeColor = Color.Gray;
-            EnterEmail.ForeColor = Color.Gray;
-            EnterForename.ForeColor = Color.Gray;
-            EnterSurname.ForeColor = Color.Gray;
-        }
-
+        
         private void EmailLabel_Click(object sender, EventArgs e)
         {
 
         }
-
-        public string getUserName()
+        // Username
+        public string getUsernameText()
         {
             return this.EnterUsername.Text;
         }
-        public string getPassword()
+        public void setUsernameText(string newText)
+        {
+            this.EnterUsername.Text = newText;
+        }
+        public void setUsernameColor(Color newColor)
+        {
+            this.EnterUsername.ForeColor = newColor;
+        }
+        // Password
+        public string getPasswordText()
         {
             return this.EnterPassword.Text;
         }
-        public string getEmail()
+        public void setPasswordText(string newText)
+        {
+            this.EnterPassword.Text = newText;
+        }
+        public void setPasswordColor(Color newColor)
+        {
+            this.EnterPassword.ForeColor = newColor;
+        }
+        // Email
+        public string getEmailText()
         {
             return this.EnterEmail.Text;
         }
-        public string getForename()
+        public void setEmailText(string newText)
+        {
+            this.EnterEmail.Text = newText;
+        }
+        public void setEmailColor(Color newColor)
+        {
+            this.EnterEmail.ForeColor = newColor;
+        }
+        // Forename
+        public string getForenameText()
         {
             return this.EnterForename.Text;
         }
-        public string getSurname()
+        public void setForenameText(string newText)
+        {
+            this.EnterForename.Text = newText;
+        }
+        public void setForenameColor(Color newColor)
+        {
+            this.EnterForename.ForeColor = newColor;
+        }
+        // Surname
+        public string getSurnameText()
         {
             return this.EnterSurname.Text;
         }
+        public void setSurnameText(string newText)
+        {
+            this.EnterSurname.Text = newText;
+        }
+        public void setSurnameColor(Color newColor)
+        {
+            this.EnterSurname.ForeColor = newColor;
+        }
 
-		internal void RegistrationRejected()
+
+        internal void RegistrationRejected()
 		{
 			regRejectLbl.Visible = true;
 		}
 
         private void EnterUsername_Enter(object sender, EventArgs e)
         {
-            if(EnterUsername.Text == "Username")
-            {
-                EnterUsername.Text = "";
-                EnterUsername.ForeColor = Color.White;
-            }
+            EnterUsernameClicked(this, e);
         }
-
         private void EnterUsername_Leave(object sender, EventArgs e)
         {
-            if(EnterUsername.Text == "")
-            {
-                EnterUsername.Text = "Username";
-                EnterUsername.ForeColor = Color.Gray;
-            }
+            EnterUsernameLeaved(this, e);
         }
 
         private void EnterPassword_Enter(object sender, EventArgs e)
         {
-            if(EnterPassword.Text == "Password")
-            {
-                EnterPassword.Text = "";
-                EnterPassword.ForeColor = Color.White;
-            }
+            EnterPasswordClicked(this, e);
+            
         }
-
         private void EnterPassword_Leave(object sender, EventArgs e)
         {
-            if (EnterPassword.Text == "")
-            {
-                EnterPassword.Text = "Password";
-                EnterPassword.ForeColor = Color.Gray;
-            }
+            EnterPasswordLeaved(this, e);
+            
         }
 
         private void EnterEmail_Enter(object sender, EventArgs e)
         {
-            if (EnterEmail.Text == "Email")
-            {
-                EnterEmail.Text = "";
-                EnterEmail.ForeColor = Color.White;
-            }
+            EnterEmailClicked(this, e);
         }
-
         private void EnterEmail_Leave(object sender, EventArgs e)
         {
-            if (EnterEmail.Text == "")
-            {
-                EnterEmail.Text = "Email";
-                EnterEmail.ForeColor = Color.Gray;
-            }
+            EnterEmailLeaved(this, e);
         }
 
         private void EnterForename_Enter(object sender, EventArgs e)
         {
-            if(EnterForename.Text == "Forename")
-            {
-                EnterForename.Text = "";
-                EnterForename.ForeColor = Color.White;
-            }
+            EnterForenameClicked(this, e);
         }
-
         private void EnterForename_Leave(object sender, EventArgs e)
         {
-            if (EnterForename.Text == "")
-            {
-                EnterForename.Text = "Forename";
-                EnterForename.ForeColor = Color.Gray;
-            }
+            EnterForenameLeaved(this, e);
         }
 
         private void EnterSurname_Enter(object sender, EventArgs e)
         {
-            if(EnterSurname.Text == "Surname")
-            {
-                EnterSurname.Text = "";
-                EnterSurname.ForeColor = Color.White;
-            }
+            EnterSurnameClicked(this, e);
         }
-
         private void EnterSurname_Leave(object sender, EventArgs e)
         {
-            if (EnterSurname.Text == "")
-            {
-                EnterSurname.Text = "Surname";
-                EnterSurname.ForeColor = Color.Gray;
-            }
+            EnterSurnameLeaved(this, e);
         }
-        private void RegisterButtonEnabled()
+
+        public void SetRegisterAccept(bool value, Color backColor)
         {
-            if ((String.IsNullOrWhiteSpace(EnterUsername.Text) || EnterUsername.Text == "Username") ||
-                (String.IsNullOrWhiteSpace(EnterPassword.Text) || EnterPassword.Text == "Password") ||
-                (String.IsNullOrWhiteSpace(EnterEmail.Text) || EnterEmail.Text == "Email") ||
-                (String.IsNullOrWhiteSpace(EnterForename.Text) || EnterForename.Text == "Forename") ||
-                (String.IsNullOrWhiteSpace(EnterSurname.Text) || EnterSurname.Text == "Surname")) 
-
-            {
-                RegisterAccept.Enabled = false;
-                RegisterAccept.BackColor = Color.FromArgb(41, 164, 221);
-                return;
-            }
-
-            RegisterAccept.Enabled = true;
-            RegisterAccept.BackColor = Color.FromArgb(64, 64, 64);
-
+            RegisterAccept.Enabled = value;
+            RegisterAccept.BackColor = backColor;
         }
 
         private void EnterUsername_TextChanged(object sender, EventArgs e)
         {
-            RegisterButtonEnabled();
+            TextChanged(this, e);
         }
         private void EnterPassword_TextChanged(object sender, EventArgs e)
         {
-            RegisterButtonEnabled();
+            TextChanged(this, e);
         }
         private void EnterEmail_TextChanged(object sender, EventArgs e)
         {
-            RegisterButtonEnabled();
+            TextChanged(this, e);
         }
         private void EnterForename_TextChanged(object sender, EventArgs e)
         {
-            RegisterButtonEnabled();
+            TextChanged(this, e);
         }
         private void EnterSurname_TextChanged(object sender, EventArgs e)
         {
-            RegisterButtonEnabled();
+            TextChanged(this, e);
         }
         public void RegLabelSet(bool set)
         {

@@ -102,7 +102,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.UserInfo.UserName != sender)
+				if(client.UserInfo.userName != sender)
 				{
                     if (client.getUserName() != "User" || client.getUserName() != sender)
                     {
@@ -116,7 +116,7 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             foreach (var client in clientList)
             {
-                if(client.UserInfo.UserName == receiver)
+                if(client.UserInfo.userName == receiver)
                 {
                     client.writer.WriteClient(MessageType.client, sender, receiver, message);
                     return;

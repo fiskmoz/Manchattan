@@ -11,12 +11,14 @@ using System.Timers;
 
 namespace SoftEngChatClient.Controller
 {
-	class ClientDriver
+	public class ClientDriver
 	{
         int spam;
 		private ChatWindow chatWindow;
 		private Login loginWindow;
         private Register registerWindow;
+
+        private RegisterDriver regDriver; // Tillfällig kod
 
         private List<IndividualChatDriver> individualChatDrivers;
 
@@ -90,14 +92,14 @@ namespace SoftEngChatClient.Controller
             chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
                                             //Print output for user
             loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
-            registerWindow = new Register();
+            //registerWindow = new Register();
             individualChatDrivers = new List<IndividualChatDriver>();
         }
 
         //Constructs backend modules
         private void ConstructBackend()
         {
-
+            regDriver = new RegisterDriver(writer);
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
@@ -120,15 +122,12 @@ namespace SoftEngChatClient.Controller
             timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
             timer.Enabled = true;
 
-            
-            loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
+            loginWindow.RegisterButtonClick += new EventHandler(regDriver.RD_OpenRegisterWindow); // Till den som gör LoginDriver använd RD_OpenRegisterWindow istället för cd_OpenRegisterWindow
 			loginWindow.LoginButtonClick += new EventHandler(cd_TryLogin);
 			loginWindow.ExitButtonClicked += new EventHandler(cd_LoginExitWindow);
             loginWindow.CheckButtonChanged += new EventHandler(cd_CheckBoxChanged);
             loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
             loginWindow.loginClosed += new FormClosedEventHandler(cd_LoginExitWindow);
-			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
-			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
 			setupChatWindowListeners();
         }
 
@@ -286,15 +285,6 @@ namespace SoftEngChatClient.Controller
             Thread.Sleep(1000);
             Application.Exit();
             System.Environment.Exit(1);
-        }
-        private void cd_ClientRegisterButtonClick(object sender, EventArgs e)
-        {
-            writer.WriteRegister(MessageType.register, registerWindow.getUserName(), registerWindow.getEmail(), registerWindow.getPassword(),
-              registerWindow.getForename(), registerWindow.getSurname());
-        }
-        private void cd_RegisterWindowCancel(object sender, EventArgs e)
-        {
-            registerWindow.Close();
         }
         private void cd_ChatWindowSend(object sender, EventArgs e)
         {
