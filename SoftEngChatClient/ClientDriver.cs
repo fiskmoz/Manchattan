@@ -9,12 +9,14 @@ using System.Windows.Forms;
 using SoftEngChatClient.Model.SSLCommunication;
 using System.Timers;
 using SoftEngChatClient.Drivers;
+using SoftEngChatClient.Model;
 
 namespace SoftEngChatClient.Controller
 {
 	class ClientDriver
 	{
         private ChatWindowDriver chatWindowDriver;
+        private RegisterDriver regDriver;
 		private Login loginWindow;
         private Register registerWindow;
 		private SSLConnector connector;
@@ -94,7 +96,7 @@ namespace SoftEngChatClient.Controller
         //Constructs backend modules
         private void ConstructBackend()
         {
-
+            regDriver = new RegisterDriver(writer);
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
@@ -112,7 +114,7 @@ namespace SoftEngChatClient.Controller
         private void SetupListeners()
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
-            chatWindowDriver.Restart += new EventHandler(ChatWindowLogout);
+            chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
 
 
             
