@@ -49,7 +49,7 @@ namespace SoftEngChatClient
 			this.message = message;
 		}
 
-		public ClientMessage(List<string> parsedMessage)
+		public ClientMessage(string[] parsedMessage)
 		{
 			sender = parsedMessage[1];
 			receiver = parsedMessage[2];
