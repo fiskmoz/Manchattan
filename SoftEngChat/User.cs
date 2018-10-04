@@ -1,39 +1,36 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 
 public class User
 {
     private static int IDnr;
     public int ID { get;  set; }
-    public string UserName { get; set; }
-    public string Mail { get; set; }
-	public string Password { get; set; }
-	public string Firstname { get; set;}
-    public string LastName { get; set; }
+    public string userName { get; set; }
+    public string mail { get; set; }
+	public string password { get; set; }
+	private string firstName { get; set;}
+    private string lastName { get; set; }
 
     //Standard constructor.
     public User(List<string> userInfo)
     {
-        this.ID = ++IDnr;
-        this.UserName = userInfo[0];
-        this.Mail = userInfo[1];
-        this.Password = userInfo[2];
-        this.Firstname = userInfo[3];
-        this.LastName = userInfo[4];
+        this.ID         = ++IDnr;
+        this.userName   = userInfo[0];
+        this.mail       = userInfo[1];
+        this.password   = userInfo[2];
+        this.firstName  = userInfo[3];
+        this.lastName   = userInfo[4];
     }
 
-    //Constructor when parsing JSON.
+    //Constructor when parsing in JSON.
     [JsonConstructor]
-    public User(int id, string username, string mail, string password, string firstName, string lastName)
+    public User(int ID, string userName, string mail, string password, string firstName, string lastName)
 	{
-		this.ID			= id;
-		this.UserName	= username;
-		this.Mail		= mail;
-		this.Password	= password;
-		this.Firstname	= firstName;
-		this.LastName	= lastName;
+		this.ID			= ID;
+		this.userName	= userName;
+		this.mail		= mail;
+		this.password	= password;
+		this.firstName	= firstName;
+		this.lastName	= lastName;
 	}
 }

@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SoftEngChatClient.Model.SSLCommunication;
 using System.Timers;
+using SoftEngChatClient.Drivers;
+using SoftEngChatClient.Model;
 
 namespace SoftEngChatClient.Controller
 {
 	class ClientDriver
 	{
-        int spam;
-		private ChatWindow chatWindow;
+        private ChatWindowDriver chatWindowDriver;
+        private RegisterDriver regDriver;
 		private Login loginWindow;
         private Register registerWindow;
-
-        private List<IndividualChatDriver> individualChatDrivers;
-
 		private SSLConnector connector;
 		private SSLListener streamListener;
 		private SSLWriter writer;
@@ -27,12 +26,11 @@ namespace SoftEngChatClient.Controller
         private LogCrypto logCrypto;
 
         private string username;
-        private string rememberMePassword;
 
-        public List<string> messageList;
+        private string rememberMePassword;
         private bool rememberMe;
 
-        private bool loggingOut = false;
+
 
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
@@ -67,10 +65,13 @@ namespace SoftEngChatClient.Controller
 		// When creating the ClientDriver in main (program.cs)
 		public ClientDriver()
 		{
+            
 			ConstructGUI();
             ConstructBackend();
 			SetupListeners();
-		}
+            chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
+
+        }
 
 		internal void RegistrationRejected()
 		{
@@ -87,17 +88,15 @@ namespace SoftEngChatClient.Controller
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            chatWindow = new ChatWindow();  //Should not handle messages (Only read user input and let backend handle the details)
-                                            //Print output for user
-            loginWindow = new Login();      //Only responsible for login-functionality (see SRP Principle)
+            loginWindow = new Login();
             registerWindow = new Register();
-            individualChatDrivers = new List<IndividualChatDriver>();
+            
         }
 
         //Constructs backend modules
         private void ConstructBackend()
         {
-
+            regDriver = new RegisterDriver(writer);
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
             writer = new SSLWriter(connector.SslStream);
@@ -115,10 +114,8 @@ namespace SoftEngChatClient.Controller
         private void SetupListeners()
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
+            chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
 
-            System.Timers.Timer timer = new System.Timers.Timer(1000);
-            timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
-            timer.Enabled = true;
 
             
             loginWindow.RegisterButtonClick += new EventHandler(cd_OpenRegisterWindow);
@@ -129,65 +126,20 @@ namespace SoftEngChatClient.Controller
             loginWindow.loginClosed += new FormClosedEventHandler(cd_LoginExitWindow);
 			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
 			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
-			setupChatWindowListeners();
         }
 
-
-        private void cd_WindowClosed(object obj, FormClosedEventArgs e)
+        private void ChatWindowLogout(object o, EventArgs e)
         {
-            var str = chatWindow.getChatBox();
-            var byteArray = logCrypto.EncryptString(str);
-            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
-            fs.Write(byteArray, 0, byteArray.Length);
-            fs.Close();
-            Session session = new Session(username, rememberMePassword, rememberMe);
-            if (loggingOut == false)
-            {
-                writer.WriteLogout(MessageType.logout);
-                Thread.Sleep(1000);
-                Application.Exit();
-                System.Environment.Exit(1);
-            }
+            connector.Connect();
+            writer.stream = connector.SslStream;
+            streamListener.stream = connector.SslStream;
+            loginWindow.Show();
         }
 
-        private void cd_HandleLogout(object sender, EventArgs e)
-		{
-			CloseCurrentSession();
-            chatWindow = new ChatWindow();
-			setupChatWindowListeners();
-			OpenNewSession();
-		}
 
-		private void CloseCurrentSession()
-		{
-			loggingOut = true;
-            cd_WindowClosed(this, new FormClosedEventArgs(CloseReason.None));
-            chatWindow.Close();
-			writer.WriteLogout(MessageType.logout);
-            loginWindow.resetLoginFields();
-			Thread.Sleep(2000);
-		}
-		private void OpenNewSession()
-		{
-			connector.Connect();
-			writer.stream = connector.SslStream;
-			streamListener.stream = connector.SslStream;
-			loginWindow.Show();
-			loggingOut = false;
-		}
 
-		private void setupChatWindowListeners()
-		{
-			chatWindow.sendButtonClicked += new EventHandler(cd_ChatWindowSend);
-			chatWindow.messageBoxKeyReleased += new KeyEventHandler(cd_CWMessageBoxKeyReleased);
-			chatWindow.previousMessageButtonClick += new EventHandler(cd_PreviousMessageButtonClicked);
-			chatWindow.chatWindowLoad += new EventHandler(cd_ChatWindowLoaded);
-			chatWindow.usernamePressed += new EventHandler(cd_HandleUsernamePressed);
-			chatWindow.logoutEvent += new EventHandler(cd_HandleLogout);
-			chatWindow.formClose += new FormClosedEventHandler(cd_WindowClosed);
-		}
 
-		private void cd_LoginIsLoaded(object sender, EventArgs e)
+        private void cd_LoginIsLoaded(object sender, EventArgs e)
         {
             CheckSessionFileExist();
             FileManager fileManager = new FileManager();
@@ -227,40 +179,10 @@ namespace SoftEngChatClient.Controller
             }
         }
 
-        private void cd_TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            if (spam >= 0)
-            {
-                spam--;
-            }
-        }
 
-        private void cd_HandleUsernamePressed(object sender, EventArgs e)
-        {
-            var index = chatWindow.listBox1.SelectedItem;
-            string receiver = chatWindow.listBox1.GetItemText(index);
-            if(receiver != username)
-            {
-                AddNewIndividualChat(receiver);
-            }
-        }
-        private void cd_ChatWindowLoaded(object sender, EventArgs e)
-        {
-            messageList = new List<string>();
-            try
-            {
-                string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\MessageLog.txt";
-                byte[] ba = File.ReadAllBytes(filePath);
+        Session session = new Session(username, rememberMePassword, rememberMe);
 
-                var goodString = logCrypto.DecryptBytes(ba);
-                chatWindow.AppendTextBox(messageList, goodString);
 
-            }
-            catch (Exception)
-            {
-                chatWindow.AppendTextBox(messageList,"" + System.Environment.NewLine);
-            }
-        }
         private void cd_OpenRegisterWindow(object sender, EventArgs e)
         {
             registerWindow.ShowDialog();
@@ -296,74 +218,9 @@ namespace SoftEngChatClient.Controller
         {
             registerWindow.Close();
         }
-        private void cd_ChatWindowSend(object sender, EventArgs e)
-        {
-            if (chatWindow.removeEnterWhenSending().Length > 0)
-            {
-                spam++;
-                if (spam < 5)
-                {
-                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
-                    chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
-                }
-                else
-                {
-                    chatWindow.AppendTextBox("[Program] Don´t spam");
-                }
-            }
-            chatWindow.clearMessageBox();
-        }
-        private void cd_PreviousMessageButtonClicked(object sender, EventArgs e)
-        {
-            foreach (string s in messageList)
-            {
-                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
-            }
-        }
-        private void cd_CWMessageBoxKeyReleased(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                cd_ChatWindowSend(sender, e);
-            }
-        }
 
-        public void AddNewIndividualChat(string sender)
-        {
-            bool found = false;
-            foreach (IndividualChatDriver icd in individualChatDrivers)
-            {
-                if (icd.getSender() == sender)
-                {
-                    found = true;
-                    if(!icd.isWindowVisible())
-                    {
-                        icd.displayWindow();
-                    }
-                }
-            }
-            if(found == false)
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender));
-        }
-        public void UpdateOnlineList(string str)
-        {
-            if (chatWindow.InvokeRequired)
-            {
-                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
-                return;
-            }
-            string[] usernames;
-            usernames = str.Split(':');
-            for (int n = chatWindow.listBox1.Items.Count -1; n >= 0; --n)
-            {
-                chatWindow.listBox1.Items.RemoveAt(n);
-            }
 
-            for (int i = 1; i < usernames.Length; i++)
-            {
-                chatWindow.listBox1.Items.Add(usernames[i]);
-            }
-        }
+
 
         public void Login(string inc)
         {
@@ -377,31 +234,6 @@ namespace SoftEngChatClient.Controller
             chatWindow.Show();
         }
 
-        public void ChatWindowPrint(string sender, string message)
-        {
-            chatWindow.AppendTextBox("[" + sender + "] : " + message);
-        }
-
-        public void IndividualChatPrint(string sender, string message)
-        {
-            foreach (var icd in individualChatDrivers)
-            {
-                if (sender == icd.getSender())
-                {
-                    icd.ReceiveMessage(message);
-                }
-            }
-        }
-
-        public void SetUserName(string name)
-		{
-			if (chatWindow.InvokeRequired)
-			{
-				chatWindow.Invoke(new Action<string>(chatWindow.SetUserName), name);
-				return;
-			}
-			chatWindow.SetUserName(name);
-		}
         public void CheckSessionFileExist()
         {
             FileManager fileManager = new FileManager();

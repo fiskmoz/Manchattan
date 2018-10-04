@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\ChatWindowDriver.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="GUI\ChatWindow.cs">
       <SubType>Form</SubType>
@@ -70,6 +71,7 @@
     <Compile Include="GUI\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncommingMessages.cs" />
     <Compile Include="IndividualChatDriver.cs" />
     <Compile Include="LogCrypto.cs" />
     <Compile Include="Messagehandler.cs" />
@@ -90,6 +92,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RegisterDriver.cs" />
     <Compile Include="Session.cs" />
   </ItemGroup>
   <ItemGroup>
