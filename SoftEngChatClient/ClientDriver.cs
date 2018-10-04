@@ -73,15 +73,7 @@ namespace SoftEngChatClient.Controller
 
         }
 
-		internal void RegistrationRejected()
-		{
-			if (registerWindow.InvokeRequired)
-			{
-				registerWindow.Invoke(new Action(registerWindow.RegistrationRejected));
-				return;
-			}
-			registerWindow.RegistrationRejected();
-		}
+		
 
 		//Constructs GUI windows and list of individual chat windows.
 		private void ConstructGUI()
@@ -124,8 +116,6 @@ namespace SoftEngChatClient.Controller
             loginWindow.CheckButtonChanged += new EventHandler(cd_CheckBoxChanged);
             loginWindow.LoginLoaded += new EventHandler(cd_LoginIsLoaded);
             loginWindow.loginClosed += new FormClosedEventHandler(cd_LoginExitWindow);
-			registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
-			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
         }
 
         private void ChatWindowLogout(object o, EventArgs e)

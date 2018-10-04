@@ -47,6 +47,7 @@ namespace SoftEngChatClient.Controller
             // TextChanged
             register.TextChanged += new EventHandler(RD_TextChanged);
         }
+        // Button Clicks
         private void RD_RegisterButtonClick(object sender, EventArgs e)
         {
             writer.WriteRegister(MessageType.register, register.getUsernameText(), register.getEmailText(), register.getPasswordText(),
@@ -56,6 +57,29 @@ namespace SoftEngChatClient.Controller
         {
             register.Close();
             register.RegLabelSet(false);
+        }
+        // Check Register ACK
+        public void RD_RegisterCheck(object sender, RegAck ack)
+        {
+            if (ack.message == true)
+            {
+                RD_ClearFields();
+                register.Close();
+            }
+
+            else
+                RD_RegistrationRejected();
+
+        }
+        // Rejected Registration
+        internal void RD_RegistrationRejected()
+        {
+            if (register.InvokeRequired)
+            {
+                register.Invoke(new Action(register.RegistrationRejected));
+                return;
+            }
+            register.RegistrationRejected();
         }
         // Username Field Action
         private void RD_EnterUsernameClicked(object sender, EventArgs e)
@@ -186,5 +210,7 @@ namespace SoftEngChatClient.Controller
             register.SetRegisterAccept(true, Color.FromArgb(64, 64, 64));
 
         }
+
+
     }
 }

@@ -122,7 +122,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			client.writer.WriteRegAck(regFlag);
 		}
-
+        
 		private string[] ParseMessage(string incomming)
 		{
 			string[] messageArray;

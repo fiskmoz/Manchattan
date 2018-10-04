@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;   
 
 namespace SoftEngChat
 {
@@ -16,9 +12,9 @@ namespace SoftEngChat
     public class DatabaseManegement
     {
         //File path where the login file appears.
-        static String fileName = "DB.txt";
-        static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
-        List<User> user;
+        private static readonly string fileName = "DB.txt";
+        private static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
+        private List<User> user;
 
         //Database constructor, it creates a file with all login credentials 
         public DatabaseManegement()
@@ -26,7 +22,6 @@ namespace SoftEngChat
             user = new List<User>();
             if (!File.Exists(filePath))
             {
-                //TestUsers();
                 DBInitWrite();
             }
         }
@@ -55,13 +50,16 @@ namespace SoftEngChat
         // Writes the test users to the database if it does not already exsist.
         private void DBInitWrite()
         {
-			List<string> info = new List<string>();
-			info.Add("Admin");
-			info.Add("mail");
-			info.Add("112");
-			info.Add("Admin");
-			info.Add("Adminson");
-			user.Add(new User(info));
+            List<string> info = new List<string>
+            {
+                "Admin",
+                "mail",
+                "112",
+                "Admin",
+                "Adminson"
+            };
+            user.Add(new User(info));
+
             try
             {
                 using (StreamWriter file = File.AppendText(filePath))
@@ -105,7 +103,6 @@ namespace SoftEngChat
                 Console.WriteLine("Dont work, DB read"+ e.ToString());
                     
             } 
-            
             return user;
         }
     }
