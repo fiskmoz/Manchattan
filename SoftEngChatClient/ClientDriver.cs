@@ -37,24 +37,6 @@ namespace SoftEngChatClient.Controller
 			Application.Run(loginWindow);
 		}
 
-		internal void CloseRegWindow()
-		{
-            registerWindow.RegLabelSet(false);
-            if (loginWindow.InvokeRequired)
-			{
-				loginWindow.Invoke(new Action(loginWindow.RegistrationOKinfo));
-			}
-
-			if (registerWindow.InvokeRequired)
-			{
-				registerWindow.Invoke(new Action(registerWindow.Close));
-                return;
-			}
-			loginWindow.RegistrationOKinfo();
-            
-			registerWindow.Close();
-		}
-
 		// When creating the ClientDriver in main (program.cs)
 		public ClientDriver()
 		{
@@ -65,16 +47,6 @@ namespace SoftEngChatClient.Controller
             chatWindowDriver = new ChatWindowDriver(writer, logCrypto);
 
         }
-
-		internal void RegistrationRejected()
-		{
-			if (registerWindow.InvokeRequired)
-			{
-				registerWindow.Invoke(new Action(registerWindow.RegistrationRejected));
-				return;
-			}
-			registerWindow.RegistrationRejected();
-		}
 
 		//Constructs GUI windows and list of individual chat windows.
 		private void ConstructGUI()
@@ -106,9 +78,6 @@ namespace SoftEngChatClient.Controller
 		{
 			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
             chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
-            
-            registerWindow.RegisterButtonClick += new EventHandler(cd_ClientRegisterButtonClick);
-			registerWindow.CancelButtonClicked += new EventHandler(cd_RegisterWindowCancel);
         }
 
         private void ChatWindowLogout(object o, EventArgs e)
