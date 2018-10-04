@@ -19,10 +19,10 @@ namespace SoftEngChatClient.Model
 
 		//Handles messages arriving at Client.
 		//Eventhandler, Consumes IncommingMessage Events.
-		internal void HandleIncommingMessage(object sender, IncommingMessage message)
+		internal void HandleIncommingMessage(object sender, EventArgs message)
         {
 
-            string[] incomming = ParseMessage(message.Message);
+            string[] incomming = ParseMessage(((IncommingMessage)message).Message);
             switch (incomming[0])
             {
                 case "1'":
@@ -131,5 +131,10 @@ namespace SoftEngChatClient.Model
 
             return messageArray;
         }
+
+		public void Subscribe(SSLCommunication.SSLListener streamListener)
+		{
+			streamListener.IncommingMessage += new EventHandler(HandleIncommingMessage);
+		}
     }
 }

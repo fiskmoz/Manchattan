@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using SoftEngChatClient.Model;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -50,6 +51,11 @@ namespace SoftEngChatClient.Drivers
             chatWindow.logoutEvent += new EventHandler(LogoutButtonClicked);
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
         }
+
+		public void Subscribe(Messagehandler mh)
+		{
+			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
+		}
 
         private void SpamTimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -212,5 +218,17 @@ namespace SoftEngChatClient.Drivers
             if (found == false)
                 individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender));
         }
+
+		private void IncommingMessage(object sender, EventArgs eventArgs)
+		{
+			if(((ClientMessage) eventArgs).receiver == "All")
+			{
+				ChatWindowPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
+			}
+			else
+			{
+				IndividualChatPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
+			}
+		}
     }
 }
