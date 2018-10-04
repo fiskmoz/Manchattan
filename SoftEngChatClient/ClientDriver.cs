@@ -23,8 +23,6 @@ namespace SoftEngChatClient.Controller
 		private Messagehandler messagehandler;
         private LogCrypto logCrypto;
 
-        private string username;
-
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
 

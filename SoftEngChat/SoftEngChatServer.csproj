@@ -47,15 +47,15 @@
   <ItemGroup>
     <Compile Include="Messagehandler.cs" />
     <Compile Include="MVC.cs" />
-    <Compile Include="DatabaseManegement.cs" />
+    <Compile Include="UserManagement\DatabaseManegement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerSSL\SSLClient.cs" />
     <Compile Include="ServerSSL\SSLServer.cs" />
     <Compile Include="ServerSSL\SSLListener.cs" />
     <Compile Include="ServerSSL\SSLWriter.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserManager.cs" />
+    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

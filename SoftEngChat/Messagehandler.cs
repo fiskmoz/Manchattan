@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
-	internal class Messagehandler
+    internal class Messagehandler
 	{
 		private SSLServer server;
 		private SSLClient client;

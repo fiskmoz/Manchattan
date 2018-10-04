@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Security;
 using System.Text;
 using System.Threading;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
-	class SSLListener
+    class SSLListener
 	{
 		private SslStream stream;
 		private Thread listeningThread;

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SoftEngChat
+﻿namespace SoftEngChat
 {
-	namespace Model
-	{
+    namespace Model
+    {
         public enum MessageType
         {
             register = 0, // "0:username:mail:pass:name:surname"
@@ -21,5 +15,5 @@ namespace SoftEngChat
         namespace SSLCommunication { }
 	}
 	namespace View { }
-	namespace Controller{ }
+	namespace Controller { }
 }
