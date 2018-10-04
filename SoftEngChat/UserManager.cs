@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftEngChat
 {
@@ -18,23 +15,6 @@ namespace SoftEngChat
 			filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + FILE_NAME;
 			userList = db.DBread(filePath);
 		}
-
-        //Remove user from database.
-        public List<User> RemoveUser(string name, string password)
-        {
-            userList = db.DBread(filePath);
-            ValidateUser validate = new ValidateUser(FILE_NAME);
-            
-            foreach(var user in userList)
-            {
-                if(validate.validate(user.UserName, user.Password))
-                {
-                    userList.Remove(user);
-                }
-            }
-            db.DBwrite(userList,filePath);
-            return userList;
-        }
 
         //Validate user from login and checks with users on database.
         public bool ValidateUser(string userIn, string passwordIn)
