@@ -10,12 +10,10 @@
             login = 3,  // "3:username:password"
             loginACK = 4,  // "4:0/1"
             logout = 5,  // "5: 1
-            onlineList = 6,  // 6:A:B:C:D"
-            friendRequest = 7,
-            friendResponse = 8
-
-
-
+            onlineList = 6,  // 6:0/1:A:B:C:D"
+            friendRequest = 7, 
+            friendResponse = 8,
+            onlineStatus = 9 // 9:0/1:name
         }
         namespace SSLCommunication { }
 	}
