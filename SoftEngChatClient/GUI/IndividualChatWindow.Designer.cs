@@ -35,6 +35,7 @@
             this.YouAreChattingWith = new System.Windows.Forms.Label();
             this.UsernameLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.poweredBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,6 +115,19 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // poweredBy
+            // 
+            this.poweredBy.AutoSize = true;
+            this.poweredBy.BackColor = System.Drawing.Color.Transparent;
+            this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredBy.ForeColor = System.Drawing.Color.White;
+            this.poweredBy.Location = new System.Drawing.Point(198, 398);
+            this.poweredBy.Name = "poweredBy";
+            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.TabIndex = 15;
+            this.poweredBy.Text = "Powered by ClientDriver 1.1";
+            this.poweredBy.Click += new System.EventHandler(this.poweredBy_Click);
+            // 
             // IndividualChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,6 +135,7 @@
             this.BackColor = System.Drawing.Color.Gray;
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.ClientSize = new System.Drawing.Size(516, 411);
+            this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.YouAreChattingWith);
@@ -149,5 +164,6 @@
         private System.Windows.Forms.Label YouAreChattingWith;
         private System.Windows.Forms.Label UsernameLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label poweredBy;
     }
 }
