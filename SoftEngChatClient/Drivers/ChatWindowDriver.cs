@@ -15,10 +15,10 @@ namespace SoftEngChatClient.Drivers
     class ChatWindowDriver
     {
         private ChatWindow chatWindow;
-        int spam;
         private List<IndividualChatDriver> individualChatDrivers;
         private SSLWriter writer;
         private ClientCrypto logCrypto;
+        private SpamProtector spam;
 
         public event EventHandler restart;
 
@@ -32,6 +32,7 @@ namespace SoftEngChatClient.Drivers
         {
             this.writer = writer;
             this.logCrypto = logCrypto;
+            spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
             SetupListeners();
@@ -39,10 +40,6 @@ namespace SoftEngChatClient.Drivers
 
         private void SetupListeners()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(1000);
-            timer.Elapsed += new ElapsedEventHandler(SpamTimerElapsed);
-            timer.Enabled = true;
-
             chatWindow.sendButtonClicked += new EventHandler(ChatWindowSendButtonClicked);
             chatWindow.messageBoxKeyReleased += new KeyEventHandler(ChatWindowEnterReleased);
             chatWindow.previousMessageButtonClick += new EventHandler(PreviousMessageButtonClicked);
@@ -55,15 +52,9 @@ namespace SoftEngChatClient.Drivers
 		public void Subscribe(Messagehandler mh)
 		{
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
+            mh.IncommingLoginAck += new EventHandler(LoggingIn);
 		}
 
-        private void SpamTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            if (spam >= 0)
-            {
-                spam--;
-            }
-        }
 
         private void ChatWindowLoaded(object sender, EventArgs e)
         {
@@ -103,8 +94,8 @@ namespace SoftEngChatClient.Drivers
         {
             if (chatWindow.removeEnterWhenSending().Length > 0)
             {
-                spam++;
-                if (spam < 5)
+                spam.SpamAppend();
+                if (spam.IsNotSpamming())
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
@@ -230,5 +221,15 @@ namespace SoftEngChatClient.Drivers
 				IndividualChatPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
 			}
 		}
+
+        private void LoggingIn(object sender, EventArgs args)
+        {
+            if(chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
+                return;
+            }
+            new Thread(() => chatWindow.ShowDialog()).Start();
+        }
     }
 }

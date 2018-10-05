@@ -7,22 +7,24 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
+using SoftEngChatClient.Drivers;
 
 namespace SoftEngChatClient
 {
     class IndividualChatDriver
     {
         IndividualChatWindow window;
+        private SpamProtector spam;
         SSLWriter writer;
         private string username;
         private string receiver;
-        int spam;
 
         public IndividualChatDriver(SSLWriter sllWriter, string Username, string Receiver)
         {
             username = Username;
             receiver = Receiver;
             window = new IndividualChatWindow(receiver);
+            spam = new SpamProtector();
             SetupListners();
             writer = sllWriter;
             new Thread(() => window.ShowDialog()).Start();
@@ -31,21 +33,10 @@ namespace SoftEngChatClient
 
         private void SetupListners()
         {
-            System.Timers.Timer timer = new System.Timers.Timer(1000);
-            timer.Elapsed += new ElapsedEventHandler(cd_TimerElapsed);
-            timer.Enabled = true;
-
             window.IndivudualFormClosed += new FormClosingEventHandler(icd_WindowClosed);
             window.IndividualSendButtonClicked += new EventHandler(icd_SendButtonClicked);
             window.IndividualMessageBoxReleased += new KeyEventHandler(icd_EnterKeyReleased);
             window.IndividualChatWindowLoaded += new EventHandler(icd_WindowLoaded);
-        }
-        private void cd_TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            if (spam >= 0)
-            {
-                spam--;
-            }
         }
         private void icd_WindowLoaded(object sender, EventArgs e)
         {
@@ -64,8 +55,8 @@ namespace SoftEngChatClient
         {
             if (window.removeEnterWhenSending().Length > 0)
             {
-                spam++;
-                if (spam < 5)
+                spam.SpamAppend();
+                if (spam.IsNotSpamming())
                 {
                     writer.WriteClient(MessageType.client, username, receiver, window.removeEnterWhenSending());
                     window.AppendTextBox("[ME] : " + window.removeEnterWhenSending());
