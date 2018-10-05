@@ -17,7 +17,7 @@ namespace SoftEngChatClient.Drivers
         Login loginWindow;
         private RegisterDriver regDriver;
 
-        private string username;
+        public string username;
         private string rememberMePassword;
         private bool rememberMe;
 
@@ -27,6 +27,7 @@ namespace SoftEngChatClient.Drivers
             regDriver = new RegisterDriver(writer);
             this.writer = writer;
             SetupListeners();
+            
         }
 
 		public void Subscribe(Model.Messagehandler mh)
@@ -141,6 +142,7 @@ namespace SoftEngChatClient.Drivers
             if (((LoginAck)eventArgs).message)
 			{
 				username = loginWindow.getUsername();
+                ClientDriver.globalUsername = username;
 				Session session = new Session(username, rememberMePassword, rememberMe);
 				loginWindow.Hide();
 			}
@@ -153,6 +155,11 @@ namespace SoftEngChatClient.Drivers
 
         public void ShowLoginWindow()
         {
+            if(loginWindow.InvokeRequired)
+            {
+                loginWindow.Invoke(new Action(ShowLoginWindow));
+                return;
+            }
             loginWindow.Show();
         }
 

@@ -49,5 +49,17 @@ namespace SoftEngChat
 			db.DBwrite(userList, filePath);
 			return true;
 		}
+
+        public bool FindUser(string receiver)
+        {
+            foreach (var user in userList)
+            {
+                if(receiver == user.userName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 	}
 }

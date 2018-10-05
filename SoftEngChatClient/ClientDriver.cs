@@ -13,7 +13,7 @@ using SoftEngChatClient.Model;
 
 namespace SoftEngChatClient.Controller
 {
-	class ClientDriver
+    class ClientDriver
 	{
         private ChatWindowDriver chatWindowDriver;
         private LoginWindowDriver loginWindowDriver;
@@ -22,6 +22,9 @@ namespace SoftEngChatClient.Controller
 		private SSLWriter writer;
 		private Messagehandler messagehandler;
         private ClientCrypto logCrypto;
+
+        public static string globalUsername;
+        
 
 		private const string IP = "127.0.0.1";	//ServerIP
 		private const int PORT = 5300;      //Serverport
