@@ -18,6 +18,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
         public void WriteRegister(MessageType type, string username, string mail, string password, string name, string surname)
         {
+            ClientCrypto cc = new ClientCrypto();
+            password = cc.Sha256_hash(password);
             string outgoing = ((int)type).ToString() + ":" + username + ":" + mail + ":" + password + ":" + name + ":" + surname;
             SendMessage(outgoing);
         }
