@@ -38,8 +38,16 @@ namespace SoftEngChatClient.Drivers
 
 		private void RegistrationSucceeded(object sender, EventArgs e)
 		{
-			if (((RegAck)e).message)
-				loginWindow.RegistrationOKinfo();
+            if (loginWindow.InvokeRequired)
+            {
+                loginWindow.Invoke(new Action<object,EventArgs>(RegistrationSucceeded), new object[] {sender, e });
+                return;
+            }
+            if (((RegAck)e).message)
+            {
+                loginWindow.RegistrationOKinfo();
+            }
+				
 		}
 
 		private void SetupListeners()
@@ -125,14 +133,13 @@ namespace SoftEngChatClient.Drivers
 
         public void Login(object sender, EventArgs eventArgs)
         {
-			if (((LoginAck)eventArgs).message)
+            if (loginWindow.InvokeRequired)
+            {
+                loginWindow.Invoke(new Action<object, EventArgs>(Login), new object[] { sender, eventArgs });
+                return;
+            }
+            if (((LoginAck)eventArgs).message)
 			{
-
-				if (loginWindow.InvokeRequired)
-				{
-					loginWindow.Invoke(new Action<object, EventArgs>(Login), new object[] { sender, eventArgs });
-					return;
-				}
 				username = loginWindow.getUsername();
 				Session session = new Session(username, rememberMePassword, rememberMe);
 				loginWindow.Hide();
