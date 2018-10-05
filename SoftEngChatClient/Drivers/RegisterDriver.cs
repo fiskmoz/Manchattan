@@ -35,7 +35,7 @@ namespace SoftEngChatClient.Controller
             register.EnterUsernameLeaved += new EventHandler(RD_EnterUsernameLeaved);
             // Password Field
             register.EnterPasswordClicked += new EventHandler(RD_EnterPasswordClicked);
-            register.EnterPasswordClicked += new EventHandler(RD_EnterPasswordLeaved);
+            register.EnterPasswordLeaved += new EventHandler(RD_EnterPasswordLeaved);
             // Email Field
             register.EnterEmailClicked += new EventHandler(RD_EnterEmailClicked);
             register.EnterEmailLeaved += new EventHandler(RD_EnterEmailLeaved);
@@ -46,7 +46,7 @@ namespace SoftEngChatClient.Controller
             register.EnterSurnameClicked += new EventHandler(RD_EnterSurnameClicked);
             register.EnterSurnameLeaved += new EventHandler(RD_EnterSurnameLeaved);
             // TextChanged
-            register.TextChanged += new EventHandler(RD_TextChanged);
+            register.TextChangedEvent += new EventHandler(RD_TextChanged);
         }
 
 		public void RD_Subscribe(Messagehandler mh)

@@ -33,6 +33,7 @@ namespace SoftEngChatClient.Drivers
 		{
 			mh.IncommingLoginAck += new EventHandler(Login);
 			mh.IncommingRegAck += new EventHandler(RegistrationSucceeded);
+			regDriver.RD_Subscribe(mh);
 		}
 
 		private void RegistrationSucceeded(object sender, EventArgs e)

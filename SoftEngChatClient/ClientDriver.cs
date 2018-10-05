@@ -66,9 +66,11 @@ namespace SoftEngChatClient.Controller
         //Sets up listeners for the different events.
         private void SetupListeners()
 		{
-			streamListener.IncommingMessage += messagehandler.HandleIncommingMessage; //Tell messagehandler to listen for IncommingMessage Events raised by streamlistener
-            chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
-        }
+			messagehandler.Subscribe(streamListener);
+			loginWindowDriver.Subscribe(messagehandler);
+			chatWindowDriver.Subscribe(messagehandler);
+			chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
+		}
 
         private void ChatWindowLogout(object o, EventArgs e)
         {
