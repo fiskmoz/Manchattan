@@ -103,7 +103,7 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 server.UpdateOnlineList();
                 server.SendOnlineListToClient(username);
-                server.UpdateUserClientList(username, true);
+                server.UpdateUserClientList(username, false);
             }
 			
 		}
@@ -148,7 +148,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void HandleLogout()
 		{
 			client.listener.StopListen();
-            server.UpdateUserClientList(client.userName.ToString(), false);
+            server.UpdateUserClientList(client.userName.ToString(), true);
             server.RemoveClient(client);
             
 		}
