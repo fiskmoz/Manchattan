@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Messagehandler.cs" />
     <Compile Include="MVC.cs" />
+    <Compile Include="ServerCrypto.cs" />
     <Compile Include="UserManagement\DatabaseManegement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
