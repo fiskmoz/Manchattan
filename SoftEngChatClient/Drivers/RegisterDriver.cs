@@ -67,6 +67,11 @@ namespace SoftEngChatClient.Controller
         // Check Register ACK
         public void RD_RegisterCheck(object sender, EventArgs ack)
         {
+            if(register.InvokeRequired)
+            {
+                register.Invoke(new Action<object, EventArgs>(RD_RegisterCheck), new object[] { sender, ack });
+                return;
+            }
             if (((RegAck)ack).message == true)
             {
                 RD_ClearFields();

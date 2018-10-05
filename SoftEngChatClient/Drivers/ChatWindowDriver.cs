@@ -18,8 +18,8 @@ namespace SoftEngChatClient.Drivers
         int spam;
         private List<IndividualChatDriver> individualChatDrivers;
         private SSLWriter writer;
-        private Cryptography logCrypto;
-		private ContactsHandler contactsHandler;
+        private ClientCrypto logCrypto;
+
         public event EventHandler restart;
 
         private bool loggingOut = false;
@@ -28,14 +28,12 @@ namespace SoftEngChatClient.Drivers
 
         private List<string> messageList;
 
-        public ChatWindowDriver(SSLWriter writer, Cryptography logCrypto)
+        public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
             this.writer = writer;
             this.logCrypto = logCrypto;
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
-			contactsHandler = new ContactsHandler();
-
             SetupListeners();
         }
 
@@ -52,13 +50,11 @@ namespace SoftEngChatClient.Drivers
             chatWindow.usernamePressed += new EventHandler(HandleIndividualUsernamePressed);
             chatWindow.logoutEvent += new EventHandler(LogoutButtonClicked);
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
-			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
 		public void Subscribe(Messagehandler mh)
 		{
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
-			contactsHandler.Subscribe(mh);
 		}
 
         private void SpamTimerElapsed(object sender, ElapsedEventArgs e)
@@ -131,8 +127,8 @@ namespace SoftEngChatClient.Drivers
 
         private void HandleIndividualUsernamePressed(object sender, EventArgs e)
         {
-            var index = chatWindow.contactListbox.SelectedItem;
-            string receiver = chatWindow.contactListbox.GetItemText(index);
+            var index = chatWindow.listBox1.SelectedItem;
+            string receiver = chatWindow.listBox1.GetItemText(index);
             if (receiver != username)
             {
                 AddNewIndividualChat(receiver);
@@ -163,22 +159,23 @@ namespace SoftEngChatClient.Drivers
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
 
-		private void UpdateOnlineList(object sender, EventArgs e)
+        public void UpdateOnlineList(string str)
         {
             if (chatWindow.InvokeRequired)
             {
-                chatWindow.Invoke(new Action<object, EventArgs>(UpdateOnlineList), new object[] { sender, e });
+                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
                 return;
             }
-
-            for (int n = chatWindow.contactListbox.Items.Count - 1; n >= 0; --n)
+            string[] usernames;
+            usernames = str.Split(':');
+            for (int n = chatWindow.listBox1.Items.Count - 1; n >= 0; --n)
             {
-                chatWindow.contactListbox.Items.RemoveAt(n);
+                chatWindow.listBox1.Items.RemoveAt(n);
             }
 
-            foreach(Contact c in ((ContactListEventArg)e).contacts)
+            for (int i = 1; i < usernames.Length; i++)
             {
-                chatWindow.contactListbox.Items.Add(c.name);
+                chatWindow.listBox1.Items.Add(usernames[i]);
             }
         }
 
