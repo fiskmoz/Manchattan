@@ -58,7 +58,7 @@
             this.RegisterAccept.Location = new System.Drawing.Point(91, 278);
             this.RegisterAccept.Name = "RegisterAccept";
             this.RegisterAccept.Size = new System.Drawing.Size(184, 44);
-            this.RegisterAccept.TabIndex = 5;
+            this.RegisterAccept.TabIndex = 7;
             this.RegisterAccept.Text = "Register";
             this.RegisterAccept.UseVisualStyleBackColor = false;
             this.RegisterAccept.Click += new System.EventHandler(this.RegisterAccept_Click);
@@ -73,7 +73,7 @@
             this.RegisterCancel.Location = new System.Drawing.Point(132, 334);
             this.RegisterCancel.Name = "RegisterCancel";
             this.RegisterCancel.Size = new System.Drawing.Size(104, 32);
-            this.RegisterCancel.TabIndex = 6;
+            this.RegisterCancel.TabIndex = 1;
             this.RegisterCancel.Text = "Cancel";
             this.RegisterCancel.UseVisualStyleBackColor = false;
             this.RegisterCancel.Click += new System.EventHandler(this.RegisterCancel_Click);
@@ -90,8 +90,7 @@
             this.EnterPassword.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterPassword.Name = "EnterPassword";
             this.EnterPassword.Size = new System.Drawing.Size(335, 30);
-            this.EnterPassword.TabIndex = 1;
-            this.EnterPassword.TabStop = false;
+            this.EnterPassword.TabIndex = 3;
             this.EnterPassword.Text = "Password";
             this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
@@ -109,8 +108,7 @@
             this.EnterUsername.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterUsername.Name = "EnterUsername";
             this.EnterUsername.Size = new System.Drawing.Size(335, 30);
-            this.EnterUsername.TabIndex = 0;
-            this.EnterUsername.TabStop = false;
+            this.EnterUsername.TabIndex = 2;
             this.EnterUsername.Text = "Username";
             this.EnterUsername.TextChanged += new System.EventHandler(this.EnterUsername_TextChanged);
             this.EnterUsername.Enter += new System.EventHandler(this.EnterUsername_Enter);
@@ -168,8 +166,7 @@
             this.EnterEmail.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterEmail.Name = "EnterEmail";
             this.EnterEmail.Size = new System.Drawing.Size(335, 30);
-            this.EnterEmail.TabIndex = 2;
-            this.EnterEmail.TabStop = false;
+            this.EnterEmail.TabIndex = 4;
             this.EnterEmail.Text = "Email";
             this.EnterEmail.TextChanged += new System.EventHandler(this.EnterEmail_TextChanged);
             this.EnterEmail.Enter += new System.EventHandler(this.EnterEmail_Enter);
@@ -200,8 +197,7 @@
             this.EnterForename.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterForename.Name = "EnterForename";
             this.EnterForename.Size = new System.Drawing.Size(335, 30);
-            this.EnterForename.TabIndex = 3;
-            this.EnterForename.TabStop = false;
+            this.EnterForename.TabIndex = 5;
             this.EnterForename.Text = "Forename";
             this.EnterForename.TextChanged += new System.EventHandler(this.EnterForename_TextChanged);
             this.EnterForename.Enter += new System.EventHandler(this.EnterForename_Enter);
@@ -233,8 +229,7 @@
             this.EnterSurname.MinimumSize = new System.Drawing.Size(335, 30);
             this.EnterSurname.Name = "EnterSurname";
             this.EnterSurname.Size = new System.Drawing.Size(335, 30);
-            this.EnterSurname.TabIndex = 4;
-            this.EnterSurname.TabStop = false;
+            this.EnterSurname.TabIndex = 6;
             this.EnterSurname.Text = "Surname";
             this.EnterSurname.TextChanged += new System.EventHandler(this.EnterSurname_TextChanged);
             this.EnterSurname.Enter += new System.EventHandler(this.EnterSurname_Enter);

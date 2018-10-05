@@ -55,12 +55,12 @@
             this.EnterEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.EnterEmail.ForeColor = System.Drawing.Color.Gray;
             this.EnterEmail.Location = new System.Drawing.Point(73, 192);
+            this.EnterEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnterEmail.MaximumSize = new System.Drawing.Size(543, 50);
             this.EnterEmail.MinimumSize = new System.Drawing.Size(443, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(443, 29);
-            this.EnterEmail.TabIndex = 1;
-            this.EnterEmail.TabStop = false;
+            this.EnterEmail.Size = new System.Drawing.Size(443, 30);
+            this.EnterEmail.TabIndex = 2;
             this.EnterEmail.Tag = "";
             this.EnterEmail.Text = "Username";
             this.EnterEmail.TextChanged += new System.EventHandler(this.EnterEmail_TextChanged);
@@ -76,12 +76,12 @@
             this.EnterPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.EnterPassword.ForeColor = System.Drawing.Color.Gray;
             this.EnterPassword.Location = new System.Drawing.Point(73, 228);
-            this.EnterPassword.MaximumSize = new System.Drawing.Size(443, 50);
+            this.EnterPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EnterPassword.MaximumSize = new System.Drawing.Size(333, 50);
             this.EnterPassword.MinimumSize = new System.Drawing.Size(443, 30);
             this.EnterPassword.Name = "EnterPassword";
-            this.EnterPassword.Size = new System.Drawing.Size(443, 29);
-            this.EnterPassword.TabIndex = 2;
-            this.EnterPassword.TabStop = false;
+            this.EnterPassword.Size = new System.Drawing.Size(443, 30);
+            this.EnterPassword.TabIndex = 3;
             this.EnterPassword.Text = "Password";
             this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
@@ -97,9 +97,10 @@
             this.LoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
             this.LoginButton.Location = new System.Drawing.Point(190, 295);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(203, 33);
-            this.LoginButton.TabIndex = 3;
+            this.LoginButton.TabIndex = 5;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -112,6 +113,7 @@
             this.MailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold);
             this.MailLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.MailLabel.Location = new System.Drawing.Point(235, 149);
+            this.MailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.MailLabel.Name = "MailLabel";
             this.MailLabel.Size = new System.Drawing.Size(106, 39);
             this.MailLabel.TabIndex = 4;
@@ -125,7 +127,8 @@
             this.PasswordLabel.BackColor = System.Drawing.Color.Transparent;
             this.PasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLabel.ForeColor = System.Drawing.Color.White;
-            this.PasswordLabel.Location = new System.Drawing.Point(7, 452);
+            this.PasswordLabel.Location = new System.Drawing.Point(78, 403);
+            this.PasswordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(114, 25);
             this.PasswordLabel.TabIndex = 5;
@@ -138,10 +141,11 @@
             this.Title.AutoSize = true;
             this.Title.Cursor = System.Windows.Forms.Cursors.Default;
             this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(121, 64);
-            this.Title.MinimumSize = new System.Drawing.Size(326, 36);
+            this.Title.Location = new System.Drawing.Point(164, 106);
+            this.Title.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Title.MinimumSize = new System.Drawing.Size(244, 28);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(326, 37);
+            this.Title.Size = new System.Drawing.Size(262, 37);
             this.Title.TabIndex = 6;
             this.Title.Text = "Manchattan 2k18";
             // 
@@ -153,6 +157,7 @@
             this.RegisterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.RegisterLabel.ForeColor = System.Drawing.Color.White;
             this.RegisterLabel.Location = new System.Drawing.Point(234, 349);
+            this.RegisterLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.RegisterLabel.Name = "RegisterLabel";
             this.RegisterLabel.Size = new System.Drawing.Size(126, 17);
             this.RegisterLabel.TabIndex = 7;
@@ -167,9 +172,10 @@
             this.RegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
             this.RegisterButton.Location = new System.Drawing.Point(214, 369);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(157, 23);
-            this.RegisterButton.TabIndex = 8;
+            this.RegisterButton.TabIndex = 6;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
@@ -182,9 +188,10 @@
             this.ExitLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExitLogin.ForeColor = System.Drawing.Color.White;
             this.ExitLogin.Location = new System.Drawing.Point(255, 450);
+            this.ExitLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ExitLogin.Name = "ExitLogin";
             this.ExitLogin.Size = new System.Drawing.Size(75, 23);
-            this.ExitLogin.TabIndex = 9;
+            this.ExitLogin.TabIndex = 1;
             this.ExitLogin.Text = "Exit";
             this.ExitLogin.UseVisualStyleBackColor = false;
             this.ExitLogin.Click += new System.EventHandler(this.ExitLogin_Click);
@@ -224,7 +231,7 @@
             this.rememberMeCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.rememberMeCheckBox.Name = "rememberMeCheckBox";
             this.rememberMeCheckBox.Size = new System.Drawing.Size(101, 17);
-            this.rememberMeCheckBox.TabIndex = 12;
+            this.rememberMeCheckBox.TabIndex = 4;
             this.rememberMeCheckBox.Text = "Remember Me?";
             this.rememberMeCheckBox.UseVisualStyleBackColor = false;
             this.rememberMeCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -235,7 +242,8 @@
             this.poweredBy.BackColor = System.Drawing.Color.Transparent;
             this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.poweredBy.ForeColor = System.Drawing.Color.White;
-            this.poweredBy.Location = new System.Drawing.Point(441, 472);
+            this.poweredBy.Location = new System.Drawing.Point(443, 471);
+            this.poweredBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.poweredBy.Name = "poweredBy";
             this.poweredBy.Size = new System.Drawing.Size(142, 13);
             this.poweredBy.TabIndex = 13;
@@ -247,7 +255,8 @@
             this.fantastic4.BackColor = System.Drawing.Color.Transparent;
             this.fantastic4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fantastic4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.fantastic4.Location = new System.Drawing.Point(426, 124);
+            this.fantastic4.Location = new System.Drawing.Point(429, 125);
+            this.fantastic4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fantastic4.Name = "fantastic4";
             this.fantastic4.Size = new System.Drawing.Size(83, 16);
             this.fantastic4.TabIndex = 14;
@@ -278,6 +287,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
