@@ -3,7 +3,7 @@
 	class Contact
 	{
 		public string name { get; private set; }
-		public bool isOnline { get; private set; }
+		public bool isOnline;
 
 		public Contact(string name, bool isOnline)
 		{

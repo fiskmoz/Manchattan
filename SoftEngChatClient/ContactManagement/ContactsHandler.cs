@@ -31,7 +31,20 @@ namespace SoftEngChatClient.Model
 		{
 			mh.IncommingOnlineList += new EventHandler(HandleOnlineList);
 			mh.IncommingOfflineList += new EventHandler(HandleOfflineList);
+			mh.IncommingUserStatus += new EventHandler(HandleContactUpdate);
 		}
+
+
+
+		private void HandleOfflineList(object sender, EventArgs e)
+		{
+			hasOfflineList = true;
+			offlineList = ((OnlineList)e).onlineList;
+		}
+
+
+
+
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
@@ -42,13 +55,6 @@ namespace SoftEngChatClient.Model
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
 		}
-
-		private void HandleOfflineList(object sender, EventArgs e)
-		{
-			hasOfflineList = true;
-			offlineList = ((OnlineList)e).onlineList;
-		}
-
 		private List<Contact> CreateContactList()
 		{
 			List<string> contacts = fileManager.ReadContacts();
@@ -61,5 +67,49 @@ namespace SoftEngChatClient.Model
 			return tempContactList;
 
 		}
+
+
+
+
+
+
+
+		private void HandleContactUpdate(object sender, EventArgs e)
+		{
+			Contact updated = new Contact(((UserOnlineStatusUpdate)e).username, ((UserOnlineStatusUpdate)e).isOnline);
+
+			UpdateOnlineOfflineLists(updated);
+			UpdateContacts(updated);
+
+		}
+
+		private void UpdateOnlineOfflineLists(Contact updated)
+		{
+			if (onlineList.Contains(updated.name) && !(updated.isOnline))
+			{
+				onlineList.Remove(updated.name);
+				offlineList.Add(updated.name);
+			}
+			else if (offlineList.Contains(updated.name) && updated.isOnline)
+			{
+				offlineList.Remove(updated.name);
+				onlineList.Add(updated.name);
+			}
+		}
+
+		private void UpdateContacts(Contact updated)
+		{
+			foreach (Contact contact in contactList)
+			{
+				if (contact.name == updated.name)
+				{
+					contact.isOnline = updated.isOnline;
+					UpdateContactList(this, new ContactListEventArg(contactList));
+					break;
+				}
+			}
+		}
+
+
 	}
 }
