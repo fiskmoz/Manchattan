@@ -89,7 +89,7 @@ namespace SoftEngChatClient.Drivers
             if (loggingOut == false)
             {
                 writer.WriteLogout(MessageType.logout);
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 Application.Exit();
                 System.Environment.Exit(1);
             }
@@ -137,7 +137,7 @@ namespace SoftEngChatClient.Drivers
             ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
             chatWindow.Hide();
             writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(1000);
+            Thread.Sleep(250);
             restart(this, e);
             loggingOut = false;
         }

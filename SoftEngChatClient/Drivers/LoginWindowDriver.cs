@@ -117,7 +117,7 @@ namespace SoftEngChatClient.Drivers
         private void LoginExitWindow(object sender, EventArgs e)
         {
             writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(1000);
+            Thread.Sleep(250);
             Application.Exit();
             System.Environment.Exit(1);
         }

@@ -98,7 +98,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string username = messageArray[1];
             string password = messageArray[2];
             bool valid = ValidateLoginMessage(username, password);
-            client.writer.WriteLoginACK(valid ? 1 : 0);
+            client.writer.WriteLoginACK(valid ? 1 : 0, username);
             if (valid)
             {
                 server.UpdateOnlineList();
@@ -148,6 +148,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void HandleLogout()
 		{
 			client.listener.StopListen();
+            if(client.userName != null) // IF USER LOGGED IN
             server.UpdateUserClientList(client.userName.ToString(), true);
             server.RemoveClient(client);
             
