@@ -10,8 +10,8 @@ public class User
     public string userName { get; set; }
     public string mail { get; set; }
     public string password { get; set; }
-    private string firstName { get; set; }
-    private string lastName { get; set; }
+    public string firstName { get; set; }
+    public string lastName { get; set; }
     public string key { get; set; }
     
 
