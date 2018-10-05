@@ -77,7 +77,7 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             else
             {
-                outgoing = "9:1" + client;
+                outgoing = "9:1:" + client;
             }
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
         }
