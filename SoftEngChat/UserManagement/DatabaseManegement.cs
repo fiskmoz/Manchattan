@@ -58,6 +58,19 @@ namespace SoftEngChat
                 "Admin",
                 "Adminson"
             };
+            ServerCrypto sc = new ServerCrypto();
+            info[2] = sc.Sha256_hash(info[2]);
+            user.Add(new User(info));
+
+            List<string> info2 = new List<string>
+            {
+                "Getman",
+                "getmail",
+                "112",
+                "Get",
+                "Mansson"
+            };
+            info2[2] = sc.Sha256_hash(info2[2]);
             user.Add(new User(info));
 
             try

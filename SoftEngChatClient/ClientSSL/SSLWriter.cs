@@ -30,6 +30,8 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
         public void WriteLogin(MessageType type, string username, string password)
         {
+            ClientCrypto cc = new ClientCrypto();
+            password = cc.Sha256_hash(password);
             string outgoing = ((int)type).ToString() + ":" + username + ":" + password;
             SendMessage(outgoing);
         }
