@@ -50,18 +50,20 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
         }
 
-        public void WriteFriendRequest(string str)
+        public void WriteFriendRequest(string sender, string receiver)
         {
-            try
-            {
-                stream.Write(Encoding.UTF8.GetBytes(str));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Write OnlineList Exception:");
-                Console.WriteLine(e.Message);
-            }
+            string outgoing = "7:" + sender + ":" + receiver;
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+            Console.WriteLine("\"" + sender + "\" sends friend request to \"" + receiver + "\"");
+        }
+
+        public void WriteFriendResponse(string sender, string receiver, int answer)
+        {
+            string outgoing = "8:" + sender + ":" + receiver + ":" + answer;
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+            Console.WriteLine("FriendResponse: \"" + sender + "\" answers \"" + receiver + "'s\"friend request with ");
+            if (answer == 0) Console.Write("Deny");
+            else if (answer == 1) Console.Write("Accept");
         }
 	}
 }

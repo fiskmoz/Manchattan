@@ -148,7 +148,7 @@ namespace SoftEngChatClient
             {
                 EnterPasswordLeaved(this, e);
             }
-            catch(Exception ev)
+            catch(Exception)
             {
                 //
             }

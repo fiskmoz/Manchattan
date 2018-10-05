@@ -45,9 +45,17 @@ namespace SoftEngChatClient
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.poweredBy = new System.Windows.Forms.Label();
+            this.findFriendsPanel = new System.Windows.Forms.Panel();
+            this.noFriendsLabel = new System.Windows.Forms.Label();
+            this.findFriendsBox = new System.Windows.Forms.ListBox();
+            this.findFriendsTextBox = new System.Windows.Forms.TextBox();
+            this.findFriendsLabel = new System.Windows.Forms.Label();
+            this.addFriends = new System.Windows.Forms.Label();
+            this.showFriends = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.findFriendsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MessageBox
@@ -82,18 +90,18 @@ namespace SoftEngChatClient
             this.SendButton.UseVisualStyleBackColor = false;
             this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
-            // listBox1
+            // contactListBox
             // 
-            this.contactListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.contactListBox.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.contactListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contactListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
+            this.contactListBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contactListBox.ForeColor = System.Drawing.Color.White;
             this.contactListBox.FormattingEnabled = true;
-            this.contactListBox.ItemHeight = 24;
-            this.contactListBox.Location = new System.Drawing.Point(2, 34);
+            this.contactListBox.ItemHeight = 23;
+            this.contactListBox.Location = new System.Drawing.Point(6, 34);
             this.contactListBox.Margin = new System.Windows.Forms.Padding(2);
-            this.contactListBox.Name = "listBox1";
-            this.contactListBox.Size = new System.Drawing.Size(199, 408);
+            this.contactListBox.Name = "contactListBox";
+            this.contactListBox.Size = new System.Drawing.Size(188, 414);
             this.contactListBox.TabIndex = 0;
             this.contactListBox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -212,12 +220,12 @@ namespace SoftEngChatClient
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(47, 10);
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(55, 4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 20);
+            this.label2.Size = new System.Drawing.Size(96, 19);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Contacts";
+            this.label2.Text = "My Friends";
             // 
             // poweredBy
             // 
@@ -231,6 +239,108 @@ namespace SoftEngChatClient
             this.poweredBy.TabIndex = 104;
             this.poweredBy.Text = "Powered by ClientDriver 1.1";
             // 
+            // findFriendsPanel
+            // 
+            this.findFriendsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.findFriendsPanel.Controls.Add(this.noFriendsLabel);
+            this.findFriendsPanel.Controls.Add(this.findFriendsBox);
+            this.findFriendsPanel.Controls.Add(this.findFriendsTextBox);
+            this.findFriendsPanel.Controls.Add(this.findFriendsLabel);
+            this.findFriendsPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findFriendsPanel.ForeColor = System.Drawing.Color.White;
+            this.findFriendsPanel.Location = new System.Drawing.Point(768, 55);
+            this.findFriendsPanel.Name = "findFriendsPanel";
+            this.findFriendsPanel.Size = new System.Drawing.Size(200, 455);
+            this.findFriendsPanel.TabIndex = 105;
+            this.findFriendsPanel.Visible = false;
+            // 
+            // noFriendsLabel
+            // 
+            this.noFriendsLabel.AutoSize = true;
+            this.noFriendsLabel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.noFriendsLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noFriendsLabel.Location = new System.Drawing.Point(8, 56);
+            this.noFriendsLabel.Name = "noFriendsLabel";
+            this.noFriendsLabel.Size = new System.Drawing.Size(135, 13);
+            this.noFriendsLabel.TabIndex = 5;
+            this.noFriendsLabel.Text = "Couldn\'t find your friend...";
+            this.noFriendsLabel.Visible = false;
+            // 
+            // findFriendsBox
+            // 
+            this.findFriendsBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.findFriendsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.findFriendsBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findFriendsBox.ForeColor = System.Drawing.Color.White;
+            this.findFriendsBox.FormattingEnabled = true;
+            this.findFriendsBox.ItemHeight = 23;
+            this.findFriendsBox.Location = new System.Drawing.Point(6, 54);
+            this.findFriendsBox.Name = "findFriendsBox";
+            this.findFriendsBox.Size = new System.Drawing.Size(188, 368);
+            this.findFriendsBox.TabIndex = 4;
+            // 
+            // findFriendsTextBox
+            // 
+            this.findFriendsTextBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.findFriendsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.findFriendsTextBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findFriendsTextBox.ForeColor = System.Drawing.Color.Gainsboro;
+            this.findFriendsTextBox.Location = new System.Drawing.Point(6, 28);
+            this.findFriendsTextBox.MinimumSize = new System.Drawing.Size(188, 22);
+            this.findFriendsTextBox.Name = "findFriendsTextBox";
+            this.findFriendsTextBox.Size = new System.Drawing.Size(188, 20);
+            this.findFriendsTextBox.TabIndex = 3;
+            this.findFriendsTextBox.Text = "Search...";
+            this.findFriendsTextBox.Click += new System.EventHandler(this.findFriendsTextBox_Click);
+            this.findFriendsTextBox.TextChanged += new System.EventHandler(this.findFriendsTextBox_TextChanged);
+            this.findFriendsTextBox.Leave += new System.EventHandler(this.findFriendsTextBox_Leave);
+            // 
+            // findFriendsLabel
+            // 
+            this.findFriendsLabel.AutoSize = true;
+            this.findFriendsLabel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findFriendsLabel.Location = new System.Drawing.Point(49, 4);
+            this.findFriendsLabel.Name = "findFriendsLabel";
+            this.findFriendsLabel.Size = new System.Drawing.Size(107, 19);
+            this.findFriendsLabel.TabIndex = 2;
+            this.findFriendsLabel.Text = "Find Friends";
+            // 
+            // addFriends
+            // 
+            this.addFriends.AutoSize = true;
+            this.addFriends.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.addFriends.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addFriends.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addFriends.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.addFriends.Location = new System.Drawing.Point(766, 20);
+            this.addFriends.Name = "addFriends";
+            this.addFriends.Size = new System.Drawing.Size(39, 39);
+            this.addFriends.TabIndex = 106;
+            this.addFriends.Text = "+";
+            this.addFriends.Click += new System.EventHandler(this.addFriends_Click);
+            this.addFriends.MouseLeave += new System.EventHandler(this.addFriends_MouseLeave);
+            this.addFriends.MouseHover += new System.EventHandler(this.addFriends_MouseHover);
+            // 
+            // showFriends
+            // 
+            this.showFriends.AutoSize = true;
+            this.showFriends.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.showFriends.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.showFriends.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.showFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showFriends.ForeColor = System.Drawing.Color.White;
+            this.showFriends.Location = new System.Drawing.Point(803, 20);
+            this.showFriends.MinimumSize = new System.Drawing.Size(63, 38);
+            this.showFriends.Name = "showFriends";
+            this.showFriends.Size = new System.Drawing.Size(63, 38);
+            this.showFriends.TabIndex = 107;
+            this.showFriends.Text = "Friends";
+            this.showFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.showFriends.Click += new System.EventHandler(this.showFriends_Click);
+            this.showFriends.MouseLeave += new System.EventHandler(this.showFriends_MouseLeave);
+            this.showFriends.MouseHover += new System.EventHandler(this.showFriends_MouseHover);
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,7 +350,6 @@ namespace SoftEngChatClient
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 522);
             this.Controls.Add(this.poweredBy);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -250,6 +359,10 @@ namespace SoftEngChatClient
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MessageBox);
             this.Controls.Add(this.ChatBox);
+            this.Controls.Add(this.addFriends);
+            this.Controls.Add(this.showFriends);
+            this.Controls.Add(this.findFriendsPanel);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -263,6 +376,8 @@ namespace SoftEngChatClient
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.findFriendsPanel.ResumeLayout(false);
+            this.findFriendsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,5 +399,12 @@ namespace SoftEngChatClient
         private Panel panel2;
         private Label label2;
         private Label poweredBy;
+        private Panel findFriendsPanel;
+        private Label findFriendsLabel;
+        private TextBox findFriendsTextBox;
+        private Label addFriends;
+        private Label showFriends;
+        private ListBox findFriendsBox;
+        private Label noFriendsLabel;
     }
 }

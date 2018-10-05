@@ -10,7 +10,7 @@ public class User
     public string password { get; set; }
     private string firstName { get; set; }
     private string lastName { get; set; }
-    
+   
 
     //Standard constructor.
     public User(List<string> userInfo)

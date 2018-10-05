@@ -100,7 +100,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.userName != sender || client.userName != null)
+				if(client.userName != sender && client.userName != null)
 				{
                     client.writer.WriteClient(MessageType.client, sender, "All", message);
                 }
@@ -120,26 +120,26 @@ namespace SoftEngChat.Model.SSLCommunication
         }
 
         
-        public void SendFriendRespond(string sender, string receiver, string message)
+        public void SendFriendResponse(string sender, string receiver, int answer)
         {
            foreach (var client in clientList)
             {
                 if(client.userName == receiver)
                 {
-                    client.writer.WriteClient(MessageType.friendResponse, sender, receiver, message);
+                    client.writer.WriteFriendResponse(sender, receiver, answer);
                     return;
                 }
             }
         }
 
 
-        public void SendFriendRequest(string sender, string receiver,string message)
+        public void SendFriendRequest(string sender, string receiver)
         {
             foreach (var client in clientList)
             {
                 if (client.userName == receiver)
                 {
-                    client.writer.WriteClient(MessageType.friendRequest, sender, receiver, message);
+                    client.writer.WriteFriendRequest(sender, receiver);
                     return;
                 }
             }
