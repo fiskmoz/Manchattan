@@ -14,6 +14,7 @@ namespace UnitTestJsonParser
         private List<User> userList = new List<User>();
         private ServerCrypto crypto = new ServerCrypto();
 
+
         [TestMethod]
         public void ReadFromFile()
         {
@@ -35,7 +36,15 @@ namespace UnitTestJsonParser
         public void TestHashMethod()
         {
             
+            string test = "Anders Olsson";
+            string hash1 = crypto.Sha256_hash(test);
+            string hash2 = crypto.Sha256_hash(test);
+
+            Assert.AreEqual(hash1, hash2);
+
            
+
+     
 
         }
     }

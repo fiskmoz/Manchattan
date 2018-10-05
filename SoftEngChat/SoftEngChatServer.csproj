@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cryptography.cs" />
     <Compile Include="Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="ServerCrypto.cs" />

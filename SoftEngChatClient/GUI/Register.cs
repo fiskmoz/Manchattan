@@ -31,7 +31,7 @@ namespace SoftEngChatClient
         public event EventHandler EnterSurnameClicked;
         public event EventHandler EnterSurnameLeaved;
 
-        public event EventHandler TextChanged;
+        public event EventHandler TextChangedEvent;
         
 
         // Initializes parameters and settings for the Register window.
@@ -39,7 +39,8 @@ namespace SoftEngChatClient
         {
             InitializeComponent();
         }
-
+        
+       
         // What should happen if clicking Register in register window.
         private void RegisterAccept_Click(object sender, EventArgs e)
         {
@@ -140,12 +141,17 @@ namespace SoftEngChatClient
         private void EnterPassword_Enter(object sender, EventArgs e)
         {
             EnterPasswordClicked(this, e);
-            
         }
         private void EnterPassword_Leave(object sender, EventArgs e)
         {
-            EnterPasswordLeaved(this, e);
-            
+            try
+            {
+                EnterPasswordLeaved(this, e);
+            }
+            catch(Exception ev)
+            {
+                //
+            }
         }
 
         private void EnterEmail_Enter(object sender, EventArgs e)
@@ -183,23 +189,23 @@ namespace SoftEngChatClient
 
         private void EnterUsername_TextChanged(object sender, EventArgs e)
         {
-            TextChanged(this, e);
+            TextChangedEvent(this, e);
         }
         private void EnterPassword_TextChanged(object sender, EventArgs e)
         {
-            TextChanged(this, e);
+            TextChangedEvent(this, e);
         }
         private void EnterEmail_TextChanged(object sender, EventArgs e)
         {
-            TextChanged(this, e);
+            TextChangedEvent(this, e);
         }
         private void EnterForename_TextChanged(object sender, EventArgs e)
         {
-            TextChanged(this, e);
+            TextChangedEvent(this, e);
         }
         private void EnterSurname_TextChanged(object sender, EventArgs e)
         {
-            TextChanged(this, e);
+            TextChangedEvent(this, e);
         }
         public void RegLabelSet(bool set)
         {
