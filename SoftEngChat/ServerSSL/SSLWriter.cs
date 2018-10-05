@@ -65,5 +65,19 @@ namespace SoftEngChat.Model.SSLCommunication
             if (answer == 0) Console.Write("Deny");
             else if (answer == 1) Console.Write("Accept");
         }
+
+        public void WriteOnlineListUpdate(string client, bool goingOffline)
+        {
+            string outgoing = "";
+            if(goingOffline)
+            {
+                outgoing = "9:0:" + client;
+            }
+            else
+            {
+                outgoing = "9:1" + client;
+            }
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+        }
 	}
 }

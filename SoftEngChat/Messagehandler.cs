@@ -94,25 +94,25 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		private void HandleLogin(string incomming)
 		{
-			bool valid = ValidateLoginMessage(incomming);
+            string[] messageArray = ParseMessage(incomming);
+            string username = messageArray[1];
+            string password = messageArray[2];
+            bool valid = ValidateLoginMessage(username, password);
             client.writer.WriteLoginACK(valid ? 1 : 0);
-			if(valid) server.SendOnlineListToAllClient();
+            if (valid)
+            {
+                server.UpdateOnlineList();
+                server.SendOnlineListToClient(username);
+                server.UpdateUserClientList(username, false);
+            }
 			
 		}
 
         //IN:   Login message
         //OUT:  True if username and password is correct and user not already logged in.
         //      False otherwise
-		private bool ValidateLoginMessage(string message)
+		private bool ValidateLoginMessage(string username, string password)
 		{
-			string username = null;
-			string password = null;
-            // string mail = null;
-
-            string[] messageArray = ParseMessage(message);
-            username = messageArray[1];
-            password = messageArray[2];
-
             if((server.userManager.ValidateUser(username, password)) && server.IsUserOnline(username)==false)
             {
                 client.userName = username;
@@ -129,7 +129,10 @@ namespace SoftEngChat.Model.SSLCommunication
 
 			user.RemoveAt(0);
 			bool regFlag = server.userManager.AddUser(user);
-
+            if(regFlag)
+            {
+                server.everyRegisteredUserList.Add(user[1]);
+            }
 			client.writer.WriteRegAck(regFlag);
 		}
         
@@ -145,7 +148,9 @@ namespace SoftEngChat.Model.SSLCommunication
 		private void HandleLogout()
 		{
 			client.listener.StopListen();
-			server.RemoveClient(client);
+            server.UpdateUserClientList(client.userName.ToString(), true);
+            server.RemoveClient(client);
+            
 		}
 
         private void HandleFriendRequest(string incomming)

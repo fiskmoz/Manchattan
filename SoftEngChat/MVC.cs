@@ -11,8 +11,8 @@
             loginACK = 4,  // "4:0/1"
             logout = 5,  // "5: 1
             onlineList = 6,  // 6:0/1:A:B:C:D"
-            friendRequest = 7, 
-            friendResponse = 8,
+            friendRequest = 7,   // 7:sender:receiver
+            friendResponse = 8, //   8:sender:receiver:(0/1)     (Decline/Accept)
             onlineStatus = 9 // 9:0/1:name
         }
         namespace SSLCommunication { }

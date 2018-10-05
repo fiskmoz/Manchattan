@@ -150,7 +150,7 @@ namespace SoftEngChatClient
 
         //Method to hash a string
         //To be implemented with login messages
-        public static string Sha256_hash(string plaintext)
+        public string Sha256_hash(string plaintext)
         {
             StringBuilder sb = new StringBuilder();
             using(SHA256 hash = SHA256.Create())
