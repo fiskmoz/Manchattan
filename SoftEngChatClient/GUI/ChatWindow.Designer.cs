@@ -44,6 +44,7 @@ namespace SoftEngChatClient
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.poweredBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -218,6 +219,18 @@ namespace SoftEngChatClient
             this.label2.TabIndex = 1;
             this.label2.Text = "Contacts";
             // 
+            // poweredBy
+            // 
+            this.poweredBy.AutoSize = true;
+            this.poweredBy.BackColor = System.Drawing.Color.Transparent;
+            this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredBy.ForeColor = System.Drawing.Color.White;
+            this.poweredBy.Location = new System.Drawing.Point(764, 509);
+            this.poweredBy.Name = "poweredBy";
+            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.TabIndex = 104;
+            this.poweredBy.Text = "Powered by ClientDriver 1.1";
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +239,7 @@ namespace SoftEngChatClient
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 522);
+            this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
@@ -269,5 +283,6 @@ namespace SoftEngChatClient
         private Label label3;
         private Panel panel2;
         private Label label2;
+        private Label poweredBy;
     }
 }

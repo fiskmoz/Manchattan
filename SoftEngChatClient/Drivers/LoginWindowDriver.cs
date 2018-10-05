@@ -153,6 +153,11 @@ namespace SoftEngChatClient.Drivers
 
         public void ShowLoginWindow()
         {
+            if(loginWindow.InvokeRequired)
+            {
+                loginWindow.Invoke(new Action(ShowLoginWindow));
+                return;
+            }
             loginWindow.Show();
         }
 
