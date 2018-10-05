@@ -10,15 +10,17 @@ namespace SoftEngChatClient.Model
 	{
 		public event EventHandler UpdateContactList;
 		private List<Contact> contactList;
-		private List<string> offlineList;
+		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
 
-		private bool hasOfflineList = false;
-		private bool hasOnlineList = false;
+		public bool hasOfflineList { get; private set; }
+		private bool hasOnlineList;
 
 		public ContactsHandler(FileManager fm)
 		{
+			hasOfflineList = false;
+			hasOnlineList = false;
 			contactList = new List<Contact>();
 			onlineList = new List<string>();
 			offlineList = new List<string>();
