@@ -93,5 +93,10 @@ namespace SoftEngChatClient
             }
             return IndividualMessageBox.Text;
         }
+
+        private void poweredBy_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
