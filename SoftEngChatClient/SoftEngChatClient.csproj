@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientCrypto.cs" />
     <Compile Include="ContactManagement\Contact.cs" />
     <Compile Include="ContactManagement\ContactListEventArg.cs" />
     <Compile Include="ContactManagement\ContactsHandler.cs" />
@@ -77,7 +78,6 @@
     </Compile>
     <Compile Include="MessageHandling\IncommingMessages.cs" />
     <Compile Include="Drivers\IndividualChatDriver.cs" />
-    <Compile Include="Cryptography.cs" />
     <Compile Include="MessageHandling\Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="Program.cs" />
