@@ -7,7 +7,6 @@ namespace SoftEngChat.Model.SSLCommunication
 	{
 		private SSLServer server;
 		private SSLClient client;
-        private UserManager UserManager;
 
 
 		//Handles messages arriving at server.
@@ -154,17 +153,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string[] messageArray = ParseMessage(incomming);
             string sender = messageArray[1];
             string receiver = messageArray[2];
-
-            if(UserManager.FindUser(receiver))
-            {
-                server.SendFriendRequest(sender, receiver,"");
-            }
-            else
-            {
-              //To do 
-            }
-
-
+            server.SendFriendRequest(sender, receiver);
         }
 
         private void ValidateFriendResponse(string incomming)
@@ -174,9 +163,9 @@ namespace SoftEngChat.Model.SSLCommunication
 
             string sender = messageArray[1];
             string receiver = messageArray[2];
-            string message = messageArray[3];
-           
-            server.SendFriendRespond(sender, receiver, message);
+            int answer;
+            if(Int32.TryParse(messageArray[3], out answer))           
+                server.SendFriendResponse(sender, receiver, answer);
         }
 	}
 }
