@@ -19,7 +19,7 @@ namespace SoftEngChat
 
 
         //Hashes a string with SHA256.
-        public static string Sha256_hash(string plaintext)
+        public string Sha256_hash(string plaintext)
         {
             StringBuilder sb = new StringBuilder();
             using (SHA256 hash = SHA256.Create())
