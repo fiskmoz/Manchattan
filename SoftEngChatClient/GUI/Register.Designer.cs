@@ -43,6 +43,7 @@
             this.EnterSurname = new System.Windows.Forms.TextBox();
             this.regRejectLbl = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.poweredBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -267,6 +268,18 @@
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
+            // poweredBy
+            // 
+            this.poweredBy.AutoSize = true;
+            this.poweredBy.BackColor = System.Drawing.Color.Transparent;
+            this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredBy.ForeColor = System.Drawing.Color.White;
+            this.poweredBy.Location = new System.Drawing.Point(114, 377);
+            this.poweredBy.Name = "poweredBy";
+            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.TabIndex = 14;
+            this.poweredBy.Text = "Powered by ClientDriver 1.1";
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,6 +287,7 @@
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(363, 399);
+            this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.regRejectLbl);
             this.Controls.Add(this.label3);
@@ -316,5 +330,6 @@
         private System.Windows.Forms.TextBox EnterSurname;
 		private System.Windows.Forms.Label regRejectLbl;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label poweredBy;
     }
 }

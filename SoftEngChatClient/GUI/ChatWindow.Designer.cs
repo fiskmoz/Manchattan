@@ -33,7 +33,7 @@ namespace SoftEngChatClient
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatWindow));
             this.MessageBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
-            this.contactListbox = new System.Windows.Forms.ListBox();
+            this.contactListBox = new System.Windows.Forms.ListBox();
             this.ChatBox = new System.Windows.Forms.TextBox();
             this.PreviousMessagesButton = new System.Windows.Forms.Button();
             this.userNameLbl = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@ namespace SoftEngChatClient
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.poweredBy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -83,18 +84,18 @@ namespace SoftEngChatClient
             // 
             // listBox1
             // 
-            this.contactListbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.contactListbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contactListbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.contactListbox.ForeColor = System.Drawing.Color.White;
-            this.contactListbox.FormattingEnabled = true;
-            this.contactListbox.ItemHeight = 24;
-            this.contactListbox.Location = new System.Drawing.Point(2, 34);
-            this.contactListbox.Margin = new System.Windows.Forms.Padding(2);
-            this.contactListbox.Name = "listBox1";
-            this.contactListbox.Size = new System.Drawing.Size(199, 408);
-            this.contactListbox.TabIndex = 0;
-            this.contactListbox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.contactListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.contactListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contactListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
+            this.contactListBox.ForeColor = System.Drawing.Color.White;
+            this.contactListBox.FormattingEnabled = true;
+            this.contactListBox.ItemHeight = 24;
+            this.contactListBox.Location = new System.Drawing.Point(2, 34);
+            this.contactListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.contactListBox.Name = "listBox1";
+            this.contactListBox.Size = new System.Drawing.Size(199, 408);
+            this.contactListBox.TabIndex = 0;
+            this.contactListBox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // ChatBox
             // 
@@ -201,7 +202,7 @@ namespace SoftEngChatClient
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.contactListbox);
+            this.panel2.Controls.Add(this.contactListBox);
             this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(766, 55);
             this.panel2.Name = "panel2";
@@ -218,6 +219,18 @@ namespace SoftEngChatClient
             this.label2.TabIndex = 1;
             this.label2.Text = "Contacts";
             // 
+            // poweredBy
+            // 
+            this.poweredBy.AutoSize = true;
+            this.poweredBy.BackColor = System.Drawing.Color.Transparent;
+            this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredBy.ForeColor = System.Drawing.Color.White;
+            this.poweredBy.Location = new System.Drawing.Point(764, 509);
+            this.poweredBy.Name = "poweredBy";
+            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.TabIndex = 104;
+            this.poweredBy.Text = "Powered by ClientDriver 1.1";
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +239,7 @@ namespace SoftEngChatClient
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 522);
+            this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
@@ -260,7 +274,7 @@ namespace SoftEngChatClient
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.Button PreviousMessagesButton;
-        public ListBox contactListbox;
+        public ListBox contactListBox;
 		private Label userNameLbl;
 		private Button logoutBtn;
         private Label label1;
@@ -269,5 +283,6 @@ namespace SoftEngChatClient
         private Label label3;
         private Panel panel2;
         private Label label2;
+        private Label poweredBy;
     }
 }

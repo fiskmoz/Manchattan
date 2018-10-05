@@ -42,6 +42,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rememberMeCheckBox = new System.Windows.Forms.CheckBox();
+            this.poweredBy = new System.Windows.Forms.Label();
+            this.fantastic4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,6 +229,30 @@
             this.rememberMeCheckBox.UseVisualStyleBackColor = false;
             this.rememberMeCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // poweredBy
+            // 
+            this.poweredBy.AutoSize = true;
+            this.poweredBy.BackColor = System.Drawing.Color.Transparent;
+            this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredBy.ForeColor = System.Drawing.Color.White;
+            this.poweredBy.Location = new System.Drawing.Point(441, 472);
+            this.poweredBy.Name = "poweredBy";
+            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.TabIndex = 13;
+            this.poweredBy.Text = "Powered by ClientDriver 1.1";
+            // 
+            // fantastic4
+            // 
+            this.fantastic4.AutoSize = true;
+            this.fantastic4.BackColor = System.Drawing.Color.Transparent;
+            this.fantastic4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fantastic4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.fantastic4.Location = new System.Drawing.Point(426, 124);
+            this.fantastic4.Name = "fantastic4";
+            this.fantastic4.Size = new System.Drawing.Size(83, 16);
+            this.fantastic4.TabIndex = 14;
+            this.fantastic4.Text = "By Fantastic4";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,6 +261,8 @@
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(584, 487);
+            this.Controls.Add(this.fantastic4);
+            this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.rememberMeCheckBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -277,5 +305,7 @@
         public System.Windows.Forms.CheckBox rememberMeCheckBox;
         public System.Windows.Forms.TextBox EnterEmail;
         public System.Windows.Forms.TextBox EnterPassword;
+        private System.Windows.Forms.Label poweredBy;
+        private System.Windows.Forms.Label fantastic4;
     }
 }
