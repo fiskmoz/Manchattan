@@ -119,7 +119,33 @@ namespace SoftEngChat.Model.SSLCommunication
             }
         }
 
-		internal void RemoveClient(SSLClient client)
+        
+        public void WriteFriendRespond(string sender, string receiver, string message)
+        {
+           foreach (var client in clientList)
+            {
+                if(client.userName == receiver)
+                {
+                    client.writer.WriteClient(MessageType.friendResponse, sender, receiver, message);
+                    return;
+                }
+            }
+        }
+
+
+        public void WriteFriendRequest(string sender, string receiver,string message)
+        {
+            foreach (var client in clientList)
+            {
+                if (client.userName == receiver)
+                {
+                    client.writer.WriteClient(MessageType.friendRequest, sender, receiver, message);
+                    return;
+                }
+            }
+        }
+
+        internal void RemoveClient(SSLClient client)
 		{
 			Thread.BeginCriticalRegion();
 
