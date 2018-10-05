@@ -77,10 +77,13 @@ namespace SoftEngChatClient.Drivers
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
             var str = chatWindow.getChatBox();
-            var byteArray = logCrypto.EncryptString(str);
-            var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
-            fs.Write(byteArray, 0, byteArray.Length);
-            fs.Close();
+            if (str != "")
+            {
+                var byteArray = logCrypto.EncryptString(str);
+                var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
+                fs.Write(byteArray, 0, byteArray.Length);
+                fs.Close();
+            }
             if (loggingOut == false)
             {
                 writer.WriteLogout(MessageType.logout);
@@ -129,12 +132,12 @@ namespace SoftEngChatClient.Drivers
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
             loggingOut = true;
-            chatWindow.Close();
+            ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
+            chatWindow.Hide();
             writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(2000);
-            chatWindow = new ChatWindow();
-            loggingOut = false;
+            Thread.Sleep(1000);
             restart(this, e);
+            loggingOut = false;
         }
 
         private void PreviousMessageButtonClicked(object sender, EventArgs e)
