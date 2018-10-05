@@ -127,8 +127,8 @@ namespace SoftEngChatClient.Drivers
 
         private void HandleIndividualUsernamePressed(object sender, EventArgs e)
         {
-            var index = chatWindow.listBox1.SelectedItem;
-            string receiver = chatWindow.listBox1.GetItemText(index);
+            var index = chatWindow.contactListBox.SelectedItem;
+            string receiver = chatWindow.contactListBox.GetItemText(index);
             if (receiver != username)
             {
                 AddNewIndividualChat(receiver);
@@ -168,14 +168,14 @@ namespace SoftEngChatClient.Drivers
             }
             string[] usernames;
             usernames = str.Split(':');
-            for (int n = chatWindow.listBox1.Items.Count - 1; n >= 0; --n)
+            for (int n = chatWindow.contactListBox.Items.Count - 1; n >= 0; --n)
             {
-                chatWindow.listBox1.Items.RemoveAt(n);
+                chatWindow.contactListBox.Items.RemoveAt(n);
             }
 
             for (int i = 1; i < usernames.Length; i++)
             {
-                chatWindow.listBox1.Items.Add(usernames[i]);
+                chatWindow.contactListBox.Items.Add(usernames[i]);
             }
         }
 
