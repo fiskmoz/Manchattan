@@ -59,10 +59,10 @@ namespace SoftEngChatClient.Model
 		{
 			List<string> onlineList = new List<string>();
 
-			for(int i = 1; i <= incomming.Length; i++)
+			for(int i = 1; i < incomming.Length; i++)
 				onlineList.Add(incomming[i]);
 
-			IncommingOnlineList(this, new OnlineList(onlineList));
+			//IncommingOnlineList(this, new OnlineList(onlineList));
 
 		}
 		/*
