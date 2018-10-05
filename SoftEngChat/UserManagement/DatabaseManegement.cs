@@ -71,7 +71,7 @@ namespace SoftEngChat
                 "Mansson"
             };
             info2[2] = sc.Sha256_hash(info2[2]);
-            user.Add(new User(info));
+            user.Add(new User(info2));
 
             try
             {

@@ -61,5 +61,13 @@ namespace SoftEngChat
             }
             return false;
         }
+
+        public void SetListOfAllClients(List<string> list )
+        {
+            foreach (var user in userList)
+            {
+                list.Add(user.userName);
+            }
+        }
 	}
 }
