@@ -33,7 +33,7 @@ namespace SoftEngChatClient
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatWindow));
             this.MessageBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.contactListbox = new System.Windows.Forms.ListBox();
             this.ChatBox = new System.Windows.Forms.TextBox();
             this.PreviousMessagesButton = new System.Windows.Forms.Button();
             this.userNameLbl = new System.Windows.Forms.Label();
@@ -83,18 +83,18 @@ namespace SoftEngChatClient
             // 
             // listBox1
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.listBox1.ForeColor = System.Drawing.Color.White;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(2, 34);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(199, 408);
-            this.listBox1.TabIndex = 0;
-            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.contactListbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.contactListbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contactListbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
+            this.contactListbox.ForeColor = System.Drawing.Color.White;
+            this.contactListbox.FormattingEnabled = true;
+            this.contactListbox.ItemHeight = 24;
+            this.contactListbox.Location = new System.Drawing.Point(2, 34);
+            this.contactListbox.Margin = new System.Windows.Forms.Padding(2);
+            this.contactListbox.Name = "listBox1";
+            this.contactListbox.Size = new System.Drawing.Size(199, 408);
+            this.contactListbox.TabIndex = 0;
+            this.contactListbox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // ChatBox
             // 
@@ -201,7 +201,7 @@ namespace SoftEngChatClient
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.listBox1);
+            this.panel2.Controls.Add(this.contactListbox);
             this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(766, 55);
             this.panel2.Name = "panel2";
@@ -260,7 +260,7 @@ namespace SoftEngChatClient
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.Button PreviousMessagesButton;
-        public ListBox listBox1;
+        public ListBox contactListbox;
 		private Label userNameLbl;
 		private Button logoutBtn;
         private Label label1;

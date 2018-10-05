@@ -19,7 +19,7 @@ namespace SoftEngChatClient.Drivers
         private List<IndividualChatDriver> individualChatDrivers;
         private SSLWriter writer;
         private Cryptography logCrypto;
-
+		private ContactsHandler contactsHandler;
         public event EventHandler restart;
 
         private bool loggingOut = false;
@@ -34,6 +34,8 @@ namespace SoftEngChatClient.Drivers
             this.logCrypto = logCrypto;
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
+			contactsHandler = new ContactsHandler();
+
             SetupListeners();
         }
 
@@ -50,11 +52,13 @@ namespace SoftEngChatClient.Drivers
             chatWindow.usernamePressed += new EventHandler(HandleIndividualUsernamePressed);
             chatWindow.logoutEvent += new EventHandler(LogoutButtonClicked);
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
+			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
 		public void Subscribe(Messagehandler mh)
 		{
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
+			contactsHandler.Subscribe(mh);
 		}
 
         private void SpamTimerElapsed(object sender, ElapsedEventArgs e)
@@ -127,8 +131,8 @@ namespace SoftEngChatClient.Drivers
 
         private void HandleIndividualUsernamePressed(object sender, EventArgs e)
         {
-            var index = chatWindow.listBox1.SelectedItem;
-            string receiver = chatWindow.listBox1.GetItemText(index);
+            var index = chatWindow.contactListbox.SelectedItem;
+            string receiver = chatWindow.contactListbox.GetItemText(index);
             if (receiver != username)
             {
                 AddNewIndividualChat(receiver);
@@ -159,23 +163,22 @@ namespace SoftEngChatClient.Drivers
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
 
-        public void UpdateOnlineList(string str)
+		private void UpdateOnlineList(object sender, EventArgs e)
         {
             if (chatWindow.InvokeRequired)
             {
-                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
+                chatWindow.Invoke(new Action<object, EventArgs>(UpdateOnlineList), new object[] { sender, e });
                 return;
             }
-            string[] usernames;
-            usernames = str.Split(':');
-            for (int n = chatWindow.listBox1.Items.Count - 1; n >= 0; --n)
+
+            for (int n = chatWindow.contactListbox.Items.Count - 1; n >= 0; --n)
             {
-                chatWindow.listBox1.Items.RemoveAt(n);
+                chatWindow.contactListbox.Items.RemoveAt(n);
             }
 
-            for (int i = 1; i < usernames.Length; i++)
+            foreach(Contact c in ((ContactListEventArg)e).contacts)
             {
-                chatWindow.listBox1.Items.Add(usernames[i]);
+                chatWindow.contactListbox.Items.Add(c.name);
             }
         }
 
