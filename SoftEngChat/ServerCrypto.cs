@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SoftEngChat
 {
-    class Cryptography
+    public class ServerCrypto
     {
         //Generates AES key.
         public byte[] GenerateAesKey()

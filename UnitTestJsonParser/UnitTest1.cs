@@ -12,9 +12,10 @@ namespace UnitTestJsonParser
         private static readonly string fileName = "DB.txt";
         private static string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\" + fileName;
         private List<User> userList = new List<User>();
+        private ServerCrypto crypto = new ServerCrypto();
 
         [TestMethod]
-        public void readFromFile()
+        public void ReadFromFile()
         {
             List<string> info = new List<string>
             {
@@ -28,8 +29,13 @@ namespace UnitTestJsonParser
 
             // Assert.AreEqual(userList, dataBase.DBread(filePath));
             Assert.IsNotNull(dataBase.DBread(filePath));
+        }
 
-
+        [TestMethod]
+        public void TestHashMethod()
+        {
+            
+           
 
         }
     }
