@@ -18,7 +18,7 @@ namespace SoftEngChatClient.Drivers
         int spam;
         private List<IndividualChatDriver> individualChatDrivers;
         private SSLWriter writer;
-        private Cryptography logCrypto;
+        private ClientCrypto logCrypto;
 
         public event EventHandler restart;
 
@@ -28,7 +28,7 @@ namespace SoftEngChatClient.Drivers
 
         private List<string> messageList;
 
-        public ChatWindowDriver(SSLWriter writer, Cryptography logCrypto)
+        public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
             this.writer = writer;
             this.logCrypto = logCrypto;
