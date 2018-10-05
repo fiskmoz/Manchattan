@@ -66,7 +66,7 @@ namespace SoftEngChat.Model.SSLCommunication
 				foreach (SSLClient client in clientList)
 				{
 					// If client has yet to log in, do not send.
-					if (client.userName != "User")
+					if (client.userName != null)
 					{
 						str.Append(":" + client.userName);
 					}
@@ -95,7 +95,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
 		//Send messages to all clients (IRC) but sender.
 		//IN: Username of client who sent message and the actual message.
-		public void WriteAll(string sender, string message)
+		public void SendMessageAll(string sender, string message)
 		{
             foreach ( var client in clientList)
 			{
@@ -107,7 +107,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
-        public void WriteIndivualMessage(string sender, string receiver, string message)
+        public void SendIndivualMessage(string sender, string receiver, string message)
         {
             foreach (var client in clientList)
             {
@@ -120,7 +120,7 @@ namespace SoftEngChat.Model.SSLCommunication
         }
 
         
-        public void WriteFriendRespond(string sender, string receiver, string message)
+        public void SendFriendRespond(string sender, string receiver, string message)
         {
            foreach (var client in clientList)
             {
@@ -133,7 +133,7 @@ namespace SoftEngChat.Model.SSLCommunication
         }
 
 
-        public void WriteFriendRequest(string sender, string receiver,string message)
+        public void SendFriendRequest(string sender, string receiver,string message)
         {
             foreach (var client in clientList)
             {

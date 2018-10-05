@@ -83,11 +83,11 @@ namespace SoftEngChat.Model.SSLCommunication
             string message = parsed[3];
             if (receiver == "All")
             {
-                server.WriteAll(sender, message);
+                server.SendMessageAll(sender, message);
             }
             else
             {
-                server.WriteIndivualMessage(sender, receiver, message);
+                server.SendIndivualMessage(sender, receiver, message);
             }
 			
 		}
@@ -157,7 +157,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
             if(UserManager.FindUser(receiver))
             {
-                server.WriteFriendRequest(sender, receiver,"");
+                server.SendFriendRequest(sender, receiver,"");
             }
             else
             {
@@ -176,7 +176,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string receiver = messageArray[2];
             string message = messageArray[3];
            
-            server.WriteFriendRespond(sender, receiver, message);
+            server.SendFriendRespond(sender, receiver, message);
         }
 	}
 }
