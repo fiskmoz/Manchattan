@@ -50,16 +50,16 @@ namespace SoftEngChat
 			return true;
 		}
 
-        public bool FindUser(string receiver)
+        public User FindUser(string username)
         {
             foreach (var user in userList)
             {
-                if(receiver == user.userName)
+                if(username == user.userName)
                 {
-                    return true;
+                    return user;
                 }
             }
-            return false;
+            return null;
         }
 
         public void SetListOfAllClients(List<string> list )
