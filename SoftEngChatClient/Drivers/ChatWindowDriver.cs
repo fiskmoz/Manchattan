@@ -229,14 +229,17 @@ namespace SoftEngChatClient.Drivers
 
         private void LoggingIn(object sender, EventArgs args)
         {
-            if(chatWindow.InvokeRequired)
+            if( ((LoginAck)args).message)
             {
-                chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
-                return;
+                if (chatWindow.InvokeRequired)
+                {
+                    chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
+                    return;
+                }
+                username = ClientDriver.globalUsername;
+                chatWindow.SetUserName(username);
+                new Thread(() => chatWindow.ShowDialog()).Start();
             }
-            username = ClientDriver.globalUsername;
-            chatWindow.SetUserName(username);
-            new Thread(() => chatWindow.ShowDialog()).Start();
         }
     }
 }
