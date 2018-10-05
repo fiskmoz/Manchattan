@@ -54,6 +54,14 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine("Message arrived; OnlineList:");
                     Console.WriteLine(incomming);
                     break;
+                case '7':
+                    Console.WriteLine("Message arrived; FriendRequest:");
+                    Console.WriteLine(incomming);
+                    break;
+                case '8':
+                    Console.WriteLine("Message arrived; FriendRespond ACK");
+                    Console.WriteLine(incomming);
+                    break;
                 default:
 					Console.WriteLine("Message arrived; Error:");
 					Console.WriteLine(incomming);
