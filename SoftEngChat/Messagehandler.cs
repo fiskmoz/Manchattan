@@ -7,6 +7,8 @@ namespace SoftEngChat.Model.SSLCommunication
 	{
 		private SSLServer server;
 		private SSLClient client;
+        private UserManager UserManager;
+
 
 		//Handles messages arriving at server.
 		public Messagehandler(string userName, SSLServer server, SSLClient client)
@@ -57,10 +59,12 @@ namespace SoftEngChat.Model.SSLCommunication
                 case '7':
                     Console.WriteLine("Message arrived; FriendRequest:");
                     Console.WriteLine(incomming);
+                    HandleFriendRequest(incomming);
                     break;
                 case '8':
                     Console.WriteLine("Message arrived; FriendRespond ACK");
                     Console.WriteLine(incomming);
+                    ValidateFriendResponse(incomming);
                     break;
                 default:
 					Console.WriteLine("Message arrived; Error:");
@@ -79,11 +83,11 @@ namespace SoftEngChat.Model.SSLCommunication
             string message = parsed[3];
             if (receiver == "All")
             {
-                server.WriteAll(sender, message);
+                server.SendMessageAll(sender, message);
             }
             else
             {
-                server.WriteIndivualMessage(sender, receiver, message);
+                server.SendIndivualMessage(sender, receiver, message);
             }
 			
 		}
@@ -144,5 +148,35 @@ namespace SoftEngChat.Model.SSLCommunication
 			client.listener.StopListen();
 			server.RemoveClient(client);
 		}
+
+        private void HandleFriendRequest(string incomming)
+        {
+            string[] messageArray = ParseMessage(incomming);
+            string sender = messageArray[1];
+            string receiver = messageArray[2];
+
+            if(UserManager.FindUser(receiver))
+            {
+                server.SendFriendRequest(sender, receiver,"");
+            }
+            else
+            {
+              //To do 
+            }
+
+
+        }
+
+        private void ValidateFriendResponse(string incomming)
+        {
+            string[] messageArray = ParseMessage(incomming);
+            //Opposite sender of friendrequest becomes the reciver.
+
+            string sender = messageArray[1];
+            string receiver = messageArray[2];
+            string message = messageArray[3];
+           
+            server.SendFriendRespond(sender, receiver, message);
+        }
 	}
 }
