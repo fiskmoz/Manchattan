@@ -9,11 +9,11 @@ namespace SoftEngChatClient
 {
     class FileManager
     {
-        private Cryptography cyptoMessage;
+        private ClientCrypto cyptoMessage;
 
        public FileManager()
         {
-            cyptoMessage = new Cryptography();
+            cyptoMessage = new ClientCrypto();
 
             //Random input for encryption 
             string input = "hejhejjkjdueoplikmnakduehgjdmnju";

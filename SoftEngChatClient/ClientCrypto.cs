@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient
 {
-    class Cryptography
+    class ClientCrypto
     {
         private AesManaged aes;
 
-        public Cryptography()
+        public ClientCrypto()
         {
             aes = new AesManaged();
             aes.GenerateKey();
         }
 
-        public Cryptography(byte[] key)
+        public ClientCrypto(byte[] key)
         {
             aes = new AesManaged();
             aes.Key = key;
