@@ -89,4 +89,14 @@ namespace SoftEngChatClient
 			message = ack;
 		}
 	}
+
+    class PersonalKey : EventArgs
+    {
+        public string key { get; set; }
+
+        public PersonalKey(string key)
+        {
+            this.key = key;
+        }
+    }
 }
