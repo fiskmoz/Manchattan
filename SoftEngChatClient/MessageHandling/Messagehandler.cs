@@ -25,7 +25,7 @@ namespace SoftEngChatClient.Model
             string[] incomming = ParseMessage(((IncommingMessage)message).Message);
             switch (incomming[0])
             {
-                case "1'":
+                case "1":
                     HandleRegistrationACK(incomming);
                     break;
                 case "2":
