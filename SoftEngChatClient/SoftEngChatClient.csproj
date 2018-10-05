@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactManagement\Contact.cs" />
+    <Compile Include="ContactManagement\ContactListEventArg.cs" />
+    <Compile Include="ContactManagement\ContactsHandler.cs" />
     <Compile Include="Drivers\ChatWindowDriver.cs" />
     <Compile Include="Drivers\LoginWindowDriver.cs" />
     <Compile Include="FileManager.cs" />
