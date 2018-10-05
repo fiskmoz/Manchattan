@@ -133,5 +133,91 @@ namespace SoftEngChatClient
             else
                 SendButton.Enabled = true;
         }
+
+        private void addFriends_MouseHover(object sender, EventArgs e)
+        {
+            addFriends.ForeColor = Color.White;
+        }
+
+        private void addFriends_MouseLeave(object sender, EventArgs e)
+        {
+            if (findFriendsPanel.Visible == false)
+                addFriends.ForeColor = Color.FromArgb(64, 64, 64);
+            else
+                addFriends.ForeColor = Color.White;
+        }
+
+        private void addFriends_Click(object sender, EventArgs e)
+        {
+            if (findFriendsPanel.Visible == false)
+            {
+                findFriendsPanel.Visible = true;
+                addFriends.BackColor = Color.FromArgb(64, 64, 64);
+                addFriends.ForeColor = Color.White;
+
+                showFriends.BackColor = Color.FromArgb(59, 177, 226);
+                showFriends.ForeColor = Color.FromArgb(64, 64, 64);
+            }
+        }
+
+        private void showFriends_MouseHover(object sender, EventArgs e)
+        {
+            showFriends.ForeColor = Color.White;
+        }
+
+        private void showFriends_MouseLeave(object sender, EventArgs e)
+        {
+            if (findFriendsPanel.Visible == true)
+                showFriends.ForeColor = Color.FromArgb(64, 64, 64);
+            else
+                showFriends.ForeColor = Color.White;
+        }
+
+        private void showFriends_Click(object sender, EventArgs e)
+        {
+            if(findFriendsPanel.Visible == true)
+            {
+                findFriendsPanel.Visible = false;
+                showFriends.BackColor = Color.FromArgb(64, 64, 64);
+                showFriends.ForeColor = Color.White;
+
+                addFriends.BackColor = Color.FromArgb(59, 177, 226);
+                addFriends.ForeColor = Color.FromArgb(64, 64, 64);
+            }
+        }
+
+        private void findFriendsTextBox_Click(object sender, EventArgs e)
+        {
+            if(findFriendsTextBox.Text == "Search...")
+            {
+                findFriendsTextBox.Text = "";
+                findFriendsTextBox.ForeColor = Color.White;
+                noFriendsLabel.Visible = false;
+            }
+        }
+
+        private void findFriendsTextBox_Leave(object sender, EventArgs e)
+        {
+            if(findFriendsTextBox.Text == "")
+            {
+                findFriendsTextBox.Text = "Search...";
+                findFriendsTextBox.ForeColor = Color.Gainsboro;
+            }
+        }
+
+        private void findFriendsTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string name1 = "MrThailand35";
+            string name2 = "MrThailand36";
+            int searchLength = findFriendsTextBox.TextLength;
+            string temp = findFriendsTextBox.Text;
+            for (int i = 0; i < searchLength; i++)
+            {
+                if (temp[i] == name1[i])
+                {
+                    findFriendsBox.Items.Add(name1[i]);
+                }
+            }
+        }
     }
 }
