@@ -16,6 +16,8 @@ namespace SoftEngChatClient.Model
 		public event EventHandler IncommingLoginAck;
 		public event EventHandler IncommingClientMessage;
 		public event EventHandler IncommingOnlineList;
+		public event EventHandler IncommingOfflineList;
+		public event EventHandler IncommingUserStatus;
 
 		//Handles messages arriving at Client.
 		//Eventhandler, Consumes IncommingMessage Events.
@@ -37,6 +39,9 @@ namespace SoftEngChatClient.Model
                 case "6":
                     HandleUpdateOnlineList(incomming);
                     break;
+				case "9":
+					HandleUserOnlineStatus(incomming);
+					break;
             }
 		}
 
@@ -57,13 +62,21 @@ namespace SoftEngChatClient.Model
 
 		private void HandleUpdateOnlineList( string[] incomming)
 		{
-			List<string> onlineList = new List<string>();
+			List<string> userList = new List<string>();
 
-			for(int i = 1; i < incomming.Length; i++)
-				onlineList.Add(incomming[i]);
+			for(int i = 2; i < incomming.Length; i++)
+				userList.Add(incomming[i]);
 
-			//IncommingOnlineList(this, new OnlineList(onlineList));
+			if (incomming[1] == "1")
+				IncommingOnlineList(this, new OnlineList(userList));
+			else
+				IncommingOfflineList(this, new OnlineList(userList));
 
+		}
+
+		private void HandleUserOnlineStatus(string[] incomming)
+		{
+			IncommingUserStatus(this, new UserOnlineStatusUpdate(incomming[2], incomming[1] == "1"));
 		}
 		/*
         private void HandleRegistrationACK(string inc)

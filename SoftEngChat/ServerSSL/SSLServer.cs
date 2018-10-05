@@ -100,7 +100,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.userName != sender || client.userName != null)
+				if(client.userName != sender && client.userName != null)
 				{
                     client.writer.WriteClient(MessageType.client, sender, "All", message);
                 }

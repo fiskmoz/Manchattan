@@ -64,5 +64,10 @@ namespace SoftEngChatClient
                 e.GetBaseException();
             }
         }
-    }
+
+		internal List<string> ReadContacts()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
