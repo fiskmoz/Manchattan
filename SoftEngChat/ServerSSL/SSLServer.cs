@@ -18,6 +18,11 @@ namespace SoftEngChat.Model.SSLCommunication
         public UserManager userManager;
         public int sessionIDCounter = 0;
 
+        public List<string> everyRegisteredUserList;
+        public List<string> allOnlineusers;
+
+        private string onlineListAsString;
+
 
 		public SSLServer(IPAddress ip, int port)
 		{
@@ -26,7 +31,9 @@ namespace SoftEngChat.Model.SSLCommunication
 			serverListener = new TcpListener(ip, port);
 			serverListener.Start();
             userManager = new UserManager();
-            
+            everyRegisteredUserList = new List<string>();
+            allOnlineusers = new List<string>();
+            userManager.SetListOfAllClients(everyRegisteredUserList);
 
 			while (true)
 			{
@@ -55,25 +62,18 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
-        public void SendOnlineListToAllClient()
+        public void SendOnlineListToClient(string username)
         {
 			Thread.BeginCriticalRegion();
 
 			lock (clientList)
 			{
-				StringBuilder str = new StringBuilder();
-				str.Append((int)MessageType.onlineList);
 				foreach (SSLClient client in clientList)
 				{
-					// If client has yet to log in, do not send.
-					if (client.userName != null)
-					{
-						str.Append(":" + client.userName);
-					}
-				}
-				foreach (SSLClient client in clientList)
-				{
-					client.writer.WriteOnlineList(str.ToString());
+                    if (client.userName == username || client.userName != null)
+                    {
+                        client.writer.WriteOnlineList(onlineListAsString);
+                    }
 				}
 			}
             
@@ -153,10 +153,39 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				client.Dispose();
 				clientList.Remove(client);
-				SendOnlineListToAllClient();
+				SendStatusUpdateToClients();
 			}
 			
 			Thread.EndCriticalRegion();
 		}
-	}
+
+        public void UpdateUserClientList(string clientGoingOffline, bool goingOffline)
+        {
+            foreach(var client in clientList)
+            {
+                client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+            }
+        }
+
+        public void SendStatusUpdateToClients()
+        {
+
+        }
+
+        public void UpdateOnlineList()
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append((int)MessageType.onlineList);
+            foreach (SSLClient client in clientList)
+            {
+                // If client has yet to log in, do not send.
+                if (client.userName != null)
+                {
+                    str.Append(":" + client.userName);
+                    allOnlineusers.Add(client.userName);
+                }
+            }
+            onlineListAsString = str.ToString();
+        }
+    }
 }
