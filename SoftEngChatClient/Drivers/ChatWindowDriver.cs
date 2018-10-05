@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using SoftEngChatClient.Model;
+using SoftEngChatClient.Controller;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -36,6 +37,7 @@ namespace SoftEngChatClient.Drivers
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
             SetupListeners();
+            username = ClientDriver.globalUsername;
         }
 
         private void SetupListeners()
@@ -232,6 +234,8 @@ namespace SoftEngChatClient.Drivers
                 chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
                 return;
             }
+            username = ClientDriver.globalUsername;
+            chatWindow.SetUserName(username);
             new Thread(() => chatWindow.ShowDialog()).Start();
         }
     }
