@@ -22,7 +22,7 @@ namespace SoftEngChatClient.Drivers
         private ClientCrypto logCrypto;
         private SpamProtector spam;
         private ContactsHandler contactList;
-        private Contact[] usersInput;
+        private List<string> usersInput;
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
 
@@ -256,10 +256,21 @@ namespace SoftEngChatClient.Drivers
 
         private void FindFriendsSearch(object sender, EventArgs e)
         {
-            //Contact test = new Contact("test", false);
-            //Messagehandler test = new Messagehandler();
-            //contactList.Subscribe(test);
-            usersInput = contactList.getContactList().ToArray();
+			//Contact test = new Contact("test", false);
+			//Messagehandler test = new Messagehandler();
+			//contactList.Subscribe(test);
+			usersInput = contactList.offlineList;
+
+			/**********************************************/
+			// Written by Roman
+			/**********************************************/
+			//Offlinelist is a List<string>
+			//förstår inte varför usersInput är en kopia av offlineList.
+			//Offlinelist finns alltid sparad hos ContactsHandler
+			//och uppdateras där också. Det enda som måsta göras här är
+			//att söka igenom den listan
+			/**********************************************/
+
             int userAmount = usersInput.Length;
             string[] users = new string[userAmount];
             for(int i = 0; i < userAmount; i++)
