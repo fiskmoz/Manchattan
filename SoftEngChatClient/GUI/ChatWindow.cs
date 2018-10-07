@@ -21,6 +21,11 @@ namespace SoftEngChatClient
         public event EventHandler chatWindowLoad;
         public event EventHandler usernamePressed;
 		public event EventHandler logoutEvent;
+        public event EventHandler findFriendsSearchEvent;
+        public event EventHandler findFriendsTextBoxClickEvent;
+        public event EventHandler findFriendsTextBoxLeaveEvent;
+        public event EventHandler showFriendsEvent;
+        public event EventHandler addFriendsEvent;
         public event FormClosedEventHandler formClose;
 
         public ChatWindow()
@@ -121,7 +126,7 @@ namespace SoftEngChatClient
 
         private void MessageBox_Enter(object sender, EventArgs e)
         {
-            
+            // garbage
         }
 
         private void MessageBox_TextChanged(object sender, EventArgs e)
@@ -149,15 +154,7 @@ namespace SoftEngChatClient
 
         private void addFriends_Click(object sender, EventArgs e)
         {
-            if (findFriendsPanel.Visible == false)
-            {
-                findFriendsPanel.Visible = true;
-                addFriends.BackColor = Color.FromArgb(64, 64, 64);
-                addFriends.ForeColor = Color.White;
-
-                showFriends.BackColor = Color.FromArgb(59, 177, 226);
-                showFriends.ForeColor = Color.FromArgb(64, 64, 64);
-            }
+            addFriendsEvent(this, e);
         }
 
         private void showFriends_MouseHover(object sender, EventArgs e)
@@ -175,49 +172,46 @@ namespace SoftEngChatClient
 
         private void showFriends_Click(object sender, EventArgs e)
         {
-            if(findFriendsPanel.Visible == true)
-            {
-                findFriendsPanel.Visible = false;
-                showFriends.BackColor = Color.FromArgb(64, 64, 64);
-                showFriends.ForeColor = Color.White;
-
-                addFriends.BackColor = Color.FromArgb(59, 177, 226);
-                addFriends.ForeColor = Color.FromArgb(64, 64, 64);
-            }
+            showFriendsEvent(this, e);
         }
 
         private void findFriendsTextBox_Click(object sender, EventArgs e)
         {
-            if(findFriendsTextBox.Text == "Search...")
-            {
-                findFriendsTextBox.Text = "";
-                findFriendsTextBox.ForeColor = Color.White;
-                noFriendsLabel.Visible = false;
-            }
+            findFriendsTextBoxClickEvent(this, e);
         }
 
         private void findFriendsTextBox_Leave(object sender, EventArgs e)
         {
-            if(findFriendsTextBox.Text == "")
-            {
-                findFriendsTextBox.Text = "Search...";
-                findFriendsTextBox.ForeColor = Color.Gainsboro;
-            }
+            findFriendsTextBoxLeaveEvent(this, e);
         }
 
         private void findFriendsTextBox_TextChanged(object sender, EventArgs e)
         {
-            string name1 = "MrThailand35";
-            string name2 = "MrThailand36";
-            int searchLength = findFriendsTextBox.TextLength;
-            string temp = findFriendsTextBox.Text;
-            for (int i = 0; i < searchLength; i++)
-            {
-                if (temp[i] == name1[i])
-                {
-                    findFriendsBox.Items.Add(name1[i]);
-                }
-            }
+            findFriendsSearchEvent(this, e);
+        }
+        public TextBox getFindFriendsTextbox()
+        {
+            return findFriendsTextBox;
+        }
+        public ListBox getFindFriendsBox()
+        {
+            return findFriendsBox;
+        }
+        public Label getNoFriendsLabel()
+        {
+            return noFriendsLabel;
+        }
+        public Panel getFindFriendsPanel()
+        {
+            return findFriendsPanel;
+        }
+        public Label getShowFriendsLabel()
+        {
+            return showFriends;
+        }
+        public Label getAddFriendsLabel()
+        {
+            return addFriends;
         }
     }
 }

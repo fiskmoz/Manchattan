@@ -36,5 +36,9 @@ namespace SoftEngChatClient.Model
 
 			return contactList;
 		}
+        public List<Contact> getContactList()
+        {
+            return contactList;
+        }
 	}
 }

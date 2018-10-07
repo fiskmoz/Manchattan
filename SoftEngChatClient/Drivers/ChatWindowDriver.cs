@@ -10,6 +10,7 @@ using System.Timers;
 using System.Windows.Forms;
 using SoftEngChatClient.Model;
 using SoftEngChatClient.Controller;
+using System.Drawing;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -20,6 +21,8 @@ namespace SoftEngChatClient.Drivers
         private SSLWriter writer;
         private ClientCrypto logCrypto;
         private SpamProtector spam;
+        private ContactsHandler contactList;
+        private Contact[] usersInput;
 
         public event EventHandler restart;
 
@@ -49,6 +52,11 @@ namespace SoftEngChatClient.Drivers
             chatWindow.usernamePressed += new EventHandler(HandleIndividualUsernamePressed);
             chatWindow.logoutEvent += new EventHandler(LogoutButtonClicked);
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
+            chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
+            chatWindow.findFriendsTextBoxClickEvent += new EventHandler(FindFriendsTextBoxClickEvent);
+            chatWindow.findFriendsTextBoxLeaveEvent += new EventHandler(FindFriendsTextBoxLeaveEvent);
+            chatWindow.showFriendsEvent += new EventHandler(ShowFriendsLabel);
+            chatWindow.addFriendsEvent += new EventHandler(AddFriendsLabel);
         }
 
 		public void Subscribe(Messagehandler mh)
@@ -56,8 +64,7 @@ namespace SoftEngChatClient.Drivers
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
             mh.IncommingLoginAck += new EventHandler(LoggingIn);
 		}
-
-
+    
         private void ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
@@ -239,6 +246,112 @@ namespace SoftEngChatClient.Drivers
                 username = ClientDriver.globalUsername;
                 chatWindow.SetUserName(username);
                 new Thread(() => chatWindow.ShowDialog()).Start();
+            }
+        }
+
+        private void FindFriendsSearch(object sender, EventArgs e)
+        {
+            //Contact test = new Contact("test", false);
+            //Messagehandler test = new Messagehandler();
+            //contactList.Subscribe(test);
+            usersInput = contactList.getContactList().ToArray();
+            int userAmount = usersInput.Length;
+            string[] users = new string[userAmount];
+            for(int i = 0; i < userAmount; i++)
+            {
+                users[i] = usersInput[i].name;
+            }
+            //string[] name = { "MrThailand35", "MrThailand45", "MrThaiband" };
+            int counter = 0;
+            int searchLength = chatWindow.getFindFriendsTextbox().Text.Length;
+            string temp = chatWindow.getFindFriendsTextbox().Text.Trim();
+
+            foreach (string user in users)
+            {
+                if(chatWindow.getFindFriendsTextbox().Text == "Search...")
+                {
+                    chatWindow.getNoFriendsLabel().Visible = false;
+                    return;
+                }
+                if (user.StartsWith(temp))
+                {
+                    chatWindow.getNoFriendsLabel().Visible = false;
+                    if (!chatWindow.getFindFriendsBox().Items.Contains(user))
+                    {
+                        chatWindow.getFindFriendsBox().Items.Add(user);
+                    }
+                }
+                else
+                {
+                    chatWindow.getFindFriendsBox().Items.Remove(user);
+                    if (chatWindow.getFindFriendsBox().Items.Count <= 0)
+                    {
+                        for (int i = 0; i < userAmount; i++)
+                        {
+                            if (temp != users[i])
+                            {
+                                counter++;
+                            }
+                        }
+                        if (counter == userAmount)
+                        {
+                            chatWindow.getFindFriendsBox().Items.Clear();
+                            chatWindow.getNoFriendsLabel().Visible = true;
+                            return;
+                        }
+                    }
+                }
+            }
+            if (chatWindow.getFindFriendsTextbox().Text == "")
+            {
+                chatWindow.getFindFriendsBox().Items.Clear();
+                chatWindow.getNoFriendsLabel().Visible = false;
+            }
+        }
+
+        private void FindFriendsTextBoxClickEvent(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsTextbox().Text == "Search...")
+            {
+                chatWindow.getFindFriendsTextbox().Text = "";
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.White;
+                chatWindow.getNoFriendsLabel().Visible = false;
+            }
+        }
+
+        private void FindFriendsTextBoxLeaveEvent(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsTextbox().Text == "")
+            {
+                chatWindow.getFindFriendsTextbox().Text = "Search...";
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.Gainsboro;
+            }
+        }
+
+        private void ShowFriendsLabel(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsPanel().Visible == true)
+            {
+                chatWindow.getFindFriendsPanel().Visible = false;
+                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getShowFriendsLabel().ForeColor = Color.White;
+
+                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
+                chatWindow.getAddFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
+                FindFriendsTextBoxLeaveEvent(this, e);
+            }
+        }
+
+        private void AddFriendsLabel(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsPanel().Visible == false)
+            {
+                chatWindow.getFindFriendsPanel().Visible = true;
+                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getAddFriendsLabel().ForeColor = Color.White;
+
+                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
+                chatWindow.getShowFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
             }
         }
     }
