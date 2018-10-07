@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using SoftEngChat;
 using System.Collections.Generic;
+using System.Text;
 
 public class User
 {
@@ -8,8 +10,9 @@ public class User
     public string userName { get; set; }
     public string mail { get; set; }
     public string password { get; set; }
-    private string firstName { get; set; }
-    private string lastName { get; set; }
+    public string firstName { get; set; }
+    public string lastName { get; set; }
+    public string key { get; set; }
     
 
     //Standard constructor.
@@ -22,6 +25,10 @@ public class User
         password = userInfo[2];
         firstName = userInfo[3];
         lastName = userInfo[4];
+
+        ServerCrypto sc = new ServerCrypto();
+        byte[] byteKey = sc.GenerateAesKey();
+        key = Encoding.UTF8.GetString(byteKey, 0, byteKey.Length);
     }
 
     //Constructor when parsing in JSON.
@@ -34,5 +41,9 @@ public class User
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+
+        ServerCrypto sc = new ServerCrypto();
+        byte[] byteKey = sc.GenerateAesKey();
+        key = Encoding.UTF8.GetString(byteKey, 0, byteKey.Length);
     }
 }

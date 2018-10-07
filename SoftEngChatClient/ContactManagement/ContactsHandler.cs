@@ -10,35 +10,106 @@ namespace SoftEngChatClient.Model
 	{
 		public event EventHandler UpdateContactList;
 		private List<Contact> contactList;
+		public List<string> offlineList { get; private set; }
+		private List<string> onlineList;
+		private FileManager fileManager;
 
-		public ContactsHandler()
+		public bool hasOfflineList { get; private set; }
+		private bool hasOnlineList;
+
+		public ContactsHandler(FileManager fm)
 		{
+			hasOfflineList = false;
+			hasOnlineList = false;
 			contactList = new List<Contact>();
+			onlineList = new List<string>();
+			offlineList = new List<string>();
+			fileManager = fm;
 		}
 
 		public void Subscribe(Messagehandler mh)
 		{
 			mh.IncommingOnlineList += new EventHandler(HandleOnlineList);
+			mh.IncommingOfflineList += new EventHandler(HandleOfflineList);
+			mh.IncommingUserStatus += new EventHandler(HandleContactUpdate);
 		}
+
+
+
+		private void HandleOfflineList(object sender, EventArgs e)
+		{
+			hasOfflineList = true;
+			offlineList = ((OnlineList)e).onlineList;
+		}
+
+
+
+
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
-			UpdateContactList(this, new ContactListEventArg(CreateContactList(((OnlineList)e).onlineList)));
+			hasOnlineList = true;
+			onlineList = ((OnlineList)e).onlineList;
+			contactList = CreateContactList();
+
+			UpdateContactList(this, new ContactListEventArg(contactList));
 
 		}
-
-		private List<Contact> CreateContactList(List<string> onlineList)
+		private List<Contact> CreateContactList()
 		{
-			foreach( string i in onlineList)
+			List<string> contacts = fileManager.ReadContacts();
+			List<Contact> tempContactList = new List<Contact>();
+			foreach(string contact in contacts)
 			{
-				contactList.Add(new Contact(i, true));
+				tempContactList.Add(new Contact(contact, onlineList.Contains(contact)));
 			}
 
-			return contactList;
+			return tempContactList;
+
 		}
-        public List<Contact> getContactList()
-        {
-            return contactList;
-        }
+
+
+
+
+
+
+
+		private void HandleContactUpdate(object sender, EventArgs e)
+		{
+			Contact updated = new Contact(((UserOnlineStatusUpdate)e).username, ((UserOnlineStatusUpdate)e).isOnline);
+
+			UpdateOnlineOfflineLists(updated);
+			UpdateContacts(updated);
+
+		}
+
+		private void UpdateOnlineOfflineLists(Contact updated)
+		{
+			if (onlineList.Contains(updated.name) && !(updated.isOnline))
+			{
+				onlineList.Remove(updated.name);
+				offlineList.Add(updated.name);
+			}
+			else if (offlineList.Contains(updated.name) && updated.isOnline)
+			{
+				offlineList.Remove(updated.name);
+				onlineList.Add(updated.name);
+			}
+		}
+
+		private void UpdateContacts(Contact updated)
+		{
+			foreach (Contact contact in contactList)
+			{
+				if (contact.name == updated.name)
+				{
+					contact.isOnline = updated.isOnline;
+					UpdateContactList(this, new ContactListEventArg(contactList));
+					break;
+				}
+			}
+		}
+
+
 	}
 }

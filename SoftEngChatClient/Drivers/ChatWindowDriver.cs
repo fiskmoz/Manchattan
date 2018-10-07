@@ -23,6 +23,8 @@ namespace SoftEngChatClient.Drivers
         private SpamProtector spam;
         private ContactsHandler contactList;
         private Contact[] usersInput;
+		private ContactsHandler contactsHandler;
+		private FileManager fileManager;
 
         public event EventHandler restart;
 
@@ -36,6 +38,8 @@ namespace SoftEngChatClient.Drivers
         {
             this.writer = writer;
             this.logCrypto = logCrypto;
+			fileManager = new FileManager();
+			contactsHandler = new ContactsHandler(fileManager);
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
@@ -57,12 +61,14 @@ namespace SoftEngChatClient.Drivers
             chatWindow.findFriendsTextBoxLeaveEvent += new EventHandler(FindFriendsTextBoxLeaveEvent);
             chatWindow.showFriendsEvent += new EventHandler(ShowFriendsLabel);
             chatWindow.addFriendsEvent += new EventHandler(AddFriendsLabel);
+			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
 		public void Subscribe(Messagehandler mh)
 		{
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
             mh.IncommingLoginAck += new EventHandler(LoggingIn);
+			contactsHandler.Subscribe(mh);
 		}
     
         private void ChatWindowLoaded(object sender, EventArgs e)
@@ -96,7 +102,7 @@ namespace SoftEngChatClient.Drivers
             if (loggingOut == false)
             {
                 writer.WriteLogout(MessageType.logout);
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 Application.Exit();
                 System.Environment.Exit(1);
             }
@@ -144,7 +150,7 @@ namespace SoftEngChatClient.Drivers
             ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
             chatWindow.Hide();
             writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(1000);
+            Thread.Sleep(250);
             restart(this, e);
             loggingOut = false;
         }
@@ -162,23 +168,22 @@ namespace SoftEngChatClient.Drivers
             chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
 
-        public void UpdateOnlineList(string str)
+        public void UpdateOnlineList(object sender, EventArgs eventArgs)
         {
             if (chatWindow.InvokeRequired)
             {
-                chatWindow.Invoke(new Action<string>(UpdateOnlineList), new object[] { str });
+                chatWindow.Invoke(new Action<object, EventArgs>(UpdateOnlineList), new object[] { sender, eventArgs });
                 return;
             }
-            string[] usernames;
-            usernames = str.Split(':');
+			List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
             for (int n = chatWindow.contactListBox.Items.Count - 1; n >= 0; --n)
             {
                 chatWindow.contactListBox.Items.RemoveAt(n);
             }
 
-            for (int i = 1; i < usernames.Length; i++)
-            {
-                chatWindow.contactListBox.Items.Add(usernames[i]);
+            foreach(Contact contact in contactList)
+			{
+                chatWindow.contactListBox.Items.Add(contact.name);
             }
         }
 

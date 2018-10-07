@@ -14,7 +14,8 @@ namespace SoftEngChatClient
 		login = 3,  // "3:username:password"
 		loginACK = 4,  // "4:0/1"
 		logout = 5,  // "5: 1
-		onlineList = 6  // 6:A:B:C:D"
+		onlineList = 6,  // 6:1/0:A:B:C:D"
+		onlineStatus = 9 // 9:1/0:username
 	}
 
 	class IncommingMessage : EventArgs
@@ -68,6 +69,17 @@ namespace SoftEngChatClient
 		}
 	}
 
+	class UserOnlineStatusUpdate : EventArgs
+	{
+		public string username { get; private set; }
+		public bool isOnline { get; private set; }
+		public UserOnlineStatusUpdate(string username, bool isOnline)
+		{
+			this.username = username;
+			this.isOnline = isOnline;
+		}
+	}
+
 	class LoginAck : EventArgs
 	{
 		public bool message { get; private set; }
@@ -77,4 +89,14 @@ namespace SoftEngChatClient
 			message = ack;
 		}
 	}
+
+    class PersonalKey : EventArgs
+    {
+        public string key { get; set; }
+
+        public PersonalKey(string key)
+        {
+            this.key = key;
+        }
+    }
 }

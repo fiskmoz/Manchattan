@@ -18,6 +18,11 @@ namespace SoftEngChat.Model.SSLCommunication
         public UserManager userManager;
         public int sessionIDCounter = 0;
 
+        public List<string> everyRegisteredUserList;
+        public List<string> allOnlineusers;
+
+        private string onlineListAsString;
+
 
 		public SSLServer(IPAddress ip, int port)
 		{
@@ -26,7 +31,9 @@ namespace SoftEngChat.Model.SSLCommunication
 			serverListener = new TcpListener(ip, port);
 			serverListener.Start();
             userManager = new UserManager();
-            
+            everyRegisteredUserList = new List<string>();
+            allOnlineusers = new List<string>();
+            userManager.SetListOfAllClients(everyRegisteredUserList);
 
 			while (true)
 			{
@@ -55,25 +62,18 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
-        public void SendOnlineListToAllClient()
+        public void SendOnlineListToClient(string username)
         {
 			Thread.BeginCriticalRegion();
 
 			lock (clientList)
 			{
-				StringBuilder str = new StringBuilder();
-				str.Append((int)MessageType.onlineList);
 				foreach (SSLClient client in clientList)
 				{
-					// If client has yet to log in, do not send.
-					if (client.userName != null)
-					{
-						str.Append(":" + client.userName);
-					}
-				}
-				foreach (SSLClient client in clientList)
-				{
-					client.writer.WriteOnlineList(str.ToString());
+                    if (client.userName == username || client.userName != null)
+                    {
+                        client.writer.WriteOnlineList(onlineListAsString);
+                    }
 				}
 			}
             
@@ -100,7 +100,7 @@ namespace SoftEngChat.Model.SSLCommunication
             foreach ( var client in clientList)
 			{
 				//let each client handle it themselves
-				if(client.userName != sender || client.userName != null)
+				if(client.userName != sender && client.userName != null)
 				{
                     client.writer.WriteClient(MessageType.client, sender, "All", message);
                 }
@@ -120,26 +120,26 @@ namespace SoftEngChat.Model.SSLCommunication
         }
 
         
-        public void SendFriendRespond(string sender, string receiver, string message)
+        public void SendFriendResponse(string sender, string receiver, int answer)
         {
            foreach (var client in clientList)
             {
                 if(client.userName == receiver)
                 {
-                    client.writer.WriteClient(MessageType.friendResponse, sender, receiver, message);
+                    client.writer.WriteFriendResponse(sender, receiver, answer);
                     return;
                 }
             }
         }
 
 
-        public void SendFriendRequest(string sender, string receiver,string message)
+        public void SendFriendRequest(string sender, string receiver)
         {
             foreach (var client in clientList)
             {
                 if (client.userName == receiver)
                 {
-                    client.writer.WriteClient(MessageType.friendRequest, sender, receiver, message);
+                    client.writer.WriteFriendRequest(sender, receiver);
                     return;
                 }
             }
@@ -153,10 +153,39 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				client.Dispose();
 				clientList.Remove(client);
-				SendOnlineListToAllClient();
+				SendStatusUpdateToClients();
 			}
 			
 			Thread.EndCriticalRegion();
 		}
-	}
+
+        public void UpdateUserClientList(string clientGoingOffline, bool goingOffline)
+        {
+            foreach(var client in clientList)
+            {
+                client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+            }
+        }
+
+        public void SendStatusUpdateToClients()
+        {
+
+        }
+
+        public void UpdateOnlineList()
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append((int)MessageType.onlineList);
+            foreach (SSLClient client in clientList)
+            {
+                // If client has yet to log in, do not send.
+                if (client.userName != null)
+                {
+                    str.Append(":" + client.userName);
+                    allOnlineusers.Add(client.userName);
+                }
+            }
+            onlineListAsString = str.ToString();
+        }
+    }
 }
