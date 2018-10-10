@@ -13,6 +13,7 @@ public class User
     public string firstName { get; set; }
     public string lastName { get; set; }
     public string key { get; set; }
+    public List<string> waitingMessages { get; set; }
     
 
     //Standard constructor.

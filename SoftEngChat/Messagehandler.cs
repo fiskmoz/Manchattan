@@ -86,7 +86,7 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             else
             {
-                server.SendIndivualMessage(sender, receiver, message);
+                server.SendIndivualMessage(incomming, sender, receiver, message);
             }
 			
 		}
@@ -159,7 +159,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string[] messageArray = ParseMessage(incomming);
             string sender = messageArray[1];
             string receiver = messageArray[2];
-            server.SendFriendRequest(sender, receiver);
+            server.SendFriendRequest(incomming, sender, receiver);
         }
 
         private void ValidateFriendResponse(string incomming)
@@ -171,7 +171,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string receiver = messageArray[2];
             int answer;
             if(Int32.TryParse(messageArray[3], out answer))           
-                server.SendFriendResponse(sender, receiver, answer);
+                server.SendFriendResponse(incomming, sender, receiver, answer);
         }
 	}
 }

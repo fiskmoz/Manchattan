@@ -107,7 +107,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
-        public void SendIndivualMessage(string sender, string receiver, string message)
+        public void SendIndivualMessage(string entireMessage, string sender, string receiver, string message)
         {
             foreach (var client in clientList)
             {
@@ -117,10 +117,11 @@ namespace SoftEngChat.Model.SSLCommunication
                     return;
                 }
             }
+            userManager.AddNewWaitingMessage(receiver, entireMessage);
         }
 
         
-        public void SendFriendResponse(string sender, string receiver, int answer)
+        public void SendFriendResponse(string entireMessage, string sender, string receiver, int answer)
         {
            foreach (var client in clientList)
             {
@@ -130,10 +131,11 @@ namespace SoftEngChat.Model.SSLCommunication
                     return;
                 }
             }
+            userManager.AddNewWaitingMessage(receiver, entireMessage);
         }
 
 
-        public void SendFriendRequest(string sender, string receiver)
+        public void SendFriendRequest(string entireMessage, string sender, string receiver)
         {
             foreach (var client in clientList)
             {
@@ -143,6 +145,7 @@ namespace SoftEngChat.Model.SSLCommunication
                     return;
                 }
             }
+            userManager.AddNewWaitingMessage(receiver, entireMessage);
         }
 
         internal void RemoveClient(SSLClient client)

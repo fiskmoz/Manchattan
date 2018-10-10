@@ -69,5 +69,16 @@ namespace SoftEngChat
                 list.Add(user.userName);
             }
         }
+
+        public void AddNewWaitingMessage(string username, string inc)
+        {
+            foreach (var user in userList)
+            {
+                if(username == user.userName)
+                {
+                    user.waitingMessages.Add(inc);
+                }
+            }
+        }
 	}
 }

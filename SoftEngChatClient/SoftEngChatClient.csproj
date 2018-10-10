@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GUI\ChatWindow.resx">
@@ -129,6 +128,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
