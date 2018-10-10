@@ -62,6 +62,37 @@ namespace SoftEngChat.Model.SSLCommunication
 			}
 		}
 
+        public void UserLogin(string username)
+        {
+            var Receiver = FindClient(username);
+            if(Receiver != null)
+            {
+                Thread.Sleep(3000);
+                var offlineMessageList = userManager.FindUser(username).waitingMessages;
+                foreach(var message in offlineMessageList)
+                {
+                    string[] messageArray;
+                    messageArray = message.Split(':');
+                    switch (messageArray[0])
+                    {
+                        case "2":
+                            Receiver.writer.WriteClient(MessageType.client, messageArray[1], messageArray[2], messageArray[3]);
+                            break;
+                        case "7":
+                            Receiver.writer.WriteFriendRequest(messageArray[1], messageArray[2]);
+                            break;
+                        case "8":
+                            Receiver.writer.WriteFriendResponse(messageArray[1], messageArray[2], Convert.ToInt32(messageArray[3]));
+                            break;
+                    }
+                }
+            }
+            
+            UpdateOnlineList();
+            SendOnlineListToClient(username);
+            UpdateUserClientList(username, false);
+        }
+
         public void SendOnlineListToClient(string username)
         {
 			Thread.BeginCriticalRegion();
@@ -109,46 +140,46 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void SendIndivualMessage(string entireMessage, string sender, string receiver, string message)
         {
-            foreach (var client in clientList)
+            var Receiver = FindClient(receiver);
+            if (Receiver != null)
             {
-                if(client.userName == receiver)
-                {
-                    client.writer.WriteClient(MessageType.client, sender, receiver, message);
-                    return;
-                }
+                Receiver.writer.WriteClient(MessageType.client, sender, receiver, message);
             }
-            userManager.AddNewWaitingMessage(receiver, entireMessage);
-            Console.WriteLine("Receiver was offline message was stored");
+            else
+            {
+                userManager.FindUser(receiver).waitingMessages.Add(entireMessage);
+                Console.WriteLine("Receiver was offline message was stored");
+            }
         }
 
         
         public void SendFriendResponse(string entireMessage, string sender, string receiver, int answer)
         {
-           foreach (var client in clientList)
+            var Receiver = FindClient(receiver);
+            if (Receiver != null)
             {
-                if(client.userName == receiver)
-                {
-                    client.writer.WriteFriendResponse(sender, receiver, answer);
-                    return;
-                }
+                Receiver.writer.WriteFriendResponse(sender, receiver, answer);
             }
-            userManager.AddNewWaitingMessage(receiver, entireMessage);
-            Console.WriteLine("Receiver was offline message was stored");
+            else
+            {
+                userManager.FindUser(receiver).waitingMessages.Add(entireMessage);
+                Console.WriteLine("Receiver was offline message was stored");
+            }
         }
 
 
         public void SendFriendRequest(string entireMessage, string sender, string receiver)
         {
-            foreach (var client in clientList)
+            var Receiver = FindClient(receiver);
+            if (Receiver != null)
             {
-                if (client.userName == receiver)
-                {
-                    client.writer.WriteFriendRequest(sender, receiver);
-                    return;
-                }
+                Receiver.writer.WriteFriendRequest(sender, receiver);
             }
-            userManager.AddNewWaitingMessage(receiver, entireMessage);
-            Console.WriteLine("Receiver was offline message was stored");
+            else
+            {
+                userManager.FindUser(receiver).waitingMessages.Add(entireMessage);
+                Console.WriteLine("Receiver was offline message was stored");
+            }
         }
 
         internal void RemoveClient(SSLClient client)
@@ -192,6 +223,18 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             onlineListAsString = str.ToString();
+        }
+
+        private SSLClient FindClient(string username)
+        {
+            foreach(SSLClient client in clientList)
+            {
+                if (client.userName == username)
+                {
+                    return client;
+                }
+            }
+            return null;
         }
     }
 }

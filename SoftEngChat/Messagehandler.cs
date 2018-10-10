@@ -98,14 +98,11 @@ namespace SoftEngChat.Model.SSLCommunication
             string username = messageArray[1];
             string password = messageArray[2];
             bool valid = ValidateLoginMessage(username, password);
-            client.writer.WriteLoginACK(valid ? 1 : 0, username);
             if (valid)
             {
-                server.UpdateOnlineList();
-                server.SendOnlineListToClient(username);
-                server.UpdateUserClientList(username, false);
+                client.writer.WriteLoginACK(valid ? 1 : 0, username);
+                server.UserLogin(username);
             }
-			
 		}
 
         //IN:   Login message
