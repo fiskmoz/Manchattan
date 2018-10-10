@@ -118,6 +118,7 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             userManager.AddNewWaitingMessage(receiver, entireMessage);
+            Console.WriteLine("Receiver was offline message was stored");
         }
 
         
@@ -132,6 +133,7 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             userManager.AddNewWaitingMessage(receiver, entireMessage);
+            Console.WriteLine("Receiver was offline message was stored");
         }
 
 
@@ -146,6 +148,7 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             userManager.AddNewWaitingMessage(receiver, entireMessage);
+            Console.WriteLine("Receiver was offline message was stored");
         }
 
         internal void RemoveClient(SSLClient client)

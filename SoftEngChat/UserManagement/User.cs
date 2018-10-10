@@ -27,6 +27,7 @@ public class User
         firstName = userInfo[3];
         lastName = userInfo[4];
 
+        waitingMessages = new List<string>();
         ServerCrypto sc = new ServerCrypto();
         byte[] byteKey = sc.GenerateAesKey();
         key = Encoding.UTF8.GetString(byteKey, 0, byteKey.Length);
@@ -43,6 +44,7 @@ public class User
         this.firstName = firstName;
         this.lastName = lastName;
 
+        waitingMessages = new List<string>();
         ServerCrypto sc = new ServerCrypto();
         byte[] byteKey = sc.GenerateAesKey();
         key = Encoding.UTF8.GetString(byteKey, 0, byteKey.Length);
