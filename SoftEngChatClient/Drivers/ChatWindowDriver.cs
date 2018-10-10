@@ -68,6 +68,8 @@ namespace SoftEngChatClient.Drivers
 		{
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
             mh.IncommingLoginAck += new EventHandler(LoggingIn);
+            mh.IncommingFriendRequest += new EventHandler(ReceivedFriendRequest);
+            mh.IncommmingFriendResponse += new EventHandler(ReceivedFriendResponse);
 			contactsHandler.Subscribe(mh);
 		}
     
@@ -115,7 +117,18 @@ namespace SoftEngChatClient.Drivers
                 spam.SpamAppend();
                 if (spam.IsNotSpamming())
                 {
-                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
+                    if (chatWindow.removeEnterWhenSending()[0] == '7')
+                    {
+                        writer.WriteFriendRequest(MessageType.friendRequest, this.username, "olaf");
+                    }
+                    else if (chatWindow.removeEnterWhenSending()[0] == '0')
+                    {
+                        writer.WriteFriendResponse(MessageType.friendReponse, this.username, "Admin");
+                    }
+                    else
+                    {
+                        writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
+                    }
                     chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
                 }
                 else
@@ -254,6 +267,16 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
+        private void ReceivedFriendRequest(object sender, EventArgs message)
+        {
+            MessageBox.Show("FriendRequest");
+        }
+
+        private void ReceivedFriendResponse(object sender, EventArgs message)
+        {
+            MessageBox.Show("FriendResponse");
+        }
+
         private void FindFriendsSearch(object sender, EventArgs e)
         {
 			//Contact test = new Contact("test", false);
@@ -271,11 +294,11 @@ namespace SoftEngChatClient.Drivers
 			//att söka igenom den listan
 			/**********************************************/
 
-            int userAmount = usersInput.Length;
+            int userAmount = usersInput.Count;
             string[] users = new string[userAmount];
             for(int i = 0; i < userAmount; i++)
             {
-                users[i] = usersInput[i].name;
+                users[i] = usersInput[i];
             }
             //string[] name = { "MrThailand35", "MrThailand45", "MrThaiband" };
             int counter = 0;

@@ -1,0 +1,64 @@
+1. Kan inte registera två användare i samma session?
+2. Kan öppna individuell chattruta genom att spamclicka på contacts sub fönster
+
+
+
+
+		/*
+        private void HandleRegistrationACK(string inc)
+        {
+            if(inc[1] == '1')
+            {
+				driver.CloseRegWindow();
+            }
+            else
+            {
+				driver.RegistrationRejected();
+            }
+        }
+
+        private void HandleClientMessage(string inc)
+        {
+            string[] parsed = ParseMessage(inc);
+            string sender = parsed[1];
+            string receiver = parsed[2];
+            string message = parsed[3];
+
+            if(parsed.Length > 4)
+            {
+                for(int i = 4; i < parsed.Length; i++)
+                {
+                    message += ":" + parsed[i];
+                }
+            }
+                
+
+
+            if (receiver == "All")
+            {
+                driver.ChatWindowPrint(sender,message);
+            }
+            else
+            {   
+                driver.AddNewIndividualChat(sender);
+                System.Threading.Thread.Sleep(100);
+                driver.IndividualChatPrint(sender, message);
+            }
+        }
+
+        private void HandleLoginACK(string inc)
+        {
+            if(inc[1] == '1')
+            {
+                driver.Login(inc);
+            }
+            else
+            {
+            }
+        }
+
+        private void HandleUpdateOnlineList(string inc)
+        {
+            driver.UpdateOnlineList(inc);
+        }
+		*/

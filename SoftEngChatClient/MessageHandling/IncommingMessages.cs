@@ -15,6 +15,8 @@ namespace SoftEngChatClient
 		loginACK = 4,  // "4:0/1"
 		logout = 5,  // "5: 1
 		onlineList = 6,  // 6:1/0:A:B:C:D"
+        friendRequest = 7,
+        friendReponse = 8,
 		onlineStatus = 9 // 9:1/0:username
 	}
 

@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestJsonParser", "UnitT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92CC92D2-0E2D-4C76-8689-45B30853CE12}"
 	ProjectSection(SolutionItems) = preProject
+		BugsAndTODO.txt = BugsAndTODO.txt
 		OldCode.txt = OldCode.txt
 	EndProjectSection
 EndProject

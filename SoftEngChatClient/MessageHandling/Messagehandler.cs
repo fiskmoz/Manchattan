@@ -16,6 +16,8 @@ namespace SoftEngChatClient.Model
 		public event EventHandler IncommingLoginAck;
 		public event EventHandler IncommingClientMessage;
 		public event EventHandler IncommingOnlineList;
+        public event EventHandler IncommingFriendRequest;
+        public event EventHandler IncommmingFriendResponse;
 		public event EventHandler IncommingOfflineList;
 		public event EventHandler IncommingUserStatus;
 
@@ -38,6 +40,12 @@ namespace SoftEngChatClient.Model
                     break;
                 case "6":
                     HandleUpdateOnlineList(incomming);
+                    break;
+                case "7":
+                    HandleFriendRequest(incomming);
+                    break;
+                case "8":
+                    HandleFriendResponse(incomming);
                     break;
 				case "9":
 					HandleUserOnlineStatus(incomming);
@@ -74,68 +82,21 @@ namespace SoftEngChatClient.Model
 
 		}
 
-		private void HandleUserOnlineStatus(string[] incomming)
+        private void HandleFriendRequest(string[] incomming)
+        {
+            IncommingFriendRequest(this, new ClientMessage(incomming));
+        }
+
+        private void HandleFriendResponse(string[] incomming)
+        {
+            IncommmingFriendResponse(this, new ClientMessage(incomming));
+        }
+
+
+        private void HandleUserOnlineStatus(string[] incomming)
 		{
 			IncommingUserStatus(this, new UserOnlineStatusUpdate(incomming[2], incomming[1] == "1"));
 		}
-		/*
-        private void HandleRegistrationACK(string inc)
-        {
-            if(inc[1] == '1')
-            {
-				driver.CloseRegWindow();
-            }
-            else
-            {
-				driver.RegistrationRejected();
-            }
-        }
-
-        private void HandleClientMessage(string inc)
-        {
-            string[] parsed = ParseMessage(inc);
-            string sender = parsed[1];
-            string receiver = parsed[2];
-            string message = parsed[3];
-
-            if(parsed.Length > 4)
-            {
-                for(int i = 4; i < parsed.Length; i++)
-                {
-                    message += ":" + parsed[i];
-                }
-            }
-                
-
-
-            if (receiver == "All")
-            {
-                driver.ChatWindowPrint(sender,message);
-            }
-            else
-            {   
-                driver.AddNewIndividualChat(sender);
-                System.Threading.Thread.Sleep(100);
-                driver.IndividualChatPrint(sender, message);
-            }
-        }
-
-        private void HandleLoginACK(string inc)
-        {
-            if(inc[1] == '1')
-            {
-                driver.Login(inc);
-            }
-            else
-            {
-            }
-        }
-
-        private void HandleUpdateOnlineList(string inc)
-        {
-            driver.UpdateOnlineList(inc);
-        }
-		*/
 		private string[] ParseMessage(string incomming)
         {
             string[] messageArray;

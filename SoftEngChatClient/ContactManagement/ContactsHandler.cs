@@ -68,12 +68,6 @@ namespace SoftEngChatClient.Model
 
 		}
 
-
-
-
-
-
-
 		private void HandleContactUpdate(object sender, EventArgs e)
 		{
 			Contact updated = new Contact(((UserOnlineStatusUpdate)e).username, ((UserOnlineStatusUpdate)e).isOnline);

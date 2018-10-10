@@ -35,7 +35,6 @@ namespace SoftEngChatClient
             this.SendButton = new System.Windows.Forms.Button();
             this.contactListBox = new System.Windows.Forms.ListBox();
             this.ChatBox = new System.Windows.Forms.TextBox();
-            this.PreviousMessagesButton = new System.Windows.Forms.Button();
             this.userNameLbl = new System.Windows.Forms.Label();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -119,18 +118,6 @@ namespace SoftEngChatClient
             this.ChatBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ChatBox.Size = new System.Drawing.Size(500, 370);
             this.ChatBox.TabIndex = 4;
-            // 
-            // PreviousMessagesButton
-            // 
-            this.PreviousMessagesButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PreviousMessagesButton.Location = new System.Drawing.Point(565, 7);
-            this.PreviousMessagesButton.Name = "PreviousMessagesButton";
-            this.PreviousMessagesButton.Size = new System.Drawing.Size(139, 20);
-            this.PreviousMessagesButton.TabIndex = 6;
-            this.PreviousMessagesButton.Text = "View previous messages";
-            this.PreviousMessagesButton.UseVisualStyleBackColor = true;
-            this.PreviousMessagesButton.Visible = false;
-            this.PreviousMessagesButton.Click += new System.EventHandler(this.PreviousMessagesButton_Click);
             // 
             // userNameLbl
             // 
@@ -355,7 +342,6 @@ namespace SoftEngChatClient
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logoutBtn);
             this.Controls.Add(this.userNameLbl);
-            this.Controls.Add(this.PreviousMessagesButton);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MessageBox);
             this.Controls.Add(this.ChatBox);
@@ -388,7 +374,6 @@ namespace SoftEngChatClient
         private System.Windows.Forms.TextBox MessageBox;
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox ChatBox;
-        private System.Windows.Forms.Button PreviousMessagesButton;
         public ListBox contactListBox;
 		private Label userNameLbl;
 		private Button logoutBtn;

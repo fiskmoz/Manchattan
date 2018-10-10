@@ -44,10 +44,27 @@ namespace SoftEngChatClient.Model.SSLCommunication
             SendMessage(outgoing);
         }
 
+        public void WriteFriendRequest(MessageType type, string sender, string receiver)
+        {
+            string outgoing = (((int)type).ToString() + ":" + sender + ":" + receiver);
+            SendMessage(outgoing);
+        }
+
+        public void WriteFriendResponse(MessageType type, string sender, string receiver, string response)
+        {
+            string outgoing = (((int)type).ToString() + ":" + sender + ":" + receiver + ":" + response);
+            SendMessage(outgoing);
+        }
+
 		private void SendMessage(string outgoing)
 		{
             byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
             stream.Write(outgoingBytes, 0, outgoingBytes.Length);
 		}
-	}
+
+        internal void WriteFriendResponse(MessageType friendReponse, string username, string v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
