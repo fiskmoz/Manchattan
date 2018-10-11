@@ -406,13 +406,13 @@ namespace SoftEngChatClient.Drivers
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, "1");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "1");
             friendrequest.Close();
         }
 
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, "0");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
             friendrequest.Close();
         }
     }
