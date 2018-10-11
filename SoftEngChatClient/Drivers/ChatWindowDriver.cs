@@ -276,6 +276,7 @@ namespace SoftEngChatClient.Drivers
                     personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
                 logCrypto.SetNewKey(personalKey);
                 fileManager.cyptoMessage.SetNewKey(personalKey);
+
                 new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }
