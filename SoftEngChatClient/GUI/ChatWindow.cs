@@ -26,6 +26,7 @@ namespace SoftEngChatClient
         public event EventHandler findFriendsTextBoxLeaveEvent;
         public event EventHandler showFriendsEvent;
         public event EventHandler addFriendsEvent;
+        public event EventHandler addFriendsButtonClicked;
         public event FormClosedEventHandler formClose;
 
         public ChatWindow()
@@ -212,6 +213,11 @@ namespace SoftEngChatClient
         public Label getAddFriendsLabel()
         {
             return addFriends;
+        }
+
+        private void addFriendButton_Click(object sender, EventArgs e)
+        {
+            addFriendsButtonClicked(this, e);
         }
     }
 }
