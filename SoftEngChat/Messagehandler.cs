@@ -133,8 +133,11 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			client.listener.StopListen();
             if(client.userName != null) // IF USER LOGGED IN
-            server.UpdateUserClientList(client.userName.ToString(), true);
-            server.RemoveClient(client);
+            {
+                server.RemoveClient(client);
+                server.UpdateUserClientList(client.userName.ToString(), true);
+            }
+            
 		}
 
         private void HandleFriendRequest(string incomming)
