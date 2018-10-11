@@ -45,11 +45,13 @@
             this.IndividualChatBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IndividualChatBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.IndividualChatBox.ForeColor = System.Drawing.Color.White;
-            this.IndividualChatBox.Location = new System.Drawing.Point(14, 47);
+            this.IndividualChatBox.Location = new System.Drawing.Point(21, 72);
+            this.IndividualChatBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualChatBox.Multiline = true;
             this.IndividualChatBox.Name = "IndividualChatBox";
             this.IndividualChatBox.ReadOnly = true;
-            this.IndividualChatBox.Size = new System.Drawing.Size(488, 255);
+            this.IndividualChatBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.IndividualChatBox.Size = new System.Drawing.Size(731, 391);
             this.IndividualChatBox.TabIndex = 0;
             // 
             // IndividualMessageBox
@@ -58,10 +60,11 @@
             this.IndividualMessageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IndividualMessageBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.IndividualMessageBox.ForeColor = System.Drawing.Color.White;
-            this.IndividualMessageBox.Location = new System.Drawing.Point(14, 308);
+            this.IndividualMessageBox.Location = new System.Drawing.Point(21, 474);
+            this.IndividualMessageBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualMessageBox.Multiline = true;
             this.IndividualMessageBox.Name = "IndividualMessageBox";
-            this.IndividualMessageBox.Size = new System.Drawing.Size(396, 91);
+            this.IndividualMessageBox.Size = new System.Drawing.Size(593, 139);
             this.IndividualMessageBox.TabIndex = 1;
             this.IndividualMessageBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IndividualMessageBox_KeyUp);
             // 
@@ -69,11 +72,12 @@
             // 
             this.IndividualSendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.IndividualSendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.IndividualSendButton.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IndividualSendButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IndividualSendButton.ForeColor = System.Drawing.Color.White;
-            this.IndividualSendButton.Location = new System.Drawing.Point(416, 308);
+            this.IndividualSendButton.Location = new System.Drawing.Point(624, 474);
+            this.IndividualSendButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IndividualSendButton.Name = "IndividualSendButton";
-            this.IndividualSendButton.Size = new System.Drawing.Size(86, 91);
+            this.IndividualSendButton.Size = new System.Drawing.Size(129, 140);
             this.IndividualSendButton.TabIndex = 2;
             this.IndividualSendButton.Text = "Send";
             this.IndividualSendButton.UseVisualStyleBackColor = false;
@@ -83,11 +87,12 @@
             // 
             this.YouAreChattingWith.AutoSize = true;
             this.YouAreChattingWith.BackColor = System.Drawing.Color.Transparent;
-            this.YouAreChattingWith.Font = new System.Drawing.Font("Rockwell Extra Bold", 12F, System.Drawing.FontStyle.Bold);
+            this.YouAreChattingWith.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.YouAreChattingWith.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.YouAreChattingWith.Location = new System.Drawing.Point(5, 15);
+            this.YouAreChattingWith.Location = new System.Drawing.Point(8, 23);
+            this.YouAreChattingWith.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.YouAreChattingWith.Name = "YouAreChattingWith";
-            this.YouAreChattingWith.Size = new System.Drawing.Size(226, 19);
+            this.YouAreChattingWith.Size = new System.Drawing.Size(270, 29);
             this.YouAreChattingWith.TabIndex = 3;
             this.YouAreChattingWith.Text = "You are chatting with: ";
             // 
@@ -95,11 +100,12 @@
             // 
             this.UsernameLabel.AutoSize = true;
             this.UsernameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.UsernameLabel.Font = new System.Drawing.Font("Rockwell Extra Bold", 14F, System.Drawing.FontStyle.Bold);
+            this.UsernameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.UsernameLabel.ForeColor = System.Drawing.Color.SteelBlue;
-            this.UsernameLabel.Location = new System.Drawing.Point(227, 12);
+            this.UsernameLabel.Location = new System.Drawing.Point(340, 18);
+            this.UsernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(124, 22);
+            this.UsernameLabel.Size = new System.Drawing.Size(153, 32);
             this.UsernameLabel.TabIndex = 4;
             this.UsernameLabel.Text = "Username";
             // 
@@ -108,9 +114,10 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
-            this.pictureBox1.Location = new System.Drawing.Point(456, -3);
+            this.pictureBox1.Location = new System.Drawing.Point(684, -5);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(75, 77);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -121,20 +128,21 @@
             this.poweredBy.BackColor = System.Drawing.Color.Transparent;
             this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.poweredBy.ForeColor = System.Drawing.Color.White;
-            this.poweredBy.Location = new System.Drawing.Point(198, 398);
+            this.poweredBy.Location = new System.Drawing.Point(297, 612);
+            this.poweredBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.poweredBy.Name = "poweredBy";
-            this.poweredBy.Size = new System.Drawing.Size(142, 13);
+            this.poweredBy.Size = new System.Drawing.Size(216, 21);
             this.poweredBy.TabIndex = 15;
             this.poweredBy.Text = "Powered by ClientDriver 1.1";
             this.poweredBy.Click += new System.EventHandler(this.poweredBy_Click);
             // 
             // IndividualChatWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
-            this.ClientSize = new System.Drawing.Size(516, 411);
+            this.ClientSize = new System.Drawing.Size(774, 632);
             this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.UsernameLabel);
@@ -144,6 +152,7 @@
             this.Controls.Add(this.IndividualChatBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "IndividualChatWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
