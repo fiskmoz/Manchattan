@@ -82,23 +82,16 @@ namespace SoftEngChatClient
 		}
 	}
 
+    //response from login. 1/0 plus user key.
 	class LoginAck : EventArgs
 	{
 		public bool message { get; private set; }
-
-		public LoginAck(bool ack)
-		{
-			message = ack;
-		}
-	}
-
-    class PersonalKey : EventArgs
-    {
         public string key { get; set; }
 
-        public PersonalKey(string key)
-        {
+		public LoginAck(bool ack, string key)
+		{
+			message = ack;
             this.key = key;
-        }
-    }
+		}
+	}
 }
