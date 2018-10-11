@@ -354,6 +354,7 @@ namespace SoftEngChatClient.Drivers
             {
                 chatWindow.getFindFriendsBox().Items.Clear();
                 chatWindow.getNoFriendsLabel().Visible = false;
+                chatWindow.getAddFriendsButton().Enabled = false;
             }
         }
 

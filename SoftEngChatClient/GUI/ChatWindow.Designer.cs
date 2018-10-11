@@ -270,6 +270,7 @@ namespace SoftEngChatClient
             // addFriendButton
             // 
             this.addFriendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.addFriendButton.Enabled = false;
             this.addFriendButton.FlatAppearance.BorderSize = 0;
             this.addFriendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.addFriendButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -307,6 +308,7 @@ namespace SoftEngChatClient
             this.findFriendsBox.Name = "findFriendsBox";
             this.findFriendsBox.Size = new System.Drawing.Size(188, 345);
             this.findFriendsBox.TabIndex = 4;
+            this.findFriendsBox.SelectedIndexChanged += new System.EventHandler(this.findFriendsBox_SelectedIndexChanged);
             // 
             // findFriendsTextBox
             // 
