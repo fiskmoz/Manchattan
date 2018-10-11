@@ -292,8 +292,8 @@ namespace SoftEngChatClient.Drivers
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
         {
-            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
-            MessageBox.Show("FriendResponse");
+            string friend = ((ClientMessage)message).sender;
+            contactsHandler.AddContact(friend);
         }
 
         private void FindFriendsSearch(object sender, EventArgs e)
