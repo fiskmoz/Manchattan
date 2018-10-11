@@ -30,7 +30,6 @@ namespace SoftEngChatClient
             SetupListners();
             writer = sllWriter;
 
-            fm.LoadIndividualChat(username, receiver);
 
             new Thread(() => window.ShowDialog()).Start();
         }
@@ -44,7 +43,8 @@ namespace SoftEngChatClient
         }
         private void icd_WindowLoaded(object sender, EventArgs e)
         {
-
+            string chatLog = fm.LoadIndividualChat(username, receiver);
+            window.AppendTextBox(chatLog);
         }
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)
@@ -76,14 +76,15 @@ namespace SoftEngChatClient
 
         private void icd_WindowClosed(object obj, FormClosingEventArgs e)
         {
+            string chatLog = window.getChatBox();
+            if (chatLog != "")
+            {
+                fm.SaveIndividualChat(username, receiver, chatLog);
+            }
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
                 window.Hide();
-            }
-            if (window.getTextMessageBox() != null)
-            {
-                fm.SaveIndividualChat(username, receiver, window.getTextMessageBox());
             }
         }
 
