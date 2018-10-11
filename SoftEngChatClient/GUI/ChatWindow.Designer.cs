@@ -40,22 +40,30 @@ namespace SoftEngChatClient
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.activeChatBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.poweredBy = new System.Windows.Forms.Label();
             this.findFriendsPanel = new System.Windows.Forms.Panel();
+            this.addFriendButton = new System.Windows.Forms.Button();
             this.noFriendsLabel = new System.Windows.Forms.Label();
             this.findFriendsBox = new System.Windows.Forms.ListBox();
             this.findFriendsTextBox = new System.Windows.Forms.TextBox();
             this.findFriendsLabel = new System.Windows.Forms.Label();
             this.addFriends = new System.Windows.Forms.Label();
             this.showFriends = new System.Windows.Forms.Label();
-            this.addFriendButton = new System.Windows.Forms.Button();
+            this.SettingsLabel = new System.Windows.Forms.Label();
+            this.settingsPanel = new System.Windows.Forms.Panel();
+            this.xLabel = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.findFriendsPanel.SuspendLayout();
+            this.settingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // MessageBox
@@ -98,10 +106,10 @@ namespace SoftEngChatClient
             this.contactListBox.ForeColor = System.Drawing.Color.White;
             this.contactListBox.FormattingEnabled = true;
             this.contactListBox.ItemHeight = 23;
-            this.contactListBox.Location = new System.Drawing.Point(6, 34);
+            this.contactListBox.Location = new System.Drawing.Point(6, 40);
             this.contactListBox.Margin = new System.Windows.Forms.Padding(2);
             this.contactListBox.Name = "contactListBox";
-            this.contactListBox.Size = new System.Drawing.Size(188, 414);
+            this.contactListBox.Size = new System.Drawing.Size(188, 391);
             this.contactListBox.TabIndex = 0;
             this.contactListBox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -135,12 +143,12 @@ namespace SoftEngChatClient
             // 
             // logoutBtn
             // 
-            this.logoutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.logoutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
             this.logoutBtn.FlatAppearance.BorderSize = 0;
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.logoutBtn.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.logoutBtn.Location = new System.Drawing.Point(875, 7);
+            this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.logoutBtn.Location = new System.Drawing.Point(67, 61);
             this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(92, 41);
@@ -177,17 +185,32 @@ namespace SoftEngChatClient
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.activeChatBox);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
+            this.panel1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Location = new System.Drawing.Point(8, 55);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(246, 455);
             this.panel1.TabIndex = 0;
             // 
+            // activeChatBox
+            // 
+            this.activeChatBox.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.activeChatBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.activeChatBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.activeChatBox.ForeColor = System.Drawing.Color.White;
+            this.activeChatBox.FormattingEnabled = true;
+            this.activeChatBox.ItemHeight = 23;
+            this.activeChatBox.Location = new System.Drawing.Point(16, 40);
+            this.activeChatBox.Name = "activeChatBox";
+            this.activeChatBox.Size = new System.Drawing.Size(214, 391);
+            this.activeChatBox.TabIndex = 109;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
             this.label3.Location = new System.Drawing.Point(65, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 20);
@@ -209,7 +232,8 @@ namespace SoftEngChatClient
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(55, 4);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.label2.Location = new System.Drawing.Point(55, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 19);
             this.label2.TabIndex = 1;
@@ -243,12 +267,28 @@ namespace SoftEngChatClient
             this.findFriendsPanel.TabIndex = 105;
             this.findFriendsPanel.Visible = false;
             // 
+            // addFriendButton
+            // 
+            this.addFriendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.addFriendButton.FlatAppearance.BorderSize = 0;
+            this.addFriendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addFriendButton.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addFriendButton.ForeColor = System.Drawing.Color.Black;
+            this.addFriendButton.Location = new System.Drawing.Point(107, 424);
+            this.addFriendButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addFriendButton.Name = "addFriendButton";
+            this.addFriendButton.Size = new System.Drawing.Size(87, 21);
+            this.addFriendButton.TabIndex = 108;
+            this.addFriendButton.Text = "Add";
+            this.addFriendButton.UseVisualStyleBackColor = false;
+            this.addFriendButton.Click += new System.EventHandler(this.addFriendButton_Click);
+            // 
             // noFriendsLabel
             // 
             this.noFriendsLabel.AutoSize = true;
             this.noFriendsLabel.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.noFriendsLabel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFriendsLabel.Location = new System.Drawing.Point(8, 56);
+            this.noFriendsLabel.Location = new System.Drawing.Point(8, 72);
             this.noFriendsLabel.Name = "noFriendsLabel";
             this.noFriendsLabel.Size = new System.Drawing.Size(135, 13);
             this.noFriendsLabel.TabIndex = 5;
@@ -263,9 +303,9 @@ namespace SoftEngChatClient
             this.findFriendsBox.ForeColor = System.Drawing.Color.White;
             this.findFriendsBox.FormattingEnabled = true;
             this.findFriendsBox.ItemHeight = 23;
-            this.findFriendsBox.Location = new System.Drawing.Point(6, 54);
+            this.findFriendsBox.Location = new System.Drawing.Point(6, 70);
             this.findFriendsBox.Name = "findFriendsBox";
-            this.findFriendsBox.Size = new System.Drawing.Size(188, 368);
+            this.findFriendsBox.Size = new System.Drawing.Size(188, 345);
             this.findFriendsBox.TabIndex = 4;
             // 
             // findFriendsTextBox
@@ -274,10 +314,10 @@ namespace SoftEngChatClient
             this.findFriendsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.findFriendsTextBox.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.findFriendsTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.findFriendsTextBox.Location = new System.Drawing.Point(6, 28);
+            this.findFriendsTextBox.Location = new System.Drawing.Point(6, 36);
             this.findFriendsTextBox.MinimumSize = new System.Drawing.Size(188, 22);
             this.findFriendsTextBox.Name = "findFriendsTextBox";
-            this.findFriendsTextBox.Size = new System.Drawing.Size(188, 20);
+            this.findFriendsTextBox.Size = new System.Drawing.Size(188, 22);
             this.findFriendsTextBox.TabIndex = 3;
             this.findFriendsTextBox.Text = "Search...";
             this.findFriendsTextBox.Click += new System.EventHandler(this.findFriendsTextBox_Click);
@@ -288,7 +328,8 @@ namespace SoftEngChatClient
             // 
             this.findFriendsLabel.AutoSize = true;
             this.findFriendsLabel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findFriendsLabel.Location = new System.Drawing.Point(49, 4);
+            this.findFriendsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.findFriendsLabel.Location = new System.Drawing.Point(49, 10);
             this.findFriendsLabel.Name = "findFriendsLabel";
             this.findFriendsLabel.Size = new System.Drawing.Size(107, 19);
             this.findFriendsLabel.TabIndex = 2;
@@ -330,21 +371,71 @@ namespace SoftEngChatClient
             this.showFriends.MouseLeave += new System.EventHandler(this.showFriends_MouseLeave);
             this.showFriends.MouseHover += new System.EventHandler(this.showFriends_MouseHover);
             // 
-            // addFriendButton
+            // SettingsLabel
             // 
-            this.addFriendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.addFriendButton.FlatAppearance.BorderSize = 0;
-            this.addFriendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addFriendButton.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addFriendButton.ForeColor = System.Drawing.Color.White;
-            this.addFriendButton.Location = new System.Drawing.Point(123, 427);
-            this.addFriendButton.Margin = new System.Windows.Forms.Padding(2);
-            this.addFriendButton.Name = "addFriendButton";
-            this.addFriendButton.Size = new System.Drawing.Size(71, 21);
-            this.addFriendButton.TabIndex = 108;
-            this.addFriendButton.Text = "Add";
-            this.addFriendButton.UseVisualStyleBackColor = false;
-            this.addFriendButton.Click += new System.EventHandler(this.addFriendButton_Click);
+            this.SettingsLabel.AutoSize = true;
+            this.SettingsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SettingsLabel.ForeColor = System.Drawing.Color.Black;
+            this.SettingsLabel.Location = new System.Drawing.Point(888, 26);
+            this.SettingsLabel.Name = "SettingsLabel";
+            this.SettingsLabel.Size = new System.Drawing.Size(76, 20);
+            this.SettingsLabel.TabIndex = 108;
+            this.SettingsLabel.Text = "Settings";
+            this.SettingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
+            this.SettingsLabel.MouseLeave += new System.EventHandler(this.SettingsLabel_MouseLeave);
+            this.SettingsLabel.MouseHover += new System.EventHandler(this.settingsLabel_MouseHover);
+            // 
+            // settingsPanel
+            // 
+            this.settingsPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.settingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.settingsPanel.Controls.Add(this.label4);
+            this.settingsPanel.Controls.Add(this.pictureBox2);
+            this.settingsPanel.Controls.Add(this.xLabel);
+            this.settingsPanel.Controls.Add(this.logoutBtn);
+            this.settingsPanel.Location = new System.Drawing.Point(401, 205);
+            this.settingsPanel.Name = "settingsPanel";
+            this.settingsPanel.Size = new System.Drawing.Size(222, 122);
+            this.settingsPanel.TabIndex = 109;
+            this.settingsPanel.Visible = false;
+            // 
+            // xLabel
+            // 
+            this.xLabel.AutoSize = true;
+            this.xLabel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.xLabel.Location = new System.Drawing.Point(197, 3);
+            this.xLabel.Name = "xLabel";
+            this.xLabel.Size = new System.Drawing.Size(20, 19);
+            this.xLabel.TabIndex = 101;
+            this.xLabel.Text = "X";
+            this.xLabel.Click += new System.EventHandler(this.xLabel_Click);
+            this.xLabel.MouseLeave += new System.EventHandler(this.xLabel_MouseLeave);
+            this.xLabel.MouseHover += new System.EventHandler(this.xLabel_MouseHover);
+            this.xLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.xLabel_MouseMove);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(54, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 102;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(97, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 20);
+            this.label4.TabIndex = 110;
+            this.label4.Text = "Settings";
             // 
             // ChatWindow
             // 
@@ -354,11 +445,12 @@ namespace SoftEngChatClient
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 522);
+            this.Controls.Add(this.settingsPanel);
+            this.Controls.Add(this.SettingsLabel);
             this.Controls.Add(this.poweredBy);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.logoutBtn);
             this.Controls.Add(this.userNameLbl);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.MessageBox);
@@ -382,6 +474,9 @@ namespace SoftEngChatClient
             this.panel2.PerformLayout();
             this.findFriendsPanel.ResumeLayout(false);
             this.findFriendsPanel.PerformLayout();
+            this.settingsPanel.ResumeLayout(false);
+            this.settingsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,5 +505,11 @@ namespace SoftEngChatClient
         private ListBox findFriendsBox;
         private Label noFriendsLabel;
         private Button addFriendButton;
+        private ListBox activeChatBox;
+        private Label SettingsLabel;
+        private Panel settingsPanel;
+        private Label xLabel;
+        private Label label4;
+        private PictureBox pictureBox2;
     }
 }

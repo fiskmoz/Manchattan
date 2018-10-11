@@ -160,6 +160,7 @@ namespace SoftEngChatClient.Drivers
 
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
+            chatWindow.getPanelSettings().Visible = false;
             loggingOut = true;
             ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
             chatWindow.Hide();
