@@ -314,6 +314,7 @@ namespace SoftEngChatClient.Drivers
 			/**********************************************/
 
             int userAmount = usersInput.Count;
+            MessageBox.Show("UserAmount = " + userAmount);
             /*string[] users = new string[userAmount];
             for(int i = 0; i < userAmount; i++)
             {
@@ -331,7 +332,7 @@ namespace SoftEngChatClient.Drivers
                     chatWindow.getNoFriendsLabel().Visible = false;
                     return;
                 }
-                if (user.StartsWith(temp))
+                if (user.ToString().StartsWith(temp))
                 {
                     chatWindow.getNoFriendsLabel().Visible = false;
                     if (!chatWindow.getFindFriendsBox().Items.Contains(user))
