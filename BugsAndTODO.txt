@@ -1,3 +1,3 @@
 1. Kan inte registera två användare i samma session?
 2. Kan öppna individuell chattruta genom att spamclicka på contacts sub fönster
-
+3. kan inte logga ut och sedan in med samma användare...
