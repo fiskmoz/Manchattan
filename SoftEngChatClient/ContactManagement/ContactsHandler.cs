@@ -111,5 +111,12 @@ namespace SoftEngChatClient.Model
             }
             fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
         }
+
+		public void AddContact(string username)
+		{
+			Contact contact = new Contact(username, onlineList.Contains(username));
+			contactList.Add(contact);
+			UpdateContacts(contact);
+		}
 	}
 }
