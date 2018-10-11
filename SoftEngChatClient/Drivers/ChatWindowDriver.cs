@@ -291,6 +291,7 @@ namespace SoftEngChatClient.Drivers
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
         {
+            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
             MessageBox.Show("FriendResponse");
         }
 
@@ -408,6 +409,7 @@ namespace SoftEngChatClient.Drivers
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "1");
+            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
             friendrequest.Close();
         }
 
