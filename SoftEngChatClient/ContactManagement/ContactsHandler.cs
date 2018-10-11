@@ -56,7 +56,6 @@ namespace SoftEngChatClient.Model
 		{
             List<string> contacts = new List<string>();
             contacts = fileManager.ReadContacts();
-            contacts.Add("test");
             List<Contact> tempContactList = new List<Contact>();
 			foreach(string contact in contacts)
 			{
