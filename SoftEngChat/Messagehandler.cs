@@ -129,6 +129,7 @@ namespace SoftEngChat.Model.SSLCommunication
             if(regFlag)
             {
                 server.everyRegisteredUserList.Add(user[1]);
+                server.UpdateOfflineList();
             }
 			client.writer.WriteRegAck(regFlag);
 		}

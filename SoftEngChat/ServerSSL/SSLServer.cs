@@ -22,7 +22,7 @@ namespace SoftEngChat.Model.SSLCommunication
         public List<string> allOnlineusers;
 
         private string onlineListAsString;
-
+        private string offlineListAsString;
 
 		public SSLServer(IPAddress ip, int port)
 		{
@@ -89,11 +89,12 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             
             UpdateOnlineList();
-            SendOnlineListToClient(username);
+            UpdateOfflineList();
+            SendListsToClient(username);
             UpdateUserClientList(username, false);
         }
 
-        public void SendOnlineListToClient(string username)
+        public void SendListsToClient(string username)
         {
 			Thread.BeginCriticalRegion();
 
@@ -104,6 +105,8 @@ namespace SoftEngChat.Model.SSLCommunication
                     if (client.userName == username || client.userName != null)
                     {
                         client.writer.WriteOnlineList(onlineListAsString);
+                        Thread.Sleep(10);
+                        client.writer.WriteOnlineList(offlineListAsString);
                     }
 				}
 			}
@@ -212,7 +215,7 @@ namespace SoftEngChat.Model.SSLCommunication
         public void UpdateOnlineList()
         {
             StringBuilder str = new StringBuilder();
-            str.Append((int)MessageType.onlineList);
+            str.Append((int)MessageType.onlineList + ":1");
             foreach (SSLClient client in clientList)
             {
                 // If client has yet to log in, do not send.
@@ -223,6 +226,17 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             onlineListAsString = str.ToString();
+        }
+        public void UpdateOfflineList()
+        {
+            userManager.SetListOfAllClients(everyRegisteredUserList);
+            StringBuilder str = new StringBuilder();
+            str.Append((int)MessageType.onlineList + ":0");
+            foreach (string String in everyRegisteredUserList)
+            {
+                str.Append(":" + String);
+            }
+            offlineListAsString = str.ToString();
         }
 
         private SSLClient FindClient(string username)
