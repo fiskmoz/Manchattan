@@ -25,9 +25,15 @@ namespace SoftEngChat.Model.SSLCommunication
         }
         public void WriteLoginACK(int flag, string userName)
         {
-
             User user = server.userManager.FindUser(userName);
-            stream.Write(Encoding.UTF8.GetBytes(((int)MessageType.loginACK).ToString() +  ":" + flag.ToString() + ":" + user.key));
+            if (user != null)
+            {
+                stream.Write(Encoding.UTF8.GetBytes(((int)MessageType.loginACK).ToString() + ":" + flag.ToString() + ":" + user.key));
+            }
+            else
+            {
+                stream.Write(Encoding.UTF8.GetBytes(((int)MessageType.loginACK).ToString() + ":" + flag.ToString() + ":error"));
+            }
             Console.WriteLine("Write login is: " + flag.ToString());
         }
 
