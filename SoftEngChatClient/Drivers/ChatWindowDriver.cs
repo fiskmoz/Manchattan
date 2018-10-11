@@ -420,7 +420,7 @@ namespace SoftEngChatClient.Drivers
         private void AddFriendsButtonClickedEvent(object sender, EventArgs e)
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
-            MessageBox.Show(userAdd);
+            writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
         }
     }
 }
