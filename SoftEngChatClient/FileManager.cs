@@ -70,10 +70,10 @@ namespace SoftEngChatClient
         }
 
         
-
+        
 		internal List<string> ReadContacts()
 		{
-			List<string> contactList = new List<string>();
+			List<string> contactList = new List<string>();/*
 			string contacts = ReadFromFile(ClientDriver.globalUsername + "/Contacts.txt");
 
 			string[] contactArray = contacts.Split(':');
@@ -81,7 +81,7 @@ namespace SoftEngChatClient
 			foreach(string user in contactArray)
 			{
 				contactList.Add(user);
-			}
+			}*/
 			return contactList;
 		}
 	}
