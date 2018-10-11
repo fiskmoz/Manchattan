@@ -400,6 +400,7 @@ namespace SoftEngChatClient.Drivers
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
             writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
+            MessageBox.Show("Friend Request Sent!");
         }
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
