@@ -242,7 +242,7 @@ namespace SoftEngChatClient.Drivers
                 }
             }
             if (found == false)
-                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender));
+                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
         }
 
 		private void IncommingMessage(object sender, EventArgs eventArgs)

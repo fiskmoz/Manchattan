@@ -18,17 +18,21 @@ namespace SoftEngChatClient
         SSLWriter writer;
         private string username;
         private string receiver;
+        private FileManager fm;
 
-        public IndividualChatDriver(SSLWriter sllWriter, string Username, string Receiver)
+        public IndividualChatDriver(SSLWriter sllWriter, string Username, string Receiver, FileManager fm)
         {
             username = Username;
             receiver = Receiver;
+            this.fm = fm;
             window = new IndividualChatWindow(receiver);
             spam = new SpamProtector();
             SetupListners();
             writer = sllWriter;
+
+            fm.LoadIndividualChat(username, receiver);
+
             new Thread(() => window.ShowDialog()).Start();
-            
         }
 
         private void SetupListners()
@@ -76,6 +80,10 @@ namespace SoftEngChatClient
             {
                 e.Cancel = true;
                 window.Hide();
+            }
+            if (window.getTextMessageBox() != null)
+            {
+                fm.SaveIndividualChat(username, receiver, window.getTextMessageBox());
             }
         }
 

@@ -158,7 +158,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox IndividualChatBox;
+        public System.Windows.Forms.TextBox IndividualChatBox;
         private System.Windows.Forms.TextBox IndividualMessageBox;
         private System.Windows.Forms.Button IndividualSendButton;
         private System.Windows.Forms.Label YouAreChattingWith;

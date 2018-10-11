@@ -98,15 +98,17 @@ namespace SoftEngChatClient
             }
         }
 
-        public void SaveIndividualChat()
+        public void SaveIndividualChat(string username, string receiver, string messageLog)
         {
+            WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\ChatLogs\" + receiver + ".txt", messageLog);
 
         }
 
-        public string LoadIndividualChat()
+        public string LoadIndividualChat(string username, string receiver)
         {
+            Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\ChatLogs");
             string text = "";
-
+            text = ReadFromFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\ChatLogs\" + receiver + ".txt");
             return text;
         }
         
