@@ -19,7 +19,6 @@ public class User
     //Standard constructor.
     public User(List<string> userInfo)
     {
-
         ID = ++IDnr;
         userName = userInfo[0];
         mail = userInfo[1];

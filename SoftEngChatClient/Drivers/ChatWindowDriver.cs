@@ -122,18 +122,7 @@ namespace SoftEngChatClient.Drivers
                 spam.SpamAppend();
                 if (spam.IsNotSpamming())
                 {
-                    if (chatWindow.removeEnterWhenSending()[0] == '7')
-                    {
-                        writer.WriteFriendRequest(MessageType.friendRequest, this.username, "olaf");
-                    }
-                    else if (chatWindow.removeEnterWhenSending()[0] == '0')
-                    {
-                        writer.WriteFriendResponse(MessageType.friendReponse, this.username, "Admin");
-                    }
-                    else
-                    {
-                        writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
-                    }
+                    writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
                 }
                 else
