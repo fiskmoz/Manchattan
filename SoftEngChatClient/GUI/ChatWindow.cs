@@ -219,9 +219,49 @@ namespace SoftEngChatClient
             return ChatBox;
         }
 
+        public Panel getPanelSettings()
+        {
+            return settingsPanel;
+        }
+
         private void addFriendButton_Click(object sender, EventArgs e)
         {
             addFriendsButtonClicked(this, e);
+        }
+
+        private void settingsLabel_MouseHover(object sender, EventArgs e)
+        {
+            SettingsLabel.ForeColor = Color.FromArgb(59, 177, 226);
+        }
+
+        private void SettingsLabel_Click(object sender, EventArgs e)
+        {
+            settingsPanel.Visible = true;
+        }
+
+        private void xLabel_Click(object sender, EventArgs e)
+        {
+            settingsPanel.Visible = false;
+        }
+
+        private void SettingsLabel_MouseLeave(object sender, EventArgs e)
+        {
+            SettingsLabel.ForeColor = Color.Black;
+        }
+
+        private void xLabel_MouseHover(object sender, EventArgs e)
+        {
+            xLabel.ForeColor = Color.FromArgb(59, 177, 226);
+        }
+
+        private void xLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void xLabel_MouseLeave(object sender, EventArgs e)
+        {
+            xLabel.ForeColor = Color.Black;
         }
     }
 }
