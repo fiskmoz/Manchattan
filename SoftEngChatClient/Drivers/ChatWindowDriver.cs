@@ -32,6 +32,8 @@ namespace SoftEngChatClient.Drivers
 
         private string username;
 
+        private byte[] personalKey;
+
         private List<string> messageList;
 
         public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
@@ -263,6 +265,10 @@ namespace SoftEngChatClient.Drivers
                 }
                 username = ClientDriver.globalUsername;
                 chatWindow.SetUserName(username);
+
+                string key = ((LoginAck)args).key;
+                personalKey = Encoding.UTF8.GetBytes(key);
+                logCrypto.SetNewKey(personalKey);
                 new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }
