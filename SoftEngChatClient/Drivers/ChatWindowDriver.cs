@@ -275,6 +275,8 @@ namespace SoftEngChatClient.Drivers
                 logCrypto.SetNewKey(personalKey);
                 fileManager.cyptoMessage.SetNewKey(personalKey);
 
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
+
                 new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }

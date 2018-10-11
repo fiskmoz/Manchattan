@@ -108,7 +108,8 @@ namespace SoftEngChatClient.Model
             {
                 contactListString += contact.name + ":";
             }
-            fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
+            if(contactListString != "")
+                fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
         }
 
 		public void AddContact(string username)
