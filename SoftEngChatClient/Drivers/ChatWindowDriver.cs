@@ -21,7 +21,7 @@ namespace SoftEngChatClient.Drivers
         private SSLWriter writer;
         private ClientCrypto logCrypto;
         private SpamProtector spam;
-        private List<string> usersInput;
+        private List<string> userlist;
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
 
@@ -37,7 +37,7 @@ namespace SoftEngChatClient.Drivers
 
         public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
-            usersInput = new List<string>();
+            userlist = new List<string>();
             
             this.writer = writer;
             this.logCrypto = logCrypto;
@@ -292,43 +292,21 @@ namespace SoftEngChatClient.Drivers
 
         private void FindFriendsSearch(object sender, EventArgs e)
         {
-            //Contact test = new Contact("test", false);
-            //Messagehandler test = new Messagehandler();
-            //contactList.Subscribe(test);
-            //usersInput = new List<string> { "test" };
             try
             {
-                usersInput = contactsHandler.offlineList;
+                userlist = contactsHandler.offlineList;
             }
             catch(Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users\n" + ex.Message.ToString());
                 return;
             }
-
-			/**********************************************/
-			// Written by Roman
-			/**********************************************/
-			//Offlinelist is a List<string>
-			//förstår inte varför usersInput är en kopia av offlineList.
-			//Offlinelist finns alltid sparad hos ContactsHandler
-			//och uppdateras där också. Det enda som måsta göras här är
-			//att söka igenom den listan
-			/**********************************************/
-
-            int userAmount = usersInput.Count;
-            MessageBox.Show("UserAmount = " + userAmount);
-            /*string[] users = new string[userAmount];
-            for(int i = 0; i < userAmount; i++)
-            {
-                users[i] = usersInput[i];
-            }*/
-            //string[] name = { "MrThailand35", "MrThailand45", "MrThaiband" };
+            int userAmount = userlist.Count;
             int counter = 0;
             int searchLength = chatWindow.getFindFriendsTextbox().Text.Length;
-            string temp = chatWindow.getFindFriendsTextbox().Text.Trim();
+            string temp = chatWindow.getFindFriendsTextbox().Text;
 
-            foreach (var user in usersInput)
+            foreach (var user in userlist)
             {
                 if(chatWindow.getFindFriendsTextbox().Text == "Search...")
                 {
@@ -359,7 +337,6 @@ namespace SoftEngChatClient.Drivers
                         {
                             chatWindow.getFindFriendsBox().Items.Clear();
                             chatWindow.getNoFriendsLabel().Visible = true;
-                            return;
                         }
                     }
                 }
