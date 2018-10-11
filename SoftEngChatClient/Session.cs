@@ -38,7 +38,7 @@ namespace SoftEngChatClient
         }
         private void PrintRememberMeToFile(string[] userInfo)
         {
-            saveToFile.WriteToFile(sessionSavePath, userInfo);
+            saveToFile.WriteSessionToFile(sessionSavePath, userInfo);
         }
     }
 }

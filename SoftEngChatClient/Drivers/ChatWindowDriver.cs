@@ -83,7 +83,7 @@ namespace SoftEngChatClient.Drivers
                 string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\MessageLog.txt";
                 byte[] ba = File.ReadAllBytes(filePath);
 
-                var goodString = logCrypto.DecryptBytes(ba);
+                var goodString = logCrypto.DecryptWithGlobal(ba);
                 chatWindow.AppendTextBox(messageList, goodString);
 
             }
@@ -98,7 +98,7 @@ namespace SoftEngChatClient.Drivers
             var str = chatWindow.getChatBox();
             if (str != "")
             {
-                var byteArray = logCrypto.EncryptString(str);
+                var byteArray = logCrypto.EncryptWithGlobal(str);
                 var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
                 fs.Write(byteArray, 0, byteArray.Length);
                 fs.Close();
@@ -253,7 +253,7 @@ namespace SoftEngChatClient.Drivers
 				IndividualChatPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
 			}
 		}
-
+        //If login OK, set username and personal key.
         private void LoggingIn(object sender, EventArgs args)
         {
             if( ((LoginAck)args).message)
@@ -269,6 +269,7 @@ namespace SoftEngChatClient.Drivers
                 string key = ((LoginAck)args).key;
                 personalKey = Encoding.UTF8.GetBytes(key);
                 logCrypto.SetNewKey(personalKey);
+                fileManager.cyptoMessage.SetNewKey(personalKey);
                 new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }

@@ -12,10 +12,14 @@ namespace SoftEngChatClient
     {
         private AesManaged aes;
 
+        private string keyString = "hejhejjkjdueoplikmnakduehgjdmnju";
+        private byte[] superKey;
+
         public ClientCrypto()
         {
             aes = new AesManaged();
             aes.GenerateKey();
+            superKey = Encoding.ASCII.GetBytes(keyString);
         }
 
         public ClientCrypto(byte[] key)
@@ -27,7 +31,7 @@ namespace SoftEngChatClient
 
         public void SetNewKey(byte[] key)
         {
-            aes.Key = key;
+            //aes.Key = key;
         }
 
         public void GenerateNewKey()
@@ -35,6 +39,27 @@ namespace SoftEngChatClient
             aes.GenerateKey();
         }
 
+        public byte[] EncryptWithGlobal(string chatLog)
+        {
+            byte[] key = aes.Key;
+            aes.Key = superKey;
+
+            byte[] returnValue = EncryptString(chatLog);
+
+            aes.Key = key;
+            return returnValue;
+        }
+
+        public string DecryptWithGlobal(byte[] cipher)
+        {
+            byte[] key = aes.Key;
+            aes.Key = superKey;
+
+            string returnValue = DecryptBytes(cipher);
+
+            aes.Key = key;
+            return returnValue;
+        }
 
         public byte[] EncryptString(string chatLog)
         {

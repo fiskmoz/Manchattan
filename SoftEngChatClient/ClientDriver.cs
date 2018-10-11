@@ -59,11 +59,7 @@ namespace SoftEngChatClient.Controller
             streamListener = new SSLListener(connector.SslStream);
             messagehandler = new Messagehandler(); 
             logCrypto = new ClientCrypto();
-
-            //Random input for encryption 
-            string input = "hejhejjkjdueoplikmnakduehgjdmnju";
-            byte[] array = Encoding.ASCII.GetBytes(input);
-            logCrypto.SetNewKey(array);
+            
         }
 
         //Sets up listeners for the different events.

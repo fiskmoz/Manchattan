@@ -67,7 +67,7 @@ namespace SoftEngChatClient.Drivers
             FileManager fileManager = new FileManager();
 
             string loginCredentials;
-            loginCredentials = fileManager.ReadFromFile("SessionSave.txt");
+            loginCredentials = fileManager.ReadSessionFromFile("SessionSave.txt");
 
             string username;
             string password;
@@ -98,7 +98,7 @@ namespace SoftEngChatClient.Drivers
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\" + "SessionSave.txt"))
             {
                 Console.WriteLine("No File present, trying to add");
-                fileManager.WriteToFile(sessionPathCreate, emptyString);
+                fileManager.WriteSessionToFile(sessionPathCreate, emptyString);
             }
         }
 

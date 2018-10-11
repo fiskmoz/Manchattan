@@ -9,26 +9,24 @@ namespace SoftEngChatClient
 {
     class FileManager
     {
-        private ClientCrypto cyptoMessage;
+        public ClientCrypto cyptoMessage { get; set; }
 
        public FileManager()
         {
             cyptoMessage = new ClientCrypto();
-
-            //Random input for encryption 
-            string input = "hejhejjkjdueoplikmnakduehgjdmnju";
-            byte[] array = Encoding.ASCII.GetBytes(input);
-            cyptoMessage.SetNewKey(array);
+            
         }
 
-        //Reads and decrypt from file.
-        public string ReadFromFile(string filePath) 
+
+
+        //Reads and decrypt from file using the global key.
+        public string ReadSessionFromFile(string filePath) 
         {
             string decryptadText = "";
             try
             {
                 byte[] data = File.ReadAllBytes(filePath);
-                decryptadText = cyptoMessage.DecryptBytes(data);
+                decryptadText = cyptoMessage.DecryptWithGlobal(data);
             }
             catch(IOException e)
             {
@@ -39,8 +37,8 @@ namespace SoftEngChatClient
         } 
 
         
-        //Encrypt and write to file.
-        public void WriteToFile(string filePath, string[] readObject)
+        //Encrypt and write to file using the global key.
+        public void WriteSessionToFile(string filePath, string[] readObject)
         {
             string text = "";
             byte[] encryptedString;
@@ -50,7 +48,7 @@ namespace SoftEngChatClient
                 text += textFromParamater + ":";
 
             }
-            encryptedString = cyptoMessage.EncryptString(text);
+            encryptedString = cyptoMessage.EncryptWithGlobal(text);
 
 
             try
@@ -64,6 +62,13 @@ namespace SoftEngChatClient
                 e.GetBaseException();
             }
         }
+
+        public void SaveIndividualChat()
+        {
+
+        }
+
+        
 
 		internal List<string> ReadContacts()
 		{
