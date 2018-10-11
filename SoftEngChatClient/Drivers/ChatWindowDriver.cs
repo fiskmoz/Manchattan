@@ -42,13 +42,14 @@ namespace SoftEngChatClient.Drivers
             this.writer = writer;
             this.logCrypto = logCrypto;
             fileManager = new FileManager();
+            username = ClientDriver.globalUsername;
 
             contactsHandler = new ContactsHandler(fileManager);
+
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
             SetupListeners();
-            username = ClientDriver.globalUsername;
         }
 
         private void SetupListeners()
@@ -98,6 +99,7 @@ namespace SoftEngChatClient.Drivers
 
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
+            contactsHandler.SaveContactList();
             var str = chatWindow.getChatBox();
             if (str != "")
             {
@@ -256,7 +258,8 @@ namespace SoftEngChatClient.Drivers
                     return;
                 }
                 username = ClientDriver.globalUsername;
-                chatWindow.SetUserName(username);
+                SetUserName(username);
+                
 
                 string key = ((LoginAck)args).key;
                 int NumberChars = key.Length;

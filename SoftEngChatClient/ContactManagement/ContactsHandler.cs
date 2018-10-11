@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngChatClient.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace SoftEngChatClient.Model
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
+        private string username;
 
 		public bool hasOfflineList { get; private set; }
 		private bool hasOnlineList;
@@ -53,16 +55,15 @@ namespace SoftEngChatClient.Model
 		private List<Contact> CreateContactList()
 		{
             List<string> contacts = new List<string>();
-            contacts.Add("test");
-                                        //fileManager.ReadContacts();
-			List<Contact> tempContactList = new List<Contact>();
+            contacts = fileManager.ReadContacts();
+            contacts.Add("Test");
+            List<Contact> tempContactList = new List<Contact>();
 			foreach(string contact in contacts)
 			{
 				tempContactList.Add(new Contact(contact, onlineList.Contains(contact)));
 			}
 
 			return tempContactList;
-
 		}
 
 		private void HandleContactUpdate(object sender, EventArgs e)
@@ -99,5 +100,15 @@ namespace SoftEngChatClient.Model
 				}
 			}
 		}
+
+        public void SaveContactList()
+        {
+            string contactListString = "";
+            foreach(Contact contact in contactList)
+            {
+                contactListString += contact.name + ":";
+            }
+            fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
+        }
 	}
 }
