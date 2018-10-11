@@ -217,6 +217,7 @@ namespace SoftEngChatClient.Drivers
 
         public void IndividualChatPrint(string sender, string message)
         {
+            AddNewIndividualChat(sender);
             foreach (var icd in individualChatDrivers)
             {
                 if (sender == icd.getSender())
@@ -278,7 +279,8 @@ namespace SoftEngChatClient.Drivers
 
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
 
-                new Thread(() => chatWindow.ShowDialog()).Start();
+                new Thread(() => Application.Run(chatWindow)).Start();
+                //new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }
 
