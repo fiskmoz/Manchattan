@@ -21,7 +21,6 @@ namespace SoftEngChatClient.Drivers
         private SSLWriter writer;
         private ClientCrypto logCrypto;
         private SpamProtector spam;
-        private ContactsHandler contactList;
         private List<string> usersInput;
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
@@ -38,10 +37,13 @@ namespace SoftEngChatClient.Drivers
 
         public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
+            usersInput = new List<string>();
+            
             this.writer = writer;
             this.logCrypto = logCrypto;
-			fileManager = new FileManager();
-			contactsHandler = new ContactsHandler(fileManager);
+            fileManager = new FileManager();
+
+            contactsHandler = new ContactsHandler(fileManager);
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
@@ -296,11 +298,11 @@ namespace SoftEngChatClient.Drivers
             //usersInput = new List<string> { "test" };
             try
             {
-                usersInput = contactList.offlineList;
+                usersInput = contactsHandler.offlineList;
             }
             catch(Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users" );
+                System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users\n" + ex.Message.ToString());
                 return;
             }
 
