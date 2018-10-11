@@ -214,6 +214,10 @@ namespace SoftEngChatClient
         {
             return addFriends;
         }
+        public TextBox getGlobalChatBox()
+        {
+            return ChatBox;
+        }
 
         private void addFriendButton_Click(object sender, EventArgs e)
         {

@@ -97,7 +97,7 @@ namespace SoftEngChatClient
                 EnterEmail.Text = "";
                 EnterEmail.ForeColor = Color.White;
 
-                if (EnterPassword.Text == "")
+                if (EnterPassword.Text == "" || EnterPassword.ForeColor == Color.Gray)
                 {
                     EnterPassword.Text = "Password";
                     EnterPassword.PasswordChar = '\0';

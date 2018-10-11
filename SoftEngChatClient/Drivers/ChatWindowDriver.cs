@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using SoftEngChatClient.Model;
 using SoftEngChatClient.Controller;
 using System.Drawing;
+using SoftEngChatClient.GUI;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -24,6 +25,7 @@ namespace SoftEngChatClient.Drivers
         private List<string> userlist;
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
+        private FriendRequest friendrequest;
 
         public event EventHandler restart;
 
@@ -49,6 +51,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow = new ChatWindow();
             SetupListeners();
             username = ClientDriver.globalUsername;
+            friendrequest = new FriendRequest();
         }
 
         private void SetupListeners()
@@ -66,6 +69,8 @@ namespace SoftEngChatClient.Drivers
             chatWindow.showFriendsEvent += new EventHandler(ShowFriendsLabel);
             chatWindow.addFriendsEvent += new EventHandler(AddFriendsLabel);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
+            friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
+            friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
@@ -103,6 +108,7 @@ namespace SoftEngChatClient.Drivers
             {
                 var byteArray = logCrypto.EncryptWithGlobal(str);
                 var fs = new FileStream("MessageLog.txt", FileMode.Create, FileAccess.Write);
+                chatWindow.getGlobalChatBox().Clear();
                 fs.Write(byteArray, 0, byteArray.Length);
                 fs.Close();
             }
@@ -283,7 +289,13 @@ namespace SoftEngChatClient.Drivers
 
         private void ReceivedFriendRequest(object sender, EventArgs message)
         {
-            MessageBox.Show("FriendRequest");
+            if (friendrequest.InvokeRequired)
+            {
+                friendrequest.Invoke(new Action<object, EventArgs>(ReceivedFriendRequest), new object[] { sender, message });
+                return;
+            }
+            friendrequest.getFriendLabel().Text = ((ClientMessage)message).sender;
+            friendrequest.ShowDialog();
         }
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
@@ -400,5 +412,16 @@ namespace SoftEngChatClient.Drivers
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
             writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
         }
+
+        private void AcceptFriendRequestButton(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RejectFriendRequestButton(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }
