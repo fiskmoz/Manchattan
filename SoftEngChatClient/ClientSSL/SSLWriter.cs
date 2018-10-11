@@ -61,10 +61,5 @@ namespace SoftEngChatClient.Model.SSLCommunication
             byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
             stream.Write(outgoingBytes, 0, outgoingBytes.Length);
 		}
-
-        internal void WriteFriendResponse(MessageType friendReponse, string username, string v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

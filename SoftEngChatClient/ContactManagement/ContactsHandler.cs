@@ -95,10 +95,11 @@ namespace SoftEngChatClient.Model
 				if (contact.name == updated.name)
 				{
 					contact.isOnline = updated.isOnline;
-					UpdateContactList(this, new ContactListEventArg(contactList));
 					break;
 				}
 			}
+
+			UpdateContactList(this, new ContactListEventArg(contactList));
 		}
 
         public void SaveContactList()

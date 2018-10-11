@@ -65,6 +65,12 @@
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientDriver.cs" />
+    <Compile Include="GUI\FriendRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FriendRequest.Designer.cs">
+      <DependentUpon>FriendRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\IndividualChatWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\ChatWindow.resx">
       <DependentUpon>ChatWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FriendRequest.resx">
+      <DependentUpon>FriendRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\IndividualChatWindow.resx">
       <DependentUpon>IndividualChatWindow.cs</DependentUpon>
