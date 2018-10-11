@@ -85,8 +85,8 @@ namespace SoftEngChat.Model.SSLCommunication
                             Receiver.writer.WriteFriendResponse(messageArray[1], messageArray[2], Convert.ToInt32(messageArray[3]));
                             break;
                     }
-					offlineMessageList.Remove(message);
                 }
+                userManager.FindUser(username).waitingMessages.Clear();
             }
             
             UpdateOnlineList();
