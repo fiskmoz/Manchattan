@@ -58,7 +58,14 @@ namespace SoftEngChatClient
 			receiver = parsedMessage[2];
 			message = parsedMessage[3];
 
-		}
+            if (parsedMessage.Length > 4)
+            {
+                for (int i = 4; i < parsedMessage.Length; i++)
+                {
+                    message += ":" + parsedMessage[i];
+                }
+            }
+        }
 	}
 
 	class OnlineList : EventArgs
