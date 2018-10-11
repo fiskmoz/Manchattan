@@ -114,7 +114,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			bool regFlag = server.userManager.AddUser(user);
             if(regFlag)
             {
-                server.everyRegisteredUserList.Add(user[1]);
+                server.everyRegisteredUserList.Add(user[0]);
                 server.UpdateOfflineList();
             }
 			client.writer.WriteRegAck(regFlag);
@@ -133,8 +133,11 @@ namespace SoftEngChat.Model.SSLCommunication
 		{
 			client.listener.StopListen();
             if(client.userName != null) // IF USER LOGGED IN
-            server.UpdateUserClientList(client.userName.ToString(), true);
-            server.RemoveClient(client);
+            {
+                server.RemoveClient(client);
+                server.UpdateUserClientList(client.userName.ToString(), true);
+            }
+            
 		}
 
         private void HandleFriendRequest(string incomming)

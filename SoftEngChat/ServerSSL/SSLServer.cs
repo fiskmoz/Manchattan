@@ -67,7 +67,7 @@ namespace SoftEngChat.Model.SSLCommunication
             var Receiver = FindClient(username);
             if(Receiver != null)
             {
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 var offlineMessageList = userManager.FindUser(username).waitingMessages;
                 foreach(var message in offlineMessageList)
                 {
