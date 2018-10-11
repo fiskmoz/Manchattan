@@ -67,6 +67,13 @@ namespace SoftEngChat.Model.SSLCommunication
             string sender = parsed[1];
             string receiver = parsed[2];
             string message = parsed[3];
+            if (parsed.Length > 4)
+            {
+                for (int i = 4; i < parsed.Length; i++)
+                {
+                    message += ":" + parsed[i];
+                }
+            }
             if (receiver == "All")
             {
                 server.SendMessageAll(sender, message);
