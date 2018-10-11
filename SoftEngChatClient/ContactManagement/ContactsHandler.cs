@@ -47,7 +47,8 @@ namespace SoftEngChatClient.Model
 			hasOnlineList = true;
 			onlineList = ((OnlineList)e).onlineList;
 
-			contactList = CreateContactList();
+
+			contactList.AddRange(CreateContactList()); //= CreateContactList();
 
 			UpdateContactList(this, new ContactListEventArg(contactList));
 

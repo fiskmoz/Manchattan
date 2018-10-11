@@ -202,6 +202,7 @@ namespace SoftEngChatClient.Drivers
 			{
                 chatWindow.contactListBox.Items.Add(contact.name);
             }
+			chatWindow.contactListBox.Update();
         }
 
         public void SetUserName(string name)
