@@ -69,7 +69,7 @@ namespace SoftEngChatClient
 		internal List<string> ReadContacts()
 		{
 			List<string> contactList = new List<string>();
-			string contacts = ReadFromFile(ClientDriver.globalUsername + "/Contacts");
+			string contacts = ReadFromFile(ClientDriver.globalUsername + "/Contacts.txt");
 
 			string[] contactArray = contacts.Split(':');
 
