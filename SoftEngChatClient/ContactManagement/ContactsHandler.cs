@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngChatClient.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace SoftEngChatClient.Model
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
+        private string username;
 
 		public bool hasOfflineList { get; private set; }
 		private bool hasOnlineList;
@@ -53,16 +55,15 @@ namespace SoftEngChatClient.Model
 		private List<Contact> CreateContactList()
 		{
             List<string> contacts = new List<string>();
+            contacts = fileManager.ReadContacts();
             contacts.Add("test");
-                                        //fileManager.ReadContacts();
-			List<Contact> tempContactList = new List<Contact>();
+            List<Contact> tempContactList = new List<Contact>();
 			foreach(string contact in contacts)
 			{
 				tempContactList.Add(new Contact(contact, onlineList.Contains(contact)));
 			}
 
 			return tempContactList;
-
 		}
 
 		private void HandleContactUpdate(object sender, EventArgs e)
@@ -94,10 +95,28 @@ namespace SoftEngChatClient.Model
 				if (contact.name == updated.name)
 				{
 					contact.isOnline = updated.isOnline;
-					UpdateContactList(this, new ContactListEventArg(contactList));
 					break;
 				}
 			}
+
+			UpdateContactList(this, new ContactListEventArg(contactList));
+		}
+
+        public void SaveContactList()
+        {
+            string contactListString = "";
+            foreach(Contact contact in contactList)
+            {
+                contactListString += contact.name + ":";
+            }
+            fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
+        }
+
+		public void AddContact(string username)
+		{
+			Contact contact = new Contact(username, onlineList.Contains(username));
+			contactList.Add(contact);
+			UpdateContacts(contact);
 		}
 	}
 }

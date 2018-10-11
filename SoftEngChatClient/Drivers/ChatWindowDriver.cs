@@ -104,6 +104,7 @@ namespace SoftEngChatClient.Drivers
 
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
+            contactsHandler.SaveContactList();
             var str = chatWindow.getChatBox();
             if (str != "")
             {
@@ -291,6 +292,7 @@ namespace SoftEngChatClient.Drivers
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
         {
+            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
             MessageBox.Show("FriendResponse");
         }
 
@@ -407,13 +409,14 @@ namespace SoftEngChatClient.Drivers
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, "1");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "1");
+            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
             friendrequest.Close();
         }
 
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, "0");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
             friendrequest.Close();
         }
     }
