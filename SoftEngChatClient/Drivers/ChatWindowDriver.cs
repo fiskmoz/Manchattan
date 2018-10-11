@@ -61,6 +61,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow.findFriendsTextBoxLeaveEvent += new EventHandler(FindFriendsTextBoxLeaveEvent);
             chatWindow.showFriendsEvent += new EventHandler(ShowFriendsLabel);
             chatWindow.addFriendsEvent += new EventHandler(AddFriendsLabel);
+            chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
@@ -279,10 +280,19 @@ namespace SoftEngChatClient.Drivers
 
         private void FindFriendsSearch(object sender, EventArgs e)
         {
-			//Contact test = new Contact("test", false);
-			//Messagehandler test = new Messagehandler();
-			//contactList.Subscribe(test);
-			usersInput = contactList.offlineList;
+            //Contact test = new Contact("test", false);
+            //Messagehandler test = new Messagehandler();
+            //contactList.Subscribe(test);
+            //usersInput = new List<string> { "test" };
+            try
+            {
+                usersInput = contactList.offlineList;
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users" );
+                return;
+            }
 
 			/**********************************************/
 			// Written by Roman
@@ -295,17 +305,17 @@ namespace SoftEngChatClient.Drivers
 			/**********************************************/
 
             int userAmount = usersInput.Count;
-            string[] users = new string[userAmount];
+            /*string[] users = new string[userAmount];
             for(int i = 0; i < userAmount; i++)
             {
                 users[i] = usersInput[i];
-            }
+            }*/
             //string[] name = { "MrThailand35", "MrThailand45", "MrThaiband" };
             int counter = 0;
             int searchLength = chatWindow.getFindFriendsTextbox().Text.Length;
             string temp = chatWindow.getFindFriendsTextbox().Text.Trim();
 
-            foreach (string user in users)
+            foreach (var user in usersInput)
             {
                 if(chatWindow.getFindFriendsTextbox().Text == "Search...")
                 {
@@ -327,7 +337,7 @@ namespace SoftEngChatClient.Drivers
                     {
                         for (int i = 0; i < userAmount; i++)
                         {
-                            if (temp != users[i])
+                            if (temp != user)
                             {
                                 counter++;
                             }
@@ -392,6 +402,12 @@ namespace SoftEngChatClient.Drivers
                 chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
                 chatWindow.getShowFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
             }
+        }
+
+        private void AddFriendsButtonClickedEvent(object sender, EventArgs e)
+        {
+            string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
+            MessageBox.Show(userAdd);
         }
     }
 }
