@@ -31,7 +31,7 @@ namespace SoftEngChatClient
 
         public void SetNewKey(byte[] key)
         {
-            //aes.Key = key;
+            aes.Key = key;
         }
 
         public void GenerateNewKey()
