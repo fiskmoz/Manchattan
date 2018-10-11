@@ -229,7 +229,7 @@ namespace SoftEngChat.Model.SSLCommunication
         }
         public void UpdateOfflineList()
         {
-            userManager.SetListOfAllClients(everyRegisteredUserList);
+            //userManager.SetListOfAllClients(everyRegisteredUserList);
             StringBuilder str = new StringBuilder();
             str.Append((int)MessageType.onlineList + ":0");
             foreach (string String in everyRegisteredUserList)
