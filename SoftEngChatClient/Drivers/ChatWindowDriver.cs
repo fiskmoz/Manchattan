@@ -401,16 +401,19 @@ namespace SoftEngChatClient.Drivers
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
             writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
+            MessageBox.Show("Friend Request Sent!");
         }
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "1");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, "1");
+            friendrequest.Close();
         }
 
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
+            writer.WriteFriendResponse(MessageType.friendReponse, username, "0");
+            friendrequest.Close();
         }
     }
 
