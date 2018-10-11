@@ -49,9 +49,10 @@ namespace SoftEngChatClient.Drivers
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
+            friendrequest = new FriendRequest();
             SetupListeners();
             username = ClientDriver.globalUsername;
-            friendrequest = new FriendRequest();
+            
         }
 
         private void SetupListeners()
@@ -405,12 +406,12 @@ namespace SoftEngChatClient.Drivers
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
-
+            writer.WriteFriendResponse(MessageType.friendReponse, username, "1");
         }
 
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
-
+            writer.WriteFriendResponse(MessageType.friendReponse, username, "0");
         }
     }
 
