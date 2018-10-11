@@ -38,26 +38,14 @@ namespace SoftEngChatClient.Model
 		{
 			hasOfflineList = true;
 			offlineList = ((OnlineList)e).onlineList;
-			foreach(string user in offlineList)
-			{
-				user.Trim();
-			}
 		}
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
 			hasOnlineList = true;
 			onlineList = ((OnlineList)e).onlineList;
-			foreach (string user in onlineList)
-			{
-				user.Trim();
-			}
 
 			contactList = CreateContactList();
-			foreach (Contact user in contactList)
-			{
-				user.name.Trim();
-			}
 
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
