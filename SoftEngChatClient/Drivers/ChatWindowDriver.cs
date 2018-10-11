@@ -297,7 +297,7 @@ namespace SoftEngChatClient.Drivers
             }
             catch(Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users" );
+                System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users\n" + ex.Message.ToString());
                 return;
             }
 
