@@ -51,6 +51,7 @@ namespace SoftEngChatClient
             this.findFriendsLabel = new System.Windows.Forms.Label();
             this.addFriends = new System.Windows.Forms.Label();
             this.showFriends = new System.Windows.Forms.Label();
+            this.addFriendButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -229,6 +230,7 @@ namespace SoftEngChatClient
             // findFriendsPanel
             // 
             this.findFriendsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.findFriendsPanel.Controls.Add(this.addFriendButton);
             this.findFriendsPanel.Controls.Add(this.noFriendsLabel);
             this.findFriendsPanel.Controls.Add(this.findFriendsBox);
             this.findFriendsPanel.Controls.Add(this.findFriendsTextBox);
@@ -328,6 +330,22 @@ namespace SoftEngChatClient
             this.showFriends.MouseLeave += new System.EventHandler(this.showFriends_MouseLeave);
             this.showFriends.MouseHover += new System.EventHandler(this.showFriends_MouseHover);
             // 
+            // addFriendButton
+            // 
+            this.addFriendButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.addFriendButton.FlatAppearance.BorderSize = 0;
+            this.addFriendButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addFriendButton.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addFriendButton.ForeColor = System.Drawing.Color.White;
+            this.addFriendButton.Location = new System.Drawing.Point(123, 427);
+            this.addFriendButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addFriendButton.Name = "addFriendButton";
+            this.addFriendButton.Size = new System.Drawing.Size(71, 21);
+            this.addFriendButton.TabIndex = 108;
+            this.addFriendButton.Text = "Add";
+            this.addFriendButton.UseVisualStyleBackColor = false;
+            this.addFriendButton.Click += new System.EventHandler(this.addFriendButton_Click);
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,5 +409,6 @@ namespace SoftEngChatClient
         private Label showFriends;
         private ListBox findFriendsBox;
         private Label noFriendsLabel;
+        private Button addFriendButton;
     }
 }

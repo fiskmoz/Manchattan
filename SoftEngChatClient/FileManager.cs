@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngChatClient.Controller;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -72,7 +73,16 @@ namespace SoftEngChatClient
 
 		internal List<string> ReadContacts()
 		{
-			throw new NotImplementedException();
+			List<string> contactList = new List<string>();
+			string contacts = ReadFromFile(ClientDriver.globalUsername + "/Contacts.txt");
+
+			string[] contactArray = contacts.Split(':');
+
+			foreach(string user in contactArray)
+			{
+				contactList.Add(user);
+			}
+			return contactList;
 		}
 	}
 }
