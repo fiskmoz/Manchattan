@@ -21,7 +21,6 @@ namespace SoftEngChatClient.Drivers
         private SSLWriter writer;
         private ClientCrypto logCrypto;
         private SpamProtector spam;
-        private ContactsHandler contactList;
         private List<string> usersInput;
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
@@ -38,10 +37,13 @@ namespace SoftEngChatClient.Drivers
 
         public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
+            usersInput = new List<string>();
+            
             this.writer = writer;
             this.logCrypto = logCrypto;
-			fileManager = new FileManager();
-			contactsHandler = new ContactsHandler(fileManager);
+            fileManager = new FileManager();
+
+            contactsHandler = new ContactsHandler(fileManager);
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
@@ -268,7 +270,10 @@ namespace SoftEngChatClient.Drivers
                 chatWindow.SetUserName(username);
 
                 string key = ((LoginAck)args).key;
-                personalKey = Encoding.UTF8.GetBytes(key);
+                int NumberChars = key.Length;
+                personalKey = new byte[NumberChars / 2];
+                for (int i = 0; i < NumberChars; i += 2)
+                    personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
                 logCrypto.SetNewKey(personalKey);
                 fileManager.cyptoMessage.SetNewKey(personalKey);
                 new Thread(() => chatWindow.ShowDialog()).Start();
@@ -293,7 +298,7 @@ namespace SoftEngChatClient.Drivers
             //usersInput = new List<string> { "test" };
             try
             {
-                usersInput = contactList.offlineList;
+                usersInput = contactsHandler.offlineList;
             }
             catch(Exception ex)
             {
@@ -414,7 +419,7 @@ namespace SoftEngChatClient.Drivers
         private void AddFriendsButtonClickedEvent(object sender, EventArgs e)
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
-            MessageBox.Show(userAdd);
+            writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
         }
     }
 }

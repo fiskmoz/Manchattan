@@ -34,8 +34,6 @@ namespace SoftEngChatClient.Model
 			mh.IncommingUserStatus += new EventHandler(HandleContactUpdate);
 		}
 
-
-
 		private void HandleOfflineList(object sender, EventArgs e)
 		{
 			hasOfflineList = true;
@@ -45,10 +43,6 @@ namespace SoftEngChatClient.Model
 				user.Trim();
 			}
 		}
-
-
-
-
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
@@ -70,7 +64,9 @@ namespace SoftEngChatClient.Model
 		}
 		private List<Contact> CreateContactList()
 		{
-			List<string> contacts = fileManager.ReadContacts();
+            List<string> contacts = new List<string>();
+            contacts.Add("test");
+                                        //fileManager.ReadContacts();
 			List<Contact> tempContactList = new List<Contact>();
 			foreach(string contact in contacts)
 			{
@@ -87,7 +83,6 @@ namespace SoftEngChatClient.Model
 
 			UpdateOnlineOfflineLists(updated);
 			UpdateContacts(updated);
-
 		}
 
 		private void UpdateOnlineOfflineLists(Contact updated)
@@ -116,7 +111,5 @@ namespace SoftEngChatClient.Model
 				}
 			}
 		}
-
-
 	}
 }

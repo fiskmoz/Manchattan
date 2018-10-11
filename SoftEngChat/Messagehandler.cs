@@ -28,10 +28,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine(incomming);
                     HandleRegistration(incomming);
 					break;
-				case '1':
-                    Console.WriteLine("Message arrived; Register ACK:");
-                    Console.WriteLine(incomming);
-					break;
 				case '2':
                     Console.WriteLine("Message arrived; Clientmessage:");
 					Console.WriteLine(incomming);
@@ -42,19 +38,11 @@ namespace SoftEngChat.Model.SSLCommunication
 					Console.WriteLine(incomming);
 					HandleLogin(incomming);
 					break;
-                case '4':
-                    Console.WriteLine("Message arrived; Login ACK:");
-                    Console.WriteLine(incomming);
-                    break;
                 case '5':
                     Console.WriteLine("Message arrived; Logout Message:");
                     Console.WriteLine(incomming);
 					HandleLogout();
 					break;
-                case '6':
-                    Console.WriteLine("Message arrived; OnlineList:");
-                    Console.WriteLine(incomming);
-                    break;
                 case '7':
                     Console.WriteLine("Message arrived; FriendRequest:");
                     Console.WriteLine(incomming);
@@ -71,7 +59,6 @@ namespace SoftEngChat.Model.SSLCommunication
 					HandleLogout();
 					break;
 			}
-			
 		}
 
 		private void HandleClientMessage(string incomming)
@@ -88,7 +75,6 @@ namespace SoftEngChat.Model.SSLCommunication
             {
                 server.SendIndivualMessage(incomming, sender, receiver, message);
             }
-			
 		}
 
 
@@ -149,7 +135,6 @@ namespace SoftEngChat.Model.SSLCommunication
             if(client.userName != null) // IF USER LOGGED IN
             server.UpdateUserClientList(client.userName.ToString(), true);
             server.RemoveClient(client);
-            
 		}
 
         private void HandleFriendRequest(string incomming)
