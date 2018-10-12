@@ -79,11 +79,9 @@ namespace SoftEngChatClient.Model
 			if (onlineList.Contains(updated.name) && !(updated.isOnline))
 			{
 				onlineList.Remove(updated.name);
-				offlineList.Add(updated.name);
 			}
 			else if (offlineList.Contains(updated.name) && updated.isOnline)
 			{
-				offlineList.Remove(updated.name);
 				onlineList.Add(updated.name);
 			}
 		}
