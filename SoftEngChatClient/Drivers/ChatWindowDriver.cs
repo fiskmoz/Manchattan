@@ -105,6 +105,10 @@ namespace SoftEngChatClient.Drivers
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
             contactsHandler.SaveContactList();
+
+			chatWindow.contactListBox.Items.Clear();
+			chatWindow.contactListBox.Refresh();
+
             var str = chatWindow.getChatBox();
             if (str != "")
             {
@@ -202,6 +206,7 @@ namespace SoftEngChatClient.Drivers
 			{
                 chatWindow.contactListBox.Items.Add(contact.name);
             }
+			chatWindow.contactListBox.Update();
         }
 
         public void SetUserName(string name)
@@ -217,6 +222,7 @@ namespace SoftEngChatClient.Drivers
 
         public void IndividualChatPrint(string sender, string message)
         {
+            AddNewIndividualChat(sender);
             foreach (var icd in individualChatDrivers)
             {
                 if (sender == icd.getSender())
@@ -278,7 +284,8 @@ namespace SoftEngChatClient.Drivers
 
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
 
-                new Thread(() => chatWindow.ShowDialog()).Start();
+                new Thread(() => Application.Run(chatWindow)).Start();
+                //new Thread(() => chatWindow.ShowDialog()).Start();
             }
         }
 

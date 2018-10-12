@@ -30,8 +30,9 @@ namespace SoftEngChatClient
             SetupListners();
             writer = sllWriter;
 
-
-            new Thread(() => window.ShowDialog()).Start();
+            new Thread(() => Application.Run(window)).Start();
+            Thread.Sleep(10);
+            //new Thread(() => window.Show()).Start();
         }
 
         private void SetupListners()
@@ -100,7 +101,12 @@ namespace SoftEngChatClient
 
         public void displayWindow()
         {
-            new Thread(() => window.ShowDialog()).Start();
+            if(window.InvokeRequired)
+            {
+                window.Invoke(new Action(displayWindow));
+                return;
+            }
+            window.Show();
         }
 
         public void ReceiveMessage(string message)

@@ -47,7 +47,8 @@ namespace SoftEngChatClient.Model
 			hasOnlineList = true;
 			onlineList = ((OnlineList)e).onlineList;
 
-			contactList = CreateContactList();
+
+			contactList.AddRange(CreateContactList()); //= CreateContactList();
 
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
@@ -110,6 +111,8 @@ namespace SoftEngChatClient.Model
             }
             if(contactListString != "")
                 fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
+
+			contactList.Clear();
         }
 
 		public void AddContact(string username)
