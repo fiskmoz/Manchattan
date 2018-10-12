@@ -73,6 +73,13 @@ namespace SoftEngChat.Model.SSLCommunication
                 {
                     string[] messageArray;
                     messageArray = message.Split(':');
+                    if (messageArray.Length > 4)
+                    {
+                        for (int i = 4; i < messageArray.Length; i++)
+                        {
+                            messageArray[3] += ":" + messageArray[i];
+                        }
+                    }
                     switch (messageArray[0])
                     {
                         case "2":
