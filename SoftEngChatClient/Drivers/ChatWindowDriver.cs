@@ -159,7 +159,7 @@ namespace SoftEngChatClient.Drivers
             string receiver = chatWindow.contactListBox.GetItemText(index);
             if (receiver != username)
             {
-                AddNewIndividualChat(receiver);
+                AddNewIndividualChat(receiver.Replace(" (offline)", ""));
             }
         }
 
