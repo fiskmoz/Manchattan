@@ -103,7 +103,7 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				foreach (SSLClient client in clientList)
 				{
-                    if (client.userName == username || client.userName != null)
+                    if (client.userName == username && client.userName != null)
                     {
                         client.writer.WriteOnlineList(onlineListAsString);
                         Thread.Sleep(10);

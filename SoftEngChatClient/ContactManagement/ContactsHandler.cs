@@ -14,7 +14,6 @@ namespace SoftEngChatClient.Model
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
-        private string username;
 
 		public bool hasOfflineList { get; private set; }
 		private bool hasOnlineList;
@@ -38,18 +37,21 @@ namespace SoftEngChatClient.Model
 
 		private void HandleOfflineList(object sender, EventArgs e)
 		{
-			hasOfflineList = true;
 			offlineList = ((OnlineList)e).onlineList;
+			foreach(Contact contact in contactList)
+			{
+				offlineList.Remove(contact.name);
+			}
+			offlineList.Remove(ClientDriver.globalUsername);
+			hasOfflineList = true;
 		}
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
-			hasOnlineList = true;
+			
 			onlineList = ((OnlineList)e).onlineList;
-
-
 			contactList.AddRange(CreateContactList()); //= CreateContactList();
-
+			hasOnlineList = true;
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
 		}
@@ -69,21 +71,20 @@ namespace SoftEngChatClient.Model
 		private void HandleContactUpdate(object sender, EventArgs e)
 		{
 			Contact updated = new Contact(((UserOnlineStatusUpdate)e).username, ((UserOnlineStatusUpdate)e).isOnline);
+			if (!(offlineList.Contains(updated.name)))
+				offlineList.Add(updated.name);
 
-			UpdateOnlineOfflineLists(updated);
+			UpdateOnlineList(updated);
 			UpdateContacts(updated);
 		}
 
-		private void UpdateOnlineOfflineLists(Contact updated)
+		private void UpdateOnlineList(Contact updated)
 		{
 			if (onlineList.Contains(updated.name) && !(updated.isOnline))
-			{
 				onlineList.Remove(updated.name);
-			}
-			else if (offlineList.Contains(updated.name) && updated.isOnline)
-			{
-				onlineList.Add(updated.name);
-			}
+
+			else if (!(onlineList.Contains(updated.name)))
+					onlineList.Add(updated.name);
 		}
 
 		private void UpdateContacts(Contact updated)
@@ -92,6 +93,7 @@ namespace SoftEngChatClient.Model
 			{
 				if (contact.name == updated.name)
 				{
+					offlineList.Remove(updated.name);
 					contact.isOnline = updated.isOnline;
 					break;
 				}
