@@ -69,9 +69,10 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             string outgoing = "8:" + sender + ":" + receiver + ":" + answer;
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
-            Console.WriteLine("FriendResponse: \"" + sender + "\" answers \"" + receiver + "'s\"friend request with ");
-            if (answer == 0) Console.Write("Deny");
-            else if (answer == 1) Console.Write("Accept");
+            Console.Write("FriendResponse: \"" + sender + "\" answers \"" + receiver + "'s\"friend request with ");
+            if (answer == 0) Console.WriteLine("Deny");
+            else if (answer == 1) Console.WriteLine("Accept");
+
         }
 
         public void WriteOnlineListUpdate(string client, bool goingOffline)

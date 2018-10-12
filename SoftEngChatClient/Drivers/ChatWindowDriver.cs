@@ -165,6 +165,11 @@ namespace SoftEngChatClient.Drivers
 
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
+            foreach(var idc in individualChatDrivers)
+            {
+                idc.hideWindow();
+            }
+                
             individualChatDrivers.Clear();
             chatWindow.getPanelSettings().Visible = false;
             ResetSearchField();
