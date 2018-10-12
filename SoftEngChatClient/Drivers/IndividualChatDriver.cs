@@ -109,6 +109,16 @@ namespace SoftEngChatClient
             window.Show();
         }
 
+        public void hideWindow()
+        {
+            if (window.InvokeRequired)
+            {
+                window.Invoke(new Action(hideWindow));
+                return;
+            }
+            window.Hide();
+        }
+
         public void ReceiveMessage(string message)
         {
             window.AppendTextBox("["+receiver+"] : "+message);
