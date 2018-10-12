@@ -211,7 +211,10 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             foreach(var client in clientList)
             {
-                client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+                if(allOnlineusers.Contains(client.userName))
+                {
+                    client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+                }
             }
         }
 
