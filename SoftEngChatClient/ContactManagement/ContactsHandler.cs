@@ -74,6 +74,8 @@ namespace SoftEngChatClient.Model
 			if (!(offlineList.Contains(updated.name)))
 				offlineList.Add(updated.name);
 
+			offlineList.Remove(ClientDriver.globalUsername);
+
 			UpdateOnlineList(updated);
 			UpdateContacts(updated);
 		}
@@ -83,7 +85,7 @@ namespace SoftEngChatClient.Model
 			if (onlineList.Contains(updated.name) && !(updated.isOnline))
 				onlineList.Remove(updated.name);
 
-			else if (!(onlineList.Contains(updated.name)))
+			else if (!(onlineList.Contains(updated.name)) && offlineList.Contains(updated.name))
 					onlineList.Add(updated.name);
 		}
 
@@ -91,6 +93,7 @@ namespace SoftEngChatClient.Model
 		{
 			foreach (Contact contact in contactList)
 			{
+
 				if (contact.name == updated.name)
 				{
 					offlineList.Remove(updated.name);
