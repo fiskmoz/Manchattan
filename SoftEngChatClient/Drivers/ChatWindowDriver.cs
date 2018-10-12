@@ -254,7 +254,12 @@ namespace SoftEngChatClient.Drivers
                 }
             }
             if (found == false)
+            {
                 individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+                //Add to active chats
+                chatWindow.activeChats.Items.Add(sender);
+            }
+
         }
 
 		private void IncommingMessage(object sender, EventArgs eventArgs)
