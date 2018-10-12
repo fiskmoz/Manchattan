@@ -165,6 +165,7 @@ namespace SoftEngChatClient.Drivers
 
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
+            individualChatDrivers.Clear();
             chatWindow.getPanelSettings().Visible = false;
             ShowFriendsLabel(this, e);
             loggingOut = true;
