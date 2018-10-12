@@ -302,8 +302,11 @@ namespace SoftEngChatClient.Drivers
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
         {
-            string friend = ((ClientMessage)message).sender;
-            contactsHandler.AddContact(friend);
+			if(((ClientMessage)message).message == "1")
+			{
+				string friend = ((ClientMessage)message).sender;
+				contactsHandler.AddContact(friend);
+			}
         }
 
         private void FindFriendsSearch(object sender, EventArgs e)
