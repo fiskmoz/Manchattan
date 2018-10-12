@@ -105,6 +105,10 @@ namespace SoftEngChatClient.Drivers
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
             contactsHandler.SaveContactList();
+
+			chatWindow.contactListBox.Items.Clear();
+			chatWindow.contactListBox.Refresh();
+
             var str = chatWindow.getChatBox();
             if (str != "")
             {
