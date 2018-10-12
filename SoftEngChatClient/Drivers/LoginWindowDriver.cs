@@ -126,6 +126,8 @@ namespace SoftEngChatClient.Drivers
         {
             writer.WriteLogin(MessageType.login, loginWindow.getUsername(), loginWindow.getPassword());
             username = loginWindow.getUsername();
+            Thread.Sleep(500);
+            loginWindow.getFailedLoginLabel().Visible = true;
             if (rememberMe == true)
             {
                 rememberMePassword = loginWindow.getPassword();
@@ -144,8 +146,10 @@ namespace SoftEngChatClient.Drivers
 				username = loginWindow.getUsername();
                 ClientDriver.globalUsername = username;
 				Session session = new Session(username, rememberMePassword, rememberMe);
-				loginWindow.Hide();
+                loginWindow.getFailedLoginLabel().Visible = false;
+                loginWindow.Hide();
 			}
+                
         }
 
         public void HideLoginWindow()

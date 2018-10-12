@@ -166,6 +166,7 @@ namespace SoftEngChatClient.Drivers
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
             chatWindow.getPanelSettings().Visible = false;
+            ResetSearchField();
             ShowFriendsLabel(this, e);
             loggingOut = true;
             ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
@@ -429,6 +430,12 @@ namespace SoftEngChatClient.Drivers
         {
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
             friendrequest.Close();
+        }
+
+        private void ResetSearchField()
+        {
+            chatWindow.getFindFriendsTextbox().Text = "Search...";
+            chatWindow.getFindFriendsBox().Items.Clear();
         }
     }
 

@@ -169,5 +169,9 @@ namespace SoftEngChatClient
             rememberMeCheckBox.Checked = false;
         }
         
+        public Label getFailedLoginLabel()
+        {
+            return loginFailedLabel;
+        }
     }
 } 
