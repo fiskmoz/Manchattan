@@ -14,7 +14,6 @@ namespace SoftEngChatClient.Model
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
-        private string username;
 
 		public bool hasOfflineList { get; private set; }
 		private bool hasOnlineList;
@@ -38,8 +37,13 @@ namespace SoftEngChatClient.Model
 
 		private void HandleOfflineList(object sender, EventArgs e)
 		{
-			hasOfflineList = true;
 			offlineList = ((OnlineList)e).onlineList;
+			foreach(Contact contact in contactList)
+			{
+				offlineList.Remove(contact.name);
+			}
+			offlineList.Remove(ClientDriver.globalUsername);
+			hasOfflineList = true;
 		}
 
 		private void HandleOnlineList(object sender, EventArgs e)
