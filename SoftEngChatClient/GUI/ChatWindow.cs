@@ -263,5 +263,18 @@ namespace SoftEngChatClient
         {
             xLabel.ForeColor = Color.Black;
         }
+
+        private void findFriendsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(findFriendsBox.SelectedIndex != -1)
+            {
+                addFriendButton.Enabled = true;
+            }
+        }
+
+        public Button getAddFriendsButton()
+        {
+            return addFriendButton;
+        }
     }
 }
