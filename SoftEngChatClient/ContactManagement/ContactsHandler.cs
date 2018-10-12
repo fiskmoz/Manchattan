@@ -48,12 +48,10 @@ namespace SoftEngChatClient.Model
 
 		private void HandleOnlineList(object sender, EventArgs e)
 		{
-			hasOnlineList = true;
+			
 			onlineList = ((OnlineList)e).onlineList;
-
-
 			contactList.AddRange(CreateContactList()); //= CreateContactList();
-
+			hasOnlineList = true;
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
 		}
@@ -84,7 +82,7 @@ namespace SoftEngChatClient.Model
 			{
 				onlineList.Remove(updated.name);
 			}
-			else if (offlineList.Contains(updated.name) && updated.isOnline)
+			else if (updated.isOnline)
 			{
 				onlineList.Add(updated.name);
 			}
@@ -96,6 +94,7 @@ namespace SoftEngChatClient.Model
 			{
 				if (contact.name == updated.name)
 				{
+					offlineList.Remove(updated.name);
 					contact.isOnline = updated.isOnline;
 					break;
 				}
