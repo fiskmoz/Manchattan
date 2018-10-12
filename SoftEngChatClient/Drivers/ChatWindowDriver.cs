@@ -211,7 +211,14 @@ namespace SoftEngChatClient.Drivers
 
             foreach(Contact contact in contactList)
 			{
-                chatWindow.contactListBox.Items.Add(contact.name);
+                if(contact.isOnline)
+                {
+                    chatWindow.contactListBox.Items.Add(contact.name);
+                }
+                else
+                {
+                    chatWindow.contactListBox.Items.Add("(OFFLINE)"+contact.name);
+                }
             }
 			chatWindow.contactListBox.Update();
         }
@@ -257,7 +264,7 @@ namespace SoftEngChatClient.Drivers
             {
                 individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
                 //Add to active chats
-                chatWindow.activeChats.Items.Add(sender);
+                //chatWindow.activeChats.Items.Add(sender);
             }
 
         }
