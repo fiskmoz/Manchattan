@@ -64,6 +64,11 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void UserLogin(string username)
         {
+            UpdateOnlineList();
+            UpdateOfflineList();
+            SendListsToClient(username);
+            UpdateUserClientList(username, false);
+
             var Receiver = FindClient(username);
             if(Receiver != null)
             {
@@ -95,11 +100,6 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
                 userManager.FindUser(username).waitingMessages.Clear();
             }
-            
-            UpdateOnlineList();
-            UpdateOfflineList();
-            SendListsToClient(username);
-            UpdateUserClientList(username, false);
         }
 
         public void SendListsToClient(string username)
@@ -113,7 +113,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     if (client.userName == username && client.userName != null)
                     {
                         client.writer.WriteOnlineList(onlineListAsString);
-                        Thread.Sleep(10);
                         client.writer.WriteOnlineList(offlineListAsString);
                     }
 				}

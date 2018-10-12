@@ -217,7 +217,7 @@ namespace SoftEngChatClient.Drivers
                 }
                 else
                 {
-                    chatWindow.contactListBox.Items.Add("(OFFLINE)"+contact.name);
+                    chatWindow.contactListBox.Items.Add("(offline) "+contact.name);
                 }
             }
 			chatWindow.contactListBox.Update();
