@@ -71,21 +71,20 @@ namespace SoftEngChatClient.Model
 		private void HandleContactUpdate(object sender, EventArgs e)
 		{
 			Contact updated = new Contact(((UserOnlineStatusUpdate)e).username, ((UserOnlineStatusUpdate)e).isOnline);
+			if (!(offlineList.Contains(updated.name)))
+				offlineList.Add(updated.name);
 
-			UpdateOnlineOfflineLists(updated);
+			UpdateOnlineList(updated);
 			UpdateContacts(updated);
 		}
 
-		private void UpdateOnlineOfflineLists(Contact updated)
+		private void UpdateOnlineList(Contact updated)
 		{
 			if (onlineList.Contains(updated.name) && !(updated.isOnline))
-			{
 				onlineList.Remove(updated.name);
-			}
-			else if (updated.isOnline)
-			{
-				onlineList.Add(updated.name);
-			}
+
+			else if (!(onlineList.Contains(updated.name)))
+					onlineList.Add(updated.name);
 		}
 
 		private void UpdateContacts(Contact updated)
