@@ -284,8 +284,8 @@ namespace SoftEngChatClient.Drivers
 
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
 
-                new Thread(() => Application.Run(chatWindow)).Start();
-                //new Thread(() => chatWindow.ShowDialog()).Start();
+                new Thread(() => chatWindow.ShowDialog()).Start();
+                
             }
         }
 
