@@ -276,10 +276,5 @@ namespace SoftEngChatClient
         {
             return addFriendButton;
         }
-
-        public ListBox getFriendsListBox()
-        {
-            return contactListBox;
-        }
     }
 }
