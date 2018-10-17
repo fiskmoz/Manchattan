@@ -9,6 +9,6 @@
 #### 3: Login Message   |   3:username:password
 #### 4: Login ACK       |   4:(0/1):userkey
 #### 5: Logout Message  |   5:1
-#### 6: Onlinelist      |   6:A:B:C:D
+#### 6: Onlinelist      |   6:(0/1):A:B:C:D           (Offline/online list)
 #### 7: FriendRequest   |   7:sender:receiver
-#### 8: FriendResponse  |   8:sender:receiver:(0/1)          (Decline/Accept)
+#### 8: FriendResponse  |   8:sender:receiver:(0/1)   (Decline/Accept)
