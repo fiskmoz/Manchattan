@@ -12,3 +12,7 @@
 #### 6: Onlinelist      |   6:(0/1):A:B:C:D           (Offline/online list)
 #### 7: FriendRequest   |   7:sender:receiver
 #### 8: FriendResponse  |   8:sender:receiver:(0/1)   (Decline/Accept)
+#### 9: OnlineStatus    |   9:(0/1)                   (Offline/Online)
+#### 10:EstablishP2P    |  10:sender:recevier
+#### 11:IncommingP2P    |  11:sender:port:key
+#### 12:OutgoingP2P     |  12:reciver:port:key
