@@ -17,6 +17,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private TcpListener serverListener;
         public UserManager userManager;
         public int sessionIDCounter = 0;
+        private int nextPort = 21000;
 
         public List<string> everyRegisteredUserList;
         public List<string> allOnlineusers;
@@ -259,6 +260,24 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             return null;
+        }
+
+        public void SendIncommingP2P(string sender, string receiver, int port, string key)
+        {
+            SSLClient receiverClient = FindClient(receiver);
+            if(receiverClient != null)
+            {
+                receiverClient.writer.WriteIncommingP2P(sender, port, key);
+            }
+            else
+            {
+                Console.WriteLine("Error: Receiving client not in ClientList");
+            }
+        }
+
+        public int getNextPort()
+        {
+            return nextPort++;
         }
     }
 }

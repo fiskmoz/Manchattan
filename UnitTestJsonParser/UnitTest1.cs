@@ -41,11 +41,6 @@ namespace UnitTestJsonParser
             string hash2 = crypto.Sha256_hash(test);
 
             Assert.AreEqual(hash1, hash2);
-
-           
-
-     
-
         }
     }
 }
