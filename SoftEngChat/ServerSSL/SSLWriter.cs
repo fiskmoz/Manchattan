@@ -88,5 +88,17 @@ namespace SoftEngChat.Model.SSLCommunication
             }
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
         }
-	}
+
+        internal void WriteOutgoingP2P(string receiver, int port, string key)
+        {
+            string outgoing = "c:" + receiver + ":" + port + ":" + key;
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+        }
+
+        internal void WriteIncommingP2P(string sender, int port, string key)
+        {
+            string outgoing = "c:" + sender + ":" + port + ":" + key;
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+        }
+    }
 }
