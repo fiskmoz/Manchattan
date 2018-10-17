@@ -60,7 +60,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void WriteFriendRequest(string sender, string receiver)
         {
-            string outgoing = "7:" + sender + ":" + receiver + ":" + "Placeholder";
+            string outgoing = "7:" + sender + ":" + receiver + ":" + "Hello i would like to add you as a friend.";
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
             Console.WriteLine("\"" + sender + "\" sends friend request to \"" + receiver + "\"");
         }

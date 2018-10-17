@@ -29,10 +29,11 @@ namespace SoftEngChatClient
             spam = new SpamProtector();
             SetupListners();
             writer = sllWriter;
-
+            window.WindowState = FormWindowState.Minimized;
             new Thread(() => Application.Run(window)).Start();
             Thread.Sleep(10);
             //new Thread(() => window.Show()).Start();
+            
         }
 
         private void SetupListners()
@@ -44,6 +45,7 @@ namespace SoftEngChatClient
         }
         private void icd_WindowLoaded(object sender, EventArgs e)
         {
+            
             string chatLog = fm.LoadIndividualChat(username, receiver);
             window.AppendTextBox(chatLog);
         }
@@ -127,6 +129,16 @@ namespace SoftEngChatClient
         public bool isWindowVisible()
         {
             return window.Visible;
+        }
+
+        public void SetNormalWindowState()
+        {
+            if(window.InvokeRequired)
+            {
+                window.Invoke(new Action(SetNormalWindowState));
+                return;
+            }
+            window.WindowState = FormWindowState.Normal;
         }
     }
 }
