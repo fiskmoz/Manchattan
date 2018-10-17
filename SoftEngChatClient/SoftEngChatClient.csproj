@@ -87,6 +87,9 @@
     <Compile Include="Drivers\IndividualChatDriver.cs" />
     <Compile Include="MessageHandling\Messagehandler.cs" />
     <Compile Include="MVC.cs" />
+    <Compile Include="P2P\P2PConnector.cs" />
+    <Compile Include="P2P\P2PListener.cs" />
+    <Compile Include="P2P\P2PWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\Register.cs">
