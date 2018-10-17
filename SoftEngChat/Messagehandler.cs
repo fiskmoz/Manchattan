@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SoftEngChat.Model.SSLCommunication
 {
@@ -52,6 +53,11 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine("Message arrived; FriendRespond ACK");
                     Console.WriteLine(incomming);
                     ValidateFriendResponse(incomming);
+                    break;
+                case 'a':
+                    Console.WriteLine("Message arrived; EstablishP2P: ");
+                    Console.WriteLine(incomming);
+                    HandleEstablishP2P(incomming);
                     break;
                 default:
 					Console.WriteLine("Message arrived; Error:");
@@ -165,6 +171,23 @@ namespace SoftEngChat.Model.SSLCommunication
             int answer;
             if(Int32.TryParse(messageArray[3], out answer))           
                 server.SendFriendResponse(incomming, sender, receiver, answer);
+        }
+
+        private void HandleEstablishP2P(string incomming)
+        {
+            string[] messageArray = ParseMessage(incomming);
+
+            string sender = messageArray[1];
+            string receiver = messageArray[2];
+
+            string key = "abcdefghabcdefghabcdefghabcdefgh";
+            int port = server.getNextPort();
+
+            server.SendIncommingP2P(sender, receiver, port, key);
+
+            Thread.Sleep(1000);
+
+            client.writer.WriteOutgoingP2P(receiver, port, key);
         }
 	}
 }

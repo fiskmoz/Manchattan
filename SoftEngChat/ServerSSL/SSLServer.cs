@@ -17,6 +17,7 @@ namespace SoftEngChat.Model.SSLCommunication
 		private TcpListener serverListener;
         public UserManager userManager;
         public int sessionIDCounter = 0;
+        private int nextPort = 21000;
 
         public List<string> everyRegisteredUserList;
         public List<string> allOnlineusers;
@@ -64,6 +65,11 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void UserLogin(string username)
         {
+            UpdateOnlineList();
+            UpdateOfflineList();
+            SendListsToClient(username);
+            UpdateUserClientList(username, false);
+
             var Receiver = FindClient(username);
             if(Receiver != null)
             {
@@ -73,6 +79,13 @@ namespace SoftEngChat.Model.SSLCommunication
                 {
                     string[] messageArray;
                     messageArray = message.Split(':');
+                    if (messageArray.Length > 4)
+                    {
+                        for (int i = 4; i < messageArray.Length; i++)
+                        {
+                            messageArray[3] += ":" + messageArray[i];
+                        }
+                    }
                     switch (messageArray[0])
                     {
                         case "2":
@@ -88,11 +101,6 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
                 userManager.FindUser(username).waitingMessages.Clear();
             }
-            
-            UpdateOnlineList();
-            UpdateOfflineList();
-            SendListsToClient(username);
-            UpdateUserClientList(username, false);
         }
 
         public void SendListsToClient(string username)
@@ -106,7 +114,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     if (client.userName == username && client.userName != null)
                     {
                         client.writer.WriteOnlineList(onlineListAsString);
-                        Thread.Sleep(10);
                         client.writer.WriteOnlineList(offlineListAsString);
                     }
 				}
@@ -204,7 +211,10 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             foreach(var client in clientList)
             {
-                client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+                if(allOnlineusers.Contains(client.userName))
+                {
+                    client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
+                }
             }
         }
 
@@ -250,6 +260,24 @@ namespace SoftEngChat.Model.SSLCommunication
                 }
             }
             return null;
+        }
+
+        public void SendIncommingP2P(string sender, string receiver, int port, string key)
+        {
+            SSLClient receiverClient = FindClient(receiver);
+            if(receiverClient != null)
+            {
+                receiverClient.writer.WriteIncommingP2P(sender, port, key);
+            }
+            else
+            {
+                Console.WriteLine("Error: Receiving client not in ClientList");
+            }
+        }
+
+        public int getNextPort()
+        {
+            return nextPort++;
         }
     }
 }

@@ -491,8 +491,8 @@ namespace SoftEngChatClient
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox ChatBox;
         public ListBox contactListBox;
-		private Label userNameLbl;
-		private Button logoutBtn;
+        private Label userNameLbl;
+        private Button logoutBtn;
         private Label label1;
         private PictureBox pictureBox1;
         private Panel panel1;
