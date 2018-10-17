@@ -12,6 +12,7 @@ using SoftEngChatClient.Model;
 using SoftEngChatClient.Controller;
 using System.Drawing;
 using SoftEngChatClient.GUI;
+using Tulpep.NotificationWindow;
 using System.Net.Sockets;
 
 namespace SoftEngChatClient.Drivers
@@ -29,6 +30,7 @@ namespace SoftEngChatClient.Drivers
         private FriendRequest friendrequest;
 		private P2P.P2PConnector p2pConnector;
 		private Messagehandler messageHandler;
+        private PopupNotifier popup;
 
         public event EventHandler restart;
 
@@ -47,6 +49,9 @@ namespace SoftEngChatClient.Drivers
             this.writer = writer;
             this.logCrypto = logCrypto;
             fileManager = new FileManager();
+            popup = new PopupNotifier();
+            popup.Image = Properties.Resources.logo;
+            popup.Click += new EventHandler(OnPopupClick);
 			p2pConnector = new P2P.P2PConnector();
 
 			contactsHandler = new ContactsHandler(fileManager);
@@ -142,6 +147,7 @@ namespace SoftEngChatClient.Drivers
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
+                    SendPopup("SENDING TO ALL", chatWindow.removeEnterWhenSending());
                 }
                 else
                 {
@@ -242,14 +248,22 @@ namespace SoftEngChatClient.Drivers
 
         public void IndividualChatPrint(string sender, string message)
         {
-            AddNewIndividualChat(sender);
+            //AddNewIndividualChat(sender);
             foreach (var icd in individualChatDrivers)
             {
                 if (sender == icd.getSender())
                 {
+                    if(!icd.isWindowVisible())
+                    {
+                        SendPopup("Received message from: " + sender, message);
+                    }
                     icd.ReceiveMessage(message);
+                    return;
                 }
             }
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+            individualChatDrivers[individualChatDrivers.Count()-1].ReceiveMessage(message);
+            SendPopup("Received message from: " + sender, message);
         }
 
         public void AddNewIndividualChat(string sender)
@@ -264,15 +278,16 @@ namespace SoftEngChatClient.Drivers
                     {
                         icd.displayWindow();
                     }
+                    icd.SetNormalWindowState();
                 }
             }
             if (found == false)
             {
                 individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+                individualChatDrivers[individualChatDrivers.Count() - 1].SetNormalWindowState();
                 //Add to active chats
                 //chatWindow.activeChats.Items.Add(sender);
             }
-
         }
 
 		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream)
@@ -300,7 +315,7 @@ namespace SoftEngChatClient.Drivers
 
 		private void IncommingMessage(object sender, EventArgs eventArgs)
 		{
-			if(((ClientMessage) eventArgs).receiver == "All")
+            if (((ClientMessage) eventArgs).receiver == "All")
 			{
 				ChatWindowPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
 			}
@@ -346,13 +361,7 @@ namespace SoftEngChatClient.Drivers
 
 		private void ReceivedFriendRequest(object sender, EventArgs message)
         {
-            if (friendrequest.InvokeRequired)
-            {
-                friendrequest.Invoke(new Action<object, EventArgs>(ReceivedFriendRequest), new object[] { sender, message });
-                return;
-            }
-            friendrequest.getFriendLabel().Text = ((ClientMessage)message).sender;
-            friendrequest.ShowDialog();
+            SendPopup("Received friend request from: " + ((ClientMessage)message).sender, ((ClientMessage)message).message);
         }
 
         private void ReceivedFriendResponse(object sender, EventArgs message)
@@ -473,7 +482,7 @@ namespace SoftEngChatClient.Drivers
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
             writer.WriteFriendRequest(MessageType.friendRequest, username, userAdd);
-            MessageBox.Show("Friend Request Sent!");
+            SendPopup("Friend request sent!", "To: " + userAdd);
         }
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
@@ -494,6 +503,44 @@ namespace SoftEngChatClient.Drivers
             chatWindow.getFindFriendsTextbox().Text = "Search...";
             chatWindow.getFindFriendsBox().Items.Clear();
         }
-    }
 
+        private void SendPopup(string header, string text)
+        {
+            if(chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<string, string>(SendPopup), new object[] { header, text });
+                return;
+            }
+            popup.TitleText = header;
+            popup.ContentText = text;
+            popup.Popup();
+        }
+
+        private void OnPopupClick(object sender, EventArgs e)
+        {
+            string[] popupSplit = popup.TitleText.Split(' ');
+            if (popupSplit.Count() < 4)
+            {
+
+            }
+            else if(contactsHandler.FindContact(popupSplit[3]))
+            {
+                AddNewIndividualChat(popup.TitleText.Split(' ')[3]);
+            }
+            else if(popup.TitleText.Split(' ').Count() > 3)
+            {
+                if (friendrequest.InvokeRequired)
+                {
+                    friendrequest.Invoke(new Action<object, EventArgs>(ReceivedFriendRequest), new object[] { sender, e });
+                    return;
+                }
+                friendrequest.getFriendLabel().Text = popup.TitleText.Split(' ')[4];
+                friendrequest.ShowDialog();
+            }
+            else
+            {
+
+            }
+        }
+    }
 }
