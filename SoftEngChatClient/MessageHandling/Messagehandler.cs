@@ -66,7 +66,7 @@ namespace SoftEngChatClient.Model
 		private void HandleLoginACK(string[] incomming)
 		{
 			IncommingLoginAck(this, new LoginAck(incomming[1] == "1", incomming[2]));
-		}
+        }
 
 		private void HandleUpdateOnlineList( string[] incomming)
 		{
