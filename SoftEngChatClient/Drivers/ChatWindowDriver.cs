@@ -12,8 +12,8 @@ using SoftEngChatClient.Model;
 using SoftEngChatClient.Controller;
 using System.Drawing;
 using SoftEngChatClient.GUI;
-using Tulpep.NotificationWindow;
 using System.Net.Sockets;
+using Tulpep.NotificationWindow;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -28,9 +28,9 @@ namespace SoftEngChatClient.Drivers
 		private ContactsHandler contactsHandler;
 		private FileManager fileManager;
         private FriendRequest friendrequest;
+        private PopupNotifier popup;
 		private P2P.P2PConnector p2pConnector;
 		private Messagehandler messageHandler;
-        private PopupNotifier popup;
 
         public event EventHandler restart;
 
