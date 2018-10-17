@@ -4,11 +4,12 @@ using System.Linq;
 using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
+using SoftEngChatClient.MessageHandling;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
 
-    class SSLWriter
+    class SSLWriter: StreamWriter
 	{
         public SslStream stream;
 		public SSLWriter(SslStream stream)
@@ -56,10 +57,11 @@ namespace SoftEngChatClient.Model.SSLCommunication
             SendMessage(outgoing);
         }
 
-		private void SendMessage(string outgoing)
+		public void SendMessage(string outgoing)
 		{
             byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
             stream.Write(outgoingBytes, 0, outgoingBytes.Length);
 		}
-    }
+		
+	}
 }

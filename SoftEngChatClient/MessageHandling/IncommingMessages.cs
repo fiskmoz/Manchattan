@@ -108,4 +108,27 @@ namespace SoftEngChatClient
         {
         }
     }
+
+	class P2POutgoingConnection : EventArgs
+	{
+		public string receiver { get; private set; }
+		public string ip { get; private set; }
+		public int port { get; private set; }
+		public string key { get; private set; }
+
+		public P2POutgoingConnection(string[] incomming)
+		{
+			receiver = incomming[1];
+			int.TryParse(incomming[2], out int parsedPort);
+			port = parsedPort;
+			key = incomming[3];
+		}
+		public P2POutgoingConnection(string receiver, int port, string key, string ip = "127.0.0.1")
+		{
+			this.receiver = receiver;
+			this.port = port;
+			this.key = key;
+			this.ip = ip;
+		}
+	}
 }

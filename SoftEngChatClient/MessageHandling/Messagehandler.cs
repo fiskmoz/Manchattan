@@ -20,6 +20,8 @@ namespace SoftEngChatClient.Model
         public event EventHandler IncommmingFriendResponse;
 		public event EventHandler IncommingOfflineList;
 		public event EventHandler IncommingUserStatus;
+		public event EventHandler OutgoingP2P;
+		public event EventHandler IncommingP2P;
 
 		//Handles messages arriving at Client.
 		//Eventhandler, Consumes IncommingMessage Events.
@@ -50,7 +52,23 @@ namespace SoftEngChatClient.Model
 				case "9":
 					HandleUserOnlineStatus(incomming);
 					break;
+				case "b":
+					HandleIncommmingP2P(incomming);
+					break;
+				case "c":
+					HandleOutgoingP2P(incomming);
+					break;
             }
+		}
+
+		private void HandleOutgoingP2P(string[] incomming)
+		{
+			OutgoingP2P(this, new P2POutgoingConnection(incomming));
+		}
+
+		private void HandleIncommmingP2P(string[] incomming)
+		{
+			
 		}
 
 		private void HandleRegistrationACK(string[] incomming)
@@ -106,7 +124,7 @@ namespace SoftEngChatClient.Model
             return messageArray;
         }
 
-		public void Subscribe(SSLCommunication.SSLListener streamListener)
+		public void Subscribe(MessageHandling.StreamListener streamListener)
 		{
 			streamListener.IncommingMessage += new EventHandler(HandleIncommingMessage);
 		}

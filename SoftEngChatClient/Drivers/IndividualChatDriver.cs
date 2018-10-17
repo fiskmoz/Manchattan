@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
 using SoftEngChatClient.Drivers;
+using SoftEngChatClient.MessageHandling;
+using System.Net.Sockets;
+using SoftEngChatClient.Model;
+using SoftEngChatClient.P2P;
 
 namespace SoftEngChatClient
 {
@@ -15,12 +19,13 @@ namespace SoftEngChatClient
     {
         IndividualChatWindow window;
         private SpamProtector spam;
-        SSLWriter writer;
+        StreamWriter writer;
         private string username;
         private string receiver;
         private FileManager fm;
+		private P2PListener p2pListener;
 
-        public IndividualChatDriver(SSLWriter sllWriter, string Username, string Receiver, FileManager fm)
+        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm)
         {
             username = Username;
             receiver = Receiver;
@@ -34,6 +39,25 @@ namespace SoftEngChatClient
             Thread.Sleep(10);
             //new Thread(() => window.Show()).Start();
         }
+
+		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh)
+		{
+			this.username = username;
+			this.receiver = receiver;
+			this.fm = fm;
+
+			window = new IndividualChatWindow(receiver);
+			spam = new SpamProtector();
+			SetupListners();
+			writer = new P2PWriter(netstream);
+			p2pListener = new P2PListener(netstream);
+
+			mh.Subscribe(p2pListener);
+			p2pListener.StartListen();
+
+			new Thread(() => Application.Run(window)).Start();
+			Thread.Sleep(10);
+		}
 
         private void SetupListners()
         {

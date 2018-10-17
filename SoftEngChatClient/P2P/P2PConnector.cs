@@ -10,18 +10,12 @@ namespace SoftEngChatClient.P2P
 {
     class P2PConnector
     {
-        private string ipAddress;
-        private int portNumber;
-        public P2PConnector(string ip, int port)
-        {
-            ipAddress = ip;
-            portNumber = port;
-        }
+        public P2PConnector() { }
 
-        public NetworkStream ReceiveConnection()
+        public NetworkStream ReceiveConnection(string ip, int port)
         {
-            IPAddress localAdress = IPAddress.Parse(ipAddress);
-            TcpListener listener = new TcpListener(localAdress, portNumber);
+            IPAddress localAdress = IPAddress.Parse(ip);
+            TcpListener listener = new TcpListener(localAdress, port);
 
             listener.Start();
 
@@ -34,9 +28,9 @@ namespace SoftEngChatClient.P2P
             return netStream;
         }
 
-        public NetworkStream Connect()
+        public NetworkStream Connect(string ip, int port)
         {
-            TcpClient client = new TcpClient(ipAddress, portNumber);
+            TcpClient client = new TcpClient(ip, port);
             NetworkStream netStream = client.GetStream();
             return netStream;
         }
