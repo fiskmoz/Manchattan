@@ -13,6 +13,6 @@
 #### 7: FriendRequest   |   7:sender:receiver
 #### 8: FriendResponse  |   8:sender:receiver:(0/1)   (Decline/Accept)
 #### 9: OnlineStatus    |   9:(0/1):UserName                   (Offline/Online)
-#### 10:EstablishP2P    |  10:sender:recevier
+#### 10:EstablishP2P    |  10:sender:receiver
 #### 11:IncommingP2P    |  11:sender:port:key
-#### 12:OutgoingP2P     |  12:reciver:port:key
+#### 12:OutgoingP2P     |  12:receiver:port:key
