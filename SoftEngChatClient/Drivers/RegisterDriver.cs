@@ -13,6 +13,9 @@ namespace SoftEngChatClient.Controller
     {
         private Register register;
         private SSLWriter writer;
+        private int passwordStrengtCounter;
+        private int previousPasswordLenght;
+        private Char previousChar;
 
         public RegisterDriver(SSLWriter inputWriter)
         {
@@ -47,6 +50,7 @@ namespace SoftEngChatClient.Controller
             register.EnterSurnameLeaved += new EventHandler(RD_EnterSurnameLeaved);
             // TextChanged
             register.TextChangedEvent += new EventHandler(RD_TextChanged);
+            register.PwTextChangedEvent += new EventHandler(RD_PwTextChanged);
         }
 
 		public void RD_Subscribe(Messagehandler mh)
@@ -223,6 +227,39 @@ namespace SoftEngChatClient.Controller
 
         }
 
-
+        private void RD_PwTextChanged(object sender, EventArgs e)
+        {
+            int length = register.getPasswordText().Count();
+            char currentChar = register.getPasswordText()[length];
+            if (length > previousPasswordLenght)
+            {
+                if (length > 3)
+                {
+                    passwordStrengtCounter++;
+                }
+                if (Char.IsUpper(currentChar))
+                {
+                    passwordStrengtCounter++;
+                }
+                if (Char.IsNumber(currentChar))
+                {
+                    passwordStrengtCounter++;
+                }
+            }
+            else
+            {
+                passwordStrengtCounter--;
+                if (Char.IsUpper(previousChar))
+                {
+                    passwordStrengtCounter--;
+                }
+                if (Char.IsNumber(previousChar))
+                {
+                    passwordStrengtCounter--;
+                }
+            }
+            previousChar = currentChar;
+            previousPasswordLenght = length;
+        }
     }
 }

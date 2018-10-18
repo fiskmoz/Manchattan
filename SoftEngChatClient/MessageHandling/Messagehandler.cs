@@ -52,10 +52,10 @@ namespace SoftEngChatClient.Model
 				case "9":
 					HandleUserOnlineStatus(incomming);
 					break;
-				case "b":
+				case "11":
 					HandleIncommmingP2P(incomming);
 					break;
-				case "c":
+				case "12":
 					HandleOutgoingP2P(incomming);
 					break;
             }
