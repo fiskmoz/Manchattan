@@ -35,7 +35,6 @@ namespace SoftEngChat.Model.SSLCommunication
             everyRegisteredUserList = new List<string>();
             allOnlineusers = new List<string>();
             userManager.SetListOfAllClients(everyRegisteredUserList);
-
 			while (true)
 			{
 				Console.WriteLine("Listening for connections....");
@@ -58,9 +57,11 @@ namespace SoftEngChat.Model.SSLCommunication
 					client.Close();
 					Console.ReadLine();
 				}
-				clientList.Add(new SSLClient(ssl, this, ++sessionIDCounter)); //Client added to list!
-				Console.WriteLine("Client connected!");
-			}
+                string ipAddress = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+				clientList.Add(new SSLClient(ssl, this, ++sessionIDCounter, ipAddress)); //Client added to list!
+				Console.Write("Client connected! IP: ");
+                Console.WriteLine(ipAddress);
+            }
 		}
 
         public void UserLogin(string username)
@@ -267,7 +268,7 @@ namespace SoftEngChat.Model.SSLCommunication
             SSLClient receiverClient = FindClient(receiver);
             if(receiverClient != null)
             {
-                receiverClient.writer.WriteIncommingP2P(sender, port, key);
+                receiverClient.writer.WriteIncommingP2P(sender, port, key, receiverClient.ipAddress);
             }
             else
             {

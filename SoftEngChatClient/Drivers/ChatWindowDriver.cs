@@ -422,7 +422,7 @@ namespace SoftEngChatClient.Drivers
 
 
                 popup = new PopupNotifier();
-                popup.Image = Properties.Resources.logo;
+                popup.Image = new Bitmap(Properties.Resources.logo, new Size(100, 100));
                 popup.Click += new EventHandler(OnPopupClick);
                 new Thread(() => chatWindow.ShowDialog()).Start();
                 

@@ -11,6 +11,7 @@ using System.Timers;
 using SoftEngChatClient.Drivers;
 using SoftEngChatClient.Model;
 using SoftEngChatClient.P2P;
+using System.Net;
 
 namespace SoftEngChatClient.Controller
 {
@@ -57,6 +58,7 @@ namespace SoftEngChatClient.Controller
         {
             connector = new SSLConnector(IP, PORT); //Connect to server!
 			connector.Connect();
+            IPAddress ip = connector.getIP();
             writer = new SSLWriter(connector.SslStream);
             streamListener = new SSLListener(connector.SslStream);
             messagehandler = new Messagehandler(); 
