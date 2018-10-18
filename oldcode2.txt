@@ -1,4 +1,4 @@
-﻿using SoftEngChatClient.Model.SSLCommunication;
+using SoftEngChatClient.Model.SSLCommunication;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +32,6 @@ namespace SoftEngChatClient.Drivers
         private PopupNotifier popup;
 		private P2PConnector p2pConnector;
 		private Messagehandler messageHandler;
-        private ChatWindowGraphicsDriver graphicsDriver;
 
         public event EventHandler restart;
 
@@ -47,6 +46,7 @@ namespace SoftEngChatClient.Drivers
         public ChatWindowDriver(SSLWriter writer, ClientCrypto logCrypto)
         {
             userlist = new List<string>();
+            
             this.writer = writer;
             this.logCrypto = logCrypto;
             fileManager = new FileManager();
@@ -59,7 +59,6 @@ namespace SoftEngChatClient.Drivers
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
-            graphicsDriver = new ChatWindowGraphicsDriver(chatWindow);
             friendrequest = new FriendRequest();
             SetupListeners();
             username = ClientDriver.globalUsername;
@@ -76,6 +75,10 @@ namespace SoftEngChatClient.Drivers
             chatWindow.logoutEvent += new EventHandler(LogoutButtonClicked);
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
             chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
+            chatWindow.findFriendsTextBoxClickEvent += new EventHandler(FindFriendsTextBoxClickEvent);
+            chatWindow.findFriendsTextBoxLeaveEvent += new EventHandler(FindFriendsTextBoxLeaveEvent);
+            chatWindow.showFriendsEvent += new EventHandler(ShowFriendsLabel);
+            chatWindow.addFriendsEvent += new EventHandler(AddFriendsLabel);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
             friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
             friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
@@ -152,10 +155,11 @@ namespace SoftEngChatClient.Drivers
                 {
                     writer.WriteClient(MessageType.client, this.username, "All", chatWindow.removeEnterWhenSending());
                     chatWindow.AppendTextBox("[" + username + "] : " + chatWindow.removeEnterWhenSending());
+                    SendPopup("SENDING TO ALL", chatWindow.removeEnterWhenSending());
                 }
                 else
                 {
-                    chatWindow.AppendTextBox("[Program] Don´t spam");
+                    chatWindow.AppendTextBox("[Program] Don�t spam");
                 }
             }
             chatWindow.clearMessageBox();
@@ -175,28 +179,9 @@ namespace SoftEngChatClient.Drivers
             string receiver = chatWindow.contactListBox.GetItemText(index);
             if (receiver != username)
             {
-				CreateNewIndivivualChat(receiver.Replace(" (offline)", ""));
+                AddNewIndividualChat(receiver.Replace(" (offline)", ""));
             }
         }
-
-		private void CreateNewIndivivualChat(string receiver)
-		{
-			foreach(Contact contact in contactsHandler.contactList)
-			{
-				if(contact.name == receiver)
-				{
-					if (contact.isOnline)
-					{
-						writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
-					}
-					else
-					{
-						AddNewIndividualChat(receiver);
-					}
-					break;
-				}
-			}
-		}
 
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
@@ -207,8 +192,8 @@ namespace SoftEngChatClient.Drivers
                 
             individualChatDrivers.Clear();
             chatWindow.getPanelSettings().Visible = false;
-            graphicsDriver.ResetSearchField();
-            graphicsDriver.ShowFriendsLabel(sender, e);
+            ResetSearchField();
+            ShowFriendsLabel(this, e);
             loggingOut = true;
             ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
             chatWindow.Hide();
@@ -224,6 +209,11 @@ namespace SoftEngChatClient.Drivers
             {
                 chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
             }
+        }
+
+        public void ChatWindowPrint(string sender, string message)
+        {
+            chatWindow.AppendTextBox("[" + sender + "] : " + message);
         }
 
         public void UpdateOnlineList(object sender, EventArgs eventArgs)
@@ -251,6 +241,17 @@ namespace SoftEngChatClient.Drivers
                 }
             }
 			chatWindow.contactListBox.Update();
+        }
+
+        public void SetUserName(string name)
+        {
+            if (chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<string>(chatWindow.SetUserName), name);
+                return;
+            }
+            this.username = name;
+            chatWindow.SetUserName(name);
         }
 
         public void IndividualChatPrint(string sender, string message)
@@ -324,14 +325,14 @@ namespace SoftEngChatClient.Drivers
 		{
             if (((ClientMessage) eventArgs).receiver == "All")
 			{
-				graphicsDriver.ChatWindowPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
+				ChatWindowPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
 			}
 			else
 			{
 				IndividualChatPrint(((ClientMessage)eventArgs).sender, ((ClientMessage)eventArgs).message);
 			}
 		}
-        
+        //If login OK, set username and personal key.
         private void LoggingIn(object sender, EventArgs args)
         {
             if( ((LoginAck)args).message)
@@ -391,7 +392,98 @@ namespace SoftEngChatClient.Drivers
                 System.Windows.Forms.MessageBox.Show("Failed: usersInput has 0 users\n" + ex.Message.ToString());
                 return;
             }
-            graphicsDriver.SearchForFriend(userlist);
+            int userAmount = userlist.Count;
+            int counter = 0;
+            int searchLength = chatWindow.getFindFriendsTextbox().Text.Length;
+            string temp = chatWindow.getFindFriendsTextbox().Text;
+
+            foreach (var user in userlist)
+            {
+                if(chatWindow.getFindFriendsTextbox().Text == "Search...")
+                {
+                    chatWindow.getNoFriendsLabel().Visible = false;
+                    return;
+                }
+                if (user.ToString().StartsWith(temp))
+                {
+                    chatWindow.getNoFriendsLabel().Visible = false;
+                    if (!chatWindow.getFindFriendsBox().Items.Contains(user))
+                    {
+                        chatWindow.getFindFriendsBox().Items.Add(user);
+                    }
+                }
+                else
+                {
+                    chatWindow.getFindFriendsBox().Items.Remove(user);
+                    if (chatWindow.getFindFriendsBox().Items.Count <= 0)
+                    {
+                        for (int i = 0; i < userAmount; i++)
+                        {
+                            if (temp != user)
+                            {
+                                counter++;
+                            }
+                        }
+                        if (counter == userAmount)
+                        {
+                            chatWindow.getFindFriendsBox().Items.Clear();
+                            chatWindow.getNoFriendsLabel().Visible = true;
+                        }
+                    }
+                }
+            }
+            if (chatWindow.getFindFriendsTextbox().Text == "")
+            {
+                chatWindow.getFindFriendsBox().Items.Clear();
+                chatWindow.getNoFriendsLabel().Visible = false;
+                chatWindow.getAddFriendsButton().Enabled = false;
+            }
+        }
+
+        private void FindFriendsTextBoxClickEvent(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsTextbox().Text == "Search...")
+            {
+                chatWindow.getFindFriendsTextbox().Text = "";
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.White;
+                chatWindow.getNoFriendsLabel().Visible = false;
+            }
+        }
+
+        private void FindFriendsTextBoxLeaveEvent(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsTextbox().Text == "")
+            {
+                chatWindow.getFindFriendsTextbox().Text = "Search...";
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.Gainsboro;
+            }
+        }
+
+        private void ShowFriendsLabel(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsPanel().Visible == true)
+            {
+                chatWindow.getFindFriendsPanel().Visible = false;
+                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getShowFriendsLabel().ForeColor = Color.White;
+
+                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
+                chatWindow.getAddFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
+                FindFriendsTextBoxLeaveEvent(this, e);
+            }
+        }
+
+        private void AddFriendsLabel(object sender, EventArgs e)
+        {
+            if (chatWindow.getFindFriendsPanel().Visible == false)
+            {
+                chatWindow.getFindFriendsPanel().Visible = true;
+                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getAddFriendsLabel().ForeColor = Color.White;
+
+                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
+                chatWindow.getShowFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
+            }
         }
 
         private void AddFriendsButtonClickedEvent(object sender, EventArgs e)
@@ -412,6 +504,12 @@ namespace SoftEngChatClient.Drivers
         {
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
             friendrequest.Close();
+        }
+
+        private void ResetSearchField()
+        {
+            chatWindow.getFindFriendsTextbox().Text = "Search...";
+            chatWindow.getFindFriendsBox().Items.Clear();
         }
 
         private void SendPopup(string header, string text)
