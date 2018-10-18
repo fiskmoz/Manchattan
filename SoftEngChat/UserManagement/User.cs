@@ -46,6 +46,6 @@ public class User
         waitingMessages = new List<string>();
         ServerCrypto sc = new ServerCrypto();
         byte[] byteKey = sc.GenerateAesKey();
-        key = Encoding.UTF8.GetString(byteKey, 0, byteKey.Length);
+        key = System.BitConverter.ToString(byteKey).Replace("-", "");
     }
 }

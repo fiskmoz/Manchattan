@@ -180,7 +180,10 @@ namespace SoftEngChat.Model.SSLCommunication
             string sender = messageArray[1];
             string receiver = messageArray[2];
 
-            string key = "abcdefghabcdefghabcdefghabcdefgh";
+            ServerCrypto sc = new ServerCrypto();
+            byte[] keyBytes = sc.GenerateAesKey();
+            string key = System.BitConverter.ToString(keyBytes).Replace("-", "");
+
             int port = server.getNextPort();
 
             server.SendIncommingP2P(sender, receiver, port, key);
