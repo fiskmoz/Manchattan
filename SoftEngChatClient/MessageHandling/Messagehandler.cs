@@ -22,6 +22,7 @@ namespace SoftEngChatClient.Model
 		public event EventHandler IncommingUserStatus;
 		public event EventHandler OutgoingP2P;
 		public event EventHandler IncommingP2P;
+		public event EventHandler DisconnectP2P;
 
 		//Handles messages arriving at Client.
 		//Eventhandler, Consumes IncommingMessage Events.
@@ -40,7 +41,11 @@ namespace SoftEngChatClient.Model
                 case "4":
                     HandleLoginACK(incomming);
                     break;
-                case "6":
+				case "5":
+					HandleP2Pdisconnect(incomming);
+					break;
+
+				case "6":
                     HandleUpdateOnlineList(incomming);
                     break;
                 case "7":
@@ -59,6 +64,11 @@ namespace SoftEngChatClient.Model
 					HandleOutgoingP2P(incomming);
 					break;
             }
+		}
+
+		private void HandleP2Pdisconnect(string[] incomming)
+		{
+			DisconnectP2P(this, new P2PDisconnect(incomming));
 		}
 
 		private void HandleOutgoingP2P(string[] incomming)

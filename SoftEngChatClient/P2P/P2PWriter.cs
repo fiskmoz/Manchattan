@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using SoftEngChatClient.MessageHandling;
+using SoftEngChatClient.Controller;
 
 namespace SoftEngChatClient.P2P
 {
@@ -26,6 +27,12 @@ namespace SoftEngChatClient.P2P
 		{
 			byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
 			netStream.Write(outgoingBytes, 0, outgoingBytes.Length);
+		}
+
+		public void WriteLogout(MessageType type)
+		{
+			string outgoing = ((int)type).ToString() + ":1:" + ClientDriver.globalUsername;
+			SendMessage(outgoing);
 		}
 	}
 }

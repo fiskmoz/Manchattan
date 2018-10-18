@@ -12,12 +12,14 @@ namespace SoftEngChatClient.P2P
 {
     class P2PListener: StreamListener
     {
-        NetworkStream netStream;
-        bool stopListen;
-        Thread listeningThread;
+        private NetworkStream netStream;
+		private bool stopListen;
+		private Thread listeningThread;
+		private string username;
 
-        public P2PListener(NetworkStream netStream)
+        public P2PListener(NetworkStream netStream, string username)
         {
+			this.username = username;
             this.netStream = netStream;
             stopListen = false;
         }
@@ -36,14 +38,28 @@ namespace SoftEngChatClient.P2P
         public void Listen()
         {
             byte[] buffer = new byte[2048];
-
-            while (true)
+			int bytesRead = 0;
+			bool readFail = false;
+			string incomming = null;
+			while (true)
             {
-                //---read incoming stream---
-                int bytesRead = netStream.Read(buffer, 0, 2048);
+				//---read incoming stream---
+				try{
 
-                //---convert the data received into a string---
-                string incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+					bytesRead = netStream.Read(buffer, 0, 2048);
+				}
+				catch(Exception e)
+				{
+					readFail = true;
+					netStream.Close();
+					incomming = "5:1:" + username;
+					stopListen = true;
+				}
+
+				//---convert the data received into a string---
+				if(!readFail)
+					incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
 				RaiseEvent(incomming);
                 if (stopListen) break;
             }

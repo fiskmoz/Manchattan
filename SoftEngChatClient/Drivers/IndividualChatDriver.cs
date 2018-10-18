@@ -24,9 +24,11 @@ namespace SoftEngChatClient
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
+		public bool isP2P { get; private set; }
 
         public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm)
         {
+			isP2P = false;
             username = Username;
             receiver = Receiver;
             this.fm = fm;
@@ -43,6 +45,7 @@ namespace SoftEngChatClient
 
 		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh)
 		{
+			isP2P = true;
 			this.username = username;
 			this.receiver = receiver;
 			this.fm = fm;
@@ -51,7 +54,7 @@ namespace SoftEngChatClient
 			spam = new SpamProtector();
 			SetupListners();
 			writer = new P2PWriter(netstream);
-			p2pListener = new P2PListener(netstream);
+			p2pListener = new P2PListener(netstream, receiver);
 
 			mh.Subscribe(p2pListener);
 			p2pListener.StartListen();
@@ -145,7 +148,12 @@ namespace SoftEngChatClient
             window.Hide();
         }
 
-        public void ReceiveMessage(string message)
+		internal void Dispose()
+		{
+			p2pListener.StopListen();
+		}
+
+		public void ReceiveMessage(string message)
         {
             window.AppendTextBox("["+receiver+"] : "+message);
         }
@@ -164,5 +172,10 @@ namespace SoftEngChatClient
             }
             window.WindowState = FormWindowState.Normal;
         }
-    }
+
+		internal void Disconnect()
+		{
+			writer.WriteLogout(MessageType.logout);
+		}
+	}
 }

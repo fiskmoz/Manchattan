@@ -92,6 +92,31 @@ namespace SoftEngChatClient.Drivers
 			mh.OutgoingP2P += new EventHandler(ReceivedP2PResponse);
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
+			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
+		}
+
+		private void DisposeP2PConnection(object sender, EventArgs e)
+		{
+			P2PDisconnect args = (P2PDisconnect)e;
+			IndividualChatDriver toChange = null;
+			bool found = false;
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if(icd.getSender() == args.sender)
+				{
+					found = true;
+					toChange = icd;
+					break;
+				}
+			}
+
+			if (found)
+			{
+				toChange.hideWindow();
+				individualChatDrivers.Remove(toChange);
+				CreateNewIndivivualChat(toChange.getSender());
+			}
+			return;
 		}
 
 		private void NewP2PConnection(object sender, EventArgs e)
@@ -142,6 +167,17 @@ namespace SoftEngChatClient.Drivers
                 System.Environment.Exit(1);
             }
         }
+
+		private void DisconnectP2P()
+		{
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if (icd.isP2P)
+				{
+					icd.Disconnect();
+				}
+			}
+		}
 
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)
         {
