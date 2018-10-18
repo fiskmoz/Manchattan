@@ -181,13 +181,32 @@ namespace SoftEngChatClient.Drivers
 
 		private void CreateNewIndivivualChat(string receiver)
 		{
+			bool found = false;
 			foreach(Contact contact in contactsHandler.contactList)
 			{
 				if(contact.name == receiver)
 				{
 					if (contact.isOnline)
 					{
-						writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
+						foreach(IndividualChatDriver icd in individualChatDrivers)
+						{
+							if(icd.getSender() == receiver)
+							{
+								found = true;
+								if (!icd.isWindowVisible())
+								{
+									icd.displayWindow();
+								}
+								icd.SetNormalWindowState();
+								break;
+							}
+						}
+
+						if (!found)
+						{
+							writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
+							break;
+						}
 					}
 					else
 					{
