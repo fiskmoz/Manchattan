@@ -189,8 +189,7 @@ namespace SoftEngChat.Model.SSLCommunication
             server.SendIncommingP2P(sender, receiver, port, key);
 
             Thread.Sleep(1000);
-
-            client.writer.WriteOutgoingP2P(receiver, port, key);
+            client.writer.WriteOutgoingP2P(receiver, port, key, "127.0.0.1");
         }
 	}
 }
