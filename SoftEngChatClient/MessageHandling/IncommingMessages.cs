@@ -131,4 +131,21 @@ namespace SoftEngChatClient
 			this.ip = ip;
 		}
 	}
+
+	class P2PIncommingConnection : EventArgs
+	{
+		public string sender { get; private set; }
+		public string ip { get; private set; }
+		public int port { get; private set; }
+		public string key { get; private set; }
+
+		public P2PIncommingConnection(string[] incomming)
+		{
+			sender = incomming[1];
+			int.TryParse(incomming[2], out int parsedPort);
+			port = parsedPort;
+			key = incomming[3];
+			ip = "127.0.0.1";
+		}
+	}
 }

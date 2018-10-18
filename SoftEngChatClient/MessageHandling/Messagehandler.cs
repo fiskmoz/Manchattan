@@ -68,7 +68,7 @@ namespace SoftEngChatClient.Model
 
 		private void HandleIncommmingP2P(string[] incomming)
 		{
-			
+			IncommingP2P(this, new P2PIncommingConnection(incomming));
 		}
 
 		private void HandleRegistrationACK(string[] incomming)

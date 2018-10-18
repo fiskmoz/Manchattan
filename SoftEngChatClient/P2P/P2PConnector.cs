@@ -12,10 +12,13 @@ namespace SoftEngChatClient.P2P
     {
         public P2PConnector() { }
 
-        public NetworkStream ReceiveConnection(string ip, int port)
+		public event EventHandler IncommingConnection;
+
+        public void ReceiveConnection(object sender, EventArgs e)
         {
-            IPAddress localAdress = IPAddress.Parse(ip);
-            TcpListener listener = new TcpListener(localAdress, port);
+			P2PIncommingConnection args = (P2PIncommingConnection)e;
+			IPAddress localAdress = IPAddress.Parse(args.ip);
+            TcpListener listener = new TcpListener(localAdress, args.port);
 
             listener.Start();
 
@@ -25,7 +28,7 @@ namespace SoftEngChatClient.P2P
             //---get the incoming data through a network stream---
             NetworkStream netStream = client.GetStream();
 
-            return netStream;
+			IncommingConnection(this, new IncommingP2PConnection(args.sender, netStream));
         }
 
         public NetworkStream Connect(string ip, int port)
@@ -34,5 +37,21 @@ namespace SoftEngChatClient.P2P
             NetworkStream netStream = client.GetStream();
             return netStream;
         }
-    }
+
+		internal void Subscribe(Model.Messagehandler messageHandler)
+		{
+			messageHandler.IncommingP2P += new EventHandler(ReceiveConnection);
+		}
+	}
+
+	class IncommingP2PConnection: EventArgs
+	{
+		public string sender { get; private set; }
+		public NetworkStream netStream { get; private set; }
+		public IncommingP2PConnection(string sender, NetworkStream netStream)
+		{
+			this.sender = sender;
+			this.netStream = netStream;
+		}
+	}
 }
