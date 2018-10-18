@@ -116,10 +116,11 @@ namespace SoftEngChatClient
 		public int port { get; private set; }
 		public string key { get; private set; }
 
+        public int parsedPort;
 		public P2POutgoingConnection(string[] incomming)
 		{
 			receiver = incomming[1];
-			int.TryParse(incomming[2], out int parsedPort);
+			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
 			ip = "127.0.0.1";
@@ -139,11 +140,11 @@ namespace SoftEngChatClient
 		public string ip { get; private set; }
 		public int port { get; private set; }
 		public string key { get; private set; }
-
-		public P2PIncommingConnection(string[] incomming)
+        public int parsedPort;
+        public P2PIncommingConnection(string[] incomming)
 		{
 			sender = incomming[1];
-			int.TryParse(incomming[2], out int parsedPort);
+			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
 			ip = "127.0.0.1";

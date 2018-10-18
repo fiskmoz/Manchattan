@@ -29,25 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FriendRequest));
-            this.usernameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.acceptButton = new System.Windows.Forms.Button();
             this.rejectButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.FriendRequestsBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // usernameLabel
-            // 
-            this.usernameLabel.AutoSize = true;
-            this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.usernameLabel.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.ForeColor = System.Drawing.Color.Azure;
-            this.usernameLabel.Location = new System.Drawing.Point(224, 12);
-            this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(68, 23);
-            this.usernameLabel.TabIndex = 0;
-            this.usernameLabel.Text = "label1";
             // 
             // label1
             // 
@@ -55,7 +43,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(52, 15);
+            this.label1.Location = new System.Drawing.Point(84, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(176, 19);
             this.label1.TabIndex = 1;
@@ -67,7 +55,7 @@
             this.acceptButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.acceptButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acceptButton.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.acceptButton.Location = new System.Drawing.Point(378, 8);
+            this.acceptButton.Location = new System.Drawing.Point(405, 50);
             this.acceptButton.Name = "acceptButton";
             this.acceptButton.Size = new System.Drawing.Size(96, 33);
             this.acceptButton.TabIndex = 2;
@@ -81,7 +69,7 @@
             this.rejectButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rejectButton.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rejectButton.ForeColor = System.Drawing.Color.DarkRed;
-            this.rejectButton.Location = new System.Drawing.Point(480, 14);
+            this.rejectButton.Location = new System.Drawing.Point(421, 89);
             this.rejectButton.Name = "rejectButton";
             this.rejectButton.Size = new System.Drawing.Size(61, 22);
             this.rejectButton.TabIndex = 3;
@@ -92,24 +80,35 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(7, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.Size = new System.Drawing.Size(83, 82);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            // 
+            // FriendRequestsBox
+            // 
+            this.FriendRequestsBox.BackColor = System.Drawing.SystemColors.Window;
+            this.FriendRequestsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FriendRequestsBox.FormattingEnabled = true;
+            this.FriendRequestsBox.ItemHeight = 24;
+            this.FriendRequestsBox.Location = new System.Drawing.Point(88, 37);
+            this.FriendRequestsBox.Name = "FriendRequestsBox";
+            this.FriendRequestsBox.Size = new System.Drawing.Size(286, 100);
+            this.FriendRequestsBox.TabIndex = 5;
             // 
             // FriendRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
-            this.ClientSize = new System.Drawing.Size(551, 47);
+            this.ClientSize = new System.Drawing.Size(551, 155);
+            this.Controls.Add(this.FriendRequestsBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.rejectButton);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.usernameLabel);
             this.ForeColor = System.Drawing.Color.Cyan;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -123,11 +122,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Button rejectButton;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListBox FriendRequestsBox;
     }
 }

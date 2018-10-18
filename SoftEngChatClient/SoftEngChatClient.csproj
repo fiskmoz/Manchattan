@@ -140,6 +140,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Manchaticons\Manchaticons.csproj">
+      <Project>{f224dc1a-33e0-4145-9152-94551408d16c}</Project>
+      <Name>Manchaticons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftEngChat\SoftEngChatServer.csproj">
       <Project>{812f09c6-e6b3-446b-9560-e154d5637a52}</Project>
       <Name>SoftEngChatServer</Name>
@@ -183,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GUI\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo3.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

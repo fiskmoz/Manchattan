@@ -74,6 +74,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
             chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
+            chatWindow.openPendingFriendRequests += new EventHandler(OpenPendingFriendRequests);
             friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
             friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
@@ -404,6 +405,7 @@ namespace SoftEngChatClient.Drivers
 
 		private void ReceivedFriendRequest(object sender, EventArgs message)
         {
+            friendrequest.AppendFriendrequest(((ClientMessage)message).sender);
             SendPopup("Received friend request from: " + ((ClientMessage)message).sender, ((ClientMessage)message).message);
         }
 
@@ -439,15 +441,13 @@ namespace SoftEngChatClient.Drivers
 
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "1");
-            contactsHandler.AddContact(friendrequest.getFriendLabel().Text);
-            friendrequest.Close();
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.GetSelectedFriend(), "1");
+            contactsHandler.AddContact(friendrequest.GetSelectedFriend());
         }
 
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
-            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.getFriendLabel().Text, "0");
-            friendrequest.Close();
+            writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.GetSelectedFriend(), "0");
         }
 
         private void SendPopup(string header, string text)
@@ -480,7 +480,6 @@ namespace SoftEngChatClient.Drivers
                     friendrequest.Invoke(new Action<object, EventArgs>(ReceivedFriendRequest), new object[] { sender, e });
                     return;
                 }
-                friendrequest.getFriendLabel().Text = popup.TitleText.Split(' ')[4];
                 friendrequest.ShowDialog();
             }
             else
@@ -488,5 +487,11 @@ namespace SoftEngChatClient.Drivers
 
             }
         }
+
+        private void OpenPendingFriendRequests(object sender, EventArgs e)
+        {
+            friendrequest.ShowDialog();
+        }
+
     }
 }
