@@ -58,6 +58,7 @@
     <Compile Include="ContactManagement\ContactListEventArg.cs" />
     <Compile Include="ContactManagement\ContactsHandler.cs" />
     <Compile Include="Drivers\ChatWindowDriver.cs" />
+    <Compile Include="Drivers\ChatWindowGraphicsDriver.cs" />
     <Compile Include="Drivers\LoginWindowDriver.cs" />
     <Compile Include="Drivers\SpamProtector.cs" />
     <Compile Include="FileManager.cs" />
