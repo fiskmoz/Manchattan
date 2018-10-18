@@ -13,11 +13,14 @@ namespace SoftEngChatClient
 		client = 2, // "2:sender:receiver:message"
 		login = 3,  // "3:username:password"
 		loginACK = 4,  // "4:0/1"
-		logout = 5,  // "5: 1
+		logout = 5,  // "5:1
 		onlineList = 6,  // 6:1/0:A:B:C:D"
-        friendRequest = 7,
-        friendReponse = 8,
-		onlineStatus = 9 // 9:1/0:username
+        friendRequest = 7, // 7:sender:receiver
+        friendReponse = 8, // 8:sender:receiver:0/1
+		onlineStatus = 9, // 9:1/0:username
+        establishP2P = 10, // 10:sender:receiver
+        incommingP2P = 11, // 11:sender:port:key
+        outgoingP2P = 12 //12:receiver:port:key
 	}
 
 	class IncommingMessage : EventArgs
@@ -99,6 +102,33 @@ namespace SoftEngChatClient
 		{
 			message = ack;
             this.key = key;
+		}
+
+        public LoginAck(string v1, string v2)
+        {
+        }
+    }
+
+	class P2POutgoingConnection : EventArgs
+	{
+		public string receiver { get; private set; }
+		public string ip { get; private set; }
+		public int port { get; private set; }
+		public string key { get; private set; }
+
+		public P2POutgoingConnection(string[] incomming)
+		{
+			receiver = incomming[1];
+			int.TryParse(incomming[2], out int parsedPort);
+			port = parsedPort;
+			key = incomming[3];
+		}
+		public P2POutgoingConnection(string receiver, int port, string key, string ip = "127.0.0.1")
+		{
+			this.receiver = receiver;
+			this.port = port;
+			this.key = key;
+			this.ip = ip;
 		}
 	}
 }

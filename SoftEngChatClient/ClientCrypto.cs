@@ -176,7 +176,6 @@ namespace SoftEngChatClient
         }
 
         //Method to hash a string
-        //To be implemented with login messages
         public string Sha256_hash(string plaintext)
         {
             StringBuilder sb = new StringBuilder();

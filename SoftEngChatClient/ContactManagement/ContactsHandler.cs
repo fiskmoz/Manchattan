@@ -124,5 +124,17 @@ namespace SoftEngChatClient.Model
 			contactList.Add(contact);
 			UpdateContacts(contact);
 		}
+
+        public bool FindContact(string username)
+        {
+            foreach(Contact contact in contactList)
+            {
+                if(contact.name == username)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 	}
 }
