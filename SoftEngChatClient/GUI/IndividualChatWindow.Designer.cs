@@ -107,6 +107,7 @@
             this.IndividualChatBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.IndividualChatBox.Size = new System.Drawing.Size(562, 333);
             this.IndividualChatBox.TabIndex = 0;
+            this.IndividualChatBox.TabStop = false;
             this.IndividualChatBox.Click += new System.EventHandler(this.IndividualChatBox_Click);
             // 
             // IndividualMessageBox
@@ -121,6 +122,7 @@
             this.IndividualMessageBox.Size = new System.Drawing.Size(466, 41);
             this.IndividualMessageBox.TabIndex = 1;
             this.IndividualMessageBox.Click += new System.EventHandler(this.IndividualMessageBox_Click);
+            this.IndividualMessageBox.TextChanged += new System.EventHandler(this.IndividualMessageBox_TextChanged);
             this.IndividualMessageBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IndividualMessageBox_KeyUp);
             // 
             // UsernameLabel
@@ -188,6 +190,7 @@
             this.msgTextBoxPanel.Size = new System.Drawing.Size(602, 444);
             this.msgTextBoxPanel.TabIndex = 17;
             this.msgTextBoxPanel.Click += new System.EventHandler(this.msgTextBoxPanel_Click);
+            this.msgTextBoxPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.msgTextBoxPanel_Paint);
             // 
             // allEmoticonsPanel
             // 
