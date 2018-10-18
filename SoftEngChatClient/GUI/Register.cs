@@ -33,7 +33,8 @@ namespace SoftEngChatClient
 
         public event EventHandler TextChangedEvent;
         public event EventHandler PwTextChangedEvent;
-        
+
+        private bool showPasswordFlag;
 
         // Initializes parameters and settings for the Register window.
         public Register()
@@ -141,18 +142,37 @@ namespace SoftEngChatClient
 
         private void EnterPassword_Enter(object sender, EventArgs e)
         {
+
+           
             EnterPasswordClicked(this, e);
+            if(EnterPassword.Text == "")
+            {
+                EnterPassword.Text = "";
+                EnterPassword.PasswordChar = '*';
+                EnterPassword.ForeColor = Color.White;
+
+            }
         }
         private void EnterPassword_Leave(object sender, EventArgs e)
         {
-            try
+
+            if(EnterPassword.Text == "")
+            {
+                EnterPassword.Text = "Password";
+                EnterPassword.PasswordChar = '\0';
+                EnterPassword.ForeColor = Color.Gray;
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
+                RegistrationIndicatorlbl.Visible = false;
+            }
+
+          /*  try
             {
                 EnterPasswordLeaved(this, e);
             }
             catch(Exception)
             {
                 //
-            }
+            }*/
         }
 
         private void EnterEmail_Enter(object sender, EventArgs e)
@@ -214,14 +234,50 @@ namespace SoftEngChatClient
             regRejectLbl.Visible = set;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void ChangeColorRegistrationIndicator(int counter)
         {
 
+            if (counter >= 10)
+            {
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.LimeGreen;
+                RegistrationIndicatorlbl.Text = "Good";
+                
+
+            }
+            else if(counter > 1 && counter < 5)
+            {
+                
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Red;
+                RegistrationIndicatorlbl.Visible = true;
+                RegistrationIndicatorlbl.Text = "Weak";
+                
+            }
+            else if(counter >= 5 && counter < 10)
+            {
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gold;
+                RegistrationIndicatorlbl.Text = "Fair";
+            }
+            else
+            {
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
+                RegistrationIndicatorlbl.Visible = false;
+
+            }
+                
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        public void ShowPassWord(bool flag)
         {
+            if(!showPasswordFlag)
+             EnterPassword.PasswordChar = '\0';
+            else
+                EnterPassword.PasswordChar = '*';
+        }
 
+        private void showPasswordImage_Click(object sender, EventArgs e)
+        {
+           showPasswordFlag = !showPasswordFlag;
+           ShowPassWord(showPasswordFlag);
         }
     }
 }

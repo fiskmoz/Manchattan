@@ -12,14 +12,20 @@ namespace SoftEngChatClient.P2P
     class P2PWriter : StreamWriter
     {
         NetworkStream netStream;
-        public P2PWriter(NetworkStream netStream)
+        private ClientCrypto cc;
+
+        public P2PWriter(NetworkStream netStream, byte[] key)
         {
             this.netStream = netStream;
+            cc = new ClientCrypto();
+            cc.SetNewKey(key);
         }
 
 		public void WriteClient(MessageType type, string sender, string receiver, string message)
 		{
-			string outgoing = ((int)type).ToString() + ":" + sender + ":" + receiver + ":" + message;
+            byte[] cipher = cc.EncryptString(message);
+            string encryptedMessage = BitConverter.ToString(cipher).Replace("-", "");
+            string outgoing = ((int)type).ToString() + ":" + sender + ":" + receiver + ":" + encryptedMessage;
 			SendMessage(outgoing);
 		}
 

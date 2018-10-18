@@ -44,7 +44,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.RegistrationColorIndicatorlbl = new System.Windows.Forms.Label();
             this.RegistrationIndicatorlbl = new System.Windows.Forms.Label();
+            this.showPasswordImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.showPasswordImage)).BeginInit();
             this.SuspendLayout();
             // 
             // RegisterAccept
@@ -130,7 +132,7 @@
             this.EnterEmail.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterEmail.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(668, 50);
+            this.EnterEmail.Size = new System.Drawing.Size(668, 51);
             this.EnterEmail.TabIndex = 4;
             this.EnterEmail.Text = "Email";
             this.EnterEmail.TextChanged += new System.EventHandler(this.EnterEmail_TextChanged);
@@ -149,7 +151,7 @@
             this.EnterForename.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterForename.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterForename.Name = "EnterForename";
-            this.EnterForename.Size = new System.Drawing.Size(668, 50);
+            this.EnterForename.Size = new System.Drawing.Size(668, 51);
             this.EnterForename.TabIndex = 5;
             this.EnterForename.Text = "Forename";
             this.EnterForename.TextChanged += new System.EventHandler(this.EnterForename_TextChanged);
@@ -183,7 +185,7 @@
             this.EnterSurname.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterSurname.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterSurname.Name = "EnterSurname";
-            this.EnterSurname.Size = new System.Drawing.Size(668, 50);
+            this.EnterSurname.Size = new System.Drawing.Size(668, 51);
             this.EnterSurname.TabIndex = 6;
             this.EnterSurname.Text = "Surname";
             this.EnterSurname.TextChanged += new System.EventHandler(this.EnterSurname_TextChanged);
@@ -255,9 +257,19 @@
             this.RegistrationIndicatorlbl.BackColor = System.Drawing.Color.Transparent;
             this.RegistrationIndicatorlbl.Location = new System.Drawing.Point(77, 410);
             this.RegistrationIndicatorlbl.Name = "RegistrationIndicatorlbl";
-            this.RegistrationIndicatorlbl.Size = new System.Drawing.Size(148, 25);
+            this.RegistrationIndicatorlbl.Size = new System.Drawing.Size(0, 25);
             this.RegistrationIndicatorlbl.TabIndex = 16;
-            this.RegistrationIndicatorlbl.Text = "Password OK!";
+            this.RegistrationIndicatorlbl.Visible = false;
+            // 
+            // showPasswordImage
+            // 
+            this.showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background3;
+            this.showPasswordImage.Location = new System.Drawing.Point(655, 348);
+            this.showPasswordImage.Name = "showPasswordImage";
+            this.showPasswordImage.Size = new System.Drawing.Size(45, 37);
+            this.showPasswordImage.TabIndex = 17;
+            this.showPasswordImage.TabStop = false;
+            this.showPasswordImage.Click += new System.EventHandler(this.showPasswordImage_Click);
             // 
             // Register
             // 
@@ -267,6 +279,7 @@
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(726, 883);
+            this.Controls.Add(this.showPasswordImage);
             this.Controls.Add(this.RegistrationIndicatorlbl);
             this.Controls.Add(this.RegistrationColorIndicatorlbl);
             this.Controls.Add(this.poweredBy);
@@ -289,6 +302,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan - Register";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.showPasswordImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +324,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label RegistrationColorIndicatorlbl;
         private System.Windows.Forms.Label RegistrationIndicatorlbl;
+        private System.Windows.Forms.PictureBox showPasswordImage;
     }
 }

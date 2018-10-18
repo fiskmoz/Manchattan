@@ -50,9 +50,6 @@ namespace SoftEngChatClient.Drivers
             this.writer = writer;
             this.logCrypto = logCrypto;
             fileManager = new FileManager();
-            popup = new PopupNotifier();
-            popup.Image = Properties.Resources.logo;
-            popup.Click += new EventHandler(OnPopupClick);
 			p2pConnector = new P2P.P2PConnector();
 
 			contactsHandler = new ContactsHandler(fileManager);
@@ -122,7 +119,8 @@ namespace SoftEngChatClient.Drivers
 		private void NewP2PConnection(object sender, EventArgs e)
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
-			AddNewIndividualP2PChat(args.sender, args.netStream);
+			AddNewIndividualP2PChat(args.sender, args.netStream, args.key);
+            
 		}
 
 		private void ChatWindowLoaded(object sender, EventArgs e)
@@ -283,29 +281,8 @@ namespace SoftEngChatClient.Drivers
 
         public void UpdateOnlineList(object sender, EventArgs eventArgs)
         {
-            if (chatWindow.InvokeRequired)
-            {
-                chatWindow.Invoke(new Action<object, EventArgs>(UpdateOnlineList), new object[] { sender, eventArgs });
-                return;
-            }
-			List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
-            for (int n = chatWindow.contactListBox.Items.Count - 1; n >= 0; --n)
-            {
-                chatWindow.contactListBox.Items.RemoveAt(n);
-            }
-
-            foreach(Contact contact in contactList)
-			{
-                if(contact.isOnline)
-                {
-                    chatWindow.contactListBox.Items.Add(contact.name);
-                }
-                else
-                {
-                    chatWindow.contactListBox.Items.Add(contact.name+ " (offline)");
-                }
-            }
-			chatWindow.contactListBox.Update();
+            List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
+            graphicsDriver.UpdateGraphicalOnlineList(contactList);
         }
 
         public void IndividualChatPrint(string sender, string message)
@@ -352,7 +329,7 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream)
+		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key)
 		{
 			bool found = false;
 			foreach (IndividualChatDriver icd in individualChatDrivers)
@@ -368,7 +345,7 @@ namespace SoftEngChatClient.Drivers
 			}
 			if (found == false)
 			{
-				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler));
+				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key));
 				//Add to active chats
 				//chatWindow.activeChats.Items.Add(sender);
 			}
@@ -409,6 +386,10 @@ namespace SoftEngChatClient.Drivers
 
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
 
+
+                popup = new PopupNotifier();
+                popup.Image = Properties.Resources.logo;
+                popup.Click += new EventHandler(OnPopupClick);
                 new Thread(() => chatWindow.ShowDialog()).Start();
                 
             }
@@ -418,7 +399,7 @@ namespace SoftEngChatClient.Drivers
 		{
 			P2POutgoingConnection arg = (P2POutgoingConnection)e;
 			NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
-			AddNewIndividualP2PChat(arg.receiver, netstream);
+			AddNewIndividualP2PChat(arg.receiver, netstream, arg.key);
 		}
 
 		private void ReceivedFriendRequest(object sender, EventArgs message)

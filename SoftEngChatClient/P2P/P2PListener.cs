@@ -12,15 +12,22 @@ namespace SoftEngChatClient.P2P
 {
     class P2PListener: StreamListener
     {
+        NetworkStream netStream;
+        bool stopListen;
+        Thread listeningThread;
+        private ClientCrypto cc;
         private NetworkStream netStream;
 		private bool stopListen;
 		private Thread listeningThread;
 		private string username;
 
         public P2PListener(NetworkStream netStream, string username)
+        public P2PListener(NetworkStream netStream, byte[] key)
         {
 			this.username = username;
             this.netStream = netStream;
+            cc = new ClientCrypto();
+            cc.SetNewKey(key);
             stopListen = false;
         }
 
@@ -61,6 +68,19 @@ namespace SoftEngChatClient.P2P
 					incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
 				RaiseEvent(incomming);
+                //---convert the data received into a string---
+                string incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                string[] splitString = incomming.Split(':');
+                if (splitString[0] == "2")
+                {
+                    int NumberChars = splitString[3].Length;
+                    byte[] messageBytes = new byte[NumberChars / 2];
+                    for (int i = 0; i < NumberChars; i += 2)
+                        messageBytes[i / 2] = System.Convert.ToByte(splitString[3].Substring(i, 2), 16);
+                    splitString[3] = cc.DecryptBytes(messageBytes);
+                    incomming = string.Join(":", splitString);
+                }
+                RaiseEvent(incomming);
                 if (stopListen) break;
             }
         }

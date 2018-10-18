@@ -43,7 +43,7 @@ namespace SoftEngChatClient
             
         }
 
-		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh)
+		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key)
 		{
 			isP2P = true;
 			this.username = username;
@@ -53,6 +53,14 @@ namespace SoftEngChatClient
 			window = new IndividualChatWindow(receiver);
 			spam = new SpamProtector();
 			SetupListners();
+
+            int NumberChars = key.Length;
+            byte[] personalKey = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
+
+            writer = new P2PWriter(netstream, personalKey);
+			p2pListener = new P2PListener(netstream, personalKey);
 			writer = new P2PWriter(netstream);
 			p2pListener = new P2PListener(netstream, receiver);
 
