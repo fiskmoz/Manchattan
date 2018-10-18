@@ -32,6 +32,7 @@ namespace SoftEngChatClient
         public event EventHandler EnterSurnameLeaved;
 
         public event EventHandler TextChangedEvent;
+        public event EventHandler PwTextChangedEvent;
         
 
         // Initializes parameters and settings for the Register window.
@@ -193,6 +194,7 @@ namespace SoftEngChatClient
         }
         private void EnterPassword_TextChanged(object sender, EventArgs e)
         {
+            PwTextChangedEvent(this, e);
             TextChangedEvent(this, e);
         }
         private void EnterEmail_TextChanged(object sender, EventArgs e)
