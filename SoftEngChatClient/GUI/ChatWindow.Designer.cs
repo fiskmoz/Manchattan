@@ -58,6 +58,7 @@ namespace SoftEngChatClient
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.xLabel = new System.Windows.Forms.Label();
+            this.FRButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -149,7 +150,7 @@ namespace SoftEngChatClient
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.logoutBtn.Font = new System.Drawing.Font("Georgia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.logoutBtn.Location = new System.Drawing.Point(67, 61);
+            this.logoutBtn.Location = new System.Drawing.Point(70, 109);
             this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(92, 41);
@@ -393,13 +394,14 @@ namespace SoftEngChatClient
             // 
             this.settingsPanel.BackColor = System.Drawing.Color.SteelBlue;
             this.settingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.settingsPanel.Controls.Add(this.FRButton);
             this.settingsPanel.Controls.Add(this.label4);
             this.settingsPanel.Controls.Add(this.pictureBox2);
             this.settingsPanel.Controls.Add(this.xLabel);
             this.settingsPanel.Controls.Add(this.logoutBtn);
             this.settingsPanel.Location = new System.Drawing.Point(401, 205);
             this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(222, 122);
+            this.settingsPanel.Size = new System.Drawing.Size(222, 165);
             this.settingsPanel.TabIndex = 109;
             this.settingsPanel.Visible = false;
             // 
@@ -439,6 +441,18 @@ namespace SoftEngChatClient
             this.xLabel.MouseLeave += new System.EventHandler(this.xLabel_MouseLeave);
             this.xLabel.MouseHover += new System.EventHandler(this.xLabel_MouseHover);
             this.xLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.xLabel_MouseMove);
+            // 
+            // FRButton
+            // 
+            this.FRButton.BackColor = System.Drawing.Color.DarkCyan;
+            this.FRButton.Location = new System.Drawing.Point(70, 69);
+            this.FRButton.Name = "FRButton";
+            this.FRButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.FRButton.Size = new System.Drawing.Size(92, 35);
+            this.FRButton.TabIndex = 111;
+            this.FRButton.Text = "View pending friend request";
+            this.FRButton.UseVisualStyleBackColor = false;
+            this.FRButton.Click += new System.EventHandler(this.FRButton_Click);
             // 
             // ChatWindow
             // 
@@ -514,5 +528,6 @@ namespace SoftEngChatClient
         private Label xLabel;
         private Label label4;
         private PictureBox pictureBox2;
+        private Button FRButton;
     }
 }
