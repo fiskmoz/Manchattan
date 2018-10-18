@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoftEngChatClient.Model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -129,6 +130,33 @@ namespace SoftEngChatClient.Drivers
                 chatWindow.getNoFriendsLabel().Visible = false;
                 chatWindow.getAddFriendsButton().Enabled = false;
             }
+        }
+
+        public void UpdateGraphicalOnlineList(List<Contact> contactList)
+        {
+            if (chatWindow.InvokeRequired)
+            {
+                chatWindow.Invoke(new Action<List<Contact>>(UpdateGraphicalOnlineList), new object[] { contactList });
+                return;
+            }
+            
+            for (int n = chatWindow.contactListBox.Items.Count - 1; n >= 0; --n)
+            {
+                chatWindow.contactListBox.Items.RemoveAt(n);
+            }
+
+            foreach (Contact contact in contactList)
+            {
+                if (contact.isOnline)
+                {
+                    chatWindow.contactListBox.Items.Add(contact.name);
+                }
+                else
+                {
+                    chatWindow.contactListBox.Items.Add(contact.name + " (offline)");
+                }
+            }
+            chatWindow.contactListBox.Update();
         }
     }
 }
