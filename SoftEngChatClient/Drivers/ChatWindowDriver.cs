@@ -50,9 +50,6 @@ namespace SoftEngChatClient.Drivers
             this.writer = writer;
             this.logCrypto = logCrypto;
             fileManager = new FileManager();
-            popup = new PopupNotifier();
-            popup.Image = Properties.Resources.logo;
-            popup.Click += new EventHandler(OnPopupClick);
 			p2pConnector = new P2P.P2PConnector();
 
 			contactsHandler = new ContactsHandler(fileManager);
@@ -228,29 +225,8 @@ namespace SoftEngChatClient.Drivers
 
         public void UpdateOnlineList(object sender, EventArgs eventArgs)
         {
-            if (chatWindow.InvokeRequired)
-            {
-                chatWindow.Invoke(new Action<object, EventArgs>(UpdateOnlineList), new object[] { sender, eventArgs });
-                return;
-            }
-			List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
-            for (int n = chatWindow.contactListBox.Items.Count - 1; n >= 0; --n)
-            {
-                chatWindow.contactListBox.Items.RemoveAt(n);
-            }
-
-            foreach(Contact contact in contactList)
-			{
-                if(contact.isOnline)
-                {
-                    chatWindow.contactListBox.Items.Add(contact.name);
-                }
-                else
-                {
-                    chatWindow.contactListBox.Items.Add(contact.name+ " (offline)");
-                }
-            }
-			chatWindow.contactListBox.Update();
+            List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
+            graphicsDriver.UpdateGraphicalOnlineList(contactList);
         }
 
         public void IndividualChatPrint(string sender, string message)
@@ -354,6 +330,10 @@ namespace SoftEngChatClient.Drivers
 
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
 
+
+                popup = new PopupNotifier();
+                popup.Image = Properties.Resources.logo;
+                popup.Click += new EventHandler(OnPopupClick);
                 new Thread(() => chatWindow.ShowDialog()).Start();
                 
             }
