@@ -270,7 +270,7 @@ namespace SoftEngChatClient.Controller
             }
             previousChar = currentChar;
             previousPasswordLenght = length;
-            
+
             register.ChangeColorRegistrationIndicator(passwordStrengtCounter);
             }
 
