@@ -43,7 +43,8 @@ namespace SoftEngChatClient.P2P
                 int bytesRead = netStream.Read(buffer, 0, 2048);
 
                 //---convert the data received into a string---
-                string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                string incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+				RaiseEvent(incomming);
                 if (stopListen) break;
             }
         }
