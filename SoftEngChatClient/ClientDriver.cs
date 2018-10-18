@@ -28,7 +28,7 @@ namespace SoftEngChatClient.Controller
         public static string globalUsername;
         
 
-		private const string IP = "10.220.1.105";	//ServerIP
+		private const string IP = Constants.ip;	//ServerIP
 		private const int PORT = 5300;      //Serverport
 
         // Creates winform thread (STAThread).
