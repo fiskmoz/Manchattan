@@ -19,6 +19,7 @@ namespace SoftEngChatClient.P2P
 			P2PIncommingConnection args = (P2PIncommingConnection)e;
 			IPAddress localAdress = IPAddress.Parse(args.ip);
             TcpListener listener = new TcpListener(localAdress, args.port);
+            
 
             listener.Start();
 
@@ -28,7 +29,7 @@ namespace SoftEngChatClient.P2P
             //---get the incoming data through a network stream---
             NetworkStream netStream = client.GetStream();
 
-			IncommingConnection(this, new IncommingP2PConnection(args.sender, netStream));
+			IncommingConnection(this, new IncommingP2PConnection(args.sender, netStream, args.key));
         }
 
         public NetworkStream Connect(string ip, int port)
@@ -48,10 +49,12 @@ namespace SoftEngChatClient.P2P
 	{
 		public string sender { get; private set; }
 		public NetworkStream netStream { get; private set; }
-		public IncommingP2PConnection(string sender, NetworkStream netStream)
+        public string key { get; private set; }
+		public IncommingP2PConnection(string sender, NetworkStream netStream, string key)
 		{
 			this.sender = sender;
 			this.netStream = netStream;
+            this.key = key;
 		}
 	}
 }

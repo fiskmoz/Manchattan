@@ -10,5 +10,6 @@ namespace SoftEngChatClient.MessageHandling
 	{
 		void WriteClient(MessageType type, string sender, string receiver, string message);
 		void SendMessage(string outgoing);
+		void WriteLogout(MessageType type);
 	}
 }

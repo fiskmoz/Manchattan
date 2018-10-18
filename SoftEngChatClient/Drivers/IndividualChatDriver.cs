@@ -24,9 +24,11 @@ namespace SoftEngChatClient
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
+		public bool isP2P { get; private set; }
 
         public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm)
         {
+			isP2P = false;
             username = Username;
             receiver = Receiver;
             this.fm = fm;
@@ -41,8 +43,9 @@ namespace SoftEngChatClient
             
         }
 
-		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh)
+		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key)
 		{
+			isP2P = true;
 			this.username = username;
 			this.receiver = receiver;
 			this.fm = fm;
@@ -50,8 +53,15 @@ namespace SoftEngChatClient
 			window = new IndividualChatWindow(receiver);
 			spam = new SpamProtector();
 			SetupListners();
-			writer = new P2PWriter(netstream);
-			p2pListener = new P2PListener(netstream);
+
+            int NumberChars = key.Length;
+            byte[] personalKey = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
+
+            writer = new P2PWriter(netstream, personalKey);
+			p2pListener = new P2PListener(netstream, receiver, personalKey);
+			writer = new P2PWriter(netstream, personalKey);
 
 			mh.Subscribe(p2pListener);
 			p2pListener.StartListen();
@@ -145,7 +155,12 @@ namespace SoftEngChatClient
             window.Hide();
         }
 
-        public void ReceiveMessage(string message)
+		internal void Dispose()
+		{
+			p2pListener.StopListen();
+		}
+
+		public void ReceiveMessage(string message)
         {
             window.AppendTextBox("["+receiver+"] : "+message);
         }
@@ -164,5 +179,10 @@ namespace SoftEngChatClient
             }
             window.WindowState = FormWindowState.Normal;
         }
-    }
+
+		internal void Disconnect()
+		{
+			writer.WriteLogout(MessageType.logout);
+		}
+	}
 }

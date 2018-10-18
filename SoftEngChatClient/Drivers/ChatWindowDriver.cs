@@ -90,12 +90,38 @@ namespace SoftEngChatClient.Drivers
 			mh.OutgoingP2P += new EventHandler(ReceivedP2PResponse);
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
+			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
+		}
+
+		private void DisposeP2PConnection(object sender, EventArgs e)
+		{
+			P2PDisconnect args = (P2PDisconnect)e;
+			IndividualChatDriver toChange = null;
+			bool found = false;
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if(icd.getSender() == args.sender)
+				{
+					found = true;
+					toChange = icd;
+					break;
+				}
+			}
+
+			if (found)
+			{
+				toChange.hideWindow();
+				individualChatDrivers.Remove(toChange);
+				CreateNewIndivivualChat(toChange.getSender());
+			}
+			return;
 		}
 
 		private void NewP2PConnection(object sender, EventArgs e)
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
-			AddNewIndividualP2PChat(args.sender, args.netStream);
+			AddNewIndividualP2PChat(args.sender, args.netStream, args.key);
+            
 		}
 
 		private void ChatWindowLoaded(object sender, EventArgs e)
@@ -141,6 +167,17 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
+		private void DisconnectP2P()
+		{
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if (icd.isP2P)
+				{
+					icd.Disconnect();
+				}
+			}
+		}
+
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)
         {
             if (chatWindow.removeEnterWhenSending().Length > 0)
@@ -179,13 +216,32 @@ namespace SoftEngChatClient.Drivers
 
 		private void CreateNewIndivivualChat(string receiver)
 		{
+			bool found = false;
 			foreach(Contact contact in contactsHandler.contactList)
 			{
 				if(contact.name == receiver)
 				{
 					if (contact.isOnline)
 					{
-						writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
+						foreach(IndividualChatDriver icd in individualChatDrivers)
+						{
+							if(icd.getSender() == receiver)
+							{
+								found = true;
+								if (!icd.isWindowVisible())
+								{
+									icd.displayWindow();
+								}
+								icd.SetNormalWindowState();
+								break;
+							}
+						}
+
+						if (!found)
+						{
+							writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
+							break;
+						}
 					}
 					else
 					{
@@ -274,7 +330,7 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream)
+		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key)
 		{
 			bool found = false;
 			foreach (IndividualChatDriver icd in individualChatDrivers)
@@ -290,7 +346,7 @@ namespace SoftEngChatClient.Drivers
 			}
 			if (found == false)
 			{
-				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler));
+				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key));
 				//Add to active chats
 				//chatWindow.activeChats.Items.Add(sender);
 			}
@@ -344,7 +400,7 @@ namespace SoftEngChatClient.Drivers
 		{
 			P2POutgoingConnection arg = (P2POutgoingConnection)e;
 			NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
-			AddNewIndividualP2PChat(arg.receiver, netstream);
+			AddNewIndividualP2PChat(arg.receiver, netstream, arg.key);
 		}
 
 		private void ReceivedFriendRequest(object sender, EventArgs message)

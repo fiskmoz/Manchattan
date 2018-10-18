@@ -44,7 +44,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.RegistrationColorIndicatorlbl = new System.Windows.Forms.Label();
             this.RegistrationIndicatorlbl = new System.Windows.Forms.Label();
+            this.showPasswordImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.showPasswordImage)).BeginInit();
             this.SuspendLayout();
             // 
             // RegisterAccept
@@ -259,6 +261,16 @@
             this.RegistrationIndicatorlbl.TabIndex = 16;
             this.RegistrationIndicatorlbl.Visible = false;
             // 
+            // showPasswordImage
+            // 
+            this.showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background3;
+            this.showPasswordImage.Location = new System.Drawing.Point(655, 348);
+            this.showPasswordImage.Name = "showPasswordImage";
+            this.showPasswordImage.Size = new System.Drawing.Size(45, 37);
+            this.showPasswordImage.TabIndex = 17;
+            this.showPasswordImage.TabStop = false;
+            this.showPasswordImage.Click += new System.EventHandler(this.showPasswordImage_Click);
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -267,6 +279,7 @@
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(726, 883);
+            this.Controls.Add(this.showPasswordImage);
             this.Controls.Add(this.RegistrationIndicatorlbl);
             this.Controls.Add(this.RegistrationColorIndicatorlbl);
             this.Controls.Add(this.poweredBy);
@@ -289,6 +302,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "ManChattan - Register";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.showPasswordImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +324,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label RegistrationColorIndicatorlbl;
         private System.Windows.Forms.Label RegistrationIndicatorlbl;
+        private System.Windows.Forms.PictureBox showPasswordImage;
     }
 }

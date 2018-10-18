@@ -149,4 +149,13 @@ namespace SoftEngChatClient
 			ip = "127.0.0.1";
 		}
 	}
+
+	class P2PDisconnect : EventArgs
+	{
+		public string sender { get; private set; }
+		public P2PDisconnect(string[] incomming)
+		{
+			this.sender = incomming[2];
+		}
+	}
 }

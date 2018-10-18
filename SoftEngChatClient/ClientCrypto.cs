@@ -78,6 +78,7 @@ namespace SoftEngChatClient
 
         public string DecryptBytes(byte[] cipher)
         {
+            if (cipher.Length == 0) return "";
             byte[] cryptoIV = new byte[16];
             byte[] encryptedString = new byte[cipher.Length - 16];
             string decryptedString;

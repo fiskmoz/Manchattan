@@ -33,7 +33,8 @@ namespace SoftEngChatClient
 
         public event EventHandler TextChangedEvent;
         public event EventHandler PwTextChangedEvent;
-        
+
+        private bool showPasswordFlag;
 
         // Initializes parameters and settings for the Register window.
         public Register()
@@ -141,6 +142,8 @@ namespace SoftEngChatClient
 
         private void EnterPassword_Enter(object sender, EventArgs e)
         {
+
+           
             EnterPasswordClicked(this, e);
             if(EnterPassword.Text == "")
             {
@@ -158,6 +161,8 @@ namespace SoftEngChatClient
                 EnterPassword.Text = "Password";
                 EnterPassword.PasswordChar = '\0';
                 EnterPassword.ForeColor = Color.Gray;
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
+                RegistrationIndicatorlbl.Visible = false;
             }
 
           /*  try
@@ -231,10 +236,13 @@ namespace SoftEngChatClient
 
         public void ChangeColorRegistrationIndicator(int counter)
         {
-            if(counter >= 10)
+
+            if (counter >= 10)
             {
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.LimeGreen;
                 RegistrationIndicatorlbl.Text = "Good";
+                
+
             }
             else if(counter > 1 && counter < 5)
             {
@@ -242,6 +250,7 @@ namespace SoftEngChatClient
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Red;
                 RegistrationIndicatorlbl.Visible = true;
                 RegistrationIndicatorlbl.Text = "Weak";
+                
             }
             else if(counter >= 5 && counter < 10)
             {
@@ -255,6 +264,20 @@ namespace SoftEngChatClient
 
             }
                 
+        }
+
+        public void ShowPassWord(bool flag)
+        {
+            if(!showPasswordFlag)
+             EnterPassword.PasswordChar = '\0';
+            else
+                EnterPassword.PasswordChar = '*';
+        }
+
+        private void showPasswordImage_Click(object sender, EventArgs e)
+        {
+           showPasswordFlag = !showPasswordFlag;
+           ShowPassWord(showPasswordFlag);
         }
     }
 }
