@@ -21,8 +21,8 @@ namespace SoftEngChat.Model.SSLCommunication
         internal void HandleMessage(object sender, IncommingMessage message)
         {
             string incomming = message.Message;
-
-			switch (incomming[0].ToString())//Handle different message types (temporary placeholders here)
+			string[] parsed = ParseMessage(((IncommingMessage)message).Message);
+			switch (parsed[0].ToString())//Handle different message types (temporary placeholders here)
 			{
 				case "0":
                     Console.WriteLine("Message arrived; Register Attempt:");
@@ -180,7 +180,10 @@ namespace SoftEngChat.Model.SSLCommunication
             string sender = messageArray[1];
             string receiver = messageArray[2];
 
-            string key = "abcdefghabcdefghabcdefghabcdefgh";
+            ServerCrypto sc = new ServerCrypto();
+            byte[] keyBytes = sc.GenerateAesKey();
+            string key = System.BitConverter.ToString(keyBytes).Replace("-", "");
+
             int port = server.getNextPort();
 
             server.SendIncommingP2P(sender, receiver, port, key);

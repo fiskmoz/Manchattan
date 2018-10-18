@@ -10,7 +10,7 @@ namespace SoftEngChatClient.Model
 	class ContactsHandler
 	{
 		public event EventHandler UpdateContactList;
-		private List<Contact> contactList;
+		public List<Contact> contactList { get; private set; }
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
 		private FileManager fileManager;
