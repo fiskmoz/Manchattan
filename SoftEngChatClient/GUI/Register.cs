@@ -269,9 +269,16 @@ namespace SoftEngChatClient
         public void ShowPassWord(bool flag)
         {
             if(!showPasswordFlag)
-             EnterPassword.PasswordChar = '\0';
+            {
+                EnterPassword.PasswordChar = '\0';
+                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background2;
+            }
             else
+            {
                 EnterPassword.PasswordChar = '*';
+                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background3;
+            }
+                
         }
 
         private void showPasswordImage_Click(object sender, EventArgs e)
