@@ -94,7 +94,6 @@
     <Compile Include="MessageHandling\Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="P2P\P2PConnector.cs" />
-    <Compile Include="P2P\P2PIndividualChatDriver.cs" />
     <Compile Include="P2P\P2PListener.cs" />
     <Compile Include="P2P\P2PWriter.cs" />
     <Compile Include="Program.cs" />

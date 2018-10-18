@@ -97,7 +97,8 @@ namespace SoftEngChatClient.Drivers
 		private void NewP2PConnection(object sender, EventArgs e)
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
-			AddNewIndividualP2PChat(args.sender, args.netStream);
+			AddNewIndividualP2PChat(args.sender, args.netStream, args.key);
+            
 		}
 
 		private void ChatWindowLoaded(object sender, EventArgs e)
@@ -297,7 +298,7 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream)
+		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key)
 		{
 			bool found = false;
 			foreach (IndividualChatDriver icd in individualChatDrivers)
@@ -313,7 +314,7 @@ namespace SoftEngChatClient.Drivers
 			}
 			if (found == false)
 			{
-				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler));
+				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key));
 				//Add to active chats
 				//chatWindow.activeChats.Items.Add(sender);
 			}
@@ -363,7 +364,7 @@ namespace SoftEngChatClient.Drivers
 		{
 			P2POutgoingConnection arg = (P2POutgoingConnection)e;
 			NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
-			AddNewIndividualP2PChat(arg.receiver, netstream);
+			AddNewIndividualP2PChat(arg.receiver, netstream, arg.key);
 		}
 
 		private void ReceivedFriendRequest(object sender, EventArgs message)

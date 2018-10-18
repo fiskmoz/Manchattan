@@ -15,10 +15,13 @@ namespace SoftEngChatClient.P2P
         NetworkStream netStream;
         bool stopListen;
         Thread listeningThread;
+        private ClientCrypto cc;
 
-        public P2PListener(NetworkStream netStream)
+        public P2PListener(NetworkStream netStream, byte[] key)
         {
             this.netStream = netStream;
+            cc = new ClientCrypto();
+            cc.SetNewKey(key);
             stopListen = false;
         }
 
@@ -44,7 +47,17 @@ namespace SoftEngChatClient.P2P
 
                 //---convert the data received into a string---
                 string incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-				RaiseEvent(incomming);
+                string[] splitString = incomming.Split(':');
+                if (splitString[0] == "2")
+                {
+                    int NumberChars = splitString[3].Length;
+                    byte[] messageBytes = new byte[NumberChars / 2];
+                    for (int i = 0; i < NumberChars; i += 2)
+                        messageBytes[i / 2] = System.Convert.ToByte(splitString[3].Substring(i, 2), 16);
+                    splitString[3] = cc.DecryptBytes(messageBytes);
+                    incomming = string.Join(":", splitString);
+                }
+                RaiseEvent(incomming);
                 if (stopListen) break;
             }
         }
