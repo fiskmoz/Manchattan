@@ -8,7 +8,8 @@ namespace SoftEngChat
         public static void Main(string[] args)
         {
             //Starting the server that runs the whole program
-            SSLServer server = new SSLServer(IPAddress.Loopback, 5300);
+            IPAddress addre = IPAddress.Parse("10.220.1.105");
+            SSLServer server = new SSLServer(addre, 5300);
         }
     }
 }
