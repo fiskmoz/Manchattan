@@ -60,9 +60,8 @@ namespace SoftEngChatClient
                 personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
 
             writer = new P2PWriter(netstream, personalKey);
-			p2pListener = new P2PListener(netstream, personalKey);
-			writer = new P2PWriter(netstream);
-			p2pListener = new P2PListener(netstream, receiver);
+			p2pListener = new P2PListener(netstream, receiver, personalKey);
+			writer = new P2PWriter(netstream, personalKey);
 
 			mh.Subscribe(p2pListener);
 			p2pListener.StartListen();
