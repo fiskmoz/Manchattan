@@ -60,6 +60,7 @@ namespace SoftEngChat
             };
             ServerCrypto sc = new ServerCrypto();
             info[2] = sc.Sha256_hash(info[2]);
+            User adminUser = new User(info);
             user.Add(new User(info));
 
             List<string> info2 = new List<string>
