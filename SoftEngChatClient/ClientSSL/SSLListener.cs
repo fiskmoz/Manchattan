@@ -5,10 +5,11 @@ using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SoftEngChatClient.MessageHandling;
 
 namespace SoftEngChatClient.Model.SSLCommunication
 {
-	class SSLListener
+	class SSLListener : StreamListener
 	{
 		public SslStream stream;
 		private Thread listeningThread;
@@ -34,7 +35,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 
 		//Start to listen for incomming messages.
 		//Raises event when message arrives, if error: event message == 0
-		private void Listen()
+		public void Listen()
 		{
             byte[] incommingMessage = new byte[2048];
             StringBuilder messageData = new StringBuilder();
@@ -91,7 +92,7 @@ namespace SoftEngChatClient.Model.SSLCommunication
 		//public delegate void EventHandler(Object sender, IncommingMessage eventArgs);
 		public event EventHandler IncommingMessage;
 
-		private void RaiseEvent(string incomming)
+		public void RaiseEvent(string incomming)
 		{
 			IncommingMessage message = new IncommingMessage(incomming);
 			message.Message = incomming;

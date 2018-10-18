@@ -22,39 +22,39 @@ namespace SoftEngChat.Model.SSLCommunication
         {
             string incomming = message.Message;
 
-			switch (incomming[0])//Handle different message types (temporary placeholders here)
+			switch (incomming[0].ToString())//Handle different message types (temporary placeholders here)
 			{
-				case '0':
+				case "0":
                     Console.WriteLine("Message arrived; Register Attempt:");
                     Console.WriteLine(incomming);
                     HandleRegistration(incomming);
 					break;
-				case '2':
+				case "2":
                     Console.WriteLine("Message arrived; Clientmessage:");
 					Console.WriteLine(incomming);
                     HandleClientMessage(incomming);
                     break;
-				case '3':
+				case "3":
 					Console.WriteLine("Message arrived; Credentials:");
 					Console.WriteLine(incomming);
 					HandleLogin(incomming);
 					break;
-                case '5':
+                case "5":
                     Console.WriteLine("Message arrived; Logout Message:");
                     Console.WriteLine(incomming);
 					HandleLogout();
 					break;
-                case '7':
+                case "7":
                     Console.WriteLine("Message arrived; FriendRequest:");
                     Console.WriteLine(incomming);
                     HandleFriendRequest(incomming);
                     break;
-                case '8':
+                case "8":
                     Console.WriteLine("Message arrived; FriendRespond ACK");
                     Console.WriteLine(incomming);
                     ValidateFriendResponse(incomming);
                     break;
-                case 'a':
+                case "10":
                     Console.WriteLine("Message arrived; EstablishP2P: ");
                     Console.WriteLine(incomming);
                     HandleEstablishP2P(incomming);

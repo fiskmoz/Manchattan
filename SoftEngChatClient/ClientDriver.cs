@@ -10,6 +10,7 @@ using SoftEngChatClient.Model.SSLCommunication;
 using System.Timers;
 using SoftEngChatClient.Drivers;
 using SoftEngChatClient.Model;
+using SoftEngChatClient.P2P;
 
 namespace SoftEngChatClient.Controller
 {
@@ -22,6 +23,7 @@ namespace SoftEngChatClient.Controller
 		private SSLWriter writer;
 		private Messagehandler messagehandler;
         private ClientCrypto logCrypto;
+		private P2PConnector p2pConnector;
 
         public static string globalUsername;
         
@@ -59,7 +61,7 @@ namespace SoftEngChatClient.Controller
             streamListener = new SSLListener(connector.SslStream);
             messagehandler = new Messagehandler(); 
             logCrypto = new ClientCrypto();
-            
+			p2pConnector = new P2PConnector();
         }
 
         //Sets up listeners for the different events.
@@ -67,8 +69,9 @@ namespace SoftEngChatClient.Controller
 		{
 			messagehandler.Subscribe(streamListener);
 			loginWindowDriver.Subscribe(messagehandler);
-			chatWindowDriver.Subscribe(messagehandler);
+			chatWindowDriver.Subscribe(messagehandler, p2pConnector);
 			chatWindowDriver.restart += new EventHandler(ChatWindowLogout);
+			p2pConnector.Subscribe(messagehandler);
 		}
 
         private void ChatWindowLogout(object o, EventArgs e)

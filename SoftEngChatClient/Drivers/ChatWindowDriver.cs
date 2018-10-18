@@ -12,7 +12,9 @@ using SoftEngChatClient.Model;
 using SoftEngChatClient.Controller;
 using System.Drawing;
 using SoftEngChatClient.GUI;
+using System.Net.Sockets;
 using Tulpep.NotificationWindow;
+using SoftEngChatClient.P2P;
 
 namespace SoftEngChatClient.Drivers
 {
@@ -28,6 +30,8 @@ namespace SoftEngChatClient.Drivers
 		private FileManager fileManager;
         private FriendRequest friendrequest;
         private PopupNotifier popup;
+		private P2PConnector p2pConnector;
+		private Messagehandler messageHandler;
 
         public event EventHandler restart;
 
@@ -49,8 +53,9 @@ namespace SoftEngChatClient.Drivers
             popup = new PopupNotifier();
             popup.Image = Properties.Resources.logo;
             popup.Click += new EventHandler(OnPopupClick);
+			p2pConnector = new P2P.P2PConnector();
 
-            contactsHandler = new ContactsHandler(fileManager);
+			contactsHandler = new ContactsHandler(fileManager);
             spam = new SpamProtector();
             individualChatDrivers = new List<IndividualChatDriver>();
             chatWindow = new ChatWindow();
@@ -80,16 +85,25 @@ namespace SoftEngChatClient.Drivers
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
-		public void Subscribe(Messagehandler mh)
+		public void Subscribe(Messagehandler mh, P2PConnector p2pc)
 		{
+			messageHandler = mh;
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
             mh.IncommingLoginAck += new EventHandler(LoggingIn);
             mh.IncommingFriendRequest += new EventHandler(ReceivedFriendRequest);
             mh.IncommmingFriendResponse += new EventHandler(ReceivedFriendResponse);
+			mh.OutgoingP2P += new EventHandler(ReceivedP2PResponse);
 			contactsHandler.Subscribe(mh);
+			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 		}
-    
-        private void ChatWindowLoaded(object sender, EventArgs e)
+
+		private void NewP2PConnection(object sender, EventArgs e)
+		{
+			IncommingP2PConnection args = (IncommingP2PConnection)e;
+			AddNewIndividualP2PChat(args.sender, args.netStream);
+		}
+
+		private void ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
             try
@@ -284,6 +298,29 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
+		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream)
+		{
+			bool found = false;
+			foreach (IndividualChatDriver icd in individualChatDrivers)
+			{
+				if (icd.getSender() == sender)
+				{
+					found = true;
+					if (!icd.isWindowVisible())
+					{
+						icd.displayWindow();
+					}
+				}
+			}
+			if (found == false)
+			{
+				individualChatDrivers.Add(new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler));
+				//Add to active chats
+				//chatWindow.activeChats.Items.Add(sender);
+			}
+
+		}
+
 		private void IncommingMessage(object sender, EventArgs eventArgs)
 		{
             if (((ClientMessage) eventArgs).receiver == "All")
@@ -323,7 +360,14 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-        private void ReceivedFriendRequest(object sender, EventArgs message)
+		private void ReceivedP2PResponse(object sender, EventArgs e)
+		{
+			P2POutgoingConnection arg = (P2POutgoingConnection)e;
+			NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
+			AddNewIndividualP2PChat(arg.receiver, netstream);
+		}
+
+		private void ReceivedFriendRequest(object sender, EventArgs message)
         {
             SendPopup("Received friend request from: " + ((ClientMessage)message).sender, ((ClientMessage)message).message);
         }

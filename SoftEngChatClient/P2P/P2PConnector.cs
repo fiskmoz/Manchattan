@@ -10,18 +10,15 @@ namespace SoftEngChatClient.P2P
 {
     class P2PConnector
     {
-        private string ipAddress;
-        private int portNumber;
-        public P2PConnector(string ip, int port)
-        {
-            ipAddress = ip;
-            portNumber = port;
-        }
+        public P2PConnector() { }
 
-        public NetworkStream ReceiveConnection()
+		public event EventHandler IncommingConnection;
+
+        public void ReceiveConnection(object sender, EventArgs e)
         {
-            IPAddress localAdress = IPAddress.Parse(ipAddress);
-            TcpListener listener = new TcpListener(localAdress, portNumber);
+			P2PIncommingConnection args = (P2PIncommingConnection)e;
+			IPAddress localAdress = IPAddress.Parse(args.ip);
+            TcpListener listener = new TcpListener(localAdress, args.port);
 
             listener.Start();
 
@@ -31,14 +28,30 @@ namespace SoftEngChatClient.P2P
             //---get the incoming data through a network stream---
             NetworkStream netStream = client.GetStream();
 
-            return netStream;
+			IncommingConnection(this, new IncommingP2PConnection(args.sender, netStream));
         }
 
-        public NetworkStream Connect()
+        public NetworkStream Connect(string ip, int port)
         {
-            TcpClient client = new TcpClient(ipAddress, portNumber);
+            TcpClient client = new TcpClient(ip, port);
             NetworkStream netStream = client.GetStream();
             return netStream;
         }
-    }
+
+		internal void Subscribe(Model.Messagehandler messageHandler)
+		{
+			messageHandler.IncommingP2P += new EventHandler(ReceiveConnection);
+		}
+	}
+
+	class IncommingP2PConnection: EventArgs
+	{
+		public string sender { get; private set; }
+		public NetworkStream netStream { get; private set; }
+		public IncommingP2PConnection(string sender, NetworkStream netStream)
+		{
+			this.sender = sender;
+			this.netStream = netStream;
+		}
+	}
 }

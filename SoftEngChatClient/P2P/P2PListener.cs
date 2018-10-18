@@ -6,10 +6,11 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SoftEngChatClient.MessageHandling;
 
 namespace SoftEngChatClient.P2P
 {
-    class P2PListener
+    class P2PListener: StreamListener
     {
         NetworkStream netStream;
         bool stopListen;
@@ -26,13 +27,13 @@ namespace SoftEngChatClient.P2P
             stopListen = true;
         }
 
-        public void StartListen()
+		public void StartListen()
         {
             listeningThread = new Thread(Listen);
             listeningThread.Start();
         }
 
-        private void Listen()
+        public void Listen()
         {
             byte[] buffer = new byte[2048];
 
@@ -46,5 +47,13 @@ namespace SoftEngChatClient.P2P
                 if (stopListen) break;
             }
         }
-    }
+
+		public event EventHandler IncommingMessage;
+		public void RaiseEvent(string incomming)
+		{
+			IncommingMessage message = new IncommingMessage(incomming);
+			message.Message = incomming;
+			IncommingMessage(this, message);
+		}
+	}
 }
