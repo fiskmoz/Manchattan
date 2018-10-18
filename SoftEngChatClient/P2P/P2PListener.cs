@@ -15,10 +15,15 @@ namespace SoftEngChatClient.P2P
         NetworkStream netStream;
         bool stopListen;
         Thread listeningThread;
-
-        public P2PListener(NetworkStream netStream)
+        private ClientCrypto cc;
+		private string username;
+		
+        public P2PListener(NetworkStream netStream, string username, byte[] key)
         {
+			this.username = username;
             this.netStream = netStream;
+            cc = new ClientCrypto();
+            cc.SetNewKey(key);
             stopListen = false;
         }
 
@@ -36,14 +41,41 @@ namespace SoftEngChatClient.P2P
         public void Listen()
         {
             byte[] buffer = new byte[2048];
-
-            while (true)
+			int bytesRead = 0;
+			bool readFail = false;
+			string incomming = null;
+			while (true)
             {
-                //---read incoming stream---
-                int bytesRead = netStream.Read(buffer, 0, 2048);
+				//---read incoming stream---
+				try{
 
-                //---convert the data received into a string---
-                string dataReceived = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+					bytesRead = netStream.Read(buffer, 0, 2048);
+				}
+				catch(Exception e)
+				{
+					readFail = true;
+					netStream.Close();
+					incomming = "5:1:" + username;
+					stopListen = true;
+				}
+
+				//---convert the data received into a string---
+				if (!readFail)
+				{
+					incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+					string[] splitString = incomming.Split(':');
+					if (splitString[0] == "2")
+					{
+						int NumberChars = splitString[3].Length;
+						byte[] messageBytes = new byte[NumberChars / 2];
+						for (int i = 0; i < NumberChars; i += 2)
+							messageBytes[i / 2] = System.Convert.ToByte(splitString[3].Substring(i, 2), 16);
+						splitString[3] = cc.DecryptBytes(messageBytes);
+						incomming = string.Join(":", splitString);
+					}
+				}
+               
+                RaiseEvent(incomming);
                 if (stopListen) break;
             }
         }

@@ -57,6 +57,12 @@ namespace SoftEngChatClient.Model.SSLCommunication
             SendMessage(outgoing);
         }
 
+		public void WriteEstablishP2P(MessageType type, string sender, string receiver)
+		{
+			string outgoing = (((int)type).ToString() + ":" + sender + ":" + receiver);
+			SendMessage(outgoing);
+		}
+
 		public void SendMessage(string outgoing)
 		{
             byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);

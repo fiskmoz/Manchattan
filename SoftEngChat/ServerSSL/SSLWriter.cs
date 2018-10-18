@@ -91,13 +91,19 @@ namespace SoftEngChat.Model.SSLCommunication
 
         internal void WriteOutgoingP2P(string receiver, int port, string key)
         {
-            string outgoing = "c:" + receiver + ":" + port + ":" + key;
+            string outgoing = "12:" + receiver + ":" + port + ":" + key;
+			Console.WriteLine();
+			Console.WriteLine(outgoing);
+			Console.WriteLine();
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
         }
 
         internal void WriteIncommingP2P(string sender, int port, string key)
         {
-            string outgoing = "b:" + sender + ":" + port + ":" + key;
+            string outgoing = "11:" + sender + ":" + port + ":" + key;
+			Console.WriteLine();
+			Console.WriteLine(outgoing);
+			Console.WriteLine();
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
         }
     }

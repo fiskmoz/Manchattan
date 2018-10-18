@@ -14,23 +14,56 @@ namespace SoftEngChatClient.GUI
     {
         public event EventHandler acceptButtonClick;
         public event EventHandler rejectButtonClick;
+
+        List<string> friendRequest;
+
         public FriendRequest()
         {
             InitializeComponent();
+            friendRequest = new List<string>();
+            initializeFriendRequests();
         }
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            acceptButtonClick(this, e);
+            if(FriendRequestsBox.SelectedItem != null)
+            {
+                acceptButtonClick(this, e);
+                FriendRequestsBox.Items.RemoveAt(FriendRequestsBox.Items.IndexOf(FriendRequestsBox.SelectedItem));
+            }
+            
         }
 
         private void rejectButton_Click(object sender, EventArgs e)
         {
-            rejectButtonClick(this, e);
+            if (FriendRequestsBox.SelectedItem != null)
+            {
+                rejectButtonClick(this, e);
+                FriendRequestsBox.Items.RemoveAt(FriendRequestsBox.Items.IndexOf(FriendRequestsBox.SelectedItem));
+            }
         }
-        public Label getFriendLabel()
+
+        private void initializeFriendRequests()
         {
-            return usernameLabel;
+            // READ PENDING FRIEND REQUESTS FROM FILE.
+            foreach(var str in friendRequest)
+            {
+                FriendRequestsBox.Items.Add(str);
+            }
+        }
+
+        public void AppendFriendrequest(string username)
+        {
+            if(!FriendRequestsBox.Items.Contains(username))
+            {
+                friendRequest.Add(username);
+                FriendRequestsBox.Items.Add(username);
+            }
+        }
+
+        public string GetSelectedFriend()
+        {
+            return (string)FriendRequestsBox.SelectedItem;
         }
     }
 }

@@ -123,6 +123,7 @@ namespace SoftEngChatClient
 			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
+			ip = "127.0.0.1";
 		}
 		public P2POutgoingConnection(string receiver, int port, string key, string ip = "127.0.0.1")
 		{
@@ -147,6 +148,15 @@ namespace SoftEngChatClient
 			port = parsedPort;
 			key = incomming[3];
 			ip = "127.0.0.1";
+		}
+	}
+
+	class P2PDisconnect : EventArgs
+	{
+		public string sender { get; private set; }
+		public P2PDisconnect(string[] incomming)
+		{
+			this.sender = incomming[2];
 		}
 	}
 }

@@ -28,6 +28,7 @@ namespace SoftEngChatClient
         public event EventHandler addFriendsEvent;
         public event EventHandler addFriendsButtonClicked;
         public event FormClosedEventHandler formClose;
+        public event EventHandler openPendingFriendRequests;
 
         public ChatWindow()
         {
@@ -275,6 +276,11 @@ namespace SoftEngChatClient
         public Button getAddFriendsButton()
         {
             return addFriendButton;
+        }
+
+        private void FRButton_Click(object sender, EventArgs e)
+        {
+            openPendingFriendRequests(this, e);
         }
     }
 }
