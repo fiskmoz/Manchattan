@@ -143,15 +143,12 @@ namespace SoftEngChatClient
 
         private void addFriends_MouseHover(object sender, EventArgs e)
         {
-            addFriends.ForeColor = Color.White;
+            
         }
 
         private void addFriends_MouseLeave(object sender, EventArgs e)
         {
-            if (findFriendsPanel.Visible == false)
-                addFriends.ForeColor = Color.FromArgb(64, 64, 64);
-            else
-                addFriends.ForeColor = Color.White;
+           
         }
 
         private void addFriends_Click(object sender, EventArgs e)
@@ -161,15 +158,12 @@ namespace SoftEngChatClient
 
         private void showFriends_MouseHover(object sender, EventArgs e)
         {
-            showFriends.ForeColor = Color.White;
+            
         }
 
         private void showFriends_MouseLeave(object sender, EventArgs e)
         {
-            if (findFriendsPanel.Visible == true)
-                showFriends.ForeColor = Color.FromArgb(64, 64, 64);
-            else
-                showFriends.ForeColor = Color.White;
+            
         }
 
         private void showFriends_Click(object sender, EventArgs e)
@@ -276,6 +270,14 @@ namespace SoftEngChatClient
         public Button getAddFriendsButton()
         {
             return addFriendButton;
+        }
+        public Label getFindFriendsLabel()
+        {
+            return findFriendsLabel;
+        }
+        public Label getMyFriendsLabel()
+        {
+            return myFriendsLabel;
         }
 
         private void FRButton_Click(object sender, EventArgs e)

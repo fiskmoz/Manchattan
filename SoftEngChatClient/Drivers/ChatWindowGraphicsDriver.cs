@@ -36,11 +36,13 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsPanel().Visible == false)
             {
                 chatWindow.getFindFriendsPanel().Visible = true;
-                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
-                chatWindow.getAddFriendsLabel().ForeColor = Color.White;
+                chatWindow.getFindFriendsLabel().Visible = true;
+                chatWindow.getMyFriendsLabel().Visible = false;
+                chatWindow.getAddFriendsLabel().BackColor = Color.SteelBlue;
+                chatWindow.getAddFriendsLabel().ForeColor = Color.AliceBlue;
 
-                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
-                chatWindow.getShowFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getShowFriendsLabel().BackColor = Color.Transparent;
+                chatWindow.getShowFriendsLabel().ForeColor = Color.AliceBlue;
             }
         }
 
@@ -49,11 +51,13 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsPanel().Visible == true)
             {
                 chatWindow.getFindFriendsPanel().Visible = false;
-                chatWindow.getShowFriendsLabel().BackColor = Color.FromArgb(64, 64, 64);
-                chatWindow.getShowFriendsLabel().ForeColor = Color.White;
+                chatWindow.getFindFriendsLabel().Visible = false;
+                chatWindow.getMyFriendsLabel().Visible = true;
+                chatWindow.getShowFriendsLabel().BackColor = Color.SteelBlue;
+                chatWindow.getShowFriendsLabel().ForeColor = Color.AliceBlue;
 
-                chatWindow.getAddFriendsLabel().BackColor = Color.FromArgb(59, 177, 226);
-                chatWindow.getAddFriendsLabel().ForeColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getAddFriendsLabel().BackColor = Color.Transparent;
+                chatWindow.getAddFriendsLabel().ForeColor = Color.AliceBlue;
                 FindFriendsTextBoxLeaveEvent(this, e);
             }
         }
@@ -63,7 +67,7 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsTextbox().Text == "")
             {
                 chatWindow.getFindFriendsTextbox().Text = "Search...";
-                chatWindow.getFindFriendsTextbox().ForeColor = Color.Gainsboro;
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.Silver;
             }
         }
 
@@ -72,7 +76,7 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsTextbox().Text == "Search...")
             {
                 chatWindow.getFindFriendsTextbox().Text = "";
-                chatWindow.getFindFriendsTextbox().ForeColor = Color.White;
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.FromArgb(64, 64, 64);
                 chatWindow.getNoFriendsLabel().Visible = false;
             }
         }
