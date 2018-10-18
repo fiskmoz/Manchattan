@@ -123,9 +123,9 @@ namespace SoftEngChatClient
 			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
-			ip = Constants.ip;
+			ip = incomming[4];
 		}
-		public P2POutgoingConnection(string receiver, int port, string key, string ip = Constants.ip)
+		public P2POutgoingConnection(string receiver, int port, string key, string ip)
 		{
 			this.receiver = receiver;
 			this.port = port;
@@ -147,7 +147,7 @@ namespace SoftEngChatClient
 			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
-			ip = "127.0.0.1";
+			ip = incomming[4];
 		}
 	}
 

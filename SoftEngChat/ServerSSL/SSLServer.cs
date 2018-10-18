@@ -268,7 +268,7 @@ namespace SoftEngChat.Model.SSLCommunication
             SSLClient receiverClient = FindClient(receiver);
             if(receiverClient != null)
             {
-                receiverClient.writer.WriteIncommingP2P(sender, port, key, "127.0.0.1");
+                receiverClient.writer.WriteIncommingP2P(sender, port, key, receiverClient.ipAddress);
             }
             else
             {
