@@ -98,5 +98,29 @@ namespace SoftEngChatClient
         {
 
         }
+
+        private void IndividualSendButton_MouseHover(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void IndividualSendButton_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void emojiLogoBox_MouseHover(object sender, EventArgs e)
+        {
+            emojiPanel.Size = new Size(150, 30);
+            emojiPanel.BackColor = Color.SteelBlue;
+            emojiPanel.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void emojiLogoBox_MouseLeave(object sender, EventArgs e)
+        {
+            emojiPanel.Size = new Size(30, 30);
+            emojiPanel.BackColor = Color.Transparent;
+            emojiPanel.BorderStyle = BorderStyle.None;
+        }
     }
 }
