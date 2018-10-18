@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Manchaticons;
 
 namespace SoftEngChatClient
 {
@@ -133,6 +134,7 @@ namespace SoftEngChatClient
 
         private void MessageBox_TextChanged(object sender, EventArgs e)
         {
+            MessageBox.SelectionStart = MessageBox.Text.Length + 1;
             if (MessageBox.Text == "")
             {
                 SendButton.Enabled = false;
@@ -141,29 +143,9 @@ namespace SoftEngChatClient
                 SendButton.Enabled = true;
         }
 
-        private void addFriends_MouseHover(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void addFriends_MouseLeave(object sender, EventArgs e)
-        {
-           
-        }
-
         private void addFriends_Click(object sender, EventArgs e)
         {
             addFriendsEvent(this, e);
-        }
-
-        private void showFriends_MouseHover(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void showFriends_MouseLeave(object sender, EventArgs e)
-        {
-            
         }
 
         private void showFriends_Click(object sender, EventArgs e)
@@ -226,12 +208,22 @@ namespace SoftEngChatClient
 
         private void settingsLabel_MouseHover(object sender, EventArgs e)
         {
-            SettingsLabel.ForeColor = Color.FromArgb(59, 177, 226);
+            if(settingsPanel.Visible == false)
+                settingsLabel.BackColor = Color.SteelBlue;
         }
 
         private void SettingsLabel_Click(object sender, EventArgs e)
         {
-            settingsPanel.Visible = true;
+            if (settingsPanel.Visible == false)
+            {
+                settingsPanel.Visible = true;
+                settingsLabel.BackColor = Color.SteelBlue;
+            }
+            else
+            {
+                settingsPanel.Visible = false;
+                settingsLabel.BackColor = Color.Transparent;
+            }
         }
 
         private void xLabel_Click(object sender, EventArgs e)
@@ -241,22 +233,8 @@ namespace SoftEngChatClient
 
         private void SettingsLabel_MouseLeave(object sender, EventArgs e)
         {
-            SettingsLabel.ForeColor = Color.Black;
-        }
-
-        private void xLabel_MouseHover(object sender, EventArgs e)
-        {
-            xLabel.ForeColor = Color.FromArgb(59, 177, 226);
-        }
-
-        private void xLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void xLabel_MouseLeave(object sender, EventArgs e)
-        {
-            xLabel.ForeColor = Color.Black;
+            if (settingsPanel.Visible == false)
+                settingsLabel.BackColor = Color.Transparent;
         }
 
         private void findFriendsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,6 +261,168 @@ namespace SoftEngChatClient
         private void FRButton_Click(object sender, EventArgs e)
         {
             openPendingFriendRequests(this, e);
+        }
+        private void emojiHappy_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Happy;
+        }
+
+        private void emojiSad_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Sad;
+        }
+
+        private void emojiTongue_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Tongue;
+        }
+
+        private void emojiDevil_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Devil;
+        }
+
+        private void emojiThinking_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Thinking;
+        }
+
+        private void emojiSick_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Sick;
+        }
+
+        private void emojiMuted_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Muted;
+        }
+
+        private void emojiSleeping_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Sleeping;
+        }
+
+        private void emojiShocked_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Shocked;
+        }
+
+        private void emojiShockedLightly_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Shocked_lightly;
+        }
+
+        private void emojiCrying_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Crying;
+        }
+
+        private void emojiAngry_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Angry;
+        }
+
+        private void emojiKiss_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Kiss;
+        }
+
+        private void emojiSmart_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Smart;
+        }
+
+        private void emojiCool_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Cool;
+        }
+
+        private void emojiInLove_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.In_love;
+        }
+
+        private void emojiWink_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Wink;
+        }
+
+        private void emojiHappier_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Happier;
+        }
+
+        private void emojiDyingLaughter_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Dying_laugher;
+        }
+
+        private void emojiPoo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Text = MessageBox.Text + Emoji.Poo;
+        }
+        private void emojiLogoBox_MouseHover(object sender, EventArgs e)
+        {
+            emojiPanel.Size = new Size(150, 30);
+            emojiPanel.BackColor = Color.SteelBlue;
+            emojiPanel.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void emojiLogoBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (allEmoticonsPanel.Visible == false)
+            {
+                emojiPanel.Size = new Size(30, 30);
+                emojiPanel.BackColor = Color.Transparent;
+                emojiPanel.BorderStyle = BorderStyle.None;
+            }
+        }
+
+        private void emojiLogoBox_Click(object sender, EventArgs e)
+        {
+            if (allEmoticonsPanel.Visible == false)
+            {
+                emojiPanel.Size = new Size(150, 30);
+                emojiPanel.BackColor = Color.SteelBlue;
+                allEmoticonsPanel.Visible = true;
+            }
+            else if (allEmoticonsPanel.Visible == true)
+            {
+                allEmoticonsPanel.Visible = false;
+            }
+        }
+
+        private void groupChatPanel_Click(object sender, EventArgs e)
+        {
+            if (allEmoticonsPanel.Visible == true)
+            {
+                emojiPanel.Size = new Size(30, 30);
+                emojiPanel.BackColor = Color.Transparent;
+                emojiPanel.BorderStyle = BorderStyle.None;
+                allEmoticonsPanel.Visible = false;
+            }
+        }
+
+        private void ChatBox_Click(object sender, EventArgs e)
+        {
+            if (allEmoticonsPanel.Visible == true)
+            {
+                emojiPanel.Size = new Size(30, 30);
+                emojiPanel.BackColor = Color.Transparent;
+                emojiPanel.BorderStyle = BorderStyle.None;
+                allEmoticonsPanel.Visible = false;
+            }
+        }
+
+        private void MessageBox_Click(object sender, EventArgs e)
+        {
+            if (allEmoticonsPanel.Visible == true)
+            {
+                emojiPanel.Size = new Size(30, 30);
+                emojiPanel.BackColor = Color.Transparent;
+                emojiPanel.BorderStyle = BorderStyle.None;
+                allEmoticonsPanel.Visible = false;
+            }
         }
     }
 }

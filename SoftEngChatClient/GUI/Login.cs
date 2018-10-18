@@ -147,12 +147,14 @@ namespace SoftEngChatClient
             if ((String.IsNullOrWhiteSpace(EnterEmail.Text) || EnterEmail.Text == "Username") || (String.IsNullOrWhiteSpace(EnterPassword.Text) || EnterPassword.Text == "Password"))
             {
                 LoginButton.Enabled = false;
-                LoginButton.BackColor = Color.FromArgb(59, 177, 226);
+                LoginButton.BackColor = Color.AliceBlue;
+                LoginButton.ForeColor = Color.SteelBlue;
                 return;
             }
 
             LoginButton.Enabled = true;
-            LoginButton.BackColor = Color.FromArgb(64, 64, 64);
+            LoginButton.BackColor = Color.SteelBlue;
+            LoginButton.ForeColor = Color.AliceBlue;
         }
 
         private void EnterPassword_TextChanged(object sender, EventArgs e)

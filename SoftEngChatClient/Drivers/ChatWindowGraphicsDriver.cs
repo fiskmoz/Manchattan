@@ -33,8 +33,8 @@ namespace SoftEngChatClient.Drivers
 
         public void AddFriendsLabel(object sender, EventArgs e)
         {
-            if (chatWindow.getFindFriendsPanel().Visible == false)
-            {
+            //if (chatWindow.getFindFriendsPanel().Visible == false)
+            //{
                 chatWindow.getFindFriendsPanel().Visible = true;
                 chatWindow.getFindFriendsLabel().Visible = true;
                 chatWindow.getMyFriendsLabel().Visible = false;
@@ -43,7 +43,7 @@ namespace SoftEngChatClient.Drivers
 
                 chatWindow.getShowFriendsLabel().BackColor = Color.Transparent;
                 chatWindow.getShowFriendsLabel().ForeColor = Color.AliceBlue;
-            }
+            //}
         }
 
         public void ShowFriendsLabel(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsTextbox().Text == "")
             {
                 chatWindow.getFindFriendsTextbox().Text = "Search...";
-                chatWindow.getFindFriendsTextbox().ForeColor = Color.Silver;
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.AliceBlue;
             }
         }
 
@@ -76,7 +76,7 @@ namespace SoftEngChatClient.Drivers
             if (chatWindow.getFindFriendsTextbox().Text == "Search...")
             {
                 chatWindow.getFindFriendsTextbox().Text = "";
-                chatWindow.getFindFriendsTextbox().ForeColor = Color.FromArgb(64, 64, 64);
+                chatWindow.getFindFriendsTextbox().ForeColor = Color.AliceBlue;
                 chatWindow.getNoFriendsLabel().Visible = false;
             }
         }

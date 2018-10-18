@@ -35,7 +35,6 @@
             this.LoginButton = new System.Windows.Forms.Button();
             this.MailLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
-            this.Title = new System.Windows.Forms.Label();
             this.RegisterLabel = new System.Windows.Forms.Label();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.ExitLogin = new System.Windows.Forms.Button();
@@ -45,7 +44,11 @@
             this.poweredBy = new System.Windows.Forms.Label();
             this.fantastic4 = new System.Windows.Forms.Label();
             this.loginFailedLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // EnterEmail
@@ -55,12 +58,12 @@
             this.EnterEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EnterEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.EnterEmail.ForeColor = System.Drawing.Color.Gray;
-            this.EnterEmail.Location = new System.Drawing.Point(73, 192);
+            this.EnterEmail.Location = new System.Drawing.Point(19, 70);
             this.EnterEmail.Margin = new System.Windows.Forms.Padding(2);
             this.EnterEmail.MaximumSize = new System.Drawing.Size(543, 50);
             this.EnterEmail.MinimumSize = new System.Drawing.Size(443, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(443, 29);
+            this.EnterEmail.Size = new System.Drawing.Size(443, 30);
             this.EnterEmail.TabIndex = 2;
             this.EnterEmail.Tag = "";
             this.EnterEmail.Text = "Username";
@@ -76,7 +79,7 @@
             this.EnterPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EnterPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
             this.EnterPassword.ForeColor = System.Drawing.Color.Gray;
-            this.EnterPassword.Location = new System.Drawing.Point(73, 228);
+            this.EnterPassword.Location = new System.Drawing.Point(19, 106);
             this.EnterPassword.Margin = new System.Windows.Forms.Padding(2);
             this.EnterPassword.MaximumSize = new System.Drawing.Size(333, 50);
             this.EnterPassword.MinimumSize = new System.Drawing.Size(443, 30);
@@ -92,12 +95,12 @@
             // LoginButton
             // 
             this.LoginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(226)))));
+            this.LoginButton.BackColor = System.Drawing.Color.AliceBlue;
             this.LoginButton.Enabled = false;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.LoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(190, 295);
+            this.LoginButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.LoginButton.Location = new System.Drawing.Point(136, 173);
             this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(203, 33);
@@ -111,15 +114,14 @@
             this.MailLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.MailLabel.AutoSize = true;
             this.MailLabel.BackColor = System.Drawing.Color.Transparent;
-            this.MailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold);
-            this.MailLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.MailLabel.Location = new System.Drawing.Point(235, 149);
+            this.MailLabel.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MailLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.MailLabel.Location = new System.Drawing.Point(182, 12);
             this.MailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.MailLabel.Name = "MailLabel";
-            this.MailLabel.Size = new System.Drawing.Size(106, 39);
+            this.MailLabel.Size = new System.Drawing.Size(105, 39);
             this.MailLabel.TabIndex = 4;
             this.MailLabel.Text = "Login";
-            this.MailLabel.Visible = false;
             // 
             // PasswordLabel
             // 
@@ -128,7 +130,7 @@
             this.PasswordLabel.BackColor = System.Drawing.Color.Transparent;
             this.PasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLabel.ForeColor = System.Drawing.Color.White;
-            this.PasswordLabel.Location = new System.Drawing.Point(78, 403);
+            this.PasswordLabel.Location = new System.Drawing.Point(78, 462);
             this.PasswordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(114, 25);
@@ -136,28 +138,14 @@
             this.PasswordLabel.Text = "Password";
             this.PasswordLabel.Visible = false;
             // 
-            // Title
-            // 
-            this.Title.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Title.AutoSize = true;
-            this.Title.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.Location = new System.Drawing.Point(164, 106);
-            this.Title.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Title.MinimumSize = new System.Drawing.Size(244, 28);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(262, 37);
-            this.Title.TabIndex = 6;
-            this.Title.Text = "Manchattan 2k18";
-            // 
             // RegisterLabel
             // 
             this.RegisterLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RegisterLabel.AutoSize = true;
             this.RegisterLabel.BackColor = System.Drawing.Color.Transparent;
             this.RegisterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.RegisterLabel.ForeColor = System.Drawing.Color.White;
-            this.RegisterLabel.Location = new System.Drawing.Point(234, 349);
+            this.RegisterLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.RegisterLabel.Location = new System.Drawing.Point(176, 228);
             this.RegisterLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.RegisterLabel.Name = "RegisterLabel";
             this.RegisterLabel.Size = new System.Drawing.Size(126, 17);
@@ -171,8 +159,8 @@
             this.RegisterButton.FlatAppearance.BorderSize = 0;
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.RegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(214, 369);
+            this.RegisterButton.ForeColor = System.Drawing.Color.AliceBlue;
+            this.RegisterButton.Location = new System.Drawing.Point(160, 247);
             this.RegisterButton.Margin = new System.Windows.Forms.Padding(2);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(157, 23);
@@ -184,11 +172,11 @@
             // ExitLogin
             // 
             this.ExitLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ExitLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ExitLogin.BackColor = System.Drawing.Color.SteelBlue;
             this.ExitLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ExitLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitLogin.ForeColor = System.Drawing.Color.White;
-            this.ExitLogin.Location = new System.Drawing.Point(255, 450);
+            this.ExitLogin.ForeColor = System.Drawing.Color.AliceBlue;
+            this.ExitLogin.Location = new System.Drawing.Point(200, 334);
             this.ExitLogin.Margin = new System.Windows.Forms.Padding(2);
             this.ExitLogin.Name = "ExitLogin";
             this.ExitLogin.Size = new System.Drawing.Size(75, 23);
@@ -213,8 +201,8 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label1.Location = new System.Drawing.Point(221, 269);
+            this.label1.ForeColor = System.Drawing.Color.DarkCyan;
+            this.label1.Location = new System.Drawing.Point(172, 146);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 16);
@@ -227,8 +215,8 @@
             // 
             this.rememberMeCheckBox.AutoSize = true;
             this.rememberMeCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rememberMeCheckBox.ForeColor = System.Drawing.Color.White;
-            this.rememberMeCheckBox.Location = new System.Drawing.Point(73, 263);
+            this.rememberMeCheckBox.ForeColor = System.Drawing.Color.SteelBlue;
+            this.rememberMeCheckBox.Location = new System.Drawing.Point(23, 143);
             this.rememberMeCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.rememberMeCheckBox.Name = "rememberMeCheckBox";
             this.rememberMeCheckBox.Size = new System.Drawing.Size(101, 17);
@@ -243,7 +231,7 @@
             this.poweredBy.BackColor = System.Drawing.Color.Transparent;
             this.poweredBy.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.poweredBy.ForeColor = System.Drawing.Color.White;
-            this.poweredBy.Location = new System.Drawing.Point(443, 471);
+            this.poweredBy.Location = new System.Drawing.Point(214, 583);
             this.poweredBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.poweredBy.Name = "poweredBy";
             this.poweredBy.Size = new System.Drawing.Size(142, 13);
@@ -278,6 +266,43 @@
             this.loginFailedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.loginFailedLabel.Visible = false;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.MailLabel);
+            this.panel1.Controls.Add(this.EnterEmail);
+            this.panel1.Controls.Add(this.EnterPassword);
+            this.panel1.Controls.Add(this.LoginButton);
+            this.panel1.Controls.Add(this.rememberMeCheckBox);
+            this.panel1.Controls.Add(this.RegisterLabel);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.RegisterButton);
+            this.panel1.Controls.Add(this.ExitLogin);
+            this.panel1.Location = new System.Drawing.Point(51, 190);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(481, 383);
+            this.panel1.TabIndex = 16;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel6.Location = new System.Drawing.Point(20, 56);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(443, 2);
+            this.panel6.TabIndex = 23;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel2.Location = new System.Drawing.Point(20, 317);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(443, 2);
+            this.panel2.TabIndex = 24;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,22 +310,13 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(584, 487);
+            this.ClientSize = new System.Drawing.Size(584, 605);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.loginFailedLabel);
             this.Controls.Add(this.fantastic4);
             this.Controls.Add(this.poweredBy);
-            this.Controls.Add(this.rememberMeCheckBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ExitLogin);
-            this.Controls.Add(this.RegisterButton);
-            this.Controls.Add(this.RegisterLabel);
-            this.Controls.Add(this.Title);
             this.Controls.Add(this.PasswordLabel);
-            this.Controls.Add(this.MailLabel);
-            this.Controls.Add(this.LoginButton);
-            this.Controls.Add(this.EnterPassword);
-            this.Controls.Add(this.EnterEmail);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -314,6 +330,8 @@
             this.Load += new System.EventHandler(this.Login_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,7 +341,6 @@
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label MailLabel;
         private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.Label Title;
         private System.Windows.Forms.Label RegisterLabel;
         private System.Windows.Forms.Button RegisterButton;
         private System.Windows.Forms.Button ExitLogin;
@@ -335,5 +352,8 @@
         private System.Windows.Forms.Label poweredBy;
         private System.Windows.Forms.Label fantastic4;
         private System.Windows.Forms.Label loginFailedLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel2;
     }
 }
