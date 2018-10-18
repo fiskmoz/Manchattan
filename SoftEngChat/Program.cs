@@ -11,7 +11,7 @@ namespace SoftEngChat
         {
             
             //Starting the server that runs the whole program
-            IPAddress addre = IPAddress.Parse(GetLocalIPAddress());
+            IPAddress addre = IPAddress.Parse("127.0.0.1");
             SSLServer server = new SSLServer(addre, 5300);
         }
 
