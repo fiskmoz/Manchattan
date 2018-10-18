@@ -130,7 +130,7 @@
             this.EnterEmail.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterEmail.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterEmail.Name = "EnterEmail";
-            this.EnterEmail.Size = new System.Drawing.Size(668, 50);
+            this.EnterEmail.Size = new System.Drawing.Size(668, 51);
             this.EnterEmail.TabIndex = 4;
             this.EnterEmail.Text = "Email";
             this.EnterEmail.TextChanged += new System.EventHandler(this.EnterEmail_TextChanged);
@@ -149,7 +149,7 @@
             this.EnterForename.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterForename.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterForename.Name = "EnterForename";
-            this.EnterForename.Size = new System.Drawing.Size(668, 50);
+            this.EnterForename.Size = new System.Drawing.Size(668, 51);
             this.EnterForename.TabIndex = 5;
             this.EnterForename.Text = "Forename";
             this.EnterForename.TextChanged += new System.EventHandler(this.EnterForename_TextChanged);
@@ -183,7 +183,7 @@
             this.EnterSurname.MaximumSize = new System.Drawing.Size(668, 50);
             this.EnterSurname.MinimumSize = new System.Drawing.Size(668, 30);
             this.EnterSurname.Name = "EnterSurname";
-            this.EnterSurname.Size = new System.Drawing.Size(668, 50);
+            this.EnterSurname.Size = new System.Drawing.Size(668, 51);
             this.EnterSurname.TabIndex = 6;
             this.EnterSurname.Text = "Surname";
             this.EnterSurname.TextChanged += new System.EventHandler(this.EnterSurname_TextChanged);
@@ -255,9 +255,9 @@
             this.RegistrationIndicatorlbl.BackColor = System.Drawing.Color.Transparent;
             this.RegistrationIndicatorlbl.Location = new System.Drawing.Point(77, 410);
             this.RegistrationIndicatorlbl.Name = "RegistrationIndicatorlbl";
-            this.RegistrationIndicatorlbl.Size = new System.Drawing.Size(148, 25);
+            this.RegistrationIndicatorlbl.Size = new System.Drawing.Size(0, 25);
             this.RegistrationIndicatorlbl.TabIndex = 16;
-            this.RegistrationIndicatorlbl.Text = "Password OK!";
+            this.RegistrationIndicatorlbl.Visible = false;
             // 
             // Register
             // 

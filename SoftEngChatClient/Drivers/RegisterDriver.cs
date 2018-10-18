@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using SoftEngChatClient.Model;
 using SoftEngChatClient.Model.SSLCommunication;
+using SoftEngChatClient;
 
 namespace SoftEngChatClient.Controller
 {
@@ -120,9 +121,13 @@ namespace SoftEngChatClient.Controller
             if (register.getPasswordText() == "Password")
             {
                 register.setPasswordText("");
+                //register.EnterPassword.PasswordChar = '*';
                 register.setPasswordColor(Color.White);
             }
         }
+
+
+       
         private void RD_EnterPasswordLeaved(object sender, EventArgs e)
         {
             if (register.getPasswordText() == "")
@@ -230,7 +235,12 @@ namespace SoftEngChatClient.Controller
         private void RD_PwTextChanged(object sender, EventArgs e)
         {
             int length = register.getPasswordText().Count();
-            char currentChar = register.getPasswordText()[length];
+            char currentChar = ' ';
+            if (length > 1)
+            {
+                currentChar = register.getPasswordText()[length-1];
+            
+            
             if (length > previousPasswordLenght)
             {
                 if (length > 3)
@@ -260,6 +270,10 @@ namespace SoftEngChatClient.Controller
             }
             previousChar = currentChar;
             previousPasswordLenght = length;
+            
+            register.ChangeColorRegistrationIndicator(passwordStrengtCounter);
+            }
+
         }
     }
 }
