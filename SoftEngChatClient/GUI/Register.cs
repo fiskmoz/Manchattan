@@ -158,6 +158,8 @@ namespace SoftEngChatClient
                 EnterPassword.Text = "Password";
                 EnterPassword.PasswordChar = '\0';
                 EnterPassword.ForeColor = Color.Gray;
+                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
+                RegistrationIndicatorlbl.Visible = false;
             }
 
           /*  try
