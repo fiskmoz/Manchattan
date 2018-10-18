@@ -272,6 +272,16 @@ namespace SoftEngChatClient
         {
             IndividualMessageBox.Text = IndividualMessageBox.Text + Emoji.Poo;
         }
-        
+
+        private void msgTextBoxPanel_Paint(object sender, PaintEventArgs e)
+        {
+            IndividualMessageBox.Select();
+            IndividualMessageBox.SelectionStart = IndividualMessageBox.Text.Length + 1;
+        }
+
+        private void IndividualMessageBox_TextChanged(object sender, EventArgs e)
+        {
+            IndividualMessageBox.SelectionStart = IndividualMessageBox.Text.Length + 1;
+        }
     }
 }
