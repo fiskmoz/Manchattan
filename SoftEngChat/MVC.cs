@@ -14,7 +14,7 @@
             friendRequest = 7, // 7:sender:receiver
             friendReponse = 8, // 8:sender:receiver:0/1
             onlineStatus = 9, // 9:1/0:username
-            establishP2P = 'a', // 10:sender:receiver
+            establishP2P = 10, // 10:sender:receiver
             incommingP2P = 11, // 11:sender:port:key
             outgoingP2P = 12 //12:receiver:port:key
         }
