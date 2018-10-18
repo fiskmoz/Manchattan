@@ -158,5 +158,9 @@ namespace SoftEngChatClient
 		{
 			this.sender = incomming[2];
 		}
+		public P2PDisconnect(string sender)
+		{
+			this.sender = sender;
+		}
 	}
 }
