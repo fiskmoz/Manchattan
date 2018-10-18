@@ -179,9 +179,28 @@ namespace SoftEngChatClient.Drivers
             string receiver = chatWindow.contactListBox.GetItemText(index);
             if (receiver != username)
             {
-                AddNewIndividualChat(receiver.Replace(" (offline)", ""));
+				CreateNewIndivivualChat(receiver.Replace(" (offline)", ""));
             }
         }
+
+		private void CreateNewIndivivualChat(string receiver)
+		{
+			foreach(Contact contact in contactsHandler.contactList)
+			{
+				if(contact.name == receiver)
+				{
+					if (contact.isOnline)
+					{
+						writer.WriteEstablishP2P(MessageType.establishP2P, username, receiver);
+					}
+					else
+					{
+						AddNewIndividualChat(receiver);
+					}
+					break;
+				}
+			}
+		}
 
         private void LogoutButtonClicked(object sender, EventArgs e)
         {
