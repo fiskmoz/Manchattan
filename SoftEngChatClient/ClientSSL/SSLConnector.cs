@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
@@ -71,7 +72,10 @@ namespace SoftEngChatClient.Model.SSLCommunication
 			return true;
 		}
 
-
+        public IPAddress getIP()
+        {
+            return ((IPEndPoint)client.Client.RemoteEndPoint).Address;
+        }
 
 
 		public void Dispose()

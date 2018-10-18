@@ -6,6 +6,7 @@ namespace SoftEngChat.Model.SSLCommunication
     class SSLClient
     {
         public string userName { set; get; }
+        public string ipAddress { get; private set; }
 		public SSLListener listener;
 		public SSLWriter writer;
 		public SslStream stream;
@@ -15,12 +16,13 @@ namespace SoftEngChat.Model.SSLCommunication
         public int sessionID;
 
 
-		public SSLClient(SslStream stream, SSLServer connector, int incomingID)
+		public SSLClient(SslStream stream, SSLServer connector, int incomingID, string ip)
         {
 			isVerifiedUser = false;
 			server = connector;
 			this.stream = stream;
             this.sessionID = incomingID;
+            ipAddress = ip;
 
             userName = null;
 

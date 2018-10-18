@@ -147,7 +147,7 @@ namespace SoftEngChatClient
 			int.TryParse(incomming[2], out parsedPort);
 			port = parsedPort;
 			key = incomming[3];
-			ip = Constants.ip;
+			ip = "127.0.0.1";
 		}
 	}
 
