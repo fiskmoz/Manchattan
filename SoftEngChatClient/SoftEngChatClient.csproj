@@ -87,6 +87,7 @@
     <Compile Include="GUI\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="MessageHandling\IncommingMessages.cs" />
     <Compile Include="Drivers\IndividualChatDriver.cs" />
     <Compile Include="MessageHandling\StreamListener.cs" />
