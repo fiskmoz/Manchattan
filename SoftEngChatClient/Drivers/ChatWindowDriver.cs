@@ -81,15 +81,6 @@ namespace SoftEngChatClient.Drivers
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
-        private void sendStatus(object sender, EventArgs e)
-        {
-
-            foreach (Contact contact in contactsHandler.contactList)
-            {
-                writer.WriteStatus(MessageType.statusUpdate, this.username , contact.name, chatWindow.statusTextLbl.Text);
-            }
-        }
-
         public void Subscribe(Messagehandler mh, P2PConnector p2pc)
 		{
 			messageHandler = mh;
@@ -141,7 +132,6 @@ namespace SoftEngChatClient.Drivers
 			}
 			return;
 		}
-
 		private void NewP2PConnection(object sender, EventArgs e)
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
@@ -149,8 +139,75 @@ namespace SoftEngChatClient.Drivers
 
             
 		}
+        private void DisconnectP2P()
+        {
+            foreach (IndividualChatDriver icd in individualChatDrivers)
+            {
+                if (icd.isP2P)
+                {
+                    icd.Disconnect();
+                }
+            }
+        }
+        private void UpdateP2PConnections()
+        {
+            for (int i = 0; i < individualChatDrivers.Count(); i++)
+            {
+                foreach (Contact contact in contactsHandler.contactList)
+                {
+                    if (contact.name == individualChatDrivers[i].getSender())
+                    {
+                        if (contact.isOnline)
+                        {
+                            if (!(individualChatDrivers[i].isP2P))
+                            {
+                                string sender = individualChatDrivers[i].getSender();
+                                individualChatDrivers[i].hideWindow();
+                                individualChatDrivers.Remove(individualChatDrivers[i]);
+                                writer.WriteEstablishP2P(MessageType.establishP2P, username, sender);
+                            }
+                        }
+                        else
+                            if (individualChatDrivers[i].isP2P)
+                            DisposeP2PConnection(this, new P2PDisconnect(individualChatDrivers[i].getSender()));
+                    }
+                }
+            }
+        }
+        private void ReceivedP2PResponse(object sender, EventArgs e)
+        {
+            P2POutgoingConnection arg = (P2POutgoingConnection)e;
+            NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
+            AddNewIndividualP2PChat(arg.receiver, netstream, arg.key, true);
+        }
+        public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key, bool showWindow)
+        {
+            bool found = false;
+            foreach (IndividualChatDriver icd in individualChatDrivers)
+            {
+                if (icd.getSender() == sender)
+                {
+                    found = true;
+                    if (!icd.isWindowVisible())
+                    {
+                        if (showWindow)
+                            icd.displayWindow();
+                    }
+                }
+            }
+            if (found == false)
+            {
+                IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, "temp");
+                if (!showWindow && icd.isWindowVisible())
+                    icd.hideWindow();
 
-		private void ChatWindowLoaded(object sender, EventArgs e)
+                individualChatDrivers.Add(icd);
+            }
+
+        }
+
+
+        private void ChatWindowLoaded(object sender, EventArgs e)
         {
             messageList = new List<string>();
             try
@@ -167,7 +224,6 @@ namespace SoftEngChatClient.Drivers
                 chatWindow.AppendTextBox(messageList, "" + System.Environment.NewLine);
             }
         }
-
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
             contactsHandler.SaveContactList();
@@ -192,17 +248,59 @@ namespace SoftEngChatClient.Drivers
                 System.Environment.Exit(1);
             }
         }
+        private void LoggingIn(object sender, EventArgs args)
+        {
+            if (((LoginAck)args).message)
+            {
+                if (chatWindow.InvokeRequired)
+                {
+                    chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
+                    return;
+                }
+                username = ClientDriver.globalUsername;
+                chatWindow.SetUserName(username);
 
-		private void DisconnectP2P()
-		{
-			foreach(IndividualChatDriver icd in individualChatDrivers)
-			{
-				if (icd.isP2P)
-				{
-					icd.Disconnect();
-				}
-			}
-		}
+                string key = ((LoginAck)args).key;
+                int NumberChars = key.Length;
+                personalKey = new byte[NumberChars / 2];
+                for (int i = 0; i < NumberChars; i += 2)
+                    personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
+                logCrypto.SetNewKey(personalKey);
+                fileManager.cyptoMessage.SetNewKey(personalKey);
+
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
+
+
+                popup = new PopupNotifier();
+                popup.Image = new Bitmap(Properties.Resources.logo, new Size(100, 100));
+                popup.Click += new EventHandler(OnPopupClick);
+                new Thread(() => chatWindow.ShowDialog()).Start();
+
+            }
+        }
+        private void LogoutButtonClicked(object sender, EventArgs e)
+        {
+            foreach (var idc in individualChatDrivers)
+            {
+                idc.hideWindow();
+            }
+
+            individualChatDrivers.Clear();
+            chatWindow.getPanelSettings().Visible = false;
+            graphicsDriver.ResetSearchField();
+            graphicsDriver.ShowFriendsLabel(sender, e);
+            loggingOut = true;
+            ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
+            chatWindow.Hide();
+            writer.WriteLogout(MessageType.logout);
+            Thread.Sleep(250);
+            restart(this, e);
+            loggingOut = false;
+            chatWindow.getMessageBox().Clear();
+            chatWindow.getStatusTextBox().Visible = false;
+            chatWindow.getStatusTextBox().Clear();
+
+        }
 
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)
         {
@@ -221,7 +319,6 @@ namespace SoftEngChatClient.Drivers
             }
             chatWindow.clearMessageBox();
         }
-
         private void ChatWindowEnterReleased(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -239,7 +336,6 @@ namespace SoftEngChatClient.Drivers
 				CreateNewIndivivualChat(receiver.Replace(" (offline)", ""));
             }
         }
-
 		private void CreateNewIndivivualChat(string receiver)
 		{
 			bool found = false;
@@ -277,72 +373,6 @@ namespace SoftEngChatClient.Drivers
 				}
 			}
 		}
-
-        private void LogoutButtonClicked(object sender, EventArgs e)
-        {
-            foreach(var idc in individualChatDrivers)
-            {
-                idc.hideWindow();
-            }
-                
-            individualChatDrivers.Clear();
-            chatWindow.getPanelSettings().Visible = false;
-            graphicsDriver.ResetSearchField();
-            graphicsDriver.ShowFriendsLabel(sender, e);
-            loggingOut = true;
-            ChatWindowClosed(sender, new FormClosedEventArgs(CloseReason.None));
-            chatWindow.Hide();
-            writer.WriteLogout(MessageType.logout);
-            Thread.Sleep(250);
-            restart(this, e);
-            loggingOut = false;
-            chatWindow.getMessageBox().Clear();
-            chatWindow.getStatusTextBox().Visible = false;
-            chatWindow.getStatusTextBox().Clear();
-
-        }
-
-        private void PreviousMessageButtonClicked(object sender, EventArgs e)
-        {
-            foreach (string s in messageList)
-            {
-                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
-            }
-        }
-
-        public void UpdateOnlineList(object sender, EventArgs eventArgs)
-        {
-            List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
-            graphicsDriver.UpdateGraphicalOnlineList(contactList);
-			UpdateP2PConnections();
-        }
-
-		private void UpdateP2PConnections()
-		{
-			for (int i = 0; i < individualChatDrivers.Count(); i++)
-			{
-				foreach(Contact contact in contactsHandler.contactList)
-				{
-					if(contact.name == individualChatDrivers[i].getSender())
-					{
-						if (contact.isOnline)
-						{
-							if (!(individualChatDrivers[i].isP2P))
-							{
-								string sender = individualChatDrivers[i].getSender();
-								individualChatDrivers[i].hideWindow();
-								individualChatDrivers.Remove(individualChatDrivers[i]);
-								writer.WriteEstablishP2P(MessageType.establishP2P, username, sender);
-							}
-						}
-						else
-							if(individualChatDrivers[i].isP2P)
-								DisposeP2PConnection(this, new P2PDisconnect(individualChatDrivers[i].getSender()));
-					}
-				}
-			}
-		}
-
         public void IndividualChatPrint(string sender, string message)
         {
             //AddNewIndividualChat(sender);
@@ -350,7 +380,7 @@ namespace SoftEngChatClient.Drivers
             {
                 if (sender == icd.getSender())
                 {
-                    if(!icd.isWindowVisible())
+                    if (!icd.isWindowVisible())
                     {
                         SendPopup("Received message from: " + sender, message);
                     }
@@ -359,10 +389,9 @@ namespace SoftEngChatClient.Drivers
                 }
             }
             individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status));
-            individualChatDrivers[individualChatDrivers.Count()-1].ReceiveMessage(message);
+            individualChatDrivers[individualChatDrivers.Count() - 1].ReceiveMessage(message);
             SendPopup("Received message from: " + sender, message);
         }
-
         public void AddNewIndividualChat(string sender)
         {
             bool found = false;
@@ -385,31 +414,20 @@ namespace SoftEngChatClient.Drivers
             }
         }
 
-		public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key, bool showWindow)
-		{
-			bool found = false;
-			foreach (IndividualChatDriver icd in individualChatDrivers)
-			{
-				if (icd.getSender() == sender)
-				{
-					found = true;
-					if (!icd.isWindowVisible())
-					{
-						if(showWindow)
-							icd.displayWindow();
-					}
-				}
-			}
-			if (found == false)
-			{
-				IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, "temp");
-				if (!showWindow && icd.isWindowVisible())
-					icd.hideWindow();
+        private void PreviousMessageButtonClicked(object sender, EventArgs e)
+        {
+            foreach (string s in messageList)
+            {
+                chatWindow.AppendTextBox(messageList, s + System.Environment.NewLine);
+            }
+        }
 
-				individualChatDrivers.Add(icd);
-			}
-
-		}
+        public void UpdateOnlineList(object sender, EventArgs eventArgs)
+        {
+            List<Contact> contactList = ((ContactListEventArg)eventArgs).contacts;
+            graphicsDriver.UpdateGraphicalOnlineList(contactList);
+			UpdateP2PConnections();
+        }
 
 		private void IncommingMessage(object sender, EventArgs eventArgs)
 		{
@@ -423,50 +441,11 @@ namespace SoftEngChatClient.Drivers
 			}
 		}
         
-        private void LoggingIn(object sender, EventArgs args)
-        {
-            if( ((LoginAck)args).message)
-            {
-                if (chatWindow.InvokeRequired)
-                {
-                    chatWindow.Invoke(new Action<object, EventArgs>(LoggingIn), new object[] { sender, args });
-                    return;
-                }
-                username = ClientDriver.globalUsername;
-                chatWindow.SetUserName(username);
-
-                string key = ((LoginAck)args).key;
-                int NumberChars = key.Length;
-                personalKey = new byte[NumberChars / 2];
-                for (int i = 0; i < NumberChars; i += 2)
-                    personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
-                logCrypto.SetNewKey(personalKey);
-                fileManager.cyptoMessage.SetNewKey(personalKey);
-
-                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username);
-
-
-                popup = new PopupNotifier();
-                popup.Image = new Bitmap(Properties.Resources.logo, new Size(100, 100));
-                popup.Click += new EventHandler(OnPopupClick);
-                new Thread(() => chatWindow.ShowDialog()).Start();
-                
-            }
-        }
-
-		private void ReceivedP2PResponse(object sender, EventArgs e)
-		{
-			P2POutgoingConnection arg = (P2POutgoingConnection)e;
-			NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
-			AddNewIndividualP2PChat(arg.receiver, netstream, arg.key, true);
-		}
-
 		private void ReceivedFriendRequest(object sender, EventArgs message)
         {
             friendrequest.AppendFriendrequest(((ClientMessage)message).sender);
             SendPopup("Received friend request from: " + ((ClientMessage)message).sender, ((ClientMessage)message).message);
         }
-
         private void ReceivedFriendResponse(object sender, EventArgs message)
         {
 			if(((ClientMessage)message).message == "1")
@@ -490,7 +469,6 @@ namespace SoftEngChatClient.Drivers
             }
             graphicsDriver.SearchForFriend(userlist);
         }
-
         private void AddFriendsButtonClickedEvent(object sender, EventArgs e)
         {
             string userAdd = chatWindow.getFindFriendsBox().SelectedItem.ToString();
@@ -503,7 +481,6 @@ namespace SoftEngChatClient.Drivers
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.GetSelectedFriend(), "1");
             contactsHandler.AddContact(friendrequest.GetSelectedFriend());
         }
-
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.GetSelectedFriend(), "0");
@@ -520,7 +497,6 @@ namespace SoftEngChatClient.Drivers
             popup.ContentText = text;
             popup.Popup();
         }
-
         private void OnPopupClick(object sender, EventArgs e)
         {
             string[] popupSplit = popup.TitleText.Split(' ');
@@ -556,6 +532,13 @@ namespace SoftEngChatClient.Drivers
         {
             contactsHandler.GetContact(((ClientMessage)e).sender).status = ((ClientMessage)e).message;
         }
+        private void sendStatus(object sender, EventArgs e)
+        {
 
+            foreach (Contact contact in contactsHandler.contactList)
+            {
+                writer.WriteStatus(MessageType.statusUpdate, this.username, contact.name, chatWindow.statusTextLbl.Text);
+            }
+        }
     }
 }
