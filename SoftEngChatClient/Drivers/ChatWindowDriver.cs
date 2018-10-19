@@ -83,7 +83,11 @@ namespace SoftEngChatClient.Drivers
 
         private void sendStatus(object sender, EventArgs e)
         {
-            //writer.WriteClient();
+
+            foreach (Contact contact in contactsHandler.contactList)
+            {
+                writer.WriteStatus(MessageType.statusUpdate, this.username , contact.name, chatWindow.statusTextLbl.Text);
+            }
         }
 
         public void Subscribe(Messagehandler mh, P2PConnector p2pc)
