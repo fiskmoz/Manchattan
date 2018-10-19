@@ -227,6 +227,7 @@ namespace SoftEngChatClient.Drivers
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
             contactsHandler.SaveContactList();
+            contactsHandler.SaveStatusMessages();
 
 			chatWindow.contactListBox.Items.Clear();
 			chatWindow.contactListBox.Refresh();

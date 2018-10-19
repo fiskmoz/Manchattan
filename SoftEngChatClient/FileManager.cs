@@ -1,4 +1,5 @@
 ﻿using SoftEngChatClient.Controller;
+using SoftEngChatClient.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -126,6 +127,22 @@ namespace SoftEngChatClient
 			}
 			return contactList;
 		}
+
+        internal void ReadStatusMessages(List<Contact> contactList)
+        {
+            if(contactList.Count > 0 )
+            {
+                string statusMessages = ReadFromFile(ClientDriver.globalUsername + "/StatusMessages.txt");
+                string[] statusArray = statusMessages.Split('§');
+                int i = 0;
+                foreach (var contact in contactList)
+                {
+                    contact.status = statusArray[i];
+                    i++;
+                }
+            }
+
+        }
 		
 		public byte[] CreatePackage(string path)
 		{

@@ -13,6 +13,7 @@ namespace SoftEngChatClient.Model
 		public List<Contact> contactList { get; private set; }
 		public List<string> offlineList { get; private set; }
 		private List<string> onlineList;
+
 		private FileManager fileManager;
 
 		public bool hasOfflineList { get; private set; }
@@ -51,6 +52,7 @@ namespace SoftEngChatClient.Model
 			
 			onlineList = ((OnlineList)e).onlineList;
 			contactList.AddRange(CreateContactList()); //= CreateContactList();
+            fileManager.ReadStatusMessages(contactList);
 			hasOnlineList = true;
 			UpdateContactList(this, new ContactListEventArg(contactList));
 
@@ -115,7 +117,21 @@ namespace SoftEngChatClient.Model
             if(contactListString != "")
                 fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\Contacts.txt", contactListString);
 
-			contactList.Clear();
+			
+        }
+
+        public void SaveStatusMessages()
+        {
+            string statusListString = "";
+            foreach(var contact in contactList)
+            {
+                statusListString += contact.status + "§";
+            }
+            if(statusListString != "")
+            {
+                fileManager.WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + ClientDriver.globalUsername + @"\StatusMessages.txt", statusListString);
+            }
+            contactList.Clear();
         }
 
 		public void AddContact(string username)
