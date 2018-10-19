@@ -277,7 +277,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void SendSatusUpdate(string sender, string receiver, string statusUpdate)
         {
-            FindClient(receiver).writer.WriteStatusMessage(sender, reciver, statusUpdate);
+            FindClient(receiver).writer.WriteStatusMessage(sender, receiver, statusUpdate);
         }
     }
 }
