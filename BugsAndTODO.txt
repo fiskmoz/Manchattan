@@ -1,2 +1,19 @@
 2. Kan öppna individuell chattruta genom att spamclicka på contacts sub fönster
 3. kan inte logga ut och sedan in med samma användare...
+
+
+
+        public void HandleStatusUpdate(string [] inc)
+        {
+            string sender = inc[1];
+            string receiver = inc[2];
+            string message = inc[3];
+            if(inc.Length > 3)
+            {
+                for (int i = 3; i < inc.Length; i++)
+                {
+                    message += inc[i];
+                }
+            }
+            NewStatusUpdate(this, new ClientMessage(sender,receiver,message));
+        }
