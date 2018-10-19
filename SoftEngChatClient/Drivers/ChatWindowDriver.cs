@@ -88,6 +88,7 @@ namespace SoftEngChatClient.Drivers
             mh.IncommingFriendRequest += new EventHandler(ReceivedFriendRequest);
             mh.IncommmingFriendResponse += new EventHandler(ReceivedFriendResponse);
 			mh.OutgoingP2P += new EventHandler(ReceivedP2PResponse);
+            mh.NewStatusUpdate += new EventHandler(ReceivedStatusUpdate);
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
@@ -525,6 +526,11 @@ namespace SoftEngChatClient.Drivers
         private void OpenPendingFriendRequests(object sender, EventArgs e)
         {
             friendrequest.ShowDialog();
+        }
+
+        private void ReceivedStatusUpdate(object sender, EventArgs e)
+        {
+            contactsHandler.GetContact(((ClientMessage)e).sender).status = ((ClientMessage)e).message;
         }
 
     }

@@ -137,7 +137,19 @@ namespace SoftEngChatClient.Model
             return false;
         }
 
-		public bool IsOnline(string username)
+        public Contact GetContact(string username)
+        {
+            foreach (Contact contact in contactList)
+            {
+                if (contact.name == username)
+                {
+                    return contact;
+                }
+            }
+            return null;
+        }
+
+        public bool IsOnline(string username)
 		{
 			if (FindContact(username))
 			{
