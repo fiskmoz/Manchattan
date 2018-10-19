@@ -98,6 +98,9 @@ namespace SoftEngChat.Model.SSLCommunication
                         case "8":
                             Receiver.writer.WriteFriendResponse(messageArray[1], messageArray[2], Convert.ToInt32(messageArray[3]));
                             break;
+                        case "15":
+                            Receiver.writer.WriteStatusMessage(messageArray[1], messageArray[2], messageArray[3]);
+                            break;
                     }
                 }
                 userManager.FindUser(username).waitingMessages.Clear();
