@@ -197,7 +197,7 @@ namespace SoftEngChatClient.Drivers
             }
             if (found == false)
             {
-                IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, "temp");
+                IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, contactsHandler.GetContact(sender).status);
                 if (!showWindow && icd.isWindowVisible())
                     icd.hideWindow();
 
