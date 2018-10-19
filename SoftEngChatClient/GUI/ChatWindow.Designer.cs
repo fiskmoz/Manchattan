@@ -143,7 +143,7 @@ namespace SoftEngChatClient
             this.MessageBox.Location = new System.Drawing.Point(50, 408);
             this.MessageBox.Multiline = true;
             this.MessageBox.Name = "MessageBox";
-            this.MessageBox.Size = new System.Drawing.Size(518, 68);
+            this.MessageBox.Size = new System.Drawing.Size(518, 93);
             this.MessageBox.TabIndex = 0;
             this.MessageBox.Click += new System.EventHandler(this.MessageBox_Click);
             this.MessageBox.TextChanged += new System.EventHandler(this.MessageBox_TextChanged);
