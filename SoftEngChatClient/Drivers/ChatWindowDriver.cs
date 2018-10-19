@@ -454,6 +454,7 @@ namespace SoftEngChatClient.Drivers
 			{
 				string friend = ((ClientMessage)message).sender;
 				contactsHandler.AddContact(friend);
+                SendPopup("Friend response: ", friend + " has accepted your friend request");
 			}
         }
 
