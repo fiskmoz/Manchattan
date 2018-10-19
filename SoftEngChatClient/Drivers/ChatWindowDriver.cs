@@ -74,13 +74,19 @@ namespace SoftEngChatClient.Drivers
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
             chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
+            chatWindow.statusSendEvent += new EventHandler(sendStatus);
             chatWindow.openPendingFriendRequests += new EventHandler(OpenPendingFriendRequests);
             friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
             friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
-		public void Subscribe(Messagehandler mh, P2PConnector p2pc)
+        private void sendStatus(object sender, EventArgs e)
+        {
+            //writer.WriteClient();
+        }
+
+        public void Subscribe(Messagehandler mh, P2PConnector p2pc)
 		{
 			messageHandler = mh;
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);

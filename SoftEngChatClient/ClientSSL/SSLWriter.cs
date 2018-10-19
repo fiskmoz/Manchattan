@@ -68,6 +68,12 @@ namespace SoftEngChatClient.Model.SSLCommunication
             byte[] outgoingBytes = Encoding.UTF8.GetBytes(outgoing);
             stream.Write(outgoingBytes, 0, outgoingBytes.Length);
 		}
-		
-	}
+
+        public void WriteStatus(MessageType type, string sender, string receiver, string status)
+        {
+            string outgoing = (((int)type).ToString() + ":" + sender + ":" + receiver + ":" + status);
+            SendMessage(outgoing);
+        }
+
+    }
 }
