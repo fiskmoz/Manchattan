@@ -74,13 +74,23 @@ namespace SoftEngChatClient.Drivers
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
             chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
+            chatWindow.statusSendEvent += new EventHandler(sendStatus);
             chatWindow.openPendingFriendRequests += new EventHandler(OpenPendingFriendRequests);
             friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
             friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
-		public void Subscribe(Messagehandler mh, P2PConnector p2pc)
+        private void sendStatus(object sender, EventArgs e)
+        {
+
+            foreach (Contact contact in contactsHandler.contactList)
+            {
+                writer.WriteStatus(MessageType.statusUpdate, this.username , contact.name, chatWindow.statusTextLbl.Text);
+            }
+        }
+
+        public void Subscribe(Messagehandler mh, P2PConnector p2pc)
 		{
 			messageHandler = mh;
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
@@ -88,9 +98,24 @@ namespace SoftEngChatClient.Drivers
             mh.IncommingFriendRequest += new EventHandler(ReceivedFriendRequest);
             mh.IncommmingFriendResponse += new EventHandler(ReceivedFriendResponse);
 			mh.OutgoingP2P += new EventHandler(ReceivedP2PResponse);
+            mh.NewStatusUpdate += new EventHandler(ReceivedStatusUpdate);
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
+			mh.FileResponse += new EventHandler(ReceivedFileResponse);
+		}
+
+		private void ReceivedFileResponse(object sender, EventArgs e)
+		{
+			FileResponseArgs args = (FileResponseArgs)e;
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if(icd.getSender() == args.sender)
+				{
+					icd.SendFile(args.sendFile);
+					break;
+				}
+			}
 		}
 
 		private void DisposeP2PConnection(object sender, EventArgs e)
@@ -333,7 +358,7 @@ namespace SoftEngChatClient.Drivers
                     return;
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
             individualChatDrivers[individualChatDrivers.Count()-1].ReceiveMessage(message);
             SendPopup("Received message from: " + sender, message);
         }
@@ -355,10 +380,8 @@ namespace SoftEngChatClient.Drivers
             }
             if (found == false)
             {
-                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
                 individualChatDrivers[individualChatDrivers.Count() - 1].SetNormalWindowState();
-                //Add to active chats
-                //chatWindow.activeChats.Items.Add(sender);
             }
         }
 
@@ -379,13 +402,11 @@ namespace SoftEngChatClient.Drivers
 			}
 			if (found == false)
 			{
-				IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key);
+				IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, "temp");
 				if (!showWindow && icd.isWindowVisible())
 					icd.hideWindow();
 
 				individualChatDrivers.Add(icd);
-				//Add to active chats
-				//chatWindow.activeChats.Items.Add(sender);
 			}
 
 		}
@@ -452,6 +473,7 @@ namespace SoftEngChatClient.Drivers
 			{
 				string friend = ((ClientMessage)message).sender;
 				contactsHandler.AddContact(friend);
+                SendPopup("Friend response: ", friend + " has accepted your friend request");
 			}
         }
 
@@ -528,6 +550,11 @@ namespace SoftEngChatClient.Drivers
         private void OpenPendingFriendRequests(object sender, EventArgs e)
         {
             friendrequest.ShowDialog();
+        }
+
+        private void ReceivedStatusUpdate(object sender, EventArgs e)
+        {
+            contactsHandler.GetContact(((ClientMessage)e).sender).status = ((ClientMessage)e).message;
         }
 
     }

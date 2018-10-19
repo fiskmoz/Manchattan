@@ -106,5 +106,14 @@ namespace SoftEngChat.Model.SSLCommunication
 			Console.WriteLine();
             stream.Write(Encoding.UTF8.GetBytes(outgoing));
         }
+
+        public void WriteStatusMessage(string sender, string receiver, string status)
+        {
+            string outgoing = "15" + sender + ":" + receiver + ":" + status;
+            Console.WriteLine();
+            Console.WriteLine(outgoing);
+            Console.WriteLine();
+            stream.Write(Encoding.UTF8.GetBytes(outgoing));
+        }
     }
 }

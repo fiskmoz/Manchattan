@@ -202,7 +202,6 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				client.Dispose();
 				clientList.Remove(client);
-				SendStatusUpdateToClients();
 			}
 			
 			Thread.EndCriticalRegion();
@@ -217,11 +216,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
                 }
             }
-        }
-
-        public void SendStatusUpdateToClients()
-        {
-
         }
 
         public void UpdateOnlineList()
@@ -279,6 +273,20 @@ namespace SoftEngChat.Model.SSLCommunication
         public int getNextPort()
         {
             return nextPort++;
+        }
+
+        public void SendSatusUpdate(string sender, string receiver, string statusUpdate, string entireMessage)
+        {
+            SSLClient receiverClient = FindClient(receiver); 
+            if (receiverClient != null)
+            {
+                receiverClient.writer.WriteStatusMessage(sender, receiver, statusUpdate);
+            }
+            else
+            {
+                userManager.FindUser(receiver).waitingMessages.Add(entireMessage);
+                Console.WriteLine("Receiver was offline message was stored");
+            }
         }
     }
 }
