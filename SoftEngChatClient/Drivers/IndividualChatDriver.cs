@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 using System.Timers;
 using SoftEngChatClient.Drivers;
 using SoftEngChatClient.MessageHandling;
@@ -81,8 +82,10 @@ namespace SoftEngChatClient
             window.IndividualSendButtonClicked += new EventHandler(icd_SendButtonClicked);
             window.IndividualMessageBoxReleased += new KeyEventHandler(icd_EnterKeyReleased);
             window.IndividualChatWindowLoaded += new EventHandler(icd_WindowLoaded);
+			window.SendFileEvent += new EventHandler(SendFileButtonClicked);
         }
-        private void icd_WindowLoaded(object sender, EventArgs e)
+
+		private void icd_WindowLoaded(object sender, EventArgs e)
         {
             string chatLog = fm.LoadIndividualChat(username, receiver);
             window.AppendTextBox(chatLog);   
@@ -197,9 +200,34 @@ namespace SoftEngChatClient
 			writer.WriteLogout(MessageType.logout);
 		}
 
+
+		private void SendFileButtonClicked(object sender, EventArgs e)
+		{
+			var filePath = string.Empty;
+			using (OpenFileDialog openFileDialog = new OpenFileDialog())
+			{
+				openFileDialog.InitialDirectory = "c:\\";
+				openFileDialog.RestoreDirectory = true;
+				Thread statThread = new Thread(new ThreadStart(() =>
+				{
+					if (openFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						//Get the path of specified file
+						SendFileRequest(openFileDialog.FileName);
+					}
+				}));
+
+				statThread.SetApartmentState(ApartmentState.STA);
+				statThread.IsBackground = true;
+				statThread.Start();
+				statThread.Join();
+			
+			}
+		}
+
 		private void FileRequestRecieved(FileRequestArgs args)
 		{
-			bool accept = false;
+			bool accept = true;
 			//GUI STUFF HERE
 
 			((P2PWriter)writer).WriteFileResponse(MessageType.FileResponse, username, receiver, accept);
