@@ -96,6 +96,7 @@ namespace SoftEngChatClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.findFriendsPanel.SuspendLayout();
@@ -143,7 +144,7 @@ namespace SoftEngChatClient
             this.MessageBox.Location = new System.Drawing.Point(50, 408);
             this.MessageBox.Multiline = true;
             this.MessageBox.Name = "MessageBox";
-            this.MessageBox.Size = new System.Drawing.Size(518, 93);
+            this.MessageBox.Size = new System.Drawing.Size(518, 68);
             this.MessageBox.TabIndex = 0;
             this.MessageBox.Click += new System.EventHandler(this.MessageBox_Click);
             this.MessageBox.TextChanged += new System.EventHandler(this.MessageBox_TextChanged);
@@ -630,6 +631,7 @@ namespace SoftEngChatClient
             // groupChatPanel
             // 
             this.groupChatPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupChatPanel.Controls.Add(this.panel7);
             this.groupChatPanel.Controls.Add(this.allEmoticonsPanel);
             this.groupChatPanel.Controls.Add(this.label1);
             this.groupChatPanel.Controls.Add(this.pictureBox1);
@@ -978,6 +980,15 @@ namespace SoftEngChatClient
             this.panel8.Size = new System.Drawing.Size(2, 520);
             this.panel8.TabIndex = 23;
             // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel7.Location = new System.Drawing.Point(103, 497);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(443, 2);
+            this.panel7.TabIndex = 112;
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1114,5 +1125,6 @@ namespace SoftEngChatClient
         private Label label6;
         public TextBox statusTextBox;
         public Label statusTextLbl;
+        private Panel panel7;
     }
 }
