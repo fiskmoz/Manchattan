@@ -271,6 +271,10 @@ namespace SoftEngChatClient.Drivers
             Thread.Sleep(250);
             restart(this, e);
             loggingOut = false;
+            chatWindow.getMessageBox().Clear();
+            chatWindow.getStatusTextBox().Visible = false;
+            chatWindow.getStatusTextBox().Clear();
+
         }
 
         private void PreviousMessageButtonClicked(object sender, EventArgs e)
@@ -329,7 +333,7 @@ namespace SoftEngChatClient.Drivers
                     return;
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
             individualChatDrivers[individualChatDrivers.Count()-1].ReceiveMessage(message);
             SendPopup("Received message from: " + sender, message);
         }
@@ -351,10 +355,8 @@ namespace SoftEngChatClient.Drivers
             }
             if (found == false)
             {
-                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager));
+                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
                 individualChatDrivers[individualChatDrivers.Count() - 1].SetNormalWindowState();
-                //Add to active chats
-                //chatWindow.activeChats.Items.Add(sender);
             }
         }
 
@@ -375,13 +377,11 @@ namespace SoftEngChatClient.Drivers
 			}
 			if (found == false)
 			{
-				IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key);
+				IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, "temp");
 				if (!showWindow && icd.isWindowVisible())
 					icd.hideWindow();
 
 				individualChatDrivers.Add(icd);
-				//Add to active chats
-				//chatWindow.activeChats.Items.Add(sender);
 			}
 
 		}
