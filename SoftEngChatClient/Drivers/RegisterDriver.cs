@@ -236,13 +236,15 @@ namespace SoftEngChatClient.Controller
         {
             int length = register.getPasswordText().Count();
             char currentChar = ' ';
-            if(length < 0)
+            if(length < 1)
             {
                 register.resetPasswordStrength();
+                passwordStrengtCounter = 0;
             }
             if (length > 1)
             {
                 currentChar = register.getPasswordText()[length-1];
+                register.setRegColorIndlbl(true);
             
             
             if (length > previousPasswordLenght)

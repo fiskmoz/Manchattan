@@ -94,6 +94,8 @@ namespace SoftEngChatClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.statusTextLbl = new System.Windows.Forms.Label();
+            this.statusTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.findFriendsPanel.SuspendLayout();
@@ -445,7 +447,7 @@ namespace SoftEngChatClient
             this.settingsPanel.Controls.Add(this.label4);
             this.settingsPanel.Controls.Add(this.pictureBox2);
             this.settingsPanel.Controls.Add(this.logoutBtn);
-            this.settingsPanel.Location = new System.Drawing.Point(120, 14);
+            this.settingsPanel.Location = new System.Drawing.Point(464, 45);
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(178, 110);
             this.settingsPanel.TabIndex = 109;
@@ -493,8 +495,9 @@ namespace SoftEngChatClient
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.panel1.Controls.Add(this.statusTextBox);
+            this.panel1.Controls.Add(this.statusTextLbl);
             this.panel1.Controls.Add(this.settingsLabel);
-            this.panel1.Controls.Add(this.settingsPanel);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.SettingsLabelOld);
             this.panel1.Controls.Add(this.userNameLbl);
@@ -595,6 +598,7 @@ namespace SoftEngChatClient
             // groupChatPanel
             // 
             this.groupChatPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupChatPanel.Controls.Add(this.settingsPanel);
             this.groupChatPanel.Controls.Add(this.allEmoticonsPanel);
             this.groupChatPanel.Controls.Add(this.label1);
             this.groupChatPanel.Controls.Add(this.pictureBox1);
@@ -943,6 +947,37 @@ namespace SoftEngChatClient
             this.panel8.Size = new System.Drawing.Size(2, 520);
             this.panel8.TabIndex = 23;
             // 
+            // statusTextLbl
+            // 
+            this.statusTextLbl.AutoSize = true;
+            this.statusTextLbl.BackColor = System.Drawing.Color.Transparent;
+            this.statusTextLbl.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusTextLbl.ForeColor = System.Drawing.Color.Gray;
+            this.statusTextLbl.Location = new System.Drawing.Point(10, 49);
+            this.statusTextLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.statusTextLbl.MaximumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.MinimumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.Name = "statusTextLbl";
+            this.statusTextLbl.Size = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.TabIndex = 113;
+            this.statusTextLbl.Text = "Status";
+            this.statusTextLbl.Click += new System.EventHandler(this.statusTextLbl_Click);
+            // 
+            // statusTextBox
+            // 
+            this.statusTextBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.statusTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.statusTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusTextBox.ForeColor = System.Drawing.Color.Gray;
+            this.statusTextBox.Location = new System.Drawing.Point(11, 63);
+            this.statusTextBox.MaxLength = 40;
+            this.statusTextBox.MinimumSize = new System.Drawing.Size(230, 16);
+            this.statusTextBox.Name = "statusTextBox";
+            this.statusTextBox.Size = new System.Drawing.Size(230, 16);
+            this.statusTextBox.TabIndex = 109;
+            this.statusTextBox.Visible = false;
+            this.statusTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.statusTextBox_KeyUp);
+            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1077,5 +1112,7 @@ namespace SoftEngChatClient
         private PictureBox emojiHappy;
         private Label requesetIndicator;
         private Label label6;
+        private TextBox statusTextBox;
+        private Label statusTextLbl;
     }
 }

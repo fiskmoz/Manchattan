@@ -283,5 +283,10 @@ namespace SoftEngChatClient
         {
             IndividualMessageBox.SelectionStart = IndividualMessageBox.Text.Length + 1;
         }
+
+        public Label getStatusTextLabel()
+        {
+            return statusTextLbl;
+        }
     }
 }
