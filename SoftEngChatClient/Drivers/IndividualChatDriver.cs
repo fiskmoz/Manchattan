@@ -24,14 +24,16 @@ namespace SoftEngChatClient
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
-		public bool isP2P { get; private set; }
+        public string statusMessage { get; private set; }
+        public bool isP2P { get; private set; }
 
-        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm)
+        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm, string status)
         {
 			isP2P = false;
             username = Username;
             receiver = Receiver;
             this.fm = fm;
+            this.statusMessage = status;
             window = new IndividualChatWindow(receiver);
             spam = new SpamProtector();
             SetupListners();
@@ -43,14 +45,14 @@ namespace SoftEngChatClient
             
         }
 
-		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key)
+		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key, string status)
 		{
 			isP2P = true;
 			this.username = username;
 			this.receiver = receiver;
 			this.fm = fm;
-
-			window = new IndividualChatWindow(receiver);
+            this.statusMessage = status;
+            window = new IndividualChatWindow(receiver);
 			spam = new SpamProtector();
 			SetupListners();
 
