@@ -234,12 +234,12 @@
             // 
             this.RegistrationColorIndicatorlbl.AutoSize = true;
             this.RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
-            this.RegistrationColorIndicatorlbl.Location = new System.Drawing.Point(19, 187);
+            this.RegistrationColorIndicatorlbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RegistrationColorIndicatorlbl.Location = new System.Drawing.Point(16, 184);
             this.RegistrationColorIndicatorlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.RegistrationColorIndicatorlbl.MaximumSize = new System.Drawing.Size(12, 13);
-            this.RegistrationColorIndicatorlbl.MinimumSize = new System.Drawing.Size(12, 13);
+            this.RegistrationColorIndicatorlbl.MinimumSize = new System.Drawing.Size(33, 13);
             this.RegistrationColorIndicatorlbl.Name = "RegistrationColorIndicatorlbl";
-            this.RegistrationColorIndicatorlbl.Size = new System.Drawing.Size(12, 13);
+            this.RegistrationColorIndicatorlbl.Size = new System.Drawing.Size(33, 15);
             this.RegistrationColorIndicatorlbl.TabIndex = 15;
             // 
             // RegistrationIndicatorlbl
@@ -256,8 +256,8 @@
             // showPasswordImage
             // 
             this.showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background3;
-            this.showPasswordImage.Location = new System.Drawing.Point(327, 161);
-            this.showPasswordImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.showPasswordImage.Location = new System.Drawing.Point(326, 160);
+            this.showPasswordImage.Margin = new System.Windows.Forms.Padding(2);
             this.showPasswordImage.Name = "showPasswordImage";
             this.showPasswordImage.Size = new System.Drawing.Size(22, 19);
             this.showPasswordImage.TabIndex = 17;
@@ -281,11 +281,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.EnterSurname);
             this.Controls.Add(this.EnterForename);
-            this.Controls.Add(this.EnterEmail);
             this.Controls.Add(this.EnterUsername);
             this.Controls.Add(this.EnterPassword);
             this.Controls.Add(this.RegisterCancel);
             this.Controls.Add(this.RegisterAccept);
+            this.Controls.Add(this.EnterEmail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
