@@ -139,9 +139,9 @@ namespace SoftEngChatClient
 			return package;
 		}
 
-		internal void SaveReceivedFile(byte[] file)
+		internal void SaveReceivedFile(byte[] file, string filename, string username)
 		{
-			throw new NotImplementedException();
+			File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\Downloads\" + filename, file);
 		}
 	}
 }
