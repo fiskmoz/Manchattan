@@ -62,10 +62,11 @@
             this.emojiLogoBox = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.viewMsgTextBoxPanel = new System.Windows.Forms.Panel();
             this.statusTextLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.viewMsgTextBoxPanel = new System.Windows.Forms.Panel();
+            this.SendFileBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).BeginInit();
             this.msgTextBoxPanel.SuspendLayout();
@@ -181,6 +182,7 @@
             // msgTextBoxPanel
             // 
             this.msgTextBoxPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.msgTextBoxPanel.Controls.Add(this.SendFileBtn);
             this.msgTextBoxPanel.Controls.Add(this.allEmoticonsPanel);
             this.msgTextBoxPanel.Controls.Add(this.emojiPanel);
             this.msgTextBoxPanel.Controls.Add(this.label2);
@@ -507,24 +509,6 @@
             this.panel1.Size = new System.Drawing.Size(584, 89);
             this.panel1.TabIndex = 19;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background5;
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel2.Location = new System.Drawing.Point(-5, 82);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(589, 11);
-            this.panel2.TabIndex = 20;
-            // 
-            // viewMsgTextBoxPanel
-            // 
-            this.viewMsgTextBoxPanel.BackColor = System.Drawing.Color.AliceBlue;
-            this.viewMsgTextBoxPanel.Location = new System.Drawing.Point(-8, 92);
-            this.viewMsgTextBoxPanel.Name = "viewMsgTextBoxPanel";
-            this.viewMsgTextBoxPanel.Size = new System.Drawing.Size(602, 449);
-            this.viewMsgTextBoxPanel.TabIndex = 18;
-            // 
             // statusTextLbl
             // 
             this.statusTextLbl.AutoSize = true;
@@ -550,6 +534,34 @@
             this.label6.Size = new System.Drawing.Size(157, 13);
             this.label6.TabIndex = 114;
             this.label6.Text = "_________________________";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel2.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background5;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel2.Location = new System.Drawing.Point(-5, 82);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(589, 11);
+            this.panel2.TabIndex = 20;
+            // 
+            // viewMsgTextBoxPanel
+            // 
+            this.viewMsgTextBoxPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.viewMsgTextBoxPanel.Location = new System.Drawing.Point(-8, 92);
+            this.viewMsgTextBoxPanel.Name = "viewMsgTextBoxPanel";
+            this.viewMsgTextBoxPanel.Size = new System.Drawing.Size(602, 449);
+            this.viewMsgTextBoxPanel.TabIndex = 18;
+            // 
+            // SendFileBtn
+            // 
+            this.SendFileBtn.Location = new System.Drawing.Point(54, 354);
+            this.SendFileBtn.Name = "SendFileBtn";
+            this.SendFileBtn.Size = new System.Drawing.Size(50, 37);
+            this.SendFileBtn.TabIndex = 23;
+            this.SendFileBtn.Text = "Attachment";
+            this.SendFileBtn.UseVisualStyleBackColor = true;
+            this.SendFileBtn.Click += new System.EventHandler(this.SendFileBtn_Click);
             // 
             // IndividualChatWindow
             // 
@@ -646,5 +658,6 @@
         private System.Windows.Forms.Panel viewMsgTextBoxPanel;
         private System.Windows.Forms.Label statusTextLbl;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button SendFileBtn;
     }
 }

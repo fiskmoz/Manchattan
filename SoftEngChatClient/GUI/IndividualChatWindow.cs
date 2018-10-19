@@ -17,6 +17,8 @@ namespace SoftEngChatClient
         public event KeyEventHandler IndividualMessageBoxReleased;
         public event EventHandler IndividualSendButtonClicked;
         public event FormClosingEventHandler IndivudualFormClosed;
+        public event EventHandler SendFileEvent;
+
 
         public IndividualChatWindow(string username)
         {
@@ -295,6 +297,11 @@ namespace SoftEngChatClient
         public Label getStatusTextLabel()
         {
             return statusTextLbl;
+        }
+
+        private void SendFileBtn_Click(object sender, EventArgs e)
+        {
+            SendFileEvent(sender, e);
         }
     }
 }
