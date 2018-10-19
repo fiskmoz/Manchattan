@@ -251,7 +251,7 @@ namespace SoftEngChat.Model.SSLCommunication
             offlineListAsString = str.ToString();
         }
 
-        private SSLClient FindClient(string username)
+        public SSLClient FindClient(string username)
         {
             foreach(SSLClient client in clientList)
             {
@@ -263,12 +263,12 @@ namespace SoftEngChat.Model.SSLCommunication
             return null;
         }
 
-        public void SendIncommingP2P(string sender, string receiver, int port, string key)
+        public void SendIncommingP2P(string sender, string receiver, int port, string key, string ip)
         {
             SSLClient receiverClient = FindClient(receiver);
             if(receiverClient != null)
             {
-                receiverClient.writer.WriteIncommingP2P(sender, port, key, receiverClient.ipAddress);
+                receiverClient.writer.WriteIncommingP2P(sender, port, key, ip);
             }
             else
             {
