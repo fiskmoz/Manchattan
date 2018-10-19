@@ -240,6 +240,7 @@ namespace SoftEngChatClient
             if (counter >= 10)
             {
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.LimeGreen;
+                RegistrationColorIndicatorlbl.MinimumSize = new Size(93,13);
                 RegistrationIndicatorlbl.Text = "Good";
                 
 
@@ -248,19 +249,22 @@ namespace SoftEngChatClient
             {
                 
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Red;
-                RegistrationIndicatorlbl.Visible = true;
+                RegistrationColorIndicatorlbl.MinimumSize = new Size(53, 13);
+                //RegistrationIndicatorlbl.Visible = true;
                 RegistrationIndicatorlbl.Text = "Weak";
                 
             }
             else if(counter >= 5 && counter < 10)
             {
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gold;
+                RegistrationColorIndicatorlbl.MinimumSize = new Size(73, 13);
                 RegistrationIndicatorlbl.Text = "Fair";
             }
-            else
+            else if(counter < 1)
             {
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
-                RegistrationIndicatorlbl.Visible = false;
+                RegistrationColorIndicatorlbl.MinimumSize = new Size(33, 13);
+                //RegistrationIndicatorlbl.Visible = false;
 
             }
                 
@@ -285,6 +289,10 @@ namespace SoftEngChatClient
         {
            showPasswordFlag = !showPasswordFlag;
            ShowPassWord(showPasswordFlag);
+        }
+        public void resetPasswordStrength()
+        {
+            RegistrationColorIndicatorlbl.MinimumSize = new Size(33, 13);
         }
     }
 }
