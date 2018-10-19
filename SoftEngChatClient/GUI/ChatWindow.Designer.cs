@@ -479,7 +479,7 @@ namespace SoftEngChatClient
             this.settingsPanel.Controls.Add(this.label4);
             this.settingsPanel.Controls.Add(this.pictureBox2);
             this.settingsPanel.Controls.Add(this.logoutBtn);
-            this.settingsPanel.Location = new System.Drawing.Point(120, 14);
+            this.settingsPanel.Location = new System.Drawing.Point(121, 14);
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(178, 110);
             this.settingsPanel.TabIndex = 109;
