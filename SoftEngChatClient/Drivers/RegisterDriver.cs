@@ -243,8 +243,7 @@ namespace SoftEngChatClient.Controller
             }
             if (length > 1)
             {
-                currentChar = register.getPasswordText()[length-1];
-                register.setRegColorIndlbl(true);
+                currentChar = register.getPasswordText()[length - 1];
             
             
             if (length > previousPasswordLenght)

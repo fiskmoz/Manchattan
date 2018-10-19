@@ -139,7 +139,7 @@ namespace SoftEngChatClient
             this.MessageBox.BackColor = System.Drawing.Color.AliceBlue;
             this.MessageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MessageBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MessageBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.MessageBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.MessageBox.Location = new System.Drawing.Point(50, 408);
             this.MessageBox.Multiline = true;
             this.MessageBox.Name = "MessageBox";
@@ -172,7 +172,7 @@ namespace SoftEngChatClient
             this.ChatBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ChatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.ChatBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChatBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ChatBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.ChatBox.Location = new System.Drawing.Point(29, 76);
             this.ChatBox.Multiline = true;
             this.ChatBox.Name = "ChatBox";
@@ -273,6 +273,7 @@ namespace SoftEngChatClient
             // findFriendsPanel
             // 
             this.findFriendsPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.findFriendsPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.findFriendsPanel.Controls.Add(this.findFriendsTextBox);
             this.findFriendsPanel.Controls.Add(this.addFriendButton);
             this.findFriendsPanel.Controls.Add(this.noFriendsLabel);
@@ -358,7 +359,9 @@ namespace SoftEngChatClient
             // 
             this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
             this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel5.Controls.Add(this.requesetIndicator);
             this.panel5.Controls.Add(this.myFriendsLabel);
+            this.panel5.Controls.Add(this.FRButton);
             this.panel5.Controls.Add(this.showFriends);
             this.panel5.Controls.Add(this.findFriendsLabel);
             this.panel5.Controls.Add(this.addFriends);
@@ -447,7 +450,7 @@ namespace SoftEngChatClient
             this.settingsPanel.Controls.Add(this.label4);
             this.settingsPanel.Controls.Add(this.pictureBox2);
             this.settingsPanel.Controls.Add(this.logoutBtn);
-            this.settingsPanel.Location = new System.Drawing.Point(464, 45);
+            this.settingsPanel.Location = new System.Drawing.Point(120, 14);
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(178, 110);
             this.settingsPanel.TabIndex = 109;
@@ -477,12 +480,12 @@ namespace SoftEngChatClient
             // 
             // FRButton
             // 
-            this.FRButton.BackColor = System.Drawing.Color.DarkCyan;
+            this.FRButton.BackColor = System.Drawing.Color.SteelBlue;
             this.FRButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.FRButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.FRButton.Font = new System.Drawing.Font("Georgia", 7.8F);
             this.FRButton.ForeColor = System.Drawing.Color.AliceBlue;
-            this.FRButton.Location = new System.Drawing.Point(582, 130);
+            this.FRButton.Location = new System.Drawing.Point(211, 3);
             this.FRButton.Name = "FRButton";
             this.FRButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.FRButton.Size = new System.Drawing.Size(92, 41);
@@ -495,9 +498,11 @@ namespace SoftEngChatClient
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.settingsLabel);
+            this.panel1.Controls.Add(this.settingsPanel);
             this.panel1.Controls.Add(this.statusTextBox);
             this.panel1.Controls.Add(this.statusTextLbl);
-            this.panel1.Controls.Add(this.settingsLabel);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.SettingsLabelOld);
             this.panel1.Controls.Add(this.userNameLbl);
@@ -521,8 +526,6 @@ namespace SoftEngChatClient
             this.settingsLabel.TabIndex = 109;
             this.settingsLabel.TabStop = false;
             this.settingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
-            this.settingsLabel.MouseLeave += new System.EventHandler(this.SettingsLabel_MouseLeave);
-            this.settingsLabel.MouseHover += new System.EventHandler(this.settingsLabel_MouseHover);
             // 
             // label6
             // 
@@ -537,11 +540,9 @@ namespace SoftEngChatClient
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.AliceBlue;
-            this.panel3.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background6;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel3.Controls.Add(this.requesetIndicator);
-            this.panel3.Controls.Add(this.FRButton);
+            this.panel3.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.panel9);
             this.panel3.Controls.Add(this.pictureBox3);
@@ -553,10 +554,10 @@ namespace SoftEngChatClient
             // requesetIndicator
             // 
             this.requesetIndicator.AutoSize = true;
-            this.requesetIndicator.BackColor = System.Drawing.Color.DarkCyan;
+            this.requesetIndicator.BackColor = System.Drawing.Color.SteelBlue;
             this.requesetIndicator.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.requesetIndicator.ForeColor = System.Drawing.Color.Yellow;
-            this.requesetIndicator.Location = new System.Drawing.Point(590, 133);
+            this.requesetIndicator.ForeColor = System.Drawing.Color.AliceBlue;
+            this.requesetIndicator.Location = new System.Drawing.Point(219, 6);
             this.requesetIndicator.Name = "requesetIndicator";
             this.requesetIndicator.Size = new System.Drawing.Size(24, 33);
             this.requesetIndicator.TabIndex = 112;
@@ -567,7 +568,7 @@ namespace SoftEngChatClient
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(470, 33);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
@@ -598,7 +599,6 @@ namespace SoftEngChatClient
             // groupChatPanel
             // 
             this.groupChatPanel.BackColor = System.Drawing.Color.AliceBlue;
-            this.groupChatPanel.Controls.Add(this.settingsPanel);
             this.groupChatPanel.Controls.Add(this.allEmoticonsPanel);
             this.groupChatPanel.Controls.Add(this.label1);
             this.groupChatPanel.Controls.Add(this.pictureBox1);
@@ -969,7 +969,7 @@ namespace SoftEngChatClient
             this.statusTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.statusTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusTextBox.ForeColor = System.Drawing.Color.Gray;
-            this.statusTextBox.Location = new System.Drawing.Point(11, 63);
+            this.statusTextBox.Location = new System.Drawing.Point(11, 49);
             this.statusTextBox.MaxLength = 40;
             this.statusTextBox.MinimumSize = new System.Drawing.Size(230, 16);
             this.statusTextBox.Name = "statusTextBox";
@@ -1112,7 +1112,7 @@ namespace SoftEngChatClient
         private PictureBox emojiHappy;
         private Label requesetIndicator;
         private Label label6;
-        private TextBox statusTextBox;
         private Label statusTextLbl;
+        public TextBox statusTextBox;
     }
 }

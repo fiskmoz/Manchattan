@@ -101,7 +101,7 @@
             this.IndividualChatBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IndividualChatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.IndividualChatBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IndividualChatBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.IndividualChatBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.IndividualChatBox.Location = new System.Drawing.Point(23, 15);
             this.IndividualChatBox.Multiline = true;
             this.IndividualChatBox.Name = "IndividualChatBox";
@@ -117,7 +117,7 @@
             this.IndividualMessageBox.BackColor = System.Drawing.Color.AliceBlue;
             this.IndividualMessageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IndividualMessageBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IndividualMessageBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.IndividualMessageBox.ForeColor = System.Drawing.Color.SteelBlue;
             this.IndividualMessageBox.Location = new System.Drawing.Point(38, 384);
             this.IndividualMessageBox.Multiline = true;
             this.IndividualMessageBox.Name = "IndividualMessageBox";
