@@ -171,12 +171,12 @@ namespace SoftEngChatClient
             this.ChatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.ChatBox.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChatBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ChatBox.Location = new System.Drawing.Point(29, 57);
+            this.ChatBox.Location = new System.Drawing.Point(29, 76);
             this.ChatBox.Multiline = true;
             this.ChatBox.Name = "ChatBox";
             this.ChatBox.ReadOnly = true;
             this.ChatBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ChatBox.Size = new System.Drawing.Size(621, 310);
+            this.ChatBox.Size = new System.Drawing.Size(621, 297);
             this.ChatBox.TabIndex = 4;
             this.ChatBox.TabStop = false;
             this.ChatBox.Click += new System.EventHandler(this.ChatBox_Click);
@@ -226,7 +226,7 @@ namespace SoftEngChatClient
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 14);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(50, 50);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(50, 50);
             this.pictureBox1.Name = "pictureBox1";
@@ -898,7 +898,7 @@ namespace SoftEngChatClient
             this.emojiLogoBox.BackColor = System.Drawing.Color.Transparent;
             this.emojiLogoBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.emojiLogoBox.Image = global::SoftEngChatClient.Properties.Resources.logo1;
-            this.emojiLogoBox.Location = new System.Drawing.Point(10, 0);
+            this.emojiLogoBox.Location = new System.Drawing.Point(0, 0);
             this.emojiLogoBox.Name = "emojiLogoBox";
             this.emojiLogoBox.Size = new System.Drawing.Size(30, 30);
             this.emojiLogoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -926,7 +926,7 @@ namespace SoftEngChatClient
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.DarkGray;
-            this.label3.Location = new System.Drawing.Point(15, 56);
+            this.label3.Location = new System.Drawing.Point(16, 54);
             this.label3.MinimumSize = new System.Drawing.Size(550, 2);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(631, 13);

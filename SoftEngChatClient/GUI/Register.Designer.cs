@@ -97,6 +97,7 @@
             this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
             this.EnterPassword.Leave += new System.EventHandler(this.EnterPassword_Leave);
+            this.EnterPassword.ShortcutsEnabled = true;
             // 
             // EnterUsername
             // 
