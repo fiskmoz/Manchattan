@@ -59,7 +59,7 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine(incomming);
                     HandleEstablishP2P(incomming);
                     break;
-                case "13":
+                case "15":
                     Console.WriteLine("Message arrived: Status update");
                     HandleStatusUpdate(incomming);
                     break;

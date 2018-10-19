@@ -109,7 +109,7 @@ namespace SoftEngChat.Model.SSLCommunication
 
         public void WriteStatusMessage(string sender, string receiver, string status)
         {
-            string outgoing = "13" + sender + ":" + receiver + ":" + status;
+            string outgoing = "15" + sender + ":" + receiver + ":" + status;
             Console.WriteLine();
             Console.WriteLine(outgoing);
             Console.WriteLine();

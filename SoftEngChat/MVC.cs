@@ -17,7 +17,9 @@
             establishP2P = 10, // 10:sender:receiver
             incommingP2P = 11, // 11:sender:port:key
             outgoingP2P = 12, // 12:receiver:port:key
-            statusUpdate = 13 // 13:sender:receiver:status
+            FileRequest = 13, //13:sender:receiver:filesize:filename
+            FileResponse = 14, //14:sender:1/0
+            statusUpdate = 15 // 15:sender:receiver:status
         }
         namespace SSLCommunication { }
 	}
