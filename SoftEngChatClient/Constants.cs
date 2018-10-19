@@ -9,6 +9,6 @@ namespace SoftEngChatClient
     static class Constants
     {
         //public const string ip = "192.168.43.237";
-        public const string ip = "127.0.0.1";
+        public const string ip = "172.20.10.3";
     }
 }

@@ -186,10 +186,11 @@ namespace SoftEngChat.Model.SSLCommunication
 
             int port = server.getNextPort();
 
-            server.SendIncommingP2P(sender, receiver, port, key);
+            server.SendIncommingP2P(sender, receiver, port, key, (server.FindClient(receiver)).ipAddress);
 
-            Thread.Sleep(1000);
-            client.writer.WriteOutgoingP2P(receiver, port, key, client.ipAddress);
+            Thread.Sleep(500);
+
+            client.writer.WriteOutgoingP2P(receiver, port, key, (server.FindClient(receiver)).ipAddress);
         }
 	}
 }
