@@ -27,9 +27,10 @@ namespace SoftEngChatClient
 		private P2PListener p2pListener;
         public string statusMessage { get; private set; }
         public bool isP2P { get; private set; }
+		private byte[] fileToSend;
 
-        public IndividualChatDriver(CustomStreamWriter sllWriter, string Username, string Receiver, FileManager fm)
-        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm, string status)
+
+		public IndividualChatDriver(CustomStreamWriter sllWriter, string Username, string Receiver, FileManager fm, string status)
         {
 			isP2P = false;
             username = Username;
