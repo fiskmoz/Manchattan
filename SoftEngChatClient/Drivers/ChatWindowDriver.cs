@@ -358,7 +358,7 @@ namespace SoftEngChatClient.Drivers
                     return;
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
+            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status));
             individualChatDrivers[individualChatDrivers.Count()-1].ReceiveMessage(message);
             SendPopup("Received message from: " + sender, message);
         }
@@ -380,7 +380,7 @@ namespace SoftEngChatClient.Drivers
             }
             if (found == false)
             {
-                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, "temp"));
+                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status));
                 individualChatDrivers[individualChatDrivers.Count() - 1].SetNormalWindowState();
             }
         }

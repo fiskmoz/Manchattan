@@ -160,9 +160,9 @@ namespace SoftEngChatClient.Model
             string sender = inc[1];
             string receiver = inc[2];
             string message = inc[3];
-            if (inc.Length > 3)
+            if (inc.Length > 4)
             {
-                for (int i = 3; i < inc.Length; i++)
+                for (int i = 4; i < inc.Length; i++)
                 {
                     message += inc[i];
                 }

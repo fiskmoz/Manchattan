@@ -462,13 +462,11 @@ namespace SoftEngChatClient
                 }
                 
                 statusTextBox.Visible = false;
+                if (statusTextLbl.Text != "Status")
+                {
+                    statusSendEvent(sender, e);
+                }
             }
-
-            if(statusTextLbl.Text != "Status")
-            {
-                statusSendEvent(sender, e);
-            }
-
         }
     }
 }
