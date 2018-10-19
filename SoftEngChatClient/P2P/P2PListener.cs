@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -17,6 +18,7 @@ namespace SoftEngChatClient.P2P
         Thread listeningThread;
         private ClientCrypto cc;
 		private string username;
+		private int BUFFERSIZE = 2048;
 		
         public P2PListener(NetworkStream netStream, string username, byte[] key)
         {
@@ -40,16 +42,16 @@ namespace SoftEngChatClient.P2P
 
         public void Listen()
         {
-            byte[] buffer = new byte[2048];
+            byte[] buffer = new byte[BUFFERSIZE];
 			int bytesRead = 0;
 			bool readFail = false;
 			string incomming = null;
-			while (true)
+			while (!stopListen)
             {
 				//---read incoming stream---
 				try{
 
-					bytesRead = netStream.Read(buffer, 0, 2048);
+					bytesRead = netStream.Read(buffer, 0, BUFFERSIZE);
 				}
 				catch(Exception e)
 				{
@@ -78,7 +80,8 @@ namespace SoftEngChatClient.P2P
                 RaiseEvent(incomming);
                 if (stopListen) break;
             }
-        }
+			listeningThread.Join();
+		}
 
 		public event EventHandler IncommingMessage;
 		public void RaiseEvent(string incomming)
@@ -86,6 +89,45 @@ namespace SoftEngChatClient.P2P
 			IncommingMessage message = new IncommingMessage(incomming);
 			message.Message = incomming;
 			IncommingMessage(this, message);
+		}
+
+		internal byte[] StartFileListener()
+		{
+			byte[] output = null;
+			listeningThread = new Thread(
+				() =>
+				{
+					output = ListenForFile();
+				});
+			listeningThread.Start();
+			listeningThread.Join();
+
+			return output;
+		}
+
+		private byte[] ListenForFile()
+		{
+			int bytesRead = 0;
+			int allBytesRead = 0;
+
+			byte[] length = new byte[4];
+			bytesRead = netStream.Read(length, 0, 4);
+			int dataLength = BitConverter.ToInt32(length, 0);
+
+			// Read the data
+			int bytesLeft = dataLength;
+			byte[] data = new byte[dataLength];
+
+			while (bytesLeft > 0)
+			{
+				int nextPacketSize = (bytesLeft > BUFFERSIZE) ? BUFFERSIZE : bytesLeft;
+
+				bytesRead = netStream.Read(data, allBytesRead, nextPacketSize);
+				allBytesRead += bytesRead;
+				bytesLeft -= bytesRead;
+
+			}
+			return data;
 		}
 	}
 }

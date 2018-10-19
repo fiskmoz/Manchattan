@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoftEngChatClient.MessageHandling
 {
-	interface StreamWriter
+	interface CustomStreamWriter
 	{
 		void WriteClient(MessageType type, string sender, string receiver, string message);
 		void SendMessage(string outgoing);

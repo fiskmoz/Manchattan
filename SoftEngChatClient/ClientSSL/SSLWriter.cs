@@ -9,7 +9,7 @@ using SoftEngChatClient.MessageHandling;
 namespace SoftEngChatClient.Model.SSLCommunication
 {
 
-    class SSLWriter: StreamWriter
+    class SSLWriter: CustomStreamWriter
 	{
         public SslStream stream;
 		public SSLWriter(SslStream stream)

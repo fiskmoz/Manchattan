@@ -126,5 +126,22 @@ namespace SoftEngChatClient
 			}
 			return contactList;
 		}
+		
+		public byte[] CreatePackage(string path)
+		{
+			byte[] data = File.ReadAllBytes(path);
+
+			byte[] dataLength = BitConverter.GetBytes(data.Length);
+			byte[] package = new byte[4 + data.Length];
+			dataLength.CopyTo(package, 0);
+			data.CopyTo(package, 4);
+
+			return package;
+		}
+
+		internal void SaveReceivedFile(byte[] file)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

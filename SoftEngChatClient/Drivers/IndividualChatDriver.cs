@@ -12,6 +12,7 @@ using SoftEngChatClient.MessageHandling;
 using System.Net.Sockets;
 using SoftEngChatClient.Model;
 using SoftEngChatClient.P2P;
+using System.IO;
 
 namespace SoftEngChatClient
 {
@@ -19,18 +20,20 @@ namespace SoftEngChatClient
     {
         IndividualChatWindow window;
         private SpamProtector spam;
-        StreamWriter writer;
+        CustomStreamWriter writer;
         private string username;
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
 		public bool isP2P { get; private set; }
+		private byte[] fileToSend;
 
-        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm)
+        public IndividualChatDriver(CustomStreamWriter sllWriter, string Username, string Receiver, FileManager fm)
         {
 			isP2P = false;
             username = Username;
             receiver = Receiver;
+			fileToSend = null;
             this.fm = fm;
             window = new IndividualChatWindow(receiver);
             spam = new SpamProtector();
@@ -125,7 +128,7 @@ namespace SoftEngChatClient
             }
         }
 
-        public string getUsername()
+		public string getUsername()
         {
             return username;
         }
@@ -183,6 +186,43 @@ namespace SoftEngChatClient
 		internal void Disconnect()
 		{
 			writer.WriteLogout(MessageType.logout);
+		}
+
+		private void FileRequestRecieved(FileRequestArgs args)
+		{
+			bool accept = false;
+			//GUI STUFF HERE
+
+			((P2PWriter)writer).WriteFileResponse(MessageType.FileResponse, username, receiver, accept);
+			if (accept)
+			{
+				p2pListener.StopListen();
+				byte[] file = p2pListener.StartFileListener();
+				p2pListener.StartListen();
+				if(file != null)
+				{
+					fm.SaveReceivedFile(file);
+					//Fancy GUI stuff here, file received
+				}
+				else
+				{
+					//Sad Gui stuff here, no file received
+				}
+			}
+
+		}
+
+		private void SendFileRequest(string path)
+		{
+			fileToSend = fm.CreatePackage(path);
+			string filename = Path.GetFileName(path);
+			((P2PWriter)writer).WriteSendFileRequest(MessageType.FileRequest, username, receiver, fileToSend.Length, filename);
+		}
+		
+		internal void SendFile(bool sendFile)
+		{
+			if(sendFile)
+				((P2PWriter)writer).SendFile(fileToSend);
 		}
 	}
 }
