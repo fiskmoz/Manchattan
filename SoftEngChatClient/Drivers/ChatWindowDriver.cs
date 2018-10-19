@@ -74,13 +74,23 @@ namespace SoftEngChatClient.Drivers
             chatWindow.formClose += new FormClosedEventHandler(ChatWindowClosed);
             chatWindow.findFriendsSearchEvent += new EventHandler(FindFriendsSearch);
             chatWindow.addFriendsButtonClicked += new EventHandler(AddFriendsButtonClickedEvent);
+            chatWindow.statusSendEvent += new EventHandler(sendStatus);
             chatWindow.openPendingFriendRequests += new EventHandler(OpenPendingFriendRequests);
             friendrequest.acceptButtonClick += new EventHandler(AcceptFriendRequestButton);
             friendrequest.rejectButtonClick += new EventHandler(RejectFriendRequestButton);
 			contactsHandler.UpdateContactList += new EventHandler(UpdateOnlineList);
         }
 
-		public void Subscribe(Messagehandler mh, P2PConnector p2pc)
+        private void sendStatus(object sender, EventArgs e)
+        {
+
+            foreach (Contact contact in contactsHandler.contactList)
+            {
+                writer.WriteStatus(MessageType.statusUpdate, this.username , contact.name, chatWindow.statusTextLbl.Text);
+            }
+        }
+
+        public void Subscribe(Messagehandler mh, P2PConnector p2pc)
 		{
 			messageHandler = mh;
 			mh.IncommingClientMessage += new EventHandler(IncommingMessage);
@@ -92,6 +102,20 @@ namespace SoftEngChatClient.Drivers
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
+			mh.FileResponse += new EventHandler(ReceivedFileResponse);
+		}
+
+		private void ReceivedFileResponse(object sender, EventArgs e)
+		{
+			FileResponseArgs args = (FileResponseArgs)e;
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if(icd.getSender() == args.sender)
+				{
+					icd.SendFile(args.sendFile);
+					break;
+				}
+			}
 		}
 
 		private void DisposeP2PConnection(object sender, EventArgs e)

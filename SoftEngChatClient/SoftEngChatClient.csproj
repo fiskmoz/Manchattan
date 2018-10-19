@@ -91,7 +91,7 @@
     <Compile Include="MessageHandling\IncommingMessages.cs" />
     <Compile Include="Drivers\IndividualChatDriver.cs" />
     <Compile Include="MessageHandling\StreamListener.cs" />
-    <Compile Include="MessageHandling\StreamWriter.cs" />
+    <Compile Include="MessageHandling\CustomStreamWriter.cs" />
     <Compile Include="MessageHandling\Messagehandler.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="P2P\P2PConnector.cs" />

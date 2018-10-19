@@ -20,8 +20,10 @@ namespace SoftEngChatClient
 		onlineStatus = 9, // 9:1/0:username
         establishP2P = 10, // 10:sender:receiver
         incommingP2P = 11, // 11:sender:port:key
-        outgoingP2P = 12, // 12:receiver:port:key
-        statusUpdate = 13 // 13:sender:receiver:status
+        outgoingP2P = 12, //12:receiver:port:key
+		FileRequest = 13, //13:sender:receiver:filesize:filename
+		FileResponse = 14, //14:sender:1/0
+        statusUpdate = 15 // 13:sender:receiver:status
 	}
 
 	class IncommingMessage : EventArgs
@@ -104,10 +106,6 @@ namespace SoftEngChatClient
 			message = ack;
             this.key = key;
 		}
-
-        public LoginAck(string v1, string v2)
-        {
-        }
     }
 
 	class P2POutgoingConnection : EventArgs
@@ -162,6 +160,31 @@ namespace SoftEngChatClient
 		public P2PDisconnect(string sender)
 		{
 			this.sender = sender;
+		}
+	}
+
+	class FileRequestArgs : EventArgs
+	{
+		public string sender { get; private set; }
+		public int fileSize;
+		public string filename { get; private set; }
+		public FileRequestArgs(string[] incomming)
+		{
+			sender = incomming[1];
+			int.TryParse(incomming[3], out fileSize);
+			filename = incomming[4];
+		}
+	}
+		
+	class FileResponseArgs : EventArgs
+	{
+		public bool sendFile { get; private set; }
+		public string sender { get; set; }
+
+		public FileResponseArgs(string[] incomming)
+		{
+			sendFile = incomming[2] == "1" ? true : false;
+			sender = incomming[3];
 		}
 	}
 }

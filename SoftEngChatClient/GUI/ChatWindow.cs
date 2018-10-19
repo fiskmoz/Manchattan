@@ -28,6 +28,7 @@ namespace SoftEngChatClient
         public event EventHandler showFriendsEvent;
         public event EventHandler addFriendsEvent;
         public event EventHandler addFriendsButtonClicked;
+        public event EventHandler statusSendEvent;
         public event FormClosedEventHandler formClose;
         public event EventHandler openPendingFriendRequests;
 
@@ -462,6 +463,12 @@ namespace SoftEngChatClient
                 
                 statusTextBox.Visible = false;
             }
+
+            if(statusTextLbl.Text != "Status")
+            {
+                statusSendEvent(sender, e);
+            }
+
         }
     }
 }
