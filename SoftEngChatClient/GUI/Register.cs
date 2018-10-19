@@ -250,7 +250,7 @@ namespace SoftEngChatClient
                 
                 RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Red;
                 RegistrationColorIndicatorlbl.MinimumSize = new Size(53, 13);
-                //RegistrationIndicatorlbl.Visible = true;
+                RegistrationColorIndicatorlbl.Visible = true;
                 RegistrationIndicatorlbl.Text = "Weak";
                 
             }
@@ -262,9 +262,7 @@ namespace SoftEngChatClient
             }
             else if(counter < 1)
             {
-                RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
-                RegistrationColorIndicatorlbl.MinimumSize = new Size(33, 13);
-                //RegistrationIndicatorlbl.Visible = false;
+                resetPasswordStrength();
 
             }
                 
@@ -293,6 +291,12 @@ namespace SoftEngChatClient
         public void resetPasswordStrength()
         {
             RegistrationColorIndicatorlbl.MinimumSize = new Size(33, 13);
+            RegistrationColorIndicatorlbl.BackColor = Color.FromArgb(64, 64, 64);
+            RegistrationColorIndicatorlbl.Visible = false;
+        }
+        public void setRegColorIndlbl(bool value)
+        {
+            RegistrationColorIndicatorlbl.Visible = value;
         }
     }
 }

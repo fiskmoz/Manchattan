@@ -81,9 +81,8 @@ namespace SoftEngChatClient
         }
         private void icd_WindowLoaded(object sender, EventArgs e)
         {
-            
             string chatLog = fm.LoadIndividualChat(username, receiver);
-            window.AppendTextBox(chatLog);
+            window.AppendTextBox(chatLog);   
         }
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)
@@ -144,6 +143,8 @@ namespace SoftEngChatClient
                 window.Invoke(new Action(displayWindow));
                 return;
             }
+            string chatLog = fm.LoadIndividualChat(username, receiver);
+            window.AppendTextBox(chatLog);
             window.Show();
         }
 
@@ -153,6 +154,11 @@ namespace SoftEngChatClient
             {
                 window.Invoke(new Action(hideWindow));
                 return;
+            }
+            string chatLog = window.getChatBox();
+            if (chatLog != "")
+            {
+                fm.SaveIndividualChat(username, receiver, chatLog);
             }
             window.Hide();
         }

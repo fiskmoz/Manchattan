@@ -97,7 +97,6 @@
             this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             this.EnterPassword.Enter += new System.EventHandler(this.EnterPassword_Enter);
             this.EnterPassword.Leave += new System.EventHandler(this.EnterPassword_Leave);
-            this.EnterPassword.ShortcutsEnabled = true;
             // 
             // EnterUsername
             // 
@@ -234,7 +233,7 @@
             // RegistrationColorIndicatorlbl
             // 
             this.RegistrationColorIndicatorlbl.AutoSize = true;
-            this.RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.Gray;
+            this.RegistrationColorIndicatorlbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.RegistrationColorIndicatorlbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RegistrationColorIndicatorlbl.Location = new System.Drawing.Point(16, 184);
             this.RegistrationColorIndicatorlbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -242,6 +241,7 @@
             this.RegistrationColorIndicatorlbl.Name = "RegistrationColorIndicatorlbl";
             this.RegistrationColorIndicatorlbl.Size = new System.Drawing.Size(33, 15);
             this.RegistrationColorIndicatorlbl.TabIndex = 15;
+            this.RegistrationColorIndicatorlbl.Visible = false;
             // 
             // RegistrationIndicatorlbl
             // 
