@@ -106,7 +106,7 @@ namespace SoftEngChatClient
                     window.AppendTextBox("[Program] Don´t spam");
                 }
             }
-            window.clearMessageBox();
+            window.ClearMessageBox();
 
         }
 
@@ -141,6 +141,7 @@ namespace SoftEngChatClient
                 window.Invoke(new Action(displayWindow));
                 return;
             }
+            window.ClearChatBox();
             string chatLog = fm.LoadIndividualChat(username, receiver);
             window.AppendTextBox(chatLog);
             window.Show();

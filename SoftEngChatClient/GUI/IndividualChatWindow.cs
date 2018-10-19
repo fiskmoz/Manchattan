@@ -44,9 +44,14 @@ namespace SoftEngChatClient
             IndivudualFormClosed(this, e);
         }
 
-        public void clearMessageBox()
+        public void ClearMessageBox()
         {
             IndividualMessageBox.Clear();
+        }
+
+        public void ClearChatBox()
+        {
+            IndividualChatBox.Clear();
         }
 
         // Print a string to the ChatBox and add the message to the list.
@@ -69,6 +74,8 @@ namespace SoftEngChatClient
             IndividualChatBox.AppendText(value + System.Environment.NewLine);
         }
 
+
+
         //Returnerar skrivfältet
         public string getTextMessageBox()
         {
@@ -83,8 +90,9 @@ namespace SoftEngChatClient
         public string getUserName()
         {
             return this.UsernameLabel.Text;
-
         }
+
+        
 
         public string removeEnterWhenSending()
         {
