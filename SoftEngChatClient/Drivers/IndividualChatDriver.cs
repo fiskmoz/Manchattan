@@ -210,7 +210,7 @@ namespace SoftEngChatClient
 				p2pListener.StartListen();
 				if(file != null)
 				{
-					fm.SaveReceivedFile(file);
+					fm.SaveReceivedFile(file, args.filename, username);
 					//Fancy GUI stuff here, file received
 				}
 				else
