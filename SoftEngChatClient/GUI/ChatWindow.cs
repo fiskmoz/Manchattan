@@ -28,6 +28,7 @@ namespace SoftEngChatClient
         public event EventHandler showFriendsEvent;
         public event EventHandler addFriendsEvent;
         public event EventHandler addFriendsButtonClicked;
+        public event EventHandler statusSendEvent;
         public event FormClosedEventHandler formClose;
         public event EventHandler openPendingFriendRequests;
 
@@ -194,6 +195,18 @@ namespace SoftEngChatClient
         public TextBox getGlobalChatBox()
         {
             return ChatBox;
+        }
+        public TextBox getMessageBox()
+        {
+            return MessageBox;
+        }
+        public TextBox getStatusTextBox()
+        {
+            return statusTextBox;
+        }
+        public Label getStatusTextLabel()
+        {
+            return statusTextLbl;
         }
 
         public Panel getPanelSettings()
@@ -423,6 +436,39 @@ namespace SoftEngChatClient
                 emojiPanel.BorderStyle = BorderStyle.None;
                 allEmoticonsPanel.Visible = false;
             }
+        }
+
+        private void statusTextLbl_Click(object sender, EventArgs e)
+        {
+            statusTextBox.Visible = true;
+            statusTextBox.Focus();
+            if(statusTextLbl.Text.Length > 0)
+            {
+                statusTextBox.Clear();
+            }
+        }
+
+        private void statusTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(statusTextBox.Text == "")
+                {
+                    statusTextLbl.Text = "Status";
+                }
+                else
+                {
+                    statusTextLbl.Text = statusTextBox.Text;
+                }
+                
+                statusTextBox.Visible = false;
+            }
+
+            if(statusTextLbl.Text != "Status")
+            {
+                statusSendEvent(sender, e);
+            }
+
         }
     }
 }

@@ -25,16 +25,18 @@ namespace SoftEngChatClient
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
-		public bool isP2P { get; private set; }
-		private byte[] fileToSend;
+        public string statusMessage { get; private set; }
+        public bool isP2P { get; private set; }
 
         public IndividualChatDriver(CustomStreamWriter sllWriter, string Username, string Receiver, FileManager fm)
+        public IndividualChatDriver(StreamWriter sllWriter, string Username, string Receiver, FileManager fm, string status)
         {
 			isP2P = false;
             username = Username;
             receiver = Receiver;
 			fileToSend = null;
             this.fm = fm;
+            this.statusMessage = status;
             window = new IndividualChatWindow(receiver);
             spam = new SpamProtector();
             SetupListners();
@@ -46,14 +48,14 @@ namespace SoftEngChatClient
             
         }
 
-		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key)
+		public IndividualChatDriver(string username, string receiver, FileManager fm, NetworkStream netstream, Messagehandler mh, string key, string status)
 		{
 			isP2P = true;
 			this.username = username;
 			this.receiver = receiver;
 			this.fm = fm;
-
-			window = new IndividualChatWindow(receiver);
+            this.statusMessage = status;
+            window = new IndividualChatWindow(receiver);
 			spam = new SpamProtector();
 			SetupListners();
 
@@ -82,9 +84,8 @@ namespace SoftEngChatClient
         }
         private void icd_WindowLoaded(object sender, EventArgs e)
         {
-            
             string chatLog = fm.LoadIndividualChat(username, receiver);
-            window.AppendTextBox(chatLog);
+            window.AppendTextBox(chatLog);   
         }
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)
@@ -110,7 +111,7 @@ namespace SoftEngChatClient
                     window.AppendTextBox("[Program] Don´t spam");
                 }
             }
-            window.clearMessageBox();
+            window.ClearMessageBox();
 
         }
 
@@ -145,6 +146,9 @@ namespace SoftEngChatClient
                 window.Invoke(new Action(displayWindow));
                 return;
             }
+            window.ClearChatBox();
+            string chatLog = fm.LoadIndividualChat(username, receiver);
+            window.AppendTextBox(chatLog);
             window.Show();
         }
 
@@ -154,6 +158,11 @@ namespace SoftEngChatClient
             {
                 window.Invoke(new Action(hideWindow));
                 return;
+            }
+            string chatLog = window.getChatBox();
+            if (chatLog != "")
+            {
+                fm.SaveIndividualChat(username, receiver, chatLog);
             }
             window.Hide();
         }

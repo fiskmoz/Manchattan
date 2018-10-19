@@ -23,6 +23,8 @@ namespace SoftEngChatClient
         outgoingP2P = 12, //12:receiver:port:key
 		FileRequest = 13, //13:sender:receiver:filesize:filename
 		FileResponse = 14 //14:sender:1/0
+        outgoingP2P = 12, // 12:receiver:port:key
+        statusUpdate = 13 // 13:sender:receiver:status
 	}
 
 	class IncommingMessage : EventArgs

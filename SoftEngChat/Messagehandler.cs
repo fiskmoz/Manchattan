@@ -59,6 +59,10 @@ namespace SoftEngChat.Model.SSLCommunication
                     Console.WriteLine(incomming);
                     HandleEstablishP2P(incomming);
                     break;
+                case "13":
+                    Console.WriteLine("Message arrived: Status update");
+                    HandleStatusUpdate(incomming);
+                    break;
                 default:
 					Console.WriteLine("Message arrived; Error:");
 					Console.WriteLine(incomming);
@@ -186,10 +190,24 @@ namespace SoftEngChat.Model.SSLCommunication
 
             int port = server.getNextPort();
 
-            server.SendIncommingP2P(sender, receiver, port, key);
+            server.SendIncommingP2P(sender, receiver, port, key, (server.FindClient(receiver)).ipAddress);
 
-            Thread.Sleep(1000);
-            client.writer.WriteOutgoingP2P(receiver, port, key, client.ipAddress);
+            Thread.Sleep(500);
+
+            client.writer.WriteOutgoingP2P(receiver, port, key, (server.FindClient(receiver)).ipAddress);
         }
-	}
+
+        private void HandleStatusUpdate(string incomming)
+        {
+            string[] msgArray = ParseMessage(incomming);
+            if (msgArray.Length > 3)
+            {
+                for (int i = 3; i < msgArray.Length; i++)
+                {
+                    msgArray[3] += ":" + msgArray[i];
+                }
+            }
+            server.SendSatusUpdate(msgArray[1], msgArray[2], msgArray[3]);
+        }
+    }
 }

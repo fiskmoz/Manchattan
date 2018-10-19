@@ -202,7 +202,6 @@ namespace SoftEngChat.Model.SSLCommunication
 			{
 				client.Dispose();
 				clientList.Remove(client);
-				SendStatusUpdateToClients();
 			}
 			
 			Thread.EndCriticalRegion();
@@ -217,11 +216,6 @@ namespace SoftEngChat.Model.SSLCommunication
                     client.writer.WriteOnlineListUpdate(clientGoingOffline, goingOffline);
                 }
             }
-        }
-
-        public void SendStatusUpdateToClients()
-        {
-
         }
 
         public void UpdateOnlineList()
@@ -251,7 +245,7 @@ namespace SoftEngChat.Model.SSLCommunication
             offlineListAsString = str.ToString();
         }
 
-        private SSLClient FindClient(string username)
+        public SSLClient FindClient(string username)
         {
             foreach(SSLClient client in clientList)
             {
@@ -263,12 +257,12 @@ namespace SoftEngChat.Model.SSLCommunication
             return null;
         }
 
-        public void SendIncommingP2P(string sender, string receiver, int port, string key)
+        public void SendIncommingP2P(string sender, string receiver, int port, string key, string ip)
         {
             SSLClient receiverClient = FindClient(receiver);
             if(receiverClient != null)
             {
-                receiverClient.writer.WriteIncommingP2P(sender, port, key, receiverClient.ipAddress);
+                receiverClient.writer.WriteIncommingP2P(sender, port, key, ip);
             }
             else
             {
@@ -279,6 +273,11 @@ namespace SoftEngChat.Model.SSLCommunication
         public int getNextPort()
         {
             return nextPort++;
+        }
+
+        public void SendSatusUpdate(string sender, string receiver, string statusUpdate)
+        {
+            FindClient(receiver).writer.WriteStatusMessage(sender, receiver, statusUpdate);
         }
     }
 }
