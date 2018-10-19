@@ -207,7 +207,7 @@ namespace SoftEngChat.Model.SSLCommunication
                     msgArray[3] += ":" + msgArray[i];
                 }
             }
-            server.SendSatusUpdate(msgArray[1], msgArray[2], msgArray[3]);
+            server.SendSatusUpdate(msgArray[1], msgArray[2], msgArray[3], incomming);
         }
     }
 }

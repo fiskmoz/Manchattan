@@ -275,9 +275,18 @@ namespace SoftEngChat.Model.SSLCommunication
             return nextPort++;
         }
 
-        public void SendSatusUpdate(string sender, string receiver, string statusUpdate)
+        public void SendSatusUpdate(string sender, string receiver, string statusUpdate, string entireMessage)
         {
-            FindClient(receiver).writer.WriteStatusMessage(sender, receiver, statusUpdate);
+            SSLClient receiverClient = FindClient(receiver); 
+            if (receiverClient != null)
+            {
+                receiverClient.writer.WriteStatusMessage(sender, receiver, statusUpdate);
+            }
+            else
+            {
+                userManager.FindUser(receiver).waitingMessages.Add(entireMessage);
+                Console.WriteLine("Receiver was offline message was stored");
+            }
         }
     }
 }
