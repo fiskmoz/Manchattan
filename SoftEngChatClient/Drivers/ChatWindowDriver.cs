@@ -101,6 +101,20 @@ namespace SoftEngChatClient.Drivers
 			contactsHandler.Subscribe(mh);
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
+			mh.FileResponse += new EventHandler(ReceivedFileResponse);
+		}
+
+		private void ReceivedFileResponse(object sender, EventArgs e)
+		{
+			FileResponseArgs args = (FileResponseArgs)e;
+			foreach(IndividualChatDriver icd in individualChatDrivers)
+			{
+				if(icd.getSender() == args.sender)
+				{
+					icd.SendFile(args.sendFile);
+					break;
+				}
+			}
 		}
 
 		private void DisposeP2PConnection(object sender, EventArgs e)
