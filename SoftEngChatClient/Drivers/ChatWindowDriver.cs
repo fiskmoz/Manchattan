@@ -271,6 +271,10 @@ namespace SoftEngChatClient.Drivers
             Thread.Sleep(250);
             restart(this, e);
             loggingOut = false;
+            chatWindow.getMessageBox().Clear();
+            chatWindow.getStatusTextBox().Visible = false;
+            chatWindow.getStatusTextBox().Clear();
+
         }
 
         private void PreviousMessageButtonClicked(object sender, EventArgs e)

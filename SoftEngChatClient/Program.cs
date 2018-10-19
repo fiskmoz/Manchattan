@@ -12,6 +12,7 @@ namespace SoftEngChatClient
         static void Main(string[] args)
         {
 			Controller.ClientDriver client = new Controller.ClientDriver();
+            Application.EnableVisualStyles();
             client.Run();
         }
     }

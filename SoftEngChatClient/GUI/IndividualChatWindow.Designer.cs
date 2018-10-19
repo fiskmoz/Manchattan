@@ -64,6 +64,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.viewMsgTextBoxPanel = new System.Windows.Forms.Panel();
+            this.statusTextLbl = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).BeginInit();
             this.msgTextBoxPanel.SuspendLayout();
@@ -496,8 +498,10 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.UsernameLabel);
+            this.panel1.Controls.Add(this.statusTextLbl);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, -2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(584, 89);
@@ -520,6 +524,32 @@
             this.viewMsgTextBoxPanel.Name = "viewMsgTextBoxPanel";
             this.viewMsgTextBoxPanel.Size = new System.Drawing.Size(602, 449);
             this.viewMsgTextBoxPanel.TabIndex = 18;
+            // 
+            // statusTextLbl
+            // 
+            this.statusTextLbl.AutoSize = true;
+            this.statusTextLbl.BackColor = System.Drawing.Color.Transparent;
+            this.statusTextLbl.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusTextLbl.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.statusTextLbl.Location = new System.Drawing.Point(108, 49);
+            this.statusTextLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.statusTextLbl.MaximumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.MinimumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.Name = "statusTextLbl";
+            this.statusTextLbl.Size = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.TabIndex = 115;
+            this.statusTextLbl.Text = "Status";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.ForeColor = System.Drawing.Color.DarkGray;
+            this.label6.Location = new System.Drawing.Point(107, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(157, 13);
+            this.label6.TabIndex = 114;
+            this.label6.Text = "_________________________";
             // 
             // IndividualChatWindow
             // 
@@ -614,5 +644,7 @@
         private System.Windows.Forms.PictureBox emojiSad;
         private System.Windows.Forms.PictureBox emojiHappy;
         private System.Windows.Forms.Panel viewMsgTextBoxPanel;
+        private System.Windows.Forms.Label statusTextLbl;
+        private System.Windows.Forms.Label label6;
     }
 }
