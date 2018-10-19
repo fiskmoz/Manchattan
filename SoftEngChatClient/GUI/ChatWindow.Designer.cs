@@ -48,7 +48,9 @@ namespace SoftEngChatClient
             this.findFriendsBox = new System.Windows.Forms.ListBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.requesetIndicator = new System.Windows.Forms.Label();
             this.myFriendsLabel = new System.Windows.Forms.Label();
+            this.FRButton = new System.Windows.Forms.Button();
             this.showFriends = new System.Windows.Forms.Label();
             this.findFriendsLabel = new System.Windows.Forms.Label();
             this.addFriends = new System.Windows.Forms.Label();
@@ -56,12 +58,12 @@ namespace SoftEngChatClient
             this.settingsPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.FRButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.settingsLabel = new System.Windows.Forms.PictureBox();
+            this.statusTextBox = new System.Windows.Forms.TextBox();
+            this.statusTextLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.requesetIndicator = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -94,8 +96,6 @@ namespace SoftEngChatClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.statusTextLbl = new System.Windows.Forms.Label();
-            this.statusTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.findFriendsPanel.SuspendLayout();
@@ -370,6 +370,18 @@ namespace SoftEngChatClient
             this.panel5.Size = new System.Drawing.Size(306, 84);
             this.panel5.TabIndex = 3;
             // 
+            // requesetIndicator
+            // 
+            this.requesetIndicator.AutoSize = true;
+            this.requesetIndicator.BackColor = System.Drawing.Color.SteelBlue;
+            this.requesetIndicator.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.requesetIndicator.ForeColor = System.Drawing.Color.AliceBlue;
+            this.requesetIndicator.Location = new System.Drawing.Point(219, 6);
+            this.requesetIndicator.Name = "requesetIndicator";
+            this.requesetIndicator.Size = new System.Drawing.Size(24, 33);
+            this.requesetIndicator.TabIndex = 112;
+            this.requesetIndicator.Text = "!";
+            // 
             // myFriendsLabel
             // 
             this.myFriendsLabel.AutoSize = true;
@@ -382,6 +394,23 @@ namespace SoftEngChatClient
             this.myFriendsLabel.TabIndex = 108;
             this.myFriendsLabel.Text = "My Friends";
             this.myFriendsLabel.UseMnemonic = false;
+            // 
+            // FRButton
+            // 
+            this.FRButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.FRButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.FRButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.FRButton.Font = new System.Drawing.Font("Georgia", 7.8F);
+            this.FRButton.ForeColor = System.Drawing.Color.AliceBlue;
+            this.FRButton.Location = new System.Drawing.Point(211, 3);
+            this.FRButton.Name = "FRButton";
+            this.FRButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.FRButton.Size = new System.Drawing.Size(92, 41);
+            this.FRButton.TabIndex = 111;
+            this.FRButton.Text = "Pending Request";
+            this.FRButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FRButton.UseVisualStyleBackColor = false;
+            this.FRButton.Click += new System.EventHandler(this.FRButton_Click);
             // 
             // showFriends
             // 
@@ -478,23 +507,6 @@ namespace SoftEngChatClient
             this.pictureBox2.TabIndex = 102;
             this.pictureBox2.TabStop = false;
             // 
-            // FRButton
-            // 
-            this.FRButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.FRButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.FRButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.FRButton.Font = new System.Drawing.Font("Georgia", 7.8F);
-            this.FRButton.ForeColor = System.Drawing.Color.AliceBlue;
-            this.FRButton.Location = new System.Drawing.Point(211, 3);
-            this.FRButton.Name = "FRButton";
-            this.FRButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.FRButton.Size = new System.Drawing.Size(92, 41);
-            this.FRButton.TabIndex = 111;
-            this.FRButton.Text = "Pending Request";
-            this.FRButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FRButton.UseVisualStyleBackColor = false;
-            this.FRButton.Click += new System.EventHandler(this.FRButton_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.AliceBlue;
@@ -527,6 +539,37 @@ namespace SoftEngChatClient
             this.settingsLabel.TabStop = false;
             this.settingsLabel.Click += new System.EventHandler(this.SettingsLabel_Click);
             // 
+            // statusTextBox
+            // 
+            this.statusTextBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.statusTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.statusTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusTextBox.ForeColor = System.Drawing.Color.Gray;
+            this.statusTextBox.Location = new System.Drawing.Point(11, 49);
+            this.statusTextBox.MaxLength = 40;
+            this.statusTextBox.MinimumSize = new System.Drawing.Size(230, 16);
+            this.statusTextBox.Name = "statusTextBox";
+            this.statusTextBox.Size = new System.Drawing.Size(230, 16);
+            this.statusTextBox.TabIndex = 109;
+            this.statusTextBox.Visible = false;
+            this.statusTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.statusTextBox_KeyUp);
+            // 
+            // statusTextLbl
+            // 
+            this.statusTextLbl.AutoSize = true;
+            this.statusTextLbl.BackColor = System.Drawing.Color.Transparent;
+            this.statusTextLbl.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusTextLbl.ForeColor = System.Drawing.Color.Gray;
+            this.statusTextLbl.Location = new System.Drawing.Point(10, 49);
+            this.statusTextLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.statusTextLbl.MaximumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.MinimumSize = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.Name = "statusTextLbl";
+            this.statusTextLbl.Size = new System.Drawing.Size(230, 16);
+            this.statusTextLbl.TabIndex = 113;
+            this.statusTextLbl.Text = "Status";
+            this.statusTextLbl.Click += new System.EventHandler(this.statusTextLbl_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -550,18 +593,6 @@ namespace SoftEngChatClient
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(694, 180);
             this.panel3.TabIndex = 111;
-            // 
-            // requesetIndicator
-            // 
-            this.requesetIndicator.AutoSize = true;
-            this.requesetIndicator.BackColor = System.Drawing.Color.SteelBlue;
-            this.requesetIndicator.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.requesetIndicator.ForeColor = System.Drawing.Color.AliceBlue;
-            this.requesetIndicator.Location = new System.Drawing.Point(219, 6);
-            this.requesetIndicator.Name = "requesetIndicator";
-            this.requesetIndicator.Size = new System.Drawing.Size(24, 33);
-            this.requesetIndicator.TabIndex = 112;
-            this.requesetIndicator.Text = "!";
             // 
             // label5
             // 
@@ -947,37 +978,6 @@ namespace SoftEngChatClient
             this.panel8.Size = new System.Drawing.Size(2, 520);
             this.panel8.TabIndex = 23;
             // 
-            // statusTextLbl
-            // 
-            this.statusTextLbl.AutoSize = true;
-            this.statusTextLbl.BackColor = System.Drawing.Color.Transparent;
-            this.statusTextLbl.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusTextLbl.ForeColor = System.Drawing.Color.Gray;
-            this.statusTextLbl.Location = new System.Drawing.Point(10, 49);
-            this.statusTextLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.statusTextLbl.MaximumSize = new System.Drawing.Size(230, 16);
-            this.statusTextLbl.MinimumSize = new System.Drawing.Size(230, 16);
-            this.statusTextLbl.Name = "statusTextLbl";
-            this.statusTextLbl.Size = new System.Drawing.Size(230, 16);
-            this.statusTextLbl.TabIndex = 113;
-            this.statusTextLbl.Text = "Status";
-            this.statusTextLbl.Click += new System.EventHandler(this.statusTextLbl_Click);
-            // 
-            // statusTextBox
-            // 
-            this.statusTextBox.BackColor = System.Drawing.Color.AliceBlue;
-            this.statusTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.statusTextBox.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusTextBox.ForeColor = System.Drawing.Color.Gray;
-            this.statusTextBox.Location = new System.Drawing.Point(11, 49);
-            this.statusTextBox.MaxLength = 40;
-            this.statusTextBox.MinimumSize = new System.Drawing.Size(230, 16);
-            this.statusTextBox.Name = "statusTextBox";
-            this.statusTextBox.Size = new System.Drawing.Size(230, 16);
-            this.statusTextBox.TabIndex = 109;
-            this.statusTextBox.Visible = false;
-            this.statusTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.statusTextBox_KeyUp);
-            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1112,7 +1112,7 @@ namespace SoftEngChatClient
         private PictureBox emojiHappy;
         private Label requesetIndicator;
         private Label label6;
-        private Label statusTextLbl;
         public TextBox statusTextBox;
+        public Label statusTextLbl;
     }
 }
