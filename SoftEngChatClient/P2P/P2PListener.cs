@@ -99,7 +99,7 @@ namespace SoftEngChatClient.P2P
 					output = ListenForFile();
 				});
 			listeningThread.Start();
-			listeningThread.Join();
+			//listeningThread.Join();
 
 			return output;
 		}

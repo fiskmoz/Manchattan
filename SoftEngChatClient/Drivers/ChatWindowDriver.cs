@@ -203,8 +203,8 @@ namespace SoftEngChatClient.Drivers
                     found = true;
                     if (!icd.isWindowVisible())
                     {
-                        icd.SetNormalWindowState();
                         icd.displayWindow();
+                        icd.SetNormalWindowState();
                     }
                     icd.SwitchToP2P(netStream, key, messageHandler);
                 }
@@ -376,11 +376,11 @@ namespace SoftEngChatClient.Drivers
 							if(icd.getSender() == receiver)
 							{
 								found = true;
-								if (!icd.isWindowVisible())
-								{
+                                if (!icd.isWindowVisible())
+                                {
+                                    icd.displayWindow();
                                     icd.SetNormalWindowState();
-									icd.displayWindow();
-								}
+                                }
 								break;
 							}
 						}
