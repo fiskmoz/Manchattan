@@ -223,6 +223,11 @@ namespace SoftEngChatClient.Drivers
             {
                 chatWindow.AppendTextBox(messageList, "" + System.Environment.NewLine);
             }
+            chatWindow.statusTextLbl.Text = fileManager.ReadMyStatus(ClientDriver.globalUsername);
+            if(chatWindow.statusTextLbl.Text == "")
+            {
+                chatWindow.statusTextLbl.Text = "Status";
+            }
         }
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
@@ -231,7 +236,10 @@ namespace SoftEngChatClient.Drivers
 
 			chatWindow.contactListBox.Items.Clear();
 			chatWindow.contactListBox.Refresh();
-
+            if(chatWindow.statusTextLbl.Text != "")
+            {
+                fileManager.SaveMyStatus(ClientDriver.globalUsername, chatWindow.statusTextLbl.Text);
+            }
             var str = chatWindow.getChatBox();
             if (str != "")
             {
@@ -300,7 +308,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow.getMessageBox().Clear();
             chatWindow.getStatusTextBox().Visible = false;
             chatWindow.getStatusTextBox().Clear();
-
+            chatWindow.statusTextLbl.Text = ""; // Clear the status label on logout.
         }
 
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)
@@ -532,6 +540,13 @@ namespace SoftEngChatClient.Drivers
         private void ReceivedStatusUpdate(object sender, EventArgs e)
         {
             contactsHandler.GetContact(((ClientMessage)e).sender).status = ((ClientMessage)e).message;
+            foreach(var icd in individualChatDrivers)
+            {
+                if(icd.getSender() == ((ClientMessage)e).sender)
+                {
+                    icd.UpdateStatus(((ClientMessage)e).message);
+                }
+            }
         }
         private void sendStatus(object sender, EventArgs e)
         {

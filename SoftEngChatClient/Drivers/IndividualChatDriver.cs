@@ -263,5 +263,15 @@ namespace SoftEngChatClient
 			if(sendFile)
 				((P2PWriter)writer).SendFile(fileToSend);
 		}
+
+        internal void UpdateStatus(string status)
+        {
+            if(window.InvokeRequired)
+            {
+                window.Invoke(new Action<string>(UpdateStatus), new object[] { status });
+                return;
+            }
+            window.getStatusTextLabel().Text = status;
+        }
 	}
 }
