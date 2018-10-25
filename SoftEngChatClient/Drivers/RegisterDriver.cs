@@ -225,10 +225,10 @@ namespace SoftEngChatClient.Controller
                 (String.IsNullOrWhiteSpace(register.getSurnameText()) || register.getSurnameText() == "Surname"))
 
             {
-                register.SetRegisterAccept(false, Color.FromArgb(41, 164, 221));
+                register.SetRegisterAccept(false, Color.AliceBlue, Color.SteelBlue);
                 return;
             }
-            register.SetRegisterAccept(true, Color.FromArgb(64, 64, 64));
+            register.SetRegisterAccept(true, Color.SteelBlue, Color.AliceBlue);
 
         }
 
