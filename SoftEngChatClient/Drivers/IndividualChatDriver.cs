@@ -26,7 +26,7 @@ namespace SoftEngChatClient
         private string receiver;
         private FileManager fm;
 		private P2PListener p2pListener;
-        public bool isP2P { get; private set; }
+        public bool isP2P { get;  set; }
 		private byte[] fileToSend;
 
 

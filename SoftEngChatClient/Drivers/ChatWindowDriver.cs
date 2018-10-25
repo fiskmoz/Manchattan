@@ -131,8 +131,10 @@ namespace SoftEngChatClient.Drivers
 			{
 				if(icd.getSender() == args.sender)
 				{
-					found = true;
-					toChange = icd;
+                    //found = true;
+                    //toChange = icd;
+                    icd.SwitchFromP2P(writer);
+                    icd.isP2P = false;
 					break;
 				}
 			}
@@ -149,8 +151,6 @@ namespace SoftEngChatClient.Drivers
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
 			AddNewIndividualP2PChat(args.sender, args.netStream, args.key, true);
-
-            
 		}
         private void DisconnectP2P()
         {
@@ -175,8 +175,8 @@ namespace SoftEngChatClient.Drivers
                             if (!(individualChatDrivers[i].isP2P))
                             {
                                 string sender = individualChatDrivers[i].getSender();
-                                individualChatDrivers[i].hideWindow();
-                                individualChatDrivers.Remove(individualChatDrivers[i]);
+                                //individualChatDrivers[i].hideWindow();
+                                //individualChatDrivers.Remove(individualChatDrivers[i]);
                                 writer.WriteEstablishP2P(MessageType.establishP2P, username, sender);
                             }
                         }
@@ -206,6 +206,7 @@ namespace SoftEngChatClient.Drivers
                         if (showWindow)
                             icd.displayWindow();
                     }
+                    icd.SwitchToP2P(netStream, key, messageHandler);
                 }
             }
             if (found == false)
