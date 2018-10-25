@@ -77,6 +77,30 @@ namespace SoftEngChatClient
 			Thread.Sleep(10);
 		}
 
+		public void SwitchToP2P(NetworkStream netStream, string key, Messagehandler mh)
+		{
+			isP2P = true;
+			int NumberChars = key.Length;
+			byte[] personalKey = new byte[NumberChars / 2];
+			for (int i = 0; i < NumberChars; i += 2)
+				personalKey[i / 2] = System.Convert.ToByte(key.Substring(i, 2), 16);
+
+			writer = new P2PWriter(netStream, personalKey);
+			p2pListener = new P2PListener(netStream, receiver, personalKey);
+			writer = new P2PWriter(netStream, personalKey);
+
+			mh.FileRequest += new EventHandler(FileRequestRecieved);
+			mh.Subscribe(p2pListener);
+			p2pListener.StartListen();
+		}
+
+		public void SwitchFromP2P(CustomStreamWriter streamWriter )
+		{
+			isP2P = false;
+			writer = streamWriter;
+			p2pListener = null;
+		}
+
         private void SetupListners()
         {
             window.IndivudualFormClosed += new FormClosingEventHandler(icd_WindowClosed);
