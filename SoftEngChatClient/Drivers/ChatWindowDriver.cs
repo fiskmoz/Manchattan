@@ -94,6 +94,19 @@ namespace SoftEngChatClient.Drivers
 			p2pc.IncommingConnection += new EventHandler(NewP2PConnection);
 			mh.DisconnectP2P += new EventHandler(DisposeP2PConnection);
 			mh.FileResponse += new EventHandler(ReceivedFileResponse);
+			mh.FileRequest += new EventHandler(ReceivedFileRequest);
+		}
+
+		private void ReceivedFileRequest(object sender, EventArgs e)
+		{
+			FileRequestArgs args = (FileRequestArgs)e;
+			foreach (IndividualChatDriver icd in individualChatDrivers)
+			{
+				if (icd.getSender() == args.sender)
+				{
+					icd.FileRequestRecieved(sender, e);
+				}
+			}
 		}
 
 		private void ReceivedFileResponse(object sender, EventArgs e)
