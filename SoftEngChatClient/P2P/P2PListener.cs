@@ -18,7 +18,7 @@ namespace SoftEngChatClient.P2P
         Thread listeningThread;
         private ClientCrypto cc;
 		private string username;
-		private int BUFFERSIZE = 2048;
+		private int BUFFERSIZE = 1024;
 		
         public P2PListener(NetworkStream netStream, string username, byte[] key)
         {
@@ -37,6 +37,7 @@ namespace SoftEngChatClient.P2P
 		public void StartListen()
         {
             listeningThread = new Thread(Listen);
+			stopListen = false;
             listeningThread.Start();
         }
 
@@ -66,7 +67,7 @@ namespace SoftEngChatClient.P2P
 				{
 					incomming = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 					string[] splitString = incomming.Split(':');
-					if (splitString[0] == "2")
+					if (splitString[0] == "2" || splitString[0] == "14")
 					{
 						int NumberChars = splitString[3].Length;
 						byte[] messageBytes = new byte[NumberChars / 2];

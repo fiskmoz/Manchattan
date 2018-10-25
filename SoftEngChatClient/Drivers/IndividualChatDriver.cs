@@ -69,6 +69,7 @@ namespace SoftEngChatClient
 			p2pListener = new P2PListener(netstream, receiver, personalKey);
 			writer = new P2PWriter(netstream, personalKey);
 
+			mh.FileRequest += new EventHandler(FileRequestRecieved);
 			mh.Subscribe(p2pListener);
 			p2pListener.StartListen();
 
@@ -225,8 +226,9 @@ namespace SoftEngChatClient
 			}
 		}
 
-		private void FileRequestRecieved(FileRequestArgs args)
+		private void FileRequestRecieved(object sender, EventArgs e)
 		{
+			FileRequestArgs args = (FileRequestArgs)e;
 			bool accept = true;
 			//GUI STUFF HERE
 

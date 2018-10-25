@@ -67,7 +67,10 @@ namespace SoftEngChatClient.Model
 				case "13":
 					HandleFileRequest(incomming);
 					break;
-                case "15":
+				case "14":
+					HandleFileResponse(incomming);
+					break;
+				case "15":
                     HandleStatusUpdate(incomming);
                     break;
             }

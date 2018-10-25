@@ -183,8 +183,8 @@ namespace SoftEngChatClient
 
 		public FileResponseArgs(string[] incomming)
 		{
-			sendFile = incomming[2] == "1" ? true : false;
-			sender = incomming[3];
+			sendFile = incomming[3] == "1" ? true : false;
+			sender = incomming[1];
 		}
 	}
 }
