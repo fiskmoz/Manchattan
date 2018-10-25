@@ -68,6 +68,7 @@ namespace SoftEngChatClient
             this.panel9 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupChatPanel = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.allEmoticonsPanel = new System.Windows.Forms.Panel();
             this.emojiCrying = new System.Windows.Forms.PictureBox();
             this.emojiPoo = new System.Windows.Forms.PictureBox();
@@ -96,7 +97,6 @@ namespace SoftEngChatClient
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.findFriendsPanel.SuspendLayout();
@@ -550,7 +550,7 @@ namespace SoftEngChatClient
             this.statusTextBox.MaxLength = 40;
             this.statusTextBox.MinimumSize = new System.Drawing.Size(230, 16);
             this.statusTextBox.Name = "statusTextBox";
-            this.statusTextBox.Size = new System.Drawing.Size(230, 16);
+            this.statusTextBox.Size = new System.Drawing.Size(230, 14);
             this.statusTextBox.TabIndex = 109;
             this.statusTextBox.Visible = false;
             this.statusTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.statusTextBox_KeyUp);
@@ -646,6 +646,15 @@ namespace SoftEngChatClient
             this.groupChatPanel.Size = new System.Drawing.Size(681, 514);
             this.groupChatPanel.TabIndex = 112;
             this.groupChatPanel.Click += new System.EventHandler(this.groupChatPanel_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel7.Location = new System.Drawing.Point(103, 497);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(443, 2);
+            this.panel7.TabIndex = 112;
             // 
             // allEmoticonsPanel
             // 
@@ -980,15 +989,6 @@ namespace SoftEngChatClient
             this.panel8.Size = new System.Drawing.Size(2, 520);
             this.panel8.TabIndex = 23;
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel7.Location = new System.Drawing.Point(103, 497);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(443, 2);
-            this.panel7.TabIndex = 112;
-            // 
             // ChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1008,6 +1008,7 @@ namespace SoftEngChatClient
             this.MaximizeBox = false;
             this.Name = "ChatWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ManChattan";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChatWindow_FormClosed);
             this.Load += new System.EventHandler(this.ChatWindow_Load);

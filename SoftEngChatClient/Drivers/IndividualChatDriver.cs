@@ -92,6 +92,8 @@ namespace SoftEngChatClient
 			mh.FileRequest += new EventHandler(FileRequestRecieved);
 			mh.Subscribe(p2pListener);
 			p2pListener.StartListen();
+            window.attachmentPanel.Visible = true;
+            window.userStatusLabel.Text = "Online";
 		}
 
 		public void SwitchFromP2P(CustomStreamWriter streamWriter )
@@ -99,7 +101,11 @@ namespace SoftEngChatClient
 			isP2P = false;
 			writer = streamWriter;
 			p2pListener = null;
-		}
+
+            window.attachmentPanel.Visible = false;
+
+            window.userStatusLabel.Text = "Offline";
+        }
 
         private void SetupListners()
         {
@@ -113,7 +119,17 @@ namespace SoftEngChatClient
 		private void icd_WindowLoaded(object sender, EventArgs e)
         {
             string chatLog = fm.LoadIndividualChat(username, receiver);
-            window.AppendTextBox(chatLog);   
+            window.AppendTextBox(chatLog);
+            if (isP2P)
+            {
+                window.attachmentPanel.Visible = true;
+                window.userStatusLabel.Text = "Online";
+            }
+            else
+            {
+                window.attachmentPanel.Visible = false;
+                window.userStatusLabel.Text = "Offline";
+            }
         }
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)

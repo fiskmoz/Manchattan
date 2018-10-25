@@ -36,7 +36,6 @@
             this.poweredBy = new System.Windows.Forms.Label();
             this.IndividualSendButton = new System.Windows.Forms.PictureBox();
             this.msgTextBoxPanel = new System.Windows.Forms.Panel();
-            this.AttachmentPictureBox = new System.Windows.Forms.PictureBox();
             this.allEmoticonsPanel = new System.Windows.Forms.Panel();
             this.emojiCrying = new System.Windows.Forms.PictureBox();
             this.emojiPoo = new System.Windows.Forms.PictureBox();
@@ -62,17 +61,18 @@
             this.emojiLabel = new System.Windows.Forms.Label();
             this.emojiLogoBox = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.attachmentPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AttachmentPictureBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.userStatusLabel = new System.Windows.Forms.Label();
             this.statusTextLbl = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.viewMsgTextBoxPanel = new System.Windows.Forms.Panel();
-            this.attachmentPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).BeginInit();
             this.msgTextBoxPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AttachmentPictureBox)).BeginInit();
             this.allEmoticonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.emojiCrying)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emojiPoo)).BeginInit();
@@ -96,8 +96,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emojiHappy)).BeginInit();
             this.emojiPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.emojiLogoBox)).BeginInit();
-            this.panel1.SuspendLayout();
             this.attachmentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AttachmentPictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // IndividualChatBox
@@ -199,21 +200,6 @@
             this.msgTextBoxPanel.TabIndex = 17;
             this.msgTextBoxPanel.Click += new System.EventHandler(this.msgTextBoxPanel_Click);
             this.msgTextBoxPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.msgTextBoxPanel_Paint);
-            // 
-            // AttachmentPictureBox
-            // 
-            this.AttachmentPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.AttachmentPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.AttachmentPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("AttachmentPictureBox.Image")));
-            this.AttachmentPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.AttachmentPictureBox.Name = "AttachmentPictureBox";
-            this.AttachmentPictureBox.Size = new System.Drawing.Size(30, 30);
-            this.AttachmentPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.AttachmentPictureBox.TabIndex = 8;
-            this.AttachmentPictureBox.TabStop = false;
-            this.AttachmentPictureBox.Click += new System.EventHandler(this.SendFileBtn_Click);
-            this.AttachmentPictureBox.MouseLeave += new System.EventHandler(this.AttachmentPictureBox_MouseLeave);
-            this.AttachmentPictureBox.MouseHover += new System.EventHandler(this.AttachmentPictureBox_MouseHover);
             // 
             // allEmoticonsPanel
             // 
@@ -514,11 +500,49 @@
             this.label2.Text = "_________________________________________________________________________________" +
     "_____________";
             // 
+            // attachmentPanel
+            // 
+            this.attachmentPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.attachmentPanel.Controls.Add(this.label1);
+            this.attachmentPanel.Controls.Add(this.AttachmentPictureBox);
+            this.attachmentPanel.Location = new System.Drawing.Point(58, 351);
+            this.attachmentPanel.Name = "attachmentPanel";
+            this.attachmentPanel.Size = new System.Drawing.Size(30, 30);
+            this.attachmentPanel.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.label1.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label1.Location = new System.Drawing.Point(52, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 18);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Send Files";
+            // 
+            // AttachmentPictureBox
+            // 
+            this.AttachmentPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.AttachmentPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.AttachmentPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("AttachmentPictureBox.Image")));
+            this.AttachmentPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.AttachmentPictureBox.Name = "AttachmentPictureBox";
+            this.AttachmentPictureBox.Size = new System.Drawing.Size(30, 30);
+            this.AttachmentPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AttachmentPictureBox.TabIndex = 8;
+            this.AttachmentPictureBox.TabStop = false;
+            this.AttachmentPictureBox.Click += new System.EventHandler(this.SendFileBtn_Click);
+            this.AttachmentPictureBox.MouseLeave += new System.EventHandler(this.AttachmentPictureBox_MouseLeave);
+            this.AttachmentPictureBox.MouseHover += new System.EventHandler(this.AttachmentPictureBox_MouseHover);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.userStatusLabel);
             this.panel1.Controls.Add(this.UsernameLabel);
             this.panel1.Controls.Add(this.statusTextLbl);
             this.panel1.Controls.Add(this.label6);
@@ -527,6 +551,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(584, 89);
             this.panel1.TabIndex = 19;
+            // 
+            // userStatusLabel
+            // 
+            this.userStatusLabel.AutoSize = true;
+            this.userStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userStatusLabel.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userStatusLabel.ForeColor = System.Drawing.Color.SteelBlue;
+            this.userStatusLabel.Location = new System.Drawing.Point(511, 11);
+            this.userStatusLabel.Name = "userStatusLabel";
+            this.userStatusLabel.Size = new System.Drawing.Size(63, 23);
+            this.userStatusLabel.TabIndex = 116;
+            this.userStatusLabel.Text = "Online";
             // 
             // statusTextLbl
             // 
@@ -572,28 +608,6 @@
             this.viewMsgTextBoxPanel.Size = new System.Drawing.Size(602, 449);
             this.viewMsgTextBoxPanel.TabIndex = 18;
             // 
-            // attachmentPanel
-            // 
-            this.attachmentPanel.BackColor = System.Drawing.Color.AliceBlue;
-            this.attachmentPanel.Controls.Add(this.label1);
-            this.attachmentPanel.Controls.Add(this.AttachmentPictureBox);
-            this.attachmentPanel.Location = new System.Drawing.Point(58, 351);
-            this.attachmentPanel.Name = "attachmentPanel";
-            this.attachmentPanel.Size = new System.Drawing.Size(30, 30);
-            this.attachmentPanel.TabIndex = 23;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.label1.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label1.Location = new System.Drawing.Point(52, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 18);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Send Files";
-            // 
             // IndividualChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -612,6 +626,7 @@
             this.MaximizeBox = false;
             this.Name = "IndividualChatWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ManChattan";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IndividualChatWindow_FormClosing);
             this.Load += new System.EventHandler(this.IndividualChatWindow_Load);
@@ -619,7 +634,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).EndInit();
             this.msgTextBoxPanel.ResumeLayout(false);
             this.msgTextBoxPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AttachmentPictureBox)).EndInit();
             this.allEmoticonsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.emojiCrying)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emojiPoo)).EndInit();
@@ -644,10 +658,11 @@
             this.emojiPanel.ResumeLayout(false);
             this.emojiPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.emojiLogoBox)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.attachmentPanel.ResumeLayout(false);
             this.attachmentPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AttachmentPictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,7 +708,8 @@
         private System.Windows.Forms.Label statusTextLbl;
         private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.PictureBox AttachmentPictureBox;
-        private System.Windows.Forms.Panel attachmentPanel;
+        public System.Windows.Forms.Panel attachmentPanel;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label userStatusLabel;
     }
 }
