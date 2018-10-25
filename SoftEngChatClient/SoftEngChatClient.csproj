@@ -192,5 +192,11 @@
   <ItemGroup>
     <None Include="Resources\logo3.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\Icons\showPassword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GUI\Icons\hidePassword.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

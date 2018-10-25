@@ -202,10 +202,11 @@ namespace SoftEngChatClient
             EnterSurnameLeaved(this, e);
         }
 
-        public void SetRegisterAccept(bool value, Color backColor)
+        public void SetRegisterAccept(bool value, Color backColor, Color ForeColor)
         {
             RegisterAccept.Enabled = value;
             RegisterAccept.BackColor = backColor;
+            RegisterAccept.ForeColor = ForeColor;
         }
 
         private void EnterUsername_TextChanged(object sender, EventArgs e)
@@ -273,12 +274,12 @@ namespace SoftEngChatClient
             if(!showPasswordFlag)
             {
                 EnterPassword.PasswordChar = '\0';
-                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background2;
+                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.hidePassword;
             }
             else
             {
                 EnterPassword.PasswordChar = '*';
-                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.background3;
+                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.showPassword;
             }
                 
         }
