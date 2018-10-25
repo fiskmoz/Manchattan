@@ -51,8 +51,8 @@ namespace SoftEngChatClient.P2P
 
 			while(bytesLeft > 0)
 			{
-				int nextPacketSize = (bytesLeft > bytesSent) ? 2048 : bytesLeft;
-
+				int nextPacketSize = (bytesLeft > 1024) ? 1024 : bytesLeft;
+				
 				netStream.Write(package, bytesSent, nextPacketSize);
 				bytesSent += nextPacketSize;
 				bytesLeft -= nextPacketSize;

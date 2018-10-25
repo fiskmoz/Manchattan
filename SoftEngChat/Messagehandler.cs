@@ -202,7 +202,7 @@ namespace SoftEngChat.Model.SSLCommunication
             string[] msgArray = ParseMessage(incomming);
             if (msgArray.Length > 3)
             {
-                for (int i = 3; i < msgArray.Length; i++)
+                for (int i = 4; i < msgArray.Length; i++)
                 {
                     msgArray[3] += ":" + msgArray[i];
                 }

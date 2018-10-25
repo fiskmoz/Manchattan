@@ -158,6 +158,7 @@ namespace SoftEngChatClient
 
 		internal void SaveReceivedFile(byte[] file, string filename, string username)
 		{
+			Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\Downloads\");
 			File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\Downloads\" + filename, file);
 		}
 
