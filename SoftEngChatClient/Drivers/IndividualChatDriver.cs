@@ -44,6 +44,7 @@ namespace SoftEngChatClient
             SetupListners();
             writer = sllWriter;
             window.WindowState = FormWindowState.Minimized;
+            window.ShowInTaskbar = false;
             new Thread(() => Application.Run(window)).Start();
             Thread.Sleep(10);
             //new Thread(() => window.Show()).Start();
@@ -57,6 +58,8 @@ namespace SoftEngChatClient
 			this.receiver = receiver;
 			this.fm = fm;
             window = new IndividualChatWindow(receiver);
+            window.WindowState = FormWindowState.Minimized;
+            window.ShowInTaskbar = false;
             window.getStatusTextLabel().Text = status;
 			spam = new SpamProtector();
 			SetupListners();
@@ -140,6 +143,7 @@ namespace SoftEngChatClient
                 window.attachmentPanel.Visible = false;
                 window.userStatusLabel.Text = "Offline";
             }
+            window.Hide();
         }
 
         private void icd_EnterKeyReleased(object sender, KeyEventArgs e)
@@ -200,9 +204,9 @@ namespace SoftEngChatClient
                 window.Invoke(new Action(displayWindow));
                 return;
             }
-            window.ClearChatBox();
-            string chatLog = fm.LoadIndividualChat(username, receiver);
-            window.AppendTextBox(chatLog);
+            //window.ClearChatBox();
+            //string chatLog = fm.LoadIndividualChat(username, receiver);
+            //window.AppendTextBox(chatLog);
             window.Show();
         }
 
@@ -241,9 +245,9 @@ namespace SoftEngChatClient
             if(window.InvokeRequired)
             {
                 window.Invoke(new Action(SetNormalWindowState));
-                return;
             }
-            window.WindowState = FormWindowState.Normal;
+            window.ShowInTaskbar = true;
+            window.Invoke(new Action(() => { window.WindowState = FormWindowState.Normal; }));
         }
 
 		internal void Disconnect()
