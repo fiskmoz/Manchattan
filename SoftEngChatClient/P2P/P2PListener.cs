@@ -33,14 +33,12 @@ namespace SoftEngChatClient.P2P
         {
             stopListen = true;
         }
-
 		public void StartListen()
         {
             listeningThread = new Thread(Listen);
 			stopListen = false;
             listeningThread.Start();
         }
-
         public void Listen()
         {
             byte[] buffer = new byte[BUFFERSIZE];
@@ -105,7 +103,6 @@ namespace SoftEngChatClient.P2P
 
 			return output;
 		}
-
 		private byte[] ListenForFile()
 		{
 			int bytesRead = 0;
