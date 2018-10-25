@@ -10,6 +10,7 @@
 		{
 			this.name = name;
 			this.isOnline = isOnline;
+            this.status = "Status";
 		}
 	}
 }
