@@ -325,6 +325,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow.getStatusTextBox().Visible = false;
             chatWindow.getStatusTextBox().Clear();
             chatWindow.statusTextLbl.Text = ""; // Clear the status label on logout.
+            chatWindow.settingsLabel.BackColor = Color.Transparent;
         }
 
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)

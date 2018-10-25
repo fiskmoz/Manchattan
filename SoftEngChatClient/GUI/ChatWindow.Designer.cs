@@ -1098,7 +1098,7 @@ namespace SoftEngChatClient
         private Panel panel8;
         private PictureBox pictureBox3;
         private Label label3;
-        private PictureBox settingsLabel;
+        public PictureBox settingsLabel;
         private Panel panel9;
         private Label label5;
         private Panel allEmoticonsPanel;

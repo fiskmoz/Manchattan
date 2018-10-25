@@ -18,6 +18,7 @@ namespace SoftEngChatClient
         public event EventHandler IndividualSendButtonClicked;
         public event FormClosingEventHandler IndivudualFormClosed;
         public event EventHandler SendFileEvent;
+        public event EventHandler acceptFileEvent;
 
 
         public IndividualChatWindow(string username)
@@ -321,6 +322,11 @@ namespace SoftEngChatClient
             attachmentPanel.Size = new Size(30, 30);
             attachmentPanel.BackColor = Color.Transparent;
             attachmentPanel.BorderStyle = BorderStyle.None;
+        }
+
+        private void acceptFileButton_Click(object sender, EventArgs e)
+        {
+            acceptFileEvent(this, e);
         }
     }
 }
