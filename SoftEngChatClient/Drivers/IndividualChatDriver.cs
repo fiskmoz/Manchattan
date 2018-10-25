@@ -289,20 +289,11 @@ namespace SoftEngChatClient
             window.fileSizeLabel.Text = fileArgs.fileSize + " bytes";
             //GUI STUFF HERE
             
-            
-
-		
-			
-
 		}
 
         private void AcceptFile(object sender, EventArgs e)
         {
-            if (window.InvokeRequired)
-            {
-                window.Invoke(new Action<object, EventArgs>(AcceptFile), new object[] { sender, e });
-                return;
-            }
+            
             ((P2PWriter)writer).WriteFileResponse(MessageType.FileResponse, username, receiver, true);
             
                 p2pListener.StopListen();
@@ -312,15 +303,25 @@ namespace SoftEngChatClient
                 {
                     fm.SaveReceivedFile(file, fileArgs.filename, username);
                     //Fancy GUI stuff here, file received
-                    MessageBox.Show("Accepted");
+                    MessageBoxShow("Accepted");
                 }
                 else
                 {
                 //Sad Gui stuff here, no file received
-                MessageBox.Show("Failed");
+                MessageBoxShow("Failed");
             }
             
         }
+
+		private void MessageBoxShow(string message)
+		{
+			if (window.InvokeRequired)
+			{
+				window.Invoke(new Action<string>(MessageBoxShow), new object[] { message });
+				return;
+			}
+			MessageBoxShow(message);
+		}
 
 		private void SendFileRequest(string path)
 		{
@@ -331,8 +332,11 @@ namespace SoftEngChatClient
 		
 		internal void SendFile(bool sendFile)
 		{
-			if(sendFile)
+			if (sendFile)
+			{
+				Thread.Sleep(1000);
 				((P2PWriter)writer).SendFile(fileToSend);
+			}
 		}
 
         internal void UpdateStatus(string status)

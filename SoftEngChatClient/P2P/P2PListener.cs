@@ -99,7 +99,7 @@ namespace SoftEngChatClient.P2P
 					output = ListenForFile();
 				});
 			listeningThread.Start();
-			listeningThread.Join();
+			Thread.CurrentThread.Join();
 
 			return output;
 		}
@@ -111,7 +111,6 @@ namespace SoftEngChatClient.P2P
 			byte[] length = new byte[4];
 			bytesRead = netStream.Read(length, 0, 4);
 			int dataLength = BitConverter.ToInt32(length, 0);
-
 			// Read the data
 			int bytesLeft = dataLength;
 			byte[] data = new byte[dataLength];
