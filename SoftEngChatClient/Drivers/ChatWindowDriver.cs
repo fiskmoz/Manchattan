@@ -193,7 +193,7 @@ namespace SoftEngChatClient.Drivers
             NetworkStream netstream = p2pConnector.Connect(arg.ip, arg.port);
             AddNewIndividualP2PChat(arg.receiver, netstream, arg.key, true);
         }
-        public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key, bool showWindow)
+        public void AddNewIndividualP2PChat(string sender, NetworkStream netStream, string key, bool display)
         {
             bool found = false;
             foreach (IndividualChatDriver icd in individualChatDrivers)
@@ -203,8 +203,8 @@ namespace SoftEngChatClient.Drivers
                     found = true;
                     if (!icd.isWindowVisible())
                     {
-                        if (showWindow)
-                            icd.displayWindow();
+                        icd.SetNormalWindowState();
+                        icd.displayWindow();
                     }
                     icd.SwitchToP2P(netStream, key, messageHandler);
                 }
@@ -212,9 +212,11 @@ namespace SoftEngChatClient.Drivers
             if (found == false)
             {
                 IndividualChatDriver icd = new IndividualChatDriver(username, sender, fileManager, netStream, messageHandler, key, contactsHandler.GetContact(sender).status);
-                if (!showWindow && icd.isWindowVisible())
-                    icd.hideWindow();
-
+                if(display)
+                {
+                    icd.displayWindow();
+                    icd.SetNormalWindowState();
+                }
                 individualChatDrivers.Add(icd);
             }
 
@@ -375,9 +377,9 @@ namespace SoftEngChatClient.Drivers
 								found = true;
 								if (!icd.isWindowVisible())
 								{
+                                    icd.SetNormalWindowState();
 									icd.displayWindow();
 								}
-								icd.SetNormalWindowState();
 								break;
 							}
 						}
@@ -411,8 +413,9 @@ namespace SoftEngChatClient.Drivers
                     return;
                 }
             }
-            individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status));
-            individualChatDrivers[individualChatDrivers.Count() - 1].ReceiveMessage(message);
+            var newICD = new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status);
+            newICD.ReceiveMessage(message);
+            individualChatDrivers.Add(newICD);
             SendPopup("Received message from: " + sender, message);
         }
         public void AddNewIndividualChat(string sender)
@@ -426,14 +429,17 @@ namespace SoftEngChatClient.Drivers
                     if (!icd.isWindowVisible())
                     {
                         icd.displayWindow();
+                        icd.SetNormalWindowState();
+                        
                     }
-                    icd.SetNormalWindowState();
                 }
             }
             if (found == false)
             {
-                individualChatDrivers.Add(new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status));
-                individualChatDrivers[individualChatDrivers.Count() - 1].SetNormalWindowState();
+                var newICD = new IndividualChatDriver(writer, username, sender, fileManager, contactsHandler.GetContact(sender).status);
+                newICD.displayWindow();
+                newICD.SetNormalWindowState();
+                individualChatDrivers.Add(newICD);
             }
         }
 
