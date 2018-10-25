@@ -478,11 +478,11 @@
             // 
             this.emojiLabel.AutoSize = true;
             this.emojiLabel.BackColor = System.Drawing.Color.Transparent;
-            this.emojiLabel.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.emojiLabel.Font = new System.Drawing.Font("Tahoma", 11F);
             this.emojiLabel.ForeColor = System.Drawing.Color.Snow;
-            this.emojiLabel.Location = new System.Drawing.Point(36, 8);
+            this.emojiLabel.Location = new System.Drawing.Point(41, 6);
             this.emojiLabel.Name = "emojiLabel";
-            this.emojiLabel.Size = new System.Drawing.Size(81, 14);
+            this.emojiLabel.Size = new System.Drawing.Size(98, 18);
             this.emojiLabel.TabIndex = 7;
             this.emojiLabel.Text = "ManChaticons";
             // 
@@ -586,11 +586,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 11F);
             this.label1.ForeColor = System.Drawing.Color.AliceBlue;
-            this.label1.Location = new System.Drawing.Point(42, 8);
+            this.label1.Location = new System.Drawing.Point(52, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 14);
+            this.label1.Size = new System.Drawing.Size(72, 18);
             this.label1.TabIndex = 9;
             this.label1.Text = "Send Files";
             // 
