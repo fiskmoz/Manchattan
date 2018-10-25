@@ -160,5 +160,14 @@ namespace SoftEngChatClient
 		{
 			File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\Downloads\" + filename, file);
 		}
+
+        public void SaveMyStatus(string username, string myStatus)
+        {
+            WriteToFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\MyStatus.txt", myStatus);
+        }
+        public string ReadMyStatus(string username)
+        {
+            return ReadFromFile(AppDomain.CurrentDomain.BaseDirectory + @"\" + username + @"\MyStatus.txt");
+        }
 	}
 }

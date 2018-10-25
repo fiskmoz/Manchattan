@@ -223,6 +223,7 @@ namespace SoftEngChatClient.Drivers
             {
                 chatWindow.AppendTextBox(messageList, "" + System.Environment.NewLine);
             }
+            chatWindow.statusTextLbl.Text = fileManager.ReadMyStatus(ClientDriver.globalUsername);
         }
         private void ChatWindowClosed(object obj, FormClosedEventArgs e)
         {
@@ -231,6 +232,7 @@ namespace SoftEngChatClient.Drivers
 
 			chatWindow.contactListBox.Items.Clear();
 			chatWindow.contactListBox.Refresh();
+            fileManager.SaveMyStatus(ClientDriver.globalUsername, chatWindow.statusTextLbl.Text);
 
             var str = chatWindow.getChatBox();
             if (str != "")
@@ -300,7 +302,7 @@ namespace SoftEngChatClient.Drivers
             chatWindow.getMessageBox().Clear();
             chatWindow.getStatusTextBox().Visible = false;
             chatWindow.getStatusTextBox().Clear();
-
+            chatWindow.statusTextLbl.Text = ""; // Clear the status label on logout.
         }
 
         private void ChatWindowSendButtonClicked(object sender, EventArgs e)
