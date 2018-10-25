@@ -78,7 +78,12 @@ namespace SoftEngChatClient
 
 		public void SwitchToP2P(NetworkStream netStream, string key, Messagehandler mh)
 		{
-			isP2P = true;
+            if (window.InvokeRequired)
+            {
+                window.Invoke(new Action<NetworkStream, string, Messagehandler>(SwitchToP2P), new object[] { netStream, key, mh });
+                return;
+            }
+            isP2P = true;
 			int NumberChars = key.Length;
 			byte[] personalKey = new byte[NumberChars / 2];
 			for (int i = 0; i < NumberChars; i += 2)
@@ -96,13 +101,18 @@ namespace SoftEngChatClient
 
 		public void SwitchFromP2P(CustomStreamWriter streamWriter )
 		{
-			isP2P = false;
-			writer = streamWriter;
-			p2pListener = null;
-
+            if (window.InvokeRequired)
+            {
+                window.Invoke(new Action<CustomStreamWriter>(SwitchFromP2P), new object[] { streamWriter });
+                return;
+            }
             window.attachmentPanel.Visible = false;
-
             window.userStatusLabel.Text = "Offline";
+
+            isP2P = false;
+            writer = streamWriter;
+            p2pListener = null;
+
         }
 
         private void SetupListners()

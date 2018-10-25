@@ -150,7 +150,7 @@ namespace SoftEngChatClient.Drivers
 		private void NewP2PConnection(object sender, EventArgs e)
 		{
 			IncommingP2PConnection args = (IncommingP2PConnection)e;
-			AddNewIndividualP2PChat(args.sender, args.netStream, args.key, true);
+			AddNewIndividualP2PChat(args.sender, args.netStream, args.key, false);
 		}
         private void DisconnectP2P()
         {
