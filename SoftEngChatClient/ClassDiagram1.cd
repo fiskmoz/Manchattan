@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SoftEngChatClient.ClientCrypto" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAIAAQEAEAQAAIAIEAABIAAAAAAAg=</HashCode>
+      <FileName>ClientCrypto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Constants" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.IndividualChatDriver" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQgQQEEASAAOCAAAAAAAAkwADQAACAIBcAAAAQAACA=</HashCode>
+      <FileName>Drivers\IndividualChatDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.FileManager" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAABAQABwAAAAAABAAAAIAAVAAAAAAABAIA=</HashCode>
+      <FileName>FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.ChatWindow" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IUZDrJKNVqAOwBDwLMSmytDjqEYBbSEScj9JXafHsow=</HashCode>
+      <FileName>GUI\ChatWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.IndividualChatWindow" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YUBCoQANQqQMwBjUJECEClHTqEIQZyBQGCwqBQ3EkqA=</HashCode>
+      <FileName>GUI\IndividualChatWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Login" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBIAWAECgUABEAICC4AAAiAJYBJQAAgAODQQBAACA=</HashCode>
+      <FileName>GUI\Login.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Register" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wEEtBCWAlCQwAVEgAAmMsGSClBQAFQABAZKlQwBDiCg=</HashCode>
+      <FileName>GUI\Register.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.IncommingMessage" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.RegAck" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.ClientMessage" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAACA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.OnlineList" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.UserOnlineStatusUpdate" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.LoginAck" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2POutgoingConnection" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAEAAAAAAAAAAgABAAgAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2PIncommingConnection" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAQAAAAAEAAAAAAAAAAgAAAAgAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2PDisconnect" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.FileRequestArgs" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.FileResponseArgs" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Program" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Session" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAQAQAAAAAABAAgAAgAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Session.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Controller.ClientDriver" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAJBAAEAgAAABAEAAAAAAAAMAAABAAAEQAAAAAAgAI=</HashCode>
+      <FileName>ClientDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Controller.RegisterDriver" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAGQRAgABAAAAgIQERIBQACABABAACQAAAoCAAAA=</HashCode>
+      <FileName>Drivers\RegisterDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Model.SSLCommunication.SSLConnector" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAgEAACAAAAIAAAAhCAAAAAAAABCAABAA=</HashCode>
+      <FileName>ClientSSL\SSLConnector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Model.SSLCommunication.SSLListener" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgAAAAAAAAAAEAAAAAAAABAAAAAAAABCAAAAUAgAAA=</HashCode>
+      <FileName>ClientSSL\SSLListener.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SoftEngChatClient.Model.SSLCommunication.SSLWriter" BaseTypeListCollapsed="true">
+    <Position X="10" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAIAAAAAAAAACAAAAAAAQACAACACIAAAIAAAAA=</HashCode>
+      <FileName>ClientSSL\SSLWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SoftEngChatClient.Model.Contact" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ContactManagement\Contact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Model.ContactListEventArg" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ContactManagement\ContactListEventArg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Model.ContactsHandler" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCASCAQBAAABKAAAAAAEAAAAACCAgAAgACAAAEAGAA=</HashCode>
+      <FileName>ContactManagement\ContactsHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Model.Messagehandler" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAggAAECAAAIBABIBgAKQEQJIKAAACUAAAAAAAQkA=</HashCode>
+      <FileName>MessageHandling\Messagehandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Drivers.ChatWindowDriver">
+    <Position X="12.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>OAQIpFQAIAKgAKAAgEDBMIcRQgEmLgAIkUAAAQBgAAU=</HashCode>
+      <FileName>Drivers\ChatWindowDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Drivers.ChatWindowGraphicsDriver" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAASAAAxAgAAAAAAAAAIAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Drivers\ChatWindowGraphicsDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Drivers.LoginWindowDriver" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIIADAAAEIAAAACAAAAAAEAAAACAAQBAQIQAAAAEAI=</HashCode>
+      <FileName>Drivers\LoginWindowDriver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.Drivers.SpamProtector" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Drivers\SpamProtector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.GUI.FriendRequest" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACwCABAAAACAIABCFAEAAAAAABAAAQBgAAA=</HashCode>
+      <FileName>GUI\FriendRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2P.P2PConnector" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAIAAAAACEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>P2P\P2PConnector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2P.IncommingP2PConnection" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAEAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>P2P\P2PConnector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoftEngChatClient.P2P.P2PListener" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgAEAAAAAAAAEAACAAAAAkAAABAAAABAAAAAUAgACA=</HashCode>
+      <FileName>P2P\P2PListener.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SoftEngChatClient.P2P.P2PWriter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAIAAAACAAAAEgAABAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>P2P\P2PWriter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SoftEngChatClient.Properties.Resources" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAEgEAAAAAAQABEQgEgUAAAAAKACAAAAAAIIg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SoftEngChatClient.MessageHandling.CustomStreamWriter">
+    <Position X="0.5" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\CustomStreamWriter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SoftEngChatClient.MessageHandling.StreamListener">
+    <Position X="4.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAUAgAAA=</HashCode>
+      <FileName>MessageHandling\StreamListener.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="SoftEngChatClient.MessageType">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAgAAAEAMABIAAAAAAAQBAAAACAAAAAUQABAAAEBA=</HashCode>
+      <FileName>MessageHandling\IncommingMessages.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
