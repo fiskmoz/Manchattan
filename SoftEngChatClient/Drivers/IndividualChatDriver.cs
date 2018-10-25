@@ -28,6 +28,7 @@ namespace SoftEngChatClient
 		private P2PListener p2pListener;
         public bool isP2P { get; private set; }
 		private byte[] fileToSend;
+        public FileRequestArgs fileArgs;
 
 
 		public IndividualChatDriver(CustomStreamWriter sllWriter, string Username, string Receiver, FileManager fm, string status)
@@ -112,6 +113,7 @@ namespace SoftEngChatClient
             window.IndividualMessageBoxReleased += new KeyEventHandler(icd_EnterKeyReleased);
             window.IndividualChatWindowLoaded += new EventHandler(icd_WindowLoaded);
 			window.SendFileEvent += new EventHandler(SendFileButtonClicked);
+            window.acceptFileEvent += new EventHandler(AcceptFile);
         }
 
 		private void icd_WindowLoaded(object sender, EventArgs e)
@@ -266,28 +268,49 @@ namespace SoftEngChatClient
 
 		public void FileRequestRecieved(object sender, EventArgs e)
 		{
-			FileRequestArgs args = (FileRequestArgs)e;
-			bool accept = true;
-			//GUI STUFF HERE
+            if (window.InvokeRequired)
+            {
+                window.Invoke(new Action<object , EventArgs>(FileRequestRecieved), new object[] { sender, e  });
+                return;
+            }
+            fileArgs = (FileRequestArgs)e;
+            window.fileRequestPanel.Visible = true;
+            window.fileNameLabel.Text = fileArgs.filename;
+            window.fileSizeLabel.Text = fileArgs.fileSize + " bytes";
+            //GUI STUFF HERE
+            
+            
 
-			((P2PWriter)writer).WriteFileResponse(MessageType.FileResponse, username, receiver, accept);
-			if (accept)
-			{
-				p2pListener.StopListen();
-				byte[] file = p2pListener.StartFileListener();
-				p2pListener.StartListen();
-				if(file != null)
-				{
-					fm.SaveReceivedFile(file, args.filename, username);
-					//Fancy GUI stuff here, file received
-				}
-				else
-				{
-					//Sad Gui stuff here, no file received
-				}
-			}
+		
+			
 
 		}
+
+        private void AcceptFile(object sender, EventArgs e)
+        {
+            if (window.InvokeRequired)
+            {
+                window.Invoke(new Action<object, EventArgs>(AcceptFile), new object[] { sender, e });
+                return;
+            }
+            ((P2PWriter)writer).WriteFileResponse(MessageType.FileResponse, username, receiver, true);
+            
+                p2pListener.StopListen();
+                byte[] file = p2pListener.StartFileListener();
+                p2pListener.StartListen();
+                if (file != null)
+                {
+                    fm.SaveReceivedFile(file, fileArgs.filename, username);
+                    //Fancy GUI stuff here, file received
+                    MessageBox.Show("Accepted");
+                }
+                else
+                {
+                //Sad Gui stuff here, no file received
+                MessageBox.Show("Failed");
+            }
+            
+        }
 
 		private void SendFileRequest(string path)
 		{

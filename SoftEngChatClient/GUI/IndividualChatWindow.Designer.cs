@@ -36,6 +36,15 @@
             this.poweredBy = new System.Windows.Forms.Label();
             this.IndividualSendButton = new System.Windows.Forms.PictureBox();
             this.msgTextBoxPanel = new System.Windows.Forms.Panel();
+            this.fileRequestPanel = new System.Windows.Forms.Panel();
+            this.fileSizeLabel = new System.Windows.Forms.Label();
+            this.fileNameLabel = new System.Windows.Forms.Label();
+            this.rejectFileButton = new System.Windows.Forms.Button();
+            this.acceptFileButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.allEmoticonsPanel = new System.Windows.Forms.Panel();
             this.emojiCrying = new System.Windows.Forms.PictureBox();
             this.emojiPoo = new System.Windows.Forms.PictureBox();
@@ -73,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).BeginInit();
             this.msgTextBoxPanel.SuspendLayout();
+            this.fileRequestPanel.SuspendLayout();
             this.allEmoticonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.emojiCrying)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emojiPoo)).BeginInit();
@@ -187,6 +197,7 @@
             // msgTextBoxPanel
             // 
             this.msgTextBoxPanel.BackColor = System.Drawing.Color.AliceBlue;
+            this.msgTextBoxPanel.Controls.Add(this.fileRequestPanel);
             this.msgTextBoxPanel.Controls.Add(this.allEmoticonsPanel);
             this.msgTextBoxPanel.Controls.Add(this.emojiPanel);
             this.msgTextBoxPanel.Controls.Add(this.label2);
@@ -200,6 +211,121 @@
             this.msgTextBoxPanel.TabIndex = 17;
             this.msgTextBoxPanel.Click += new System.EventHandler(this.msgTextBoxPanel_Click);
             this.msgTextBoxPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.msgTextBoxPanel_Paint);
+            // 
+            // fileRequestPanel
+            // 
+            this.fileRequestPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.fileRequestPanel.Controls.Add(this.fileSizeLabel);
+            this.fileRequestPanel.Controls.Add(this.fileNameLabel);
+            this.fileRequestPanel.Controls.Add(this.rejectFileButton);
+            this.fileRequestPanel.Controls.Add(this.acceptFileButton);
+            this.fileRequestPanel.Controls.Add(this.label7);
+            this.fileRequestPanel.Controls.Add(this.label5);
+            this.fileRequestPanel.Controls.Add(this.label3);
+            this.fileRequestPanel.Controls.Add(this.label4);
+            this.fileRequestPanel.Location = new System.Drawing.Point(392, 240);
+            this.fileRequestPanel.Name = "fileRequestPanel";
+            this.fileRequestPanel.Size = new System.Drawing.Size(200, 100);
+            this.fileRequestPanel.TabIndex = 24;
+            this.fileRequestPanel.Visible = false;
+            // 
+            // fileSizeLabel
+            // 
+            this.fileSizeLabel.AutoSize = true;
+            this.fileSizeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.fileSizeLabel.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.fileSizeLabel.ForeColor = System.Drawing.Color.AliceBlue;
+            this.fileSizeLabel.Location = new System.Drawing.Point(36, 49);
+            this.fileSizeLabel.Name = "fileSizeLabel";
+            this.fileSizeLabel.Size = new System.Drawing.Size(31, 13);
+            this.fileSizeLabel.TabIndex = 123;
+            this.fileSizeLabel.Text = "none";
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.fileNameLabel.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.fileNameLabel.ForeColor = System.Drawing.Color.AliceBlue;
+            this.fileNameLabel.Location = new System.Drawing.Point(66, 34);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(31, 13);
+            this.fileNameLabel.TabIndex = 122;
+            this.fileNameLabel.Text = "none";
+            // 
+            // rejectFileButton
+            // 
+            this.rejectFileButton.BackColor = System.Drawing.Color.AliceBlue;
+            this.rejectFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.rejectFileButton.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.rejectFileButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.rejectFileButton.Location = new System.Drawing.Point(122, 73);
+            this.rejectFileButton.Name = "rejectFileButton";
+            this.rejectFileButton.Size = new System.Drawing.Size(75, 23);
+            this.rejectFileButton.TabIndex = 121;
+            this.rejectFileButton.Text = "Reject";
+            this.rejectFileButton.UseVisualStyleBackColor = false;
+            // 
+            // acceptFileButton
+            // 
+            this.acceptFileButton.BackColor = System.Drawing.Color.AliceBlue;
+            this.acceptFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.acceptFileButton.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.acceptFileButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.acceptFileButton.Location = new System.Drawing.Point(6, 72);
+            this.acceptFileButton.Name = "acceptFileButton";
+            this.acceptFileButton.Size = new System.Drawing.Size(75, 23);
+            this.acceptFileButton.TabIndex = 120;
+            this.acceptFileButton.Text = "Accept";
+            this.acceptFileButton.UseVisualStyleBackColor = false;
+            this.acceptFileButton.Click += new System.EventHandler(this.acceptFileButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.label7.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label7.Location = new System.Drawing.Point(5, 47);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 17);
+            this.label7.TabIndex = 119;
+            this.label7.Text = "Size:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.label5.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label5.Location = new System.Drawing.Point(5, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 17);
+            this.label5.TabIndex = 118;
+            this.label5.Text = "Filename: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label3.Location = new System.Drawing.Point(53, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 19);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "File Request";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label4.Location = new System.Drawing.Point(20, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(157, 13);
+            this.label4.TabIndex = 117;
+            this.label4.Text = "_________________________";
             // 
             // allEmoticonsPanel
             // 
@@ -634,6 +760,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.IndividualSendButton)).EndInit();
             this.msgTextBoxPanel.ResumeLayout(false);
             this.msgTextBoxPanel.PerformLayout();
+            this.fileRequestPanel.ResumeLayout(false);
+            this.fileRequestPanel.PerformLayout();
             this.allEmoticonsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.emojiCrying)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emojiPoo)).EndInit();
@@ -711,5 +839,14 @@
         public System.Windows.Forms.Panel attachmentPanel;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label userStatusLabel;
+        public System.Windows.Forms.Panel fileRequestPanel;
+        public System.Windows.Forms.Label fileSizeLabel;
+        public System.Windows.Forms.Label fileNameLabel;
+        public System.Windows.Forms.Button rejectFileButton;
+        public System.Windows.Forms.Button acceptFileButton;
+        public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label label4;
     }
 }
