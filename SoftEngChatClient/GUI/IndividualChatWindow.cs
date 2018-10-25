@@ -125,6 +125,7 @@ namespace SoftEngChatClient
             emojiPanel.Size = new Size(150, 30);
             emojiPanel.BackColor = Color.SteelBlue;
             emojiPanel.BorderStyle = BorderStyle.FixedSingle;
+            attachmentPanel.Location = new Point(178, attachmentPanel.Location.Y);
         }
 
         private void emojiLogoBox_MouseLeave(object sender, EventArgs e)
@@ -133,6 +134,7 @@ namespace SoftEngChatClient
                 emojiPanel.Size = new Size(30, 30);
                 emojiPanel.BackColor = Color.Transparent;
                 emojiPanel.BorderStyle = BorderStyle.None;
+                attachmentPanel.Location = new Point(58, attachmentPanel.Location.Y);
             }
         }
 
@@ -158,6 +160,7 @@ namespace SoftEngChatClient
                 emojiPanel.BackColor = Color.Transparent;
                 emojiPanel.BorderStyle = BorderStyle.None;
                 allEmoticonsPanel.Visible = false;
+                attachmentPanel.Location = new Point(58, attachmentPanel.Location.Y);
             }
         }
 
@@ -169,6 +172,7 @@ namespace SoftEngChatClient
                 emojiPanel.BackColor = Color.Transparent;
                 emojiPanel.BorderStyle = BorderStyle.None;
                 allEmoticonsPanel.Visible = false;
+                attachmentPanel.Location = new Point(58, attachmentPanel.Location.Y);
             }
         }
 
@@ -180,6 +184,7 @@ namespace SoftEngChatClient
                 emojiPanel.BackColor = Color.Transparent;
                 emojiPanel.BorderStyle = BorderStyle.None;
                 allEmoticonsPanel.Visible = false;
+                AttachmentPictureBox.Location = new Point(58, AttachmentPictureBox.Location.Y);
             }
         }
 
@@ -302,6 +307,20 @@ namespace SoftEngChatClient
         private void SendFileBtn_Click(object sender, EventArgs e)
         {
             SendFileEvent(sender, e);
+        }
+
+        private void AttachmentPictureBox_MouseHover(object sender, EventArgs e)
+        {
+            attachmentPanel.Size = new Size(150, 30);
+            attachmentPanel.BackColor = Color.SteelBlue;
+            attachmentPanel.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void AttachmentPictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            attachmentPanel.Size = new Size(30, 30);
+            attachmentPanel.BackColor = Color.Transparent;
+            attachmentPanel.BorderStyle = BorderStyle.None;
         }
     }
 }
