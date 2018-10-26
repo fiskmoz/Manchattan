@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4844B12D-C4C9-49E9-8DC2-EF5F08BEC66E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SoftEngChatClient</RootNamespace>
-    <AssemblyName>SoftEngChatClient</AssemblyName>
+    <RootNamespace>Client</RootNamespace>
+    <AssemblyName>Client</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
