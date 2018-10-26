@@ -178,6 +178,7 @@ namespace SoftEngChatClient
             string chatLog = window.getChatBox();
             if (chatLog != "")
             {
+                chatLog = chatLog.Remove(chatLog.Length - 1);
                 fm.SaveIndividualChat(username, receiver, chatLog);
             }
             if (e.CloseReason == CloseReason.UserClosing)
@@ -220,6 +221,7 @@ namespace SoftEngChatClient
             string chatLog = window.getChatBox();
             if (chatLog != "")
             {
+                chatLog = chatLog.Remove(chatLog.Length - 1);
                 fm.SaveIndividualChat(username, receiver, chatLog);
             }
             window.Hide();
