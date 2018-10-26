@@ -7,9 +7,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SoftEngChatClient.MessageHandling;
+using Client.MessageHandling;
 
-namespace SoftEngChatClient.P2P
+namespace Client.P2P
 {
     class P2PListener: StreamListener
     {

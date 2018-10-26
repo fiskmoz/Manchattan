@@ -1,4 +1,4 @@
-﻿namespace SoftEngChatClient
+﻿namespace Client
 {
     partial class Login
     {
@@ -188,7 +188,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.manchattan;
+            this.pictureBox1.Image = global::Client.Properties.Resources.manchattan;
             this.pictureBox1.Location = new System.Drawing.Point(73, 19);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pictureBox1.Name = "pictureBox1";
@@ -308,7 +308,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
+            this.BackgroundImage = global::Client.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(584, 605);
             this.Controls.Add(this.panel1);

@@ -1,5 +1,5 @@
-﻿using SoftEngChatClient.Controller;
-using SoftEngChatClient.Model.SSLCommunication;
+﻿using Client.Controller;
+using Client.Model.SSLCommunication;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SoftEngChatClient.Drivers
+namespace Client.Drivers
 {
     class LoginWindowDriver
     {

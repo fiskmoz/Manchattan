@@ -1,10 +1,10 @@
-﻿using SoftEngChatClient.Controller;
-using SoftEngChatClient.MessageHandling;
+﻿using Client.Controller;
+using Client.MessageHandling;
 using System;
 using System.Net.Sockets;
 using System.Text;
 
-namespace SoftEngChatClient.P2P
+namespace Client.P2P
 {
 	class P2PWriter : CustomStreamWriter
     {

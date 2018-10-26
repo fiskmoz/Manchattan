@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SoftEngChatClient.Properties {
+namespace Client.Properties {
     using System;
     
     

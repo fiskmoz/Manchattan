@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SoftEngChatClient.Model.SSLCommunication;
+using Client.Model.SSLCommunication;
 using System.Timers;
-using SoftEngChatClient.Drivers;
-using SoftEngChatClient.Model;
-using SoftEngChatClient.P2P;
+using Client.Drivers;
+using Client.Model;
+using Client.P2P;
 using System.Net;
 
-namespace SoftEngChatClient.Controller
+namespace Client.Controller
 {
     class ClientDriver
 	{

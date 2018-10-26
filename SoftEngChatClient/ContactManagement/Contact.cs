@@ -1,4 +1,4 @@
-﻿namespace SoftEngChatClient.Model
+﻿namespace Client.Model
 {
 	class Contact
 	{

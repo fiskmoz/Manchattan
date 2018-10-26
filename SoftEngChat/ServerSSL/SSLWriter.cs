@@ -2,7 +2,7 @@
 using System.Net.Security;
 using System.Text;
 
-namespace SoftEngChat.Model.SSLCommunication
+namespace Server.Model.SSLCommunication
 {
     class SSLWriter
 	{

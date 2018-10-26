@@ -1,9 +1,9 @@
-﻿using SoftEngChat.Model.SSLCommunication;
+﻿using Server.Model.SSLCommunication;
 using System;
 using System.Net;
 using System.Net.Sockets;
 
-namespace SoftEngChat
+namespace Server
 {
     class Program
     {

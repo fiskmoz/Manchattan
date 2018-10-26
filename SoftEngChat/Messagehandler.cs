@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace SoftEngChat.Model.SSLCommunication
+namespace Server.Model.SSLCommunication
 {
     internal class Messagehandler
 	{

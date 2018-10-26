@@ -1,4 +1,4 @@
-﻿using SoftEngChatClient.Model.SSLCommunication;
+﻿using Client.Model.SSLCommunication;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,15 +8,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using SoftEngChatClient.Model;
-using SoftEngChatClient.Controller;
+using Client.Model;
+using Client.Controller;
 using System.Drawing;
-using SoftEngChatClient.GUI;
+using Client.GUI;
 using System.Net.Sockets;
 using Tulpep.NotificationWindow;
-using SoftEngChatClient.P2P;
+using Client.P2P;
 
-namespace SoftEngChatClient.Drivers
+namespace Client.Drivers
 {
     class ChatWindowDriver
     {

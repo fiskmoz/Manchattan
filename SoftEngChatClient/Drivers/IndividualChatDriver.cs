@@ -1,4 +1,4 @@
-﻿using SoftEngChatClient.Model.SSLCommunication;
+﻿using Client.Model.SSLCommunication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Timers;
-using SoftEngChatClient.Drivers;
-using SoftEngChatClient.MessageHandling;
+using Client.Drivers;
+using Client.MessageHandling;
 using System.Net.Sockets;
-using SoftEngChatClient.Model;
-using SoftEngChatClient.P2P;
+using Client.Model;
+using Client.P2P;
 using System.IO;
 
-namespace SoftEngChatClient
+namespace Client
 {
     class IndividualChatDriver
     {

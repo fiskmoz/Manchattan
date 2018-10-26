@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SoftEngChatClient.Model
+namespace Client.Model
 {
 	class ContactListEventArg : EventArgs
 	{

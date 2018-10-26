@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using SoftEngChatClient.Model;
-using SoftEngChatClient.Model.SSLCommunication;
-using SoftEngChatClient;
+using Client.Model;
+using Client.Model.SSLCommunication;
+using Client;
 
-namespace SoftEngChatClient.Controller
+namespace Client.Controller
 {
     class RegisterDriver
     {

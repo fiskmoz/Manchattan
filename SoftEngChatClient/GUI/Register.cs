@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SoftEngChatClient.Controller;
+using Client.Controller;
 
-namespace SoftEngChatClient
+namespace Client
 {
     public partial class Register : Form
     {
@@ -274,12 +274,12 @@ namespace SoftEngChatClient
             if(!showPasswordFlag)
             {
                 EnterPassword.PasswordChar = '\0';
-                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.hidePassword;
+                showPasswordImage.Image = global::Client.Properties.Resources.hidePassword;
             }
             else
             {
                 EnterPassword.PasswordChar = '*';
-                showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.showPassword;
+                showPasswordImage.Image = global::Client.Properties.Resources.showPassword;
             }
                 
         }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SoftEngChatClient
+namespace Client
 {
     partial class ChatWindow
     {
@@ -228,7 +228,7 @@ namespace SoftEngChatClient
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.pictureBox1.Image = global::Client.Properties.Resources.logo1;
             this.pictureBox1.Location = new System.Drawing.Point(19, 14);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(50, 50);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(50, 50);
@@ -252,7 +252,7 @@ namespace SoftEngChatClient
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel4.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background5;
+            this.panel4.BackgroundImage = global::Client.Properties.Resources.Background5;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel4.Location = new System.Drawing.Point(-2, 0);
             this.panel4.Name = "panel4";
@@ -620,7 +620,7 @@ namespace SoftEngChatClient
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Image = global::SoftEngChatClient.Properties.Resources.manchattan;
+            this.pictureBox3.Image = global::Client.Properties.Resources.manchattan;
             this.pictureBox3.Location = new System.Drawing.Point(36, 21);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pictureBox3.Name = "pictureBox3";
@@ -943,7 +943,7 @@ namespace SoftEngChatClient
             // 
             this.emojiLogoBox.BackColor = System.Drawing.Color.Transparent;
             this.emojiLogoBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.emojiLogoBox.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.emojiLogoBox.Image = global::Client.Properties.Resources.logo1;
             this.emojiLogoBox.Location = new System.Drawing.Point(0, 0);
             this.emojiLogoBox.Name = "emojiLogoBox";
             this.emojiLogoBox.Size = new System.Drawing.Size(30, 30);
@@ -994,7 +994,7 @@ namespace SoftEngChatClient
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
+            this.BackgroundImage = global::Client.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(978, 711);
             this.Controls.Add(this.panel6);

@@ -1,4 +1,4 @@
-﻿namespace SoftEngChatClient
+﻿namespace Client
 {
     partial class Register
     {
@@ -208,7 +208,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.pictureBox1.Image = global::Client.Properties.Resources.logo1;
             this.pictureBox1.Location = new System.Drawing.Point(13, 493);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(60, 60);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(40, 40);
@@ -263,7 +263,7 @@
             // showPasswordImage
             // 
             this.showPasswordImage.BackColor = System.Drawing.Color.Transparent;
-            this.showPasswordImage.Image = global::SoftEngChatClient.Properties.Resources.showPassword;
+            this.showPasswordImage.Image = global::Client.Properties.Resources.showPassword;
             this.showPasswordImage.Location = new System.Drawing.Point(366, 139);
             this.showPasswordImage.Margin = new System.Windows.Forms.Padding(2);
             this.showPasswordImage.Name = "showPasswordImage";
@@ -327,7 +327,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.background7;
+            this.BackgroundImage = global::Client.Properties.Resources.background7;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(416, 535);
             this.Controls.Add(this.pictureBox2);

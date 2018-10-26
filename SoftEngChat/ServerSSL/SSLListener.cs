@@ -3,7 +3,7 @@ using System.Net.Security;
 using System.Text;
 using System.Threading;
 
-namespace SoftEngChat.Model.SSLCommunication
+namespace Server.Model.SSLCommunication
 {
     class SSLListener
 	{

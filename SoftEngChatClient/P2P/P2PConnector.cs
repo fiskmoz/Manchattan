@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEngChatClient.P2P
+namespace Client.P2P
 {
     class P2PConnector
     {

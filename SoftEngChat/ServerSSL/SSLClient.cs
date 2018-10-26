@@ -1,6 +1,6 @@
 ﻿using System.Net.Security;
 
-namespace SoftEngChat.Model.SSLCommunication
+namespace Server.Model.SSLCommunication
 {
     //A client we are connected to.
     class SSLClient

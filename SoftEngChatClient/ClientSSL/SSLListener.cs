@@ -5,9 +5,9 @@ using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SoftEngChatClient.MessageHandling;
+using Client.MessageHandling;
 
-namespace SoftEngChatClient.Model.SSLCommunication
+namespace Client.Model.SSLCommunication
 {
 	class SSLListener : StreamListener
 	{

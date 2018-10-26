@@ -1,4 +1,4 @@
-﻿namespace SoftEngChat
+﻿namespace Server
 {
     namespace Model
     {

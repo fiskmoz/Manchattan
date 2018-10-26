@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SoftEngChatClient.Model.SSLCommunication
+namespace Client.Model.SSLCommunication
 {
 	// Establishes encrypted (SSL) connection with server.
 	class SSLConnector

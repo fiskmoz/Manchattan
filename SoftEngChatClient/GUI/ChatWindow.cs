@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Manchaticons;
 
-namespace SoftEngChatClient
+namespace Client
 {
     public partial class ChatWindow : Form
     {

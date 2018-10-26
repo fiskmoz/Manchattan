@@ -1,4 +1,4 @@
-﻿namespace SoftEngChatClient
+﻿namespace Client
 {
     partial class IndividualChatWindow
     {
@@ -159,7 +159,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.pictureBox1.Image = global::Client.Properties.Resources.logo1;
             this.pictureBox1.Location = new System.Drawing.Point(0, -1);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(90, 90);
@@ -602,7 +602,7 @@
             // 
             this.emojiLogoBox.BackColor = System.Drawing.Color.Transparent;
             this.emojiLogoBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.emojiLogoBox.Image = global::SoftEngChatClient.Properties.Resources.logo1;
+            this.emojiLogoBox.Image = global::Client.Properties.Resources.logo1;
             this.emojiLogoBox.Location = new System.Drawing.Point(0, 0);
             this.emojiLogoBox.Name = "emojiLogoBox";
             this.emojiLogoBox.Size = new System.Drawing.Size(30, 30);
@@ -719,7 +719,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background5;
+            this.panel2.BackgroundImage = global::Client.Properties.Resources.Background5;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel2.Location = new System.Drawing.Point(-5, 82);
             this.panel2.Name = "panel2";
@@ -739,7 +739,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.BackgroundImage = global::SoftEngChatClient.Properties.Resources.Background5;
+            this.BackgroundImage = global::Client.Properties.Resources.Background5;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(584, 561);
             this.Controls.Add(this.panel2);
