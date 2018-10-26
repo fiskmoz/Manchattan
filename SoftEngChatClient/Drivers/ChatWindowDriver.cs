@@ -483,7 +483,8 @@ namespace SoftEngChatClient.Drivers
 				string friend = ((ClientMessage)message).sender;
 				contactsHandler.AddContact(friend);
                 SendPopup("Friend response: ", friend + " has accepted your friend request");
-			}
+                //writer.WriteStatus(MessageType.statusUpdate, username, friendrequest.GetSelectedFriend(), chatWindow.statusTextLbl.Text);
+            }
         }
 
         private void FindFriendsSearch(object sender, EventArgs e)
@@ -509,7 +510,13 @@ namespace SoftEngChatClient.Drivers
         private void AcceptFriendRequestButton(object sender, EventArgs e)
         {
             writer.WriteFriendResponse(MessageType.friendReponse, username, friendrequest.GetSelectedFriend(), "1");
-            contactsHandler.AddContact(friendrequest.GetSelectedFriend());
+            if(!contactsHandler.FindContact(friendrequest.GetSelectedFriend()))
+            {
+                contactsHandler.AddContact(friendrequest.GetSelectedFriend());
+                writer.WriteStatus(MessageType.statusUpdate, username, friendrequest.GetSelectedFriend(), chatWindow.statusTextLbl.Text);
+            }
+
+            
         }
         private void RejectFriendRequestButton(object sender, EventArgs e)
         {
@@ -561,9 +568,9 @@ namespace SoftEngChatClient.Drivers
         private void ReceivedStatusUpdate(object sender, EventArgs e)
         {
             contactsHandler.GetContact(((ClientMessage)e).sender).status = ((ClientMessage)e).message;
-            foreach(var icd in individualChatDrivers)
+            foreach (var icd in individualChatDrivers)
             {
-                if(icd.getSender() == ((ClientMessage)e).sender)
+                if (icd.getSender() == ((ClientMessage)e).sender)
                 {
                     icd.UpdateStatus(((ClientMessage)e).message);
                 }
