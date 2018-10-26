@@ -1,3 +1,0 @@
-1. Clear previous logged in user status message
-2. Store local status message and insert it when logging in
-3. Store all friends current status messages and read them from file when logging in.
